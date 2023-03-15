@@ -1,6 +1,7 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Merge
 {
@@ -39,7 +40,7 @@ namespace Merge
         {
             MergingItem = clickedItem;
             StartItemPosition = MergingItem.transform.position;
-            MergingItem.GetComponent<BoxCollider2D>().enabled = false;
+            MergingItem.GetComponent<Image>().raycastTarget = false;
         }
 
         public void ResetMergingItem()
@@ -48,7 +49,7 @@ namespace Merge
                 return;
 
             MergingItem.transform.position = StartItemPosition;
-            MergingItem.GetComponent<BoxCollider2D>().enabled = true;
+            MergingItem.GetComponent<Image>().raycastTarget = true;
             MergingItem = null;
         }
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Merge
 {
@@ -7,10 +8,12 @@ namespace Merge
     {
         [SerializeField] private MergeItemData mergeItemData;
 
-        private SpriteRenderer SpriteRenderer { get; set; }
+        private Image SpriteRenderer { get; set; }
 
         public bool TryMergeIn(MergeItem itemToMergeIn)
         {
+            Debug.Log(gameObject == itemToMergeIn.gameObject);
+
             if (gameObject == itemToMergeIn.gameObject
                 || mergeItemData.IsFinalItem
                 || !Equals(itemToMergeIn))
@@ -35,7 +38,7 @@ namespace Merge
 
         private void Start()
         {
-            SpriteRenderer = GetComponent<SpriteRenderer>();
+            SpriteRenderer = GetComponent<Image>();
             RefreshSprite();
         }
 
