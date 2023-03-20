@@ -10,11 +10,13 @@ namespace Orders
 {
     public class OrderManager : MonoBehaviour
     {
+        [SerializeField] private GameObject orderPrefab;
+        [SerializeField] private Transform ordersParent;
         [SerializeField] private double timeToGenerateOrderInSeconds;
         [SerializeField] private int maxActiveOrdersCount;
 
         private List<MergeItemData> AllMergeItems { get; set; } = new();
-        private List<Order> ActiveOrders { get; } = new();
+        private List<OrderData> ActiveOrders { get; } = new();
         private DateTime NextOrderGenerationTime { get; set; }
 
         private void GenerateOrder()
@@ -23,12 +25,12 @@ namespace Orders
                 return;
 
             var partsAmount = Random.Range(1, 1 + 1);
-            var order = new Order();
+            var order = new OrderData();
 
             for (var i = 0; i < partsAmount; i++)
             {
                 var randomItem = GetRandomItem();
-                var part = new OrderPart(randomItem, 1);
+                var part = new OrderPartData(randomItem, 1);
                 order.AddPart(part);
             }
 

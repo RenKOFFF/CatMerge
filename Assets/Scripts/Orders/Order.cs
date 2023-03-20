@@ -1,27 +1,31 @@
-﻿using System.Collections.Generic;
-using Merge;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Orders
 {
-    public class OrderPart
+    public class Order : MonoBehaviour
     {
-        public MergeItemData NeededItem { get; }
-        public int Count { get; } //TODO: подумать, а надо ли
+        [SerializeField] private OrderPart orderPartPrefab;
+        [SerializeField] private Transform orderPartsParent;
+        [SerializeField] private Button claimRewardButton;
 
-        public OrderPart(MergeItemData neededItem, int count)
+        public void Initialize(OrderData orderData)
         {
-            NeededItem = neededItem;
-            Count = count;
+            foreach (var orderPartData in orderData.Parts)
+            {
+                var orderPart = Instantiate(orderPartPrefab, orderPartsParent, false);
+                orderPart.Initialize(orderPartData);
+            }
         }
-    }
 
-    public class Order
-    {
-        public List<OrderPart> Parts { get; } = new();
-
-        public void AddPart(OrderPart orderPart)
+        public void ClaimReward()
         {
-            Parts.Add(orderPart);
+            Destroy(gameObject);
+        }
+
+        private void Update()
+        {
+            // claimRewardButton.enabled = ;
         }
     }
 }
