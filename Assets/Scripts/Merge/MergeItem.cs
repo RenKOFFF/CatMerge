@@ -29,7 +29,8 @@ namespace Merge
 
             itemToMergeIn.mergeItemData = mergeItemData.nextMergeItem;
             itemToMergeIn.RefreshSprite();
-            Destroy(gameObject);
+
+            ClearItemCell(this);
 
             return true;
         }
@@ -75,7 +76,7 @@ namespace Merge
                 mergeItemData = fromMergeItem.MergeItemData;
                 RefreshSprite();
 
-                ClearFromMergeItemCell(fromMergeItem);
+                ClearItemCell(fromMergeItem);
                 
                 return true;
             }
@@ -83,7 +84,7 @@ namespace Merge
             return false;
         }
 
-        private void ClearFromMergeItemCell(MergeItem mergeItem)
+        private void ClearItemCell(MergeItem mergeItem)
         {
             mergeItem.TrySetData(null, true);
         }
