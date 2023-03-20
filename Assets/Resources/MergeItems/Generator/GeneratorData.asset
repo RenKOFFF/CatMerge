@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd314e7d37064c15889684d10850b527, type: 3}
   m_Name: GeneratorData
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 02800fb9cff14da47a04572790384d8b, type: 3}
   nextMergeItem: {fileID: 0}

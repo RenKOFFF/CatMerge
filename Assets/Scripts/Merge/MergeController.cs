@@ -8,7 +8,7 @@ namespace Merge
     public class MergeController : MonoBehaviour
     {
         [SerializeField] private Transform[] _spawnCells;
-        
+
         [CanBeNull] private MergeItem MergingItem { get; set; }
         private Vector3 StartItemPosition { get; set; }
 
@@ -36,11 +36,16 @@ namespace Merge
             }
 
             if (!MergingItem.TryMergeIn(clickedItem))
+            {
+                clickedItem.TrySwapData(MergingItem);
                 ResetMergingItem();
+            }
         }
 
         private void SetMergingItem(MergeItem clickedItem)
         {
+            if (clickedItem.IsEmpty) return;
+
             MergingItem = clickedItem;
             StartItemPosition = MergingItem.transform.position;
             MergingItem.GetComponent<Image>().raycastTarget = false;
@@ -65,7 +70,7 @@ namespace Merge
         {
             if (MergingItem == null) return;
 
-            var worldPosition = (Vector2) Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+            var worldPosition = (Vector2)Camera.main!.ScreenToWorldPoint(Input.mousePosition);
             MergingItem.transform.position = worldPosition;
         }
     }

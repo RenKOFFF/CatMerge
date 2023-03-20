@@ -11,6 +11,7 @@ namespace Merge
         private Image SpriteRenderer { get; set; }
 
         public bool IsEmpty => mergeItemData == null;
+        public MergeItemData MergeItemData => mergeItemData;
 
         public bool TryMergeIn(MergeItem itemToMergeIn)
         {
@@ -39,11 +40,10 @@ namespace Merge
         {
             if (IsEmpty)
             {
-                SpriteRenderer.enabled = false;
+                SpriteRenderer.sprite = null;
                 return;
             }
-
-            SpriteRenderer.enabled = true;
+            
             SpriteRenderer.sprite = mergeItemData.sprite;
         }
 
@@ -58,9 +58,9 @@ namespace Merge
             MergeController.Instance.OnClick(this, eventData.button);
         }
 
-        public bool SetData(MergeItemData data)
+        public bool TrySetData(MergeItemData data, bool forceSet)
         {
-            if (mergeItemData is null)
+            if (forceSet || mergeItemData is null)
             {
                 mergeItemData = data;
                 RefreshSprite();
@@ -69,6 +69,26 @@ namespace Merge
             }
 
             return false;
+        }
+
+        public bool TrySwapData(MergeItem fromMergeItem)
+        {
+            if (mergeItemData is null)
+            {
+                mergeItemData = fromMergeItem.MergeItemData;
+                RefreshSprite();
+
+                ClearFromMergeItemCell(fromMergeItem);
+                
+                return true;
+            }
+
+            return false;
+        }
+
+        private void ClearFromMergeItemCell(MergeItem mergeItem)
+        {
+            mergeItem.TrySetData(null, true);
         }
     }
 }

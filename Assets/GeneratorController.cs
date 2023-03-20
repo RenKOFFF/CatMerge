@@ -8,9 +8,9 @@ using Random = UnityEngine.Random;
 public class GeneratorController : MonoBehaviour
 {
     [SerializeField] private MergeItemData _data;
-    
-    public Transform GeneratorCellLocation { get; private set; }
-    
+
+    public int GeneratorCellIndex { get; private set; }
+
     private void Start()
     {
         SpawnGenerator();
@@ -21,7 +21,8 @@ public class GeneratorController : MonoBehaviour
         var rndCellIndex = GetRandomCellLocation();
 
         var mergeItem = MergeController.Instance.SpawnCells[rndCellIndex].GetComponentInChildren<MergeItem>();
-        mergeItem.SetData(_data);
+        if (mergeItem.TrySetData(_data, false))
+            GeneratorCellIndex = rndCellIndex;
     }
 
     private int GetRandomCellLocation()
