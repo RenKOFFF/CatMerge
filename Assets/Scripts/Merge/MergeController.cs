@@ -7,9 +7,12 @@ namespace Merge
 {
     public class MergeController : MonoBehaviour
     {
+        [SerializeField] private Transform[] _spawnCells;
+        
         [CanBeNull] private MergeItem MergingItem { get; set; }
         private Vector3 StartItemPosition { get; set; }
 
+        public Transform[] SpawnCells => _spawnCells;
         public static MergeController Instance { get; private set; }
 
         public void OnClick(MergeItem clickedItem, PointerEventData.InputButton inputButton)

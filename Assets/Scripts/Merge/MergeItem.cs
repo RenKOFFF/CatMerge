@@ -17,7 +17,7 @@ namespace Merge
             Debug.Log(gameObject == itemToMergeIn.gameObject);
 
             if (IsEmpty) return false;
-            
+
             if (gameObject == itemToMergeIn.gameObject
                 || mergeItemData.IsFinalItem
                 || !Equals(itemToMergeIn))
@@ -47,7 +47,7 @@ namespace Merge
             SpriteRenderer.sprite = mergeItemData.sprite;
         }
 
-        private void Start()
+        private void Awake()
         {
             SpriteRenderer = GetComponent<Image>();
             RefreshSprite();
@@ -56,6 +56,19 @@ namespace Merge
         public void OnPointerClick(PointerEventData eventData)
         {
             MergeController.Instance.OnClick(this, eventData.button);
+        }
+
+        public bool SetData(MergeItemData data)
+        {
+            if (mergeItemData is null)
+            {
+                mergeItemData = data;
+                RefreshSprite();
+
+                return true;
+            }
+
+            return false;
         }
     }
 }
