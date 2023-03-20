@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Merge
 {
-    public class MergeItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class MergeItem : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         [SerializeField] private MergeItemData mergeItemData;
 
@@ -103,6 +103,14 @@ namespace Merge
         {
             _canvasGroup.blocksRaycasts = true;
             transform.localPosition = Vector3.zero;
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (MergeItemData is ClickableMergeItemData clickableData)
+            {
+                clickableData.Spawn();
+            }
         }
     }
 }
