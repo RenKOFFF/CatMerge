@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 99678398427830873}
   - component: {fileID: 99678398427830872}
   - component: {fileID: 99678398427830855}
+  - component: {fileID: 6416125248924218135}
   m_Layer: 5
   m_Name: Cat
   m_TagString: Untagged
@@ -90,6 +91,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mergeItemData: {fileID: 0}
+--- !u!225 &6416125248924218135
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99678398427830853}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &99678399057597870
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,6 +114,7 @@ GameObject:
   - component: {fileID: 99678399057597871}
   - component: {fileID: 99678399057597857}
   - component: {fileID: 99678399057597856}
+  - component: {fileID: -2230960804157462314}
   m_Layer: 5
   m_Name: MergeCell
   m_TagString: Untagged
@@ -167,3 +181,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-2230960804157462314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99678399057597870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f083b566e6d8d14dbeabf6acdaff451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

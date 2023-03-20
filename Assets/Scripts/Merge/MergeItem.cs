@@ -4,11 +4,12 @@ using UnityEngine.UI;
 
 namespace Merge
 {
-    public class MergeItem : MonoBehaviour, IPointerClickHandler
+    public class MergeItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         [SerializeField] private MergeItemData mergeItemData;
 
         private Image SpriteRenderer { get; set; }
+        private CanvasGroup _canvasGroup;
 
         public bool IsEmpty => mergeItemData == null;
         public MergeItemData MergeItemData => mergeItemData;
@@ -50,12 +51,8 @@ namespace Merge
         private void Awake()
         {
             SpriteRenderer = GetComponent<Image>();
+            _canvasGroup = GetComponent<CanvasGroup>();
             RefreshSprite();
-        }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            MergeController.Instance.OnClick(this, eventData.button);
         }
 
         public bool TrySetData(MergeItemData data, bool forceSet)
@@ -89,6 +86,23 @@ namespace Merge
         private void ClearFromMergeItemCell(MergeItem mergeItem)
         {
             mergeItem.TrySetData(null, true);
+        }
+        
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            _canvasGroup.blocksRaycasts = false;
+            MergeController.Instance.OnBeginDrag(this);
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+            MergeController.Instance.OnDrag();
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            _canvasGroup.blocksRaycasts = true;
+            transform.localPosition = Vector3.zero;
         }
     }
 }

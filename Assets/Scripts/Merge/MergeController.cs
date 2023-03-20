@@ -1,32 +1,37 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Merge
 {
     public class MergeController : MonoBehaviour
     {
-        [SerializeField] private Transform[] _spawnCells;
+        [SerializeField] private MergeCell[] _spawnCells;
 
         [CanBeNull] private MergeItem MergingItem { get; set; }
         private Vector3 StartItemPosition { get; set; }
 
-        public Transform[] SpawnCells => _spawnCells;
+        public MergeCell[] SpawnCells => _spawnCells;
         public static MergeController Instance { get; private set; }
 
-        public void OnClick(MergeItem clickedItem, PointerEventData.InputButton inputButton)
+        public void OnBeginDrag(MergeItem clickedItem)
         {
-            switch (inputButton)
-            {
-                case PointerEventData.InputButton.Left:
-                    InteractWithMergeItem(clickedItem);
-                    break;
-                default:
-                    return;
-            }
+            InteractWithMergeItem(clickedItem);
         }
+        
+        public void OnDrag()
+        {
+            if (MergingItem == null) return;
 
+            var worldPosition = (Vector2)Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+            MergingItem.transform.position = worldPosition;
+        }
+        
+        public void OnEndDrag(MergeItem clickedItem)
+        {
+            InteractWithMergeItem(clickedItem);
+        }
+        
         private void InteractWithMergeItem(MergeItem clickedItem)
         {
             if (MergingItem == null)
@@ -64,14 +69,6 @@ namespace Merge
         private void Awake()
         {
             Instance = this;
-        }
-
-        private void Update()
-        {
-            if (MergingItem == null) return;
-
-            var worldPosition = (Vector2)Camera.main!.ScreenToWorldPoint(Input.mousePosition);
-            MergingItem.transform.position = worldPosition;
         }
     }
 }
