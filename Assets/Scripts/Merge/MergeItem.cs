@@ -10,10 +10,14 @@ namespace Merge
 
         private Image SpriteRenderer { get; set; }
 
+        public bool IsEmpty => mergeItemData == null;
+
         public bool TryMergeIn(MergeItem itemToMergeIn)
         {
             Debug.Log(gameObject == itemToMergeIn.gameObject);
 
+            if (IsEmpty) return false;
+            
             if (gameObject == itemToMergeIn.gameObject
                 || mergeItemData.IsFinalItem
                 || !Equals(itemToMergeIn))
@@ -33,6 +37,13 @@ namespace Merge
 
         private void RefreshSprite()
         {
+            if (IsEmpty)
+            {
+                SpriteRenderer.enabled = false;
+                return;
+            }
+
+            SpriteRenderer.enabled = true;
             SpriteRenderer.sprite = mergeItemData.sprite;
         }
 

@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1063a1baa6aa4093beaaa56818dbc19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mergeItemData: {fileID: 11400000, guid: b9bc292adf5836e46ab50b0ce2433735, type: 2}
+  mergeItemData: {fileID: 0}
 --- !u!1 &99678399057597870
 GameObject:
   m_ObjectHideFlags: 0
