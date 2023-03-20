@@ -10,37 +10,48 @@ namespace Orders
 {
     public class OrderManager : MonoBehaviour
     {
-        [SerializeField] private GameObject orderPrefab;
+        [SerializeField] private Order orderPrefab;
         [SerializeField] private Transform ordersParent;
         [SerializeField] private double timeToGenerateOrderInSeconds;
         [SerializeField] private int maxActiveOrdersCount;
 
         private List<MergeItemData> AllMergeItems { get; set; } = new();
-        private List<OrderData> ActiveOrders { get; } = new();
+        private List<GameObject> ActiveOrders { get; set; } = new();
         private DateTime NextOrderGenerationTime { get; set; }
 
         private void GenerateOrder()
         {
+            ActiveOrders = ActiveOrders
+                .Where(o => o != null)
+                .ToList();
+
             if (ActiveOrders.Count >= maxActiveOrdersCount)
                 return;
 
-            var partsAmount = Random.Range(1, 1 + 1);
-            var order = new OrderData();
+            var partsAmount = Random.Range(1, 2 + 1);
+            var orderData = new OrderData();
 
             for (var i = 0; i < partsAmount; i++)
             {
                 var randomItem = GetRandomItem();
-                var part = new OrderPartData(randomItem, 1);
-                order.AddPart(part);
+                var orderPartData = new OrderPartData(randomItem);
+                orderData.AddPart(orderPartData);
             }
 
-            ActiveOrders.Add(order);
+            SpawnOrder(orderData);
         }
 
         private MergeItemData GetRandomItem()
         {
             var randomIndex = Random.Range(0, AllMergeItems.Count);
             return AllMergeItems[randomIndex];
+        }
+
+        private void SpawnOrder(OrderData orderData)
+        {
+            var order = Instantiate(orderPrefab, ordersParent, false);
+            order.Initialize(orderData);
+            ActiveOrders.Add(order.gameObject);
         }
 
         private void SetNewOrderGenerationTime()

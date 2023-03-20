@@ -6,12 +6,10 @@ namespace Orders
     public class OrderPartData
     {
         public MergeItemData NeededItem { get; }
-        public int Count { get; } //TODO: подумать, а надо ли
 
-        public OrderPartData(MergeItemData neededItem, int count)
+        public OrderPartData(MergeItemData neededItem)
         {
             NeededItem = neededItem;
-            Count = count;
         }
     }
 

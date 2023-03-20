@@ -1758,6 +1758,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Order (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2345349851450697133, guid: 08c23fca7c5d89c4c9e4a8032dce4b2a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08c23fca7c5d89c4c9e4a8032dce4b2a, type: 3}
 --- !u!224 &1083193133 stripped
@@ -4039,6 +4043,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 140175347}
     m_Modifications:
+    - target: {fileID: 4275090085983670804, guid: 82657f15adc707841851cb05dc89f212, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4275090086000181900, guid: 82657f15adc707841851cb05dc89f212, type: 3}
       propertyPath: m_Name
       value: OrdersArea

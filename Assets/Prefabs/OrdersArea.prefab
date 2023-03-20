@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4275090085983670804}
   - component: {fileID: 4275090085983670807}
+  - component: {fileID: 4526758346496398536}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -63,6 +64,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &4526758346496398536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4275090085983670805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 1
+  m_VerticalFit: 0
 --- !u!1 &4275090086000181900
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab14bcba1d84b20a230e00ae3185561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orderPrefab: {fileID: 2345349851450697133, guid: 08c23fca7c5d89c4c9e4a8032dce4b2a, type: 3}
+  orderPrefab: {fileID: 2345349851450697169, guid: 08c23fca7c5d89c4c9e4a8032dce4b2a, type: 3}
   ordersParent: {fileID: 4275090085983670804}
   timeToGenerateOrderInSeconds: 3
   maxActiveOrdersCount: 5
