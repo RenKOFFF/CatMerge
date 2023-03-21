@@ -28,7 +28,7 @@ namespace Orders
             if (ActiveOrders.Count >= maxActiveOrdersCount)
                 return;
 
-            var partsAmount = Random.Range(1, 2 + 1);
+            var partsAmount = Random.Range(1, 3 + 1);
             var orderData = new OrderData();
 
             for (var i = 0; i < partsAmount; i++)
