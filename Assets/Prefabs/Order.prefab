@@ -93,7 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orderPartPrefab: {fileID: 8548016646137782716, guid: 385b0538cf3593b4e992ae93cec7b680, type: 3}
   orderPartsParent: {fileID: 2345349853272555827}
-  claimRewardButton: {fileID: 2345349852102249612}
+  claimRewardButton: {fileID: 2345349852102249614}
 --- !u!1 &2345349852102249614
 GameObject:
   m_ObjectHideFlags: 0

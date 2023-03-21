@@ -25,7 +25,7 @@ public class GeneratorController : MonoBehaviour
     {
         var generatorCellIndex = GetEmptyCellIndex();
 
-        var mergeItem = MergeController.Instance.SpawnCells[generatorCellIndex].GetComponentInChildren<MergeItem>();
+        var mergeItem = MergeController.Instance.MergeCells[generatorCellIndex].GetComponentInChildren<MergeItem>();
         if (mergeItem.TrySetData(_data, false))
             GeneratorCellIndex = generatorCellIndex;
     }
@@ -35,9 +35,9 @@ public class GeneratorController : MonoBehaviour
         int count = 50;
         while (count > 0)
         {
-            var i = Random.Range(0, MergeController.Instance.SpawnCells.Length);
+            var i = Random.Range(0, MergeController.Instance.MergeCells.Length);
             
-            var isEmpty = MergeController.Instance.SpawnCells[i].GetComponentInChildren<MergeItem>().IsEmpty;
+            var isEmpty = MergeController.Instance.MergeCells[i].GetComponentInChildren<MergeItem>().IsEmpty;
             if (isEmpty) return i;
             count--;
         }

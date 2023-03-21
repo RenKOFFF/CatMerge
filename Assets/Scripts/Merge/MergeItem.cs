@@ -16,9 +16,8 @@ namespace Merge
 
         public bool TryMergeIn(MergeItem itemToMergeIn)
         {
-            if (IsEmpty) return false;
-
-            if (gameObject == itemToMergeIn.gameObject
+            if (IsEmpty
+                || gameObject == itemToMergeIn.gameObject
                 || mergeItemData.IsFinalItem
                 || !Equals(itemToMergeIn))
             {

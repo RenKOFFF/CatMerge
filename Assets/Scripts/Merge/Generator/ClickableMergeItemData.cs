@@ -19,7 +19,7 @@ namespace Merge
                 try
                 {
                     var cellIndex = GeneratorController.Instance.GetEmptyCellIndex();
-                    var itemOnSpecificCell = MergeController.Instance.SpawnCells[cellIndex].GetComponentInChildren<MergeItem>();
+                    var itemOnSpecificCell = MergeController.Instance.MergeCells[cellIndex].GetComponentInChildren<MergeItem>();
 
                     var line = GetRandomLine();
                     var itemIndex = GetRandomItemIndexByGeneratorAge(line);

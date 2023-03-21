@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using Merge;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class MergeCell : MonoBehaviour, IDropHandler
 {
+    [SerializeField] private MergeItem mergeItem;
+
+    public MergeItem MergeItem => mergeItem;
+
     public void OnDrop(PointerEventData eventData)
     {
-        var itemOnThisCell = GetComponentInChildren<MergeItem>();
-        MergeController.Instance.OnEndDrag(itemOnThisCell);
+        MergeController.Instance.OnEndDrag(MergeItem);
     }
 }

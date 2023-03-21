@@ -1,4 +1,6 @@
-﻿using JetBrains.Annotations;
+﻿using System.Collections.Generic;
+using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,12 +8,17 @@ namespace Merge
 {
     public class MergeController : MonoBehaviour
     {
-        [SerializeField] private MergeCell[] _spawnCells;
+        [SerializeField] private List<MergeCell> mergeCells;
 
         [CanBeNull] private MergeItem MergingItem { get; set; }
         private Vector3 StartItemPosition { get; set; }
 
-        public MergeCell[] SpawnCells => _spawnCells;
+        public List<MergeCell> MergeCells => mergeCells;
+        public List<MergeItemData> MergeItemDatas => MergeCells
+            .Where(c => c.MergeItem != null)
+            .Select(c => c.MergeItem.MergeItemData)
+            .ToList();
+
         public static MergeController Instance { get; private set; }
 
         public void OnBeginDrag(MergeItem clickedItem)
@@ -23,7 +30,7 @@ namespace Merge
         {
             if (MergingItem == null) return;
 
-            var worldPosition = (Vector2)Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+            var worldPosition = (Vector2) Camera.main!.ScreenToWorldPoint(Input.mousePosition);
             MergingItem.transform.position = worldPosition;
         }
 

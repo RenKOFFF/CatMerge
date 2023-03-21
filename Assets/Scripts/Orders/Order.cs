@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using Merge;
+using UnityEngine;
 
 namespace Orders
 {
@@ -7,10 +7,14 @@ namespace Orders
     {
         [SerializeField] private OrderPart orderPartPrefab;
         [SerializeField] private Transform orderPartsParent;
-        [SerializeField] private Button claimRewardButton;
+        [SerializeField] private GameObject claimRewardButton;
+
+        private OrderData _orderData;
 
         public void Initialize(OrderData orderData)
         {
+            _orderData = orderData;
+
             foreach (var orderPartData in orderData.Parts)
             {
                 var orderPart = Instantiate(orderPartPrefab, orderPartsParent, false);
@@ -25,7 +29,13 @@ namespace Orders
 
         private void Update()
         {
-            // claimRewardButton.enabled = ;
+            var areAllNeededItemsOnFieldNow = true;
+            var mergeItemsOnField = MergeController.Instance.MergeItemDatas;
+
+            foreach (var orderPartData in _orderData.Parts)
+                areAllNeededItemsOnFieldNow &= mergeItemsOnField.Contains(orderPartData.NeededItem);
+
+            claimRewardButton.SetActive(areAllNeededItemsOnFieldNow);
         }
     }
 }
