@@ -14,10 +14,6 @@ namespace Merge
         private Vector3 StartItemPosition { get; set; }
 
         public List<MergeCell> MergeCells => mergeCells;
-        public List<MergeItemData> MergeItemDatas => MergeCells
-            .Where(c => c.MergeItem != null)
-            .Select(c => c.MergeItem.MergeItemData)
-            .ToList();
 
         public static MergeController Instance { get; private set; }
 
@@ -38,6 +34,21 @@ namespace Merge
         {
             InteractWithMergeItem(clickedItem);
         }
+
+        public void ResetMergingItem()
+        {
+            if (MergingItem == null)
+                return;
+
+            MergingItem.transform.position = StartItemPosition;
+            //MergingItem.GetComponent<Image>().raycastTarget = true;
+            MergingItem = null;
+        }
+
+        public MergeItem FindMergeItemWithData(MergeItemData mergeItemData)
+            => mergeCells
+                .Select(c => c.MergeItem)
+                .FirstOrDefault(i => i.MergeItemData == mergeItemData);
 
         private void InteractWithMergeItem(MergeItem clickedItem)
         {
@@ -62,16 +73,6 @@ namespace Merge
             MergingItem = clickedItem;
             StartItemPosition = MergingItem.transform.position;
             //MergingItem.GetComponent<Image>().raycastTarget = false;
-        }
-
-        public void ResetMergingItem()
-        {
-            if (MergingItem == null)
-                return;
-
-            MergingItem.transform.position = StartItemPosition;
-            //MergingItem.GetComponent<Image>().raycastTarget = true;
-            MergingItem = null;
         }
 
         private void Awake()

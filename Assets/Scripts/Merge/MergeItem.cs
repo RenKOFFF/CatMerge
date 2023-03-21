@@ -9,7 +9,9 @@ namespace Merge
         private MergeItemData mergeItemData;
 
         private Image SpriteRenderer { get; set; }
-        private CanvasGroup _canvasGroup;
+        private CanvasGroup CanvasGroup { get; set; }
+
+        public bool IsUsedForOrder { get; private set; }
 
         public bool IsEmpty => mergeItemData == null;
         public MergeItemData MergeItemData => mergeItemData;
@@ -27,9 +29,14 @@ namespace Merge
             itemToMergeIn.mergeItemData = mergeItemData.nextMergeItem;
             itemToMergeIn.RefreshSprite();
 
-            ClearItemCell(this);
+            ClearItemCell();
 
             return true;
+        }
+
+        public void UseForOrder(bool isUsed = true)
+        {
+            IsUsedForOrder = isUsed;
         }
 
         private bool Equals(MergeItem other)
@@ -49,7 +56,7 @@ namespace Merge
         private void Awake()
         {
             SpriteRenderer = GetComponent<Image>();
-            _canvasGroup = GetComponent<CanvasGroup>();
+            CanvasGroup = GetComponent<CanvasGroup>();
             RefreshSprite();
         }
 
@@ -83,9 +90,10 @@ namespace Merge
             return true;
         }
 
-        private void ClearItemCell(MergeItem mergeItem)
+        public void ClearItemCell()
         {
-            mergeItem.TrySetData(null, true);
+            TrySetData(null, true);
+            UseForOrder(false);
         }
 
         public void OnBeginDrag(PointerEventData eventData)
@@ -104,7 +112,7 @@ namespace Merge
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            _canvasGroup.blocksRaycasts = true;
+            CanvasGroup.blocksRaycasts = true;
             transform.localPosition = Vector3.zero;
         }
 
