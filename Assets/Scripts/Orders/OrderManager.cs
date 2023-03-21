@@ -61,7 +61,9 @@ namespace Orders
 
         private void Awake()
         {
-            AllMergeItems = Resources.LoadAll<MergeItemData>("MergeItems").ToList();
+            AllMergeItems = Resources.LoadAll<MergeItemData>("MergeItems")
+                .Where(i => i is not ClickableMergeItemData)
+                .ToList();
         }
 
         private void Start()
