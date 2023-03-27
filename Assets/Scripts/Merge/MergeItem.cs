@@ -92,6 +92,9 @@ namespace Merge
         public void OnBeginDrag(PointerEventData eventData)
         {
             _canvasGroup.blocksRaycasts = false;
+            var slotTransform = transform.parent;
+            slotTransform.SetAsLastSibling();
+            
             MergeController.Instance.OnBeginDrag(this);
         }
 
