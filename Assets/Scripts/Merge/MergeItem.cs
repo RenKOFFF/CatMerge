@@ -16,8 +16,6 @@ namespace Merge
 
         public bool TryMergeIn(MergeItem itemToMergeIn)
         {
-            Debug.Log(gameObject == itemToMergeIn.gameObject);
-
             if (IsEmpty) return false;
 
             if (gameObject == itemToMergeIn.gameObject
@@ -45,7 +43,7 @@ namespace Merge
                 SpriteRenderer.sprite = null;
                 return;
             }
-            
+
             SpriteRenderer.sprite = mergeItemData.sprite;
         }
 
@@ -71,30 +69,32 @@ namespace Merge
 
         public bool TrySwapData(MergeItem fromMergeItem)
         {
-            if (mergeItemData is null)
+            if (Equals(fromMergeItem))
             {
-                mergeItemData = fromMergeItem.MergeItemData;
-                RefreshSprite();
-
-                ClearItemCell(fromMergeItem);
-                
-                return true;
+                return false;
             }
 
-            return false;
+            var tempMergeItemData = mergeItemData;
+
+            TrySetData(fromMergeItem.MergeItemData, true);
+            fromMergeItem.TrySetData(tempMergeItemData, true);
+
+            //ClearItemCell(fromMergeItem);
+
+            return true;
         }
 
         private void ClearItemCell(MergeItem mergeItem)
         {
             mergeItem.TrySetData(null, true);
         }
-        
+
         public void OnBeginDrag(PointerEventData eventData)
         {
             _canvasGroup.blocksRaycasts = false;
             var slotTransform = transform.parent;
             slotTransform.SetAsLastSibling();
-            
+
             MergeController.Instance.OnBeginDrag(this);
         }
 
