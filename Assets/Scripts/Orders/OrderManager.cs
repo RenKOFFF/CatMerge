@@ -28,23 +28,24 @@ namespace Orders
             if (ActiveOrders.Count >= maxActiveOrdersCount)
                 return;
 
+            var availableMergeItems = AllMergeItems.ToList();
             var partsAmount = Random.Range(1, 3 + 1);
             var orderData = new OrderData();
 
             for (var i = 0; i < partsAmount; i++)
             {
-                var randomItem = GetRandomItem();
+                if (availableMergeItems.Count == 0)
+                    break;
+
+                var randomIndex = Random.Range(0, availableMergeItems.Count);
+                var randomItem = availableMergeItems[randomIndex];
+                availableMergeItems.RemoveAt(randomIndex);
+
                 var orderPartData = new OrderPartData(randomItem);
                 orderData.AddPart(orderPartData);
             }
 
             SpawnOrder(orderData);
-        }
-
-        private MergeItemData GetRandomItem()
-        {
-            var randomIndex = Random.Range(0, AllMergeItems.Count);
-            return AllMergeItems[randomIndex];
         }
 
         private void SpawnOrder(OrderData orderData)
