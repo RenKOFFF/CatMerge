@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GameData;
 using Merge;
 using UnityEngine;
 
@@ -31,6 +32,9 @@ namespace Orders
         {
             foreach (var mergeItem in _usedItems)
                 mergeItem.ClearItemCell();
+
+            var rewardMoney = Random.Range(1, 4 + 1) * _orderData.Parts.Count;
+            GameManager.Instance.AddMoney(rewardMoney);
 
             Destroy(gameObject);
         }
