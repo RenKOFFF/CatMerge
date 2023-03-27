@@ -6,7 +6,7 @@ namespace Merge
 {
     public class MergeItem : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        [SerializeField] private MergeItemData mergeItemData;
+        private MergeItemData mergeItemData;
 
         private Image SpriteRenderer { get; set; }
         private CanvasGroup _canvasGroup;
