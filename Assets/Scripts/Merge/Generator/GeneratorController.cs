@@ -39,7 +39,6 @@ public class GeneratorController : MonoBehaviour
             
             var isEmpty = MergeController.Instance.SpawnCells[i].GetComponentInChildren<MergeItem>().IsEmpty;
             if (isEmpty) return i;
-            
             count--;
         }
 

@@ -11,16 +11,19 @@ namespace Merge
 
         public void Spawn()
         {
-            try
+            if (EnergyController.Instance.SpendEnergy())
             {
-                var cellIndex = GeneratorController.Instance.GetEmptyCellIndex();
-                var item = MergeController.Instance.SpawnCells[cellIndex].GetComponentInChildren<MergeItem>();
+                try
+                {
+                    var cellIndex = GeneratorController.Instance.GetEmptyCellIndex();
+                    var item = MergeController.Instance.SpawnCells[cellIndex].GetComponentInChildren<MergeItem>();
 
-                item.TrySetData(_spawnItems[Random.Range(0, _spawnItems.Length)], false);
-            }
-            catch (Exception e)
-            {
-                Debug.Log(e.Message);
+                    item.TrySetData(_spawnItems[Random.Range(0, _spawnItems.Length)], false);
+                }
+                catch (Exception e)
+                {
+                    Debug.Log(e.Message);
+                }
             }
         }
     }
