@@ -13,20 +13,29 @@ namespace Merge
 
         public bool IsUsedForOrder { get; private set; }
 
-        public bool IsEmpty => mergeItemData == null;
-        public MergeItemData MergeItemData => mergeItemData;
+        public bool IsEmpty => MergeItemData == null;
+
+        public MergeItemData MergeItemData
+        {
+            get => mergeItemData;
+            private set
+            {
+                SetUsedForOrder(false);
+                mergeItemData = value;
+            }
+        }
 
         public bool TryMergeIn(MergeItem itemToMergeIn)
         {
             if (IsEmpty
                 || gameObject == itemToMergeIn.gameObject
-                || mergeItemData.IsFinalItem
+                || MergeItemData.IsFinalItem
                 || !Equals(itemToMergeIn))
             {
                 return false;
             }
 
-            itemToMergeIn.mergeItemData = mergeItemData.nextMergeItem;
+            itemToMergeIn.MergeItemData = MergeItemData.nextMergeItem;
             itemToMergeIn.RefreshSprite();
 
             ClearItemCell();
@@ -34,13 +43,13 @@ namespace Merge
             return true;
         }
 
-        public void UseForOrder(bool isUsed = true)
+        public void SetUsedForOrder(bool isUsed = true)
         {
             IsUsedForOrder = isUsed;
         }
 
         private bool Equals(MergeItem other)
-            => mergeItemData == other.mergeItemData;
+            => MergeItemData == other.MergeItemData;
 
         private void RefreshSprite()
         {
@@ -50,7 +59,7 @@ namespace Merge
                 return;
             }
 
-            SpriteRenderer.sprite = mergeItemData.sprite;
+            SpriteRenderer.sprite = MergeItemData.sprite;
         }
 
         private void Awake()
@@ -62,9 +71,9 @@ namespace Merge
 
         public bool TrySetData(MergeItemData data, bool forceSet)
         {
-            if (forceSet || mergeItemData is null)
+            if (forceSet || MergeItemData is null)
             {
-                mergeItemData = data;
+                MergeItemData = data;
                 RefreshSprite();
 
                 return true;
@@ -93,7 +102,6 @@ namespace Merge
         public void ClearItemCell()
         {
             TrySetData(null, true);
-            UseForOrder(false);
         }
 
         public void OnBeginDrag(PointerEventData eventData)

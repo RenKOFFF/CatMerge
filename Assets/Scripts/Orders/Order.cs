@@ -12,10 +12,7 @@ namespace Orders
         [SerializeField] private Transform orderPartsParent;
         [SerializeField] private GameObject claimRewardButton;
 
-        private bool AreAllNeededItemsOnFieldNow => _usedItems.Count == _orderData.Parts.Count;
-
         private OrderData _orderData;
-        private readonly List<MergeItem> _usedItems = new();
 
         public void Initialize(OrderData orderData)
         {
@@ -30,10 +27,19 @@ namespace Orders
 
         public void ClaimReward()
         {
-            foreach (var mergeItem in _usedItems)
-                mergeItem.ClearItemCell();
+            var rewardMoney = 0;
 
-            var rewardMoney = Random.Range(1, 4 + 1) * _orderData.Parts.Count;
+            foreach (var orderPartData in _orderData.Parts)
+            {
+                var foundMergeItem = MergeController.Instance.FindMergeItemWithData(orderPartData.NeededItem);
+
+                if (foundMergeItem == null)
+                    return;
+
+                rewardMoney += Random.Range(1, 4 + 1);
+                foundMergeItem.ClearItemCell();
+            }
+
             GameManager.Instance.AddMoney(rewardMoney);
 
             Destroy(gameObject);
@@ -41,29 +47,22 @@ namespace Orders
 
         private void Update()
         {
-            UpdateUsedItems();
-
-            if (AreAllNeededItemsOnFieldNow)
-                return;
+            var areAllNeededItemsOnFieldNow = true;
 
             foreach (var orderPartData in _orderData.Parts)
             {
                 var foundMergeItem = MergeController.Instance.FindMergeItemWithData(orderPartData.NeededItem);
 
                 if (foundMergeItem == null)
-                    break;
+                {
+                    areAllNeededItemsOnFieldNow = false;
+                    continue;
+                }
 
-                foundMergeItem.UseForOrder();
-                _usedItems.Add(foundMergeItem);
+                foundMergeItem.SetUsedForOrder();
             }
 
-            claimRewardButton.SetActive(AreAllNeededItemsOnFieldNow);
-        }
-
-        private void UpdateUsedItems()
-        {
-            foreach (var mergeItem in _usedItems.ToList().Where(mergeItem => mergeItem.IsEmpty))
-                _usedItems.Remove(mergeItem);
+            claimRewardButton.SetActive(areAllNeededItemsOnFieldNow);
         }
     }
 }
