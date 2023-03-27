@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd314e7d37064c15889684d10850b527, type: 3}
-  m_Name: Cat1
+  m_Name: Dog1
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: e5600378dd761e64d9423790c482bf36, type: 3}
-  nextMergeItem: {fileID: 11400000, guid: 241cc1550555ef44fb7a7ee770430ea7, type: 2}
+  sprite: {fileID: 21300000, guid: d4a1388a0d4ee9c44bcaa86e463a7b39, type: 3}
+  nextMergeItem: {fileID: 11400000, guid: f594ee4f765371346bdda49d4a2e24ca, type: 2}
   SpawnChance:
     serializedVersion: 2
     m_Curve:

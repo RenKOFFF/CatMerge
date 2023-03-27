@@ -1,5 +1,6 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Merge
 {
@@ -11,5 +12,7 @@ namespace Merge
         public Sprite sprite;
 
         [CanBeNull] public MergeItemData nextMergeItem;
+        
+        [FormerlySerializedAs("SpawnProbability")] public AnimationCurve SpawnChance;
     }
 }
