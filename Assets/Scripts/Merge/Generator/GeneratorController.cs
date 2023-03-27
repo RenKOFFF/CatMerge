@@ -32,10 +32,15 @@ public class GeneratorController : MonoBehaviour
     
     public int GetEmptyCellIndex()
     {
-        for (int i = 0; i < MergeController.Instance.SpawnCells.Length; i++)
+        int count = 50;
+        while (count > 0)
         {
+            var i = Random.Range(0, MergeController.Instance.SpawnCells.Length);
+            
             var isEmpty = MergeController.Instance.SpawnCells[i].GetComponentInChildren<MergeItem>().IsEmpty;
             if (isEmpty) return i;
+            
+            count--;
         }
 
         throw new Exception("Empty");
