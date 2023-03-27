@@ -18,7 +18,7 @@ namespace Merge
         {
             InteractWithMergeItem(clickedItem);
         }
-        
+
         public void OnDrag()
         {
             if (MergingItem == null) return;
@@ -26,12 +26,12 @@ namespace Merge
             var worldPosition = (Vector2)Camera.main!.ScreenToWorldPoint(Input.mousePosition);
             MergingItem.transform.position = worldPosition;
         }
-        
+
         public void OnEndDrag(MergeItem clickedItem)
         {
             InteractWithMergeItem(clickedItem);
         }
-        
+
         private void InteractWithMergeItem(MergeItem clickedItem)
         {
             if (MergingItem == null)
@@ -43,8 +43,9 @@ namespace Merge
             if (!MergingItem.TryMergeIn(clickedItem))
             {
                 clickedItem.TrySwapData(MergingItem);
-                ResetMergingItem();
             }
+
+            ResetMergingItem();
         }
 
         private void SetMergingItem(MergeItem clickedItem)
@@ -53,7 +54,7 @@ namespace Merge
 
             MergingItem = clickedItem;
             StartItemPosition = MergingItem.transform.position;
-            MergingItem.GetComponent<Image>().raycastTarget = false;
+            //MergingItem.GetComponent<Image>().raycastTarget = false;
         }
 
         public void ResetMergingItem()
@@ -62,7 +63,7 @@ namespace Merge
                 return;
 
             MergingItem.transform.position = StartItemPosition;
-            MergingItem.GetComponent<Image>().raycastTarget = true;
+            //MergingItem.GetComponent<Image>().raycastTarget = true;
             MergingItem = null;
         }
 
