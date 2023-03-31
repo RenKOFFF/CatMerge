@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd314e7d37064c15889684d10850b527, type: 3}
-  m_Name: Dog3
+  m_Name: Cat2_3
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 65f0e363b74cf5845ab8c3fbc14f39ac, type: 3}
-  nextMergeItem: {fileID: 0}
+  sprite: {fileID: -1422596427, guid: 44941cf6862589f48aee951d8ddb0df0, type: 3}
+  nextMergeItem: {fileID: 11400000, guid: f50532861a230ae41ac8f0878b432216, type: 2}
   SpawnChance:
     serializedVersion: 2
     m_Curve:
@@ -38,11 +38,11 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 3
       value: 0.1
-      inSlope: -Infinity
-      outSlope: -Infinity
+      inSlope: Infinity
+      outSlope: Infinity
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 4
