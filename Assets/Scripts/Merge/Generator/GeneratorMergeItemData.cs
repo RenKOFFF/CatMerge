@@ -4,10 +4,10 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Merge
+namespace Merge.Generator
 {
-    [CreateAssetMenu(menuName = "Custom/ClickableMergeItem")]
-    public class ClickableMergeItemData : MergeItemData
+    [CreateAssetMenu(menuName = "Custom/GeneratorMergeItem")]
+    public class GeneratorMergeItemData : MergeItemData
     {
         [SerializeField] private int _age;
         [SerializeField] private GenerateLines _lines;

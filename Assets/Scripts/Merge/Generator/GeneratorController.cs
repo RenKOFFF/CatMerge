@@ -2,6 +2,7 @@ using System;
 using Merge;
 using Unity.VisualScripting;
 using UnityEngine;
+using Utils;
 using Random = UnityEngine.Random;
 
 public class GeneratorController : MonoBehaviour
@@ -35,6 +36,8 @@ public class GeneratorController : MonoBehaviour
 
     public int GetEmptyCellIndex()
     {
+        var shakedSpawnCellsArray = ShakeArray<MergeCell>.Shake(MergeController.Instance.SpawnCells);
+        
         int count = 50;
         while (count > 0)
         {

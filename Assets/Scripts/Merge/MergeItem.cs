@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Merge.Generator;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -111,7 +112,7 @@ namespace Merge
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (MergeItemData is ClickableMergeItemData clickableData)
+            if (MergeItemData is GeneratorMergeItemData clickableData)
             {
                 clickableData.Spawn();
             }
