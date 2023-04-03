@@ -116,6 +116,15 @@ namespace Merge
             {
                 clickableData.Spawn();
             }
+            
+            if (MergeItemData is EnergyMergeItemData doubleClickableData)
+            {
+                if (eventData.clickCount == 2)
+                {
+                    doubleClickableData.GetEnergy();
+                    ClearItemCell(this);
+                }
+            }
         }
     }
 }
