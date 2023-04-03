@@ -137,7 +137,7 @@ namespace Merge
                 if (eventData.clickCount == 2)
                 {
                     doubleClickableData.GetEnergy();
-                    ClearItemCell(this);
+                    ClearItemCell();
                 }
             }
         }

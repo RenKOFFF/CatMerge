@@ -725,8 +725,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e39d81624e14e8fb3a1e0323601d7e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxStartEnergy: 10
-  _timeBtwRestoreOneEnergyPoint: 3
+  _maxStartEnergy: 100
+  _timeBtwRestoreOneEnergyPoint: 30
 --- !u!114 &1694124556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -812,11 +812,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4833736253051254738, guid: 6192b417186f4b84192df141ae129ed6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -168.7
+      value: -168.70001
       objectReference: {fileID: 0}
     - target: {fileID: 4833736253051254738, guid: 6192b417186f4b84192df141ae129ed6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -86.2
+      value: -86.19995
       objectReference: {fileID: 0}
     - target: {fileID: 4833736253051254738, guid: 6192b417186f4b84192df141ae129ed6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

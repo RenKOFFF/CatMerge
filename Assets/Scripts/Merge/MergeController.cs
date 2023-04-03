@@ -8,12 +8,12 @@ namespace Merge
 {
     public class MergeController : MonoBehaviour
     {
-        [SerializeField] private List<MergeCell> mergeCells;
+        [SerializeField] private MergeCell[] _spawnCells;
 
         [CanBeNull] private MergeItem MergingItem { get; set; }
         private Vector3 StartItemPosition { get; set; }
 
-        public List<MergeCell> MergeCells => mergeCells;
+        public MergeCell[] SpawnCells => _spawnCells;
 
         public static MergeController Instance { get; private set; }
 
@@ -46,7 +46,7 @@ namespace Merge
         }
 
         public MergeItem FindMergeItemWithData(MergeItemData mergeItemData)
-            => mergeCells
+            => _spawnCells
                 .Select(c => c.MergeItem)
                 .FirstOrDefault(i => i.MergeItemData == mergeItemData);
 

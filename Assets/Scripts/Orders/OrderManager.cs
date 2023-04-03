@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Extensions;
 using Merge;
+using Merge.Generator;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -63,7 +64,7 @@ namespace Orders
         private void Awake()
         {
             AllMergeItems = Resources.LoadAll<MergeItemData>("MergeItems")
-                .Where(i => i is not ClickableMergeItemData)
+                .Where(i => i is not GeneratorMergeItemData)
                 .ToList();
         }
 

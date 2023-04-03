@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5acff4f3134a8d85692b99be9dfac2, type: 3}
   m_Name: Energy1
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 8d98ab6168c3e91439339f1908b8fe97, type: 3}
+  sprite: {fileID: -1635465084, guid: 67d44ac6e466d6647bb653911f02087a, type: 3}
   nextMergeItem: {fileID: 11400000, guid: 86be6abbd8babe04ca58f4d526cd12be, type: 2}
   SpawnChance:
     serializedVersion: 2
