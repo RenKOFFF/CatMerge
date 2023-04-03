@@ -36,7 +36,7 @@ namespace Orders
                 if (foundMergeItem == null)
                     return;
 
-                rewardMoney += Random.Range(1, 4 + 1);
+                rewardMoney += Random.Range(1, 4 + 1) * foundMergeItem.MergeItemData.ComplexityLevel;
                 foundMergeItem.ClearItemCell();
             }
 

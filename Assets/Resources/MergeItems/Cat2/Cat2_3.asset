@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Cat2_3
   m_EditorClassIdentifier: 
   sprite: {fileID: -1422596427, guid: 44941cf6862589f48aee951d8ddb0df0, type: 3}
+  previousMergeItem: {fileID: 11400000, guid: f594ee4f765371346bdda49d4a2e24ca, type: 2}
   nextMergeItem: {fileID: 11400000, guid: f50532861a230ae41ac8f0878b432216, type: 2}
   SpawnChance:
     serializedVersion: 2
