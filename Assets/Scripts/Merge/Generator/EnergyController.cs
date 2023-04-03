@@ -41,6 +41,16 @@ namespace Merge
             return false;
         }
 
+
+        public void AddEnergy(int count)
+        {
+            CurrentEnergy += count;
+            if (CurrentEnergy > _maxStartEnergy)
+                CurrentEnergy = _maxStartEnergy;
+
+            Debug.Log($"Energy was added on {count} points, current energy: {CurrentEnergy}");
+        }
+
         private IEnumerator RestoreEnergy()
         {
             if (_coroutineWasStarted)
@@ -49,7 +59,7 @@ namespace Merge
             }
 
             _coroutineWasStarted = true;
-            
+
             while (CurrentEnergy < _maxStartEnergy)
             {
                 yield return new WaitForSeconds(_timeBtwRestoreOneEnergyPoint);
@@ -57,6 +67,9 @@ namespace Merge
                 Debug.Log($"CurrentEnergy: {CurrentEnergy}");
             }
 
+            if (CurrentEnergy > _maxStartEnergy) 
+                CurrentEnergy = _maxStartEnergy;
+            
             _coroutineWasStarted = false;
         }
     }
