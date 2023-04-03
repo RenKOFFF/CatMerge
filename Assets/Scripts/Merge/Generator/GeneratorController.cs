@@ -35,7 +35,7 @@ public class GeneratorController : MonoBehaviour
         int count = 50;
         while (count > 0)
         {
-            var i = Random.Range(0, MergeController.Instance.MergeCells.Length);
+            var i = Random.Range(0, MergeController.Instance.MergeCells.Count);
             
             var isEmpty = MergeController.Instance.MergeCells[i].GetComponentInChildren<MergeItem>().IsEmpty;
             if (isEmpty) return i;
