@@ -16,28 +16,24 @@ namespace Merge.Generator
         {
             if (EnergyController.Instance.SpendEnergy())
             {
-                try
-                {
-                    var cellIndex = GeneratorController.Instance.GetEmptyCellIndex();
-                    var itemOnSpecificCell = MergeController.Instance.SpawnCells[cellIndex].GetComponentInChildren<MergeItem>();
+                var cellIndex = GeneratorController.Instance.GetEmptyCellIndex();
+                var itemOnSpecificCell =
+                    MergeController.Instance.SpawnCells[cellIndex].GetComponentInChildren<MergeItem>();
 
-                    var line = GetRandomLine();
-                    var itemIndex = GetRandomItemIndexByGeneratorAge(line);
-                    
-                    itemOnSpecificCell.TrySetData(_lines.GenerateLine[line].ItemData[itemIndex], false);
-                }
-                catch (Exception e)
-                {
-                    Debug.Log(e.Message);
-                }
+                var line = GetRandomLine();
+                var itemIndex = GetRandomItemIndexByGeneratorAge(line);
+
+                Debug.Log($"Line {line}, itemIndex: {itemIndex}");
+                
+                itemOnSpecificCell.TrySetData(_lines.GenerateLine[line].ItemData[itemIndex], false);
             }
         }
-        
+
         private int GetRandomLine()
         {
             return Random.Range(0, _lines.GenerateLine.Length);
         }
-        
+
         private int GetRandomItemIndexByGeneratorAge(int line)
         {
             List<float> chances = new();
@@ -57,7 +53,7 @@ namespace Merge.Generator
                     return i;
             }
 
-            return _lines.GenerateLine[line].Count - 1;
+            return _lines.GenerateLine[line].ItemData.Length - 1;
         }
     }
 
@@ -65,8 +61,8 @@ namespace Merge.Generator
     public class GenerateLines : List<GenerateLine>
     {
         public GenerateLine[] GenerateLine;
-    } 
-    
+    }
+
     [Serializable]
     public class GenerateLine : List<MergeItemData>
     {
