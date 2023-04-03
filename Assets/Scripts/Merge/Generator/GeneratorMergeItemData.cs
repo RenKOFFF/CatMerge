@@ -14,9 +14,16 @@ namespace Merge.Generator
 
         public void Spawn()
         {
-            if (EnergyController.Instance.SpendEnergy())
+            if (EnergyController.Instance.CurrentEnergy > 0)
             {
                 var cellIndex = GeneratorController.Instance.GetEmptyCellIndex();
+
+                if (cellIndex == -1)
+                {
+                    Debug.Log("can't spawn");
+                    return;
+                }
+                
                 var itemOnSpecificCell =
                     MergeController.Instance.SpawnCells[cellIndex].GetComponentInChildren<MergeItem>();
 
@@ -26,6 +33,8 @@ namespace Merge.Generator
                 Debug.Log($"Line {line}, itemIndex: {itemIndex}");
                 
                 itemOnSpecificCell.TrySetData(_lines.GenerateLine[line].ItemData[itemIndex], false);
+                
+                EnergyController.Instance.SpendEnergy();
             }
         }
 

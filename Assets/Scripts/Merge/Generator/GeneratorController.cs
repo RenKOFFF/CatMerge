@@ -28,6 +28,12 @@ public class GeneratorController : MonoBehaviour
         {
             var generatorCellIndex = GetEmptyCellIndex();
 
+            if (generatorCellIndex == -1)
+            {
+                Debug.Log("can't spawn generator");
+                return;
+            }
+            
             var mergeItem = MergeController.Instance.SpawnCells[generatorCellIndex].GetComponentInChildren<MergeItem>();
             if (mergeItem.TrySetData(_generatorsData[i], false))
                 GeneratorCellIndex = generatorCellIndex;
@@ -37,17 +43,14 @@ public class GeneratorController : MonoBehaviour
     public int GetEmptyCellIndex()
     {
         var shakedSpawnCellsArray = ShakeArray<MergeCell>.Shake(MergeController.Instance.SpawnCells);
-        
-        int count = 50;
-        while (count > 0)
-        {
-            var i = Random.Range(0, MergeController.Instance.SpawnCells.Length);
 
+        for (int i = 0; i < shakedSpawnCellsArray.Length; i++)
+        {
             var isEmpty = MergeController.Instance.SpawnCells[i].GetComponentInChildren<MergeItem>().IsEmpty;
             if (isEmpty) return i;
-            count--;
         }
 
-        throw new Exception("Empty");
+        Debug.Log("Not empty cells");
+        return -1;
     }
 }
