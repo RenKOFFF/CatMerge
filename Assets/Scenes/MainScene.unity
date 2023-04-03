@@ -514,8 +514,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e39d81624e14e8fb3a1e0323601d7e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxStartEnergy: 10
-  _timeBtwRestoreOneEnergyPoint: 3
+  _maxStartEnergy: 100
+  _timeBtwRestoreOneEnergyPoint: 30
 --- !u!224 &2095121737 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7084717492431136181, guid: a71d86944645f77469197fd811cee7da, type: 3}
@@ -528,22 +528,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 140175347}
     m_Modifications:
-    - target: {fileID: 2095121743, guid: a71d86944645f77469197fd811cee7da, type: 3}
-      propertyPath: _generatorsData.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2095121743, guid: a71d86944645f77469197fd811cee7da, type: 3}
-      propertyPath: _generatorsData.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 662d28a09bab9804bb90e97722deda2f, type: 2}
-    - target: {fileID: 2095121743, guid: a71d86944645f77469197fd811cee7da, type: 3}
-      propertyPath: _generatorsData.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 662d28a09bab9804bb90e97722deda2f, type: 2}
-    - target: {fileID: 2095121743, guid: a71d86944645f77469197fd811cee7da, type: 3}
-      propertyPath: _generatorsData.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 5915dd76d52162645a544fa6f33f9b29, type: 2}
     - target: {fileID: 7084717492431136180, guid: a71d86944645f77469197fd811cee7da, type: 3}
       propertyPath: m_Name
       value: CatsMergeField
