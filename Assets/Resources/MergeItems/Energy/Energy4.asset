@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Energy4
   m_EditorClassIdentifier: 
   sprite: {fileID: 165941600, guid: 67d44ac6e466d6647bb653911f02087a, type: 3}
+  previousMergeItem: {fileID: 11400000, guid: 3017e162d1abb3545bd7d31bedc94eb7, type: 2}
   nextMergeItem: {fileID: 0}
   SpawnChance:
     serializedVersion: 2
