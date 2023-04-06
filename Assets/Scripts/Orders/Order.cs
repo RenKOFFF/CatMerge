@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using GameData;
-using Merge;
 using UnityEngine;
 
 namespace Orders
@@ -12,16 +10,15 @@ namespace Orders
         [SerializeField] private Transform orderPartsParent;
         [SerializeField] private GameObject claimRewardButton;
 
-        private OrderData _orderData;
+        private readonly List<OrderPart> _orderParts = new();
 
         public void Initialize(OrderData orderData)
         {
-            _orderData = orderData;
-
             foreach (var orderPartData in orderData.Parts)
             {
                 var orderPart = Instantiate(orderPartPrefab, orderPartsParent, false);
                 orderPart.Initialize(orderPartData);
+                _orderParts.Add(orderPart);
             }
         }
 
@@ -29,16 +26,8 @@ namespace Orders
         {
             var rewardMoney = 0;
 
-            foreach (var orderPartData in _orderData.Parts)
-            {
-                var foundMergeItem = MergeController.Instance.FindMergeItemWithData(orderPartData.NeededItem);
-
-                if (foundMergeItem == null)
-                    return;
-
-                rewardMoney += Random.Range(1, 4 + 1) * foundMergeItem.MergeItemData.ComplexityLevel;
-                foundMergeItem.ClearItemCell();
-            }
+            foreach (var orderPartData in _orderParts)
+                rewardMoney += orderPartData.ClaimReward();
 
             GameManager.Instance.AddMoney(rewardMoney);
 
@@ -49,18 +38,8 @@ namespace Orders
         {
             var areAllNeededItemsOnFieldNow = true;
 
-            foreach (var orderPartData in _orderData.Parts)
-            {
-                var foundMergeItem = MergeController.Instance.FindMergeItemWithData(orderPartData.NeededItem);
-
-                if (foundMergeItem == null)
-                {
-                    areAllNeededItemsOnFieldNow = false;
-                    continue;
-                }
-
-                foundMergeItem.SetUsedForOrder();
-            }
+            foreach (var orderPartData in _orderParts)
+                areAllNeededItemsOnFieldNow &= orderPartData.IsItemOnField;
 
             claimRewardButton.SetActive(areAllNeededItemsOnFieldNow);
         }

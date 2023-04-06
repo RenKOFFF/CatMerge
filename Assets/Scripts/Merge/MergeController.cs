@@ -46,9 +46,15 @@ namespace Merge
         }
 
         public MergeItem FindMergeItemWithData(MergeItemData mergeItemData)
-            => _spawnCells
+            => SpawnCells
                 .Select(c => c.MergeItem)
                 .FirstOrDefault(i => i.MergeItemData == mergeItemData);
+
+        public List<MergeItem> FindMergeItemsWithData(MergeItemData mergeItemData)
+            => SpawnCells
+                .Select(c => c.MergeItem)
+                .Where(i => i.MergeItemData == mergeItemData)
+                .ToList();
 
         private void InteractWithMergeItem(MergeItem clickedItem)
         {
