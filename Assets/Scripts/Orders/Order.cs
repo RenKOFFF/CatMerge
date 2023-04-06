@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GameData;
+using TMPro;
 using UnityEngine;
 
 namespace Orders
@@ -9,8 +10,10 @@ namespace Orders
         [SerializeField] private OrderPart orderPartPrefab;
         [SerializeField] private Transform orderPartsParent;
         [SerializeField] private GameObject claimRewardButton;
+        [SerializeField] private TMP_Text rewardText;
 
         private readonly List<OrderPart> _orderParts = new();
+        private int _reward;
 
         public void Initialize(OrderData orderData)
         {
@@ -20,16 +23,19 @@ namespace Orders
                 orderPart.Initialize(orderPartData);
                 _orderParts.Add(orderPart);
             }
+
+            foreach (var orderPartData in _orderParts)
+                _reward += orderPartData.GetRewardAmount();
+
+            rewardText.text = $"+{_reward}";
         }
 
         public void ClaimReward()
         {
-            var rewardMoney = 0;
-
             foreach (var orderPartData in _orderParts)
-                rewardMoney += orderPartData.ClaimReward();
+                orderPartData.Complete();
 
-            GameManager.Instance.AddMoney(rewardMoney);
+            GameManager.Instance.AddMoney(_reward);
 
             Destroy(gameObject);
         }

@@ -9,7 +9,7 @@ namespace Orders
         [SerializeField] private Image orderPartImage;
         [SerializeField] private GameObject isItemOnFieldFlag;
 
-        public bool IsItemOnField { get; set; }
+        public bool IsItemOnField { get; private set; }
 
         private OrderPartData _orderPartData;
 
@@ -19,16 +19,14 @@ namespace Orders
             orderPartImage.sprite = _orderPartData.NeededItem.sprite;
         }
 
-        public int ClaimReward()
-        {
-            var foundMergeItem = MergeController.Instance.FindMergeItemWithData(_orderPartData.NeededItem);
-            var reward = Random.Range(1, 4 + 1) * foundMergeItem.MergeItemData.ComplexityLevel;
+        public int GetRewardAmount()
+            => Random.Range(1, 4 + 1) * _orderPartData.NeededItem.ComplexityLevel;
 
-            foundMergeItem.ClearItemCell();
+        public void Complete()
+        {
+            MergeController.Instance.FindMergeItemWithData(_orderPartData.NeededItem).ClearItemCell();
             Destroy(gameObject);
             UseForOrderAllNeededItemsOnField(false);
-
-            return reward;
         }
 
         private void UseForOrderAllNeededItemsOnField(bool isUsed = true)
