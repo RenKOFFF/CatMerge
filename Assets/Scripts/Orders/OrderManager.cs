@@ -64,7 +64,9 @@ namespace Orders
         private void Awake()
         {
             AllMergeItems = Resources.LoadAll<MergeItemData>("MergeItems")
-                .Where(i => i is not GeneratorMergeItemData)
+                .Where(i => i
+                    is not GeneratorMergeItemData
+                    and not EnergyMergeItemData)
                 .ToList();
         }
 
