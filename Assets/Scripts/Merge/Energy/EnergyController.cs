@@ -11,8 +11,21 @@ namespace Merge
 
         private bool _coroutineWasStarted;
 
-        public float CurrentEnergy { get; private set; }
+        public float CurrentEnergy
+        {
+            get => CurrentEnergy;
+            private set
+            {
+                if (CurrentEnergy + value > _maxStartEnergy)
+                    CurrentEnergy = _maxStartEnergy;
+                else CurrentEnergy += value;
+                
+                OnEnergyChangedEvent?.Invoke(CurrentEnergy);
+            }
+        }
+
         public static EnergyController Instance { get; private set; }
+        public event Action<float> OnEnergyChangedEvent;
 
         private void Awake()
         {
@@ -45,8 +58,6 @@ namespace Merge
         public void AddEnergy(int count)
         {
             CurrentEnergy += count;
-            if (CurrentEnergy > _maxStartEnergy)
-                CurrentEnergy = _maxStartEnergy;
 
             Debug.Log($"Energy was added on {count} points, current energy: {CurrentEnergy}");
         }
@@ -67,9 +78,6 @@ namespace Merge
                 Debug.Log($"CurrentEnergy: {CurrentEnergy}");
             }
 
-            if (CurrentEnergy > _maxStartEnergy) 
-                CurrentEnergy = _maxStartEnergy;
-            
             _coroutineWasStarted = false;
         }
     }
