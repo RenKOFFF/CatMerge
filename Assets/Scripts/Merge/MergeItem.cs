@@ -1,4 +1,5 @@
-﻿using Merge.Generator;
+﻿using System.Collections;
+using Merge.Generator;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,6 +9,9 @@ namespace Merge
     public class MergeItem : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         private MergeItemData mergeItemData;
+
+        private int _clickCount;
+        private float _timeBtwClick = .5f;
 
         private Image SpriteRenderer { get; set; }
         private CanvasGroup CanvasGroup { get; set; }
@@ -127,18 +131,32 @@ namespace Merge
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            _clickCount++;
+
+            if (_clickCount > 0)
+                StartCoroutine(ClickCountReset());
+
             if (MergeItemData is GeneratorMergeItemData clickableData)
             {
                 clickableData.Spawn();
             }
-            
+
             if (MergeItemData is EnergyMergeItemData doubleClickableData)
             {
-                if (eventData.clickCount == 2)
+                if (_clickCount >= 2)
                 {
                     doubleClickableData.GetEnergy();
                     ClearItemCell();
                 }
+            }
+        }
+
+        private IEnumerator ClickCountReset()
+        {
+            while (_clickCount > 0)
+            {
+                yield return new WaitForSeconds(_timeBtwClick);
+                _clickCount = 0;
             }
         }
     }
