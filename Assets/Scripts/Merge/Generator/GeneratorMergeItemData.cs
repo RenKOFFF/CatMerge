@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Merge.Energy;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -29,8 +30,6 @@ namespace Merge.Generator
 
                 var line = GetRandomLine();
                 var itemIndex = GetRandomItemIndexByGeneratorAge(line);
-
-                Debug.Log($"Line {line}, itemIndex: {itemIndex}");
                 
                 itemOnSpecificCell.TrySetData(_lines.GenerateLine[line].ItemData[itemIndex], false);
                 

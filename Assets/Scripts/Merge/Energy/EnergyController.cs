@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Merge
+namespace Merge.Energy
 {
     public class EnergyController : MonoBehaviour
     {
@@ -10,15 +10,16 @@ namespace Merge
         [SerializeField] private float _timeBtwRestoreOneEnergyPoint = 3f;
 
         private bool _coroutineWasStarted;
+        private float _currentEnergy;
 
         public float CurrentEnergy
         {
-            get => CurrentEnergy;
+            get => _currentEnergy;
             private set
             {
-                if (CurrentEnergy + value > _maxStartEnergy)
-                    CurrentEnergy = _maxStartEnergy;
-                else CurrentEnergy += value;
+                if (value > _maxStartEnergy)
+                    _currentEnergy = _maxStartEnergy;
+                else _currentEnergy = value;
                 
                 OnEnergyChangedEvent?.Invoke(CurrentEnergy);
             }

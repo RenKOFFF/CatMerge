@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Merge.Energy;
+using UnityEngine;
 
 namespace Merge
 {
