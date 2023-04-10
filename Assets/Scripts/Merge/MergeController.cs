@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
+using Merge.Selling;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Merge
 {
     public class MergeController : MonoBehaviour
     {
         [SerializeField] private MergeCell[] _spawnCells;
+        [SerializeField] private SellButton sellButton;
 
         [CanBeNull] private MergeItem MergingItem { get; set; }
         private Vector3 StartItemPosition { get; set; }
@@ -33,6 +34,11 @@ namespace Merge
         public void OnEndDrag(MergeItem clickedItem)
         {
             InteractWithMergeItem(clickedItem);
+        }
+
+        public void OnClick(MergeItem clickedItem)
+        {
+            ActivateSellButton(clickedItem);
         }
 
         public void ResetMergingItem()
@@ -79,6 +85,11 @@ namespace Merge
             MergingItem = clickedItem;
             StartItemPosition = MergingItem.transform.position;
             //MergingItem.GetComponent<Image>().raycastTarget = false;
+        }
+
+        private void ActivateSellButton(MergeItem sellingItem)
+        {
+            sellButton.Initialize(sellingItem);
         }
 
         private void Awake()

@@ -8,6 +8,7 @@ namespace Merge
     public class MergeItemData : ScriptableObject
     {
         public bool IsFinalItem => nextMergeItem == null;
+        public int SellPrice => ComplexityLevel;
 
         public int ComplexityLevel
         {

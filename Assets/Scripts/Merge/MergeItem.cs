@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using GameData;
 using Merge.Generator;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,7 +9,7 @@ namespace Merge
 {
     public class MergeItem : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        private MergeItemData mergeItemData;
+        private MergeItemData _mergeItemData;
 
         private int _clickCount;
         private float _timeBtwClick = .5f;
@@ -22,11 +23,11 @@ namespace Merge
 
         public MergeItemData MergeItemData
         {
-            get => mergeItemData;
+            get => _mergeItemData;
             private set
             {
                 SetUsedForOrder(false);
-                mergeItemData = value;
+                _mergeItemData = value;
             }
         }
 
@@ -61,10 +62,12 @@ namespace Merge
             if (IsEmpty)
             {
                 SpriteRenderer.sprite = null;
+                SpriteRenderer.enabled = false;
                 return;
             }
 
             SpriteRenderer.sprite = MergeItemData.sprite;
+            SpriteRenderer.enabled = true;
         }
 
         private void Awake()
@@ -94,7 +97,7 @@ namespace Merge
                 return false;
             }
 
-            var tempMergeItemData = mergeItemData;
+            var tempMergeItemData = MergeItemData;
 
             TrySetData(fromMergeItem.MergeItemData, true);
             fromMergeItem.TrySetData(tempMergeItemData, true);
@@ -139,6 +142,7 @@ namespace Merge
             if (MergeItemData is GeneratorMergeItemData clickableData)
             {
                 clickableData.Spawn();
+                return;
             }
 
             if (MergeItemData is EnergyMergeItemData doubleClickableData)
@@ -148,7 +152,17 @@ namespace Merge
                     doubleClickableData.GetEnergy();
                     ClearItemCell();
                 }
+
+                return;
             }
+
+            MergeController.Instance.OnClick(this);
+        }
+
+        public void Sell()
+        {
+            GameManager.Instance.AddMoney(MergeItemData.SellPrice);
+            ClearItemCell();
         }
 
         private IEnumerator ClickCountReset()
@@ -156,6 +170,7 @@ namespace Merge
             while (_clickCount > 0)
             {
                 yield return new WaitForSeconds(_timeBtwClick);
+
                 _clickCount = 0;
             }
         }
