@@ -20,6 +20,7 @@ namespace Merge
         public bool IsUsedForOrder { get; private set; }
 
         public bool IsEmpty => MergeItemData == null;
+        public bool IsMoving => transform.localPosition != Vector3.zero;
 
         public MergeItemData MergeItemData
         {
@@ -59,15 +60,8 @@ namespace Merge
 
         private void RefreshSprite()
         {
-            if (IsEmpty)
-            {
-                SpriteRenderer.sprite = null;
-                SpriteRenderer.enabled = false;
-                return;
-            }
-
-            SpriteRenderer.sprite = MergeItemData.sprite;
-            SpriteRenderer.enabled = true;
+            SpriteRenderer.sprite = !IsEmpty ? MergeItemData.sprite : null;
+            SpriteRenderer.enabled = !IsEmpty;
         }
 
         private void Awake()
@@ -93,16 +87,12 @@ namespace Merge
         public bool TrySwapData(MergeItem fromMergeItem)
         {
             if (Equals(fromMergeItem))
-            {
                 return false;
-            }
 
             var tempMergeItemData = MergeItemData;
 
             TrySetData(fromMergeItem.MergeItemData, true);
             fromMergeItem.TrySetData(tempMergeItemData, true);
-
-            //ClearItemCell(fromMergeItem);
 
             return true;
         }
@@ -127,6 +117,11 @@ namespace Merge
         }
 
         public void OnEndDrag(PointerEventData eventData)
+        {
+            ResetItem();
+        }
+
+        private void ResetItem()
         {
             CanvasGroup.blocksRaycasts = true;
             transform.localPosition = Vector3.zero;

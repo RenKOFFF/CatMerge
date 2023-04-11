@@ -12,7 +12,6 @@ namespace Merge
         [SerializeField] private SellButton sellButton;
 
         [CanBeNull] private MergeItem MergingItem { get; set; }
-        private Vector3 StartItemPosition { get; set; }
 
         public MergeCell[] SpawnCells => _spawnCells;
 
@@ -43,11 +42,6 @@ namespace Merge
 
         public void ResetMergingItem()
         {
-            if (MergingItem == null)
-                return;
-
-            MergingItem.transform.position = StartItemPosition;
-            //MergingItem.GetComponent<Image>().raycastTarget = true;
             MergingItem = null;
         }
 
@@ -80,11 +74,10 @@ namespace Merge
 
         private void SetMergingItem(MergeItem clickedItem)
         {
-            if (clickedItem.IsEmpty) return;
+            if (clickedItem.IsEmpty)
+                return;
 
             MergingItem = clickedItem;
-            StartItemPosition = MergingItem.transform.position;
-            //MergingItem.GetComponent<Image>().raycastTarget = false;
         }
 
         private void ActivateSellButton(MergeItem sellingItem)
