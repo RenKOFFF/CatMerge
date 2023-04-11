@@ -1220,10 +1220,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4275090085983670804, guid: 82657f15adc707841851cb05dc89f212, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.00006949678
-      objectReference: {fileID: 0}
     - target: {fileID: 4275090086000181900, guid: 82657f15adc707841851cb05dc89f212, type: 3}
       propertyPath: m_Name
       value: OrdersArea

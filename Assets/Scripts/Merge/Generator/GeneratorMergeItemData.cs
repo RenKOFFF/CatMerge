@@ -26,7 +26,7 @@ namespace Merge.Generator
                 }
                 
                 var itemOnSpecificCell =
-                    MergeController.Instance.SpawnCells[cellIndex].GetComponentInChildren<MergeItem>();
+                    MergeController.Instance.MergeCells[cellIndex].GetComponentInChildren<MergeItem>();
 
                 var line = GetRandomLine();
                 var itemIndex = GetRandomItemIndexByGeneratorAge(line);

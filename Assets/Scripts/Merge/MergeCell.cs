@@ -11,7 +11,7 @@ public class MergeCell : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        MergeController.Instance.OnEndDrag(MergeItem);
+        MergeController.Instance.OnDrop(MergeItem);
     }
 
     private void Update()

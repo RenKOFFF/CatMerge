@@ -3,36 +3,42 @@ using System.Linq;
 using JetBrains.Annotations;
 using Merge.Selling;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Merge
 {
     public class MergeController : MonoBehaviour
     {
-        [SerializeField] private MergeCell[] _spawnCells;
+        [FormerlySerializedAs("_spawnCells")] [SerializeField] private MergeCell[] mergeCells;
+
         [SerializeField] private SellButton sellButton;
 
         [CanBeNull] private MergeItem MergingItem { get; set; }
 
-        public MergeCell[] SpawnCells => _spawnCells;
+        public MergeCell[] MergeCells => mergeCells;
 
         public static MergeController Instance { get; private set; }
 
         public void OnBeginDrag(MergeItem clickedItem)
         {
-            InteractWithMergeItem(clickedItem);
+            SetMergingItem(clickedItem);
         }
 
         public void OnDrag()
         {
-            if (MergingItem == null) return;
+            if (MergingItem == null)
+                return;
 
             var worldPosition = (Vector2) Camera.main!.ScreenToWorldPoint(Input.mousePosition);
             MergingItem.transform.position = worldPosition;
         }
 
-        public void OnEndDrag(MergeItem clickedItem)
+        public void OnDrop(MergeItem droppedOnItem)
         {
-            InteractWithMergeItem(clickedItem);
+            if (MergingItem == null || MergingItem.TryMergeIn(droppedOnItem))
+                return;
+
+            droppedOnItem.TrySwapData(MergingItem);
         }
 
         public void OnClick(MergeItem clickedItem)
@@ -40,37 +46,16 @@ namespace Merge
             ActivateSellButton(clickedItem);
         }
 
-        public void ResetMergingItem()
-        {
-            MergingItem = null;
-        }
-
         public MergeItem FindMergeItemWithData(MergeItemData mergeItemData)
-            => SpawnCells
+            => MergeCells
                 .Select(c => c.MergeItem)
                 .FirstOrDefault(i => i.MergeItemData == mergeItemData);
 
         public List<MergeItem> FindMergeItemsWithData(MergeItemData mergeItemData)
-            => SpawnCells
+            => MergeCells
                 .Select(c => c.MergeItem)
                 .Where(i => i.MergeItemData == mergeItemData)
                 .ToList();
-
-        private void InteractWithMergeItem(MergeItem clickedItem)
-        {
-            if (MergingItem == null)
-            {
-                SetMergingItem(clickedItem);
-                return;
-            }
-
-            if (!MergingItem.TryMergeIn(clickedItem))
-            {
-                clickedItem.TrySwapData(MergingItem);
-            }
-
-            ResetMergingItem();
-        }
 
         private void SetMergingItem(MergeItem clickedItem)
         {
