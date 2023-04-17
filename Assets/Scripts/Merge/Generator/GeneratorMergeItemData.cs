@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameData;
 using Merge.Energy;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -33,7 +34,7 @@ namespace Merge.Generator
                 
                 itemOnSpecificCell.TrySetData(_lines.GenerateLine[line].ItemData[itemIndex], false);
                 
-                EnergyController.Instance.SpendEnergy();
+                GameManager.Instance.SpendEnergy();
             }
         }
 

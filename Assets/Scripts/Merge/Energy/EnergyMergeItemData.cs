@@ -1,4 +1,5 @@
-﻿using Merge.Energy;
+﻿using GameData;
+using Merge.Energy;
 using UnityEngine;
 
 namespace Merge
@@ -10,7 +11,7 @@ namespace Merge
 
         public void GiveEnergy()
         {
-            EnergyController.Instance.AddEnergy(_energy);
+            GameManager.Instance.AddEnergy(_energy);
         }
     }
 }
