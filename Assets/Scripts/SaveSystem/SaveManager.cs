@@ -5,6 +5,11 @@ namespace SaveSystem
 {
     public class SaveManager : MonoBehaviour
     {
-        public static IStorageService SaveInstance { get; } = new JSonToFileStorageService();
+        public static IStorageService Instance { get; private set; }
+
+        private void Awake()
+        {
+            Instance = new BinaryFormatterStorage(Application.persistentDataPath + "/saves/");
+        }
     }
 }

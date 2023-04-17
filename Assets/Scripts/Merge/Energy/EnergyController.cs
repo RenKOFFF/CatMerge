@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections;
+using SaveSystem;
 using UnityEngine;
 
 namespace Merge.Energy
 {
     public class EnergyController : MonoBehaviour
     {
-        [SerializeField] private float _maxStartEnergy = 10f;
-        [SerializeField] private float _timeBtwRestoreOneEnergyPoint = 3f;
+        [SerializeField] private int _maxStartEnergy = 100;
+        [SerializeField] private float _timeBtwRestoreOneEnergyPoint = 30f;
 
         private bool _coroutineWasStarted;
-        private float _currentEnergy;
+        private int _currentEnergy;
 
-        public float CurrentEnergy
+        public int MaxStartEnergy => _maxStartEnergy;
+        public int CurrentEnergy
         {
             get => _currentEnergy;
             private set
@@ -20,7 +22,7 @@ namespace Merge.Energy
                 if (value > _maxStartEnergy)
                     _currentEnergy = _maxStartEnergy;
                 else _currentEnergy = value;
-                
+
                 OnEnergyChangedEvent?.Invoke(CurrentEnergy);
             }
         }
@@ -35,7 +37,12 @@ namespace Merge.Energy
 
         private void Start()
         {
-            CurrentEnergy = _maxStartEnergy;
+            //CurrentEnergy = _maxStartEnergy;
+        }
+
+        public void SetEnergy(int energy)
+        {
+            CurrentEnergy = energy;
         }
 
         public bool SpendEnergy()
@@ -43,14 +50,11 @@ namespace Merge.Energy
             if (CurrentEnergy > 0)
             {
                 CurrentEnergy--;
-                Debug.Log($"Energy was spended, current energy: {CurrentEnergy}");
 
                 StartCoroutine(RestoreEnergy());
 
                 return true;
             }
-
-            Debug.Log("No Energy");
 
             return false;
         }
@@ -59,8 +63,6 @@ namespace Merge.Energy
         public void AddEnergy(int count)
         {
             CurrentEnergy += count;
-
-            Debug.Log($"Energy was added on {count} points, current energy: {CurrentEnergy}");
         }
 
         private IEnumerator RestoreEnergy()
@@ -76,7 +78,6 @@ namespace Merge.Energy
             {
                 yield return new WaitForSeconds(_timeBtwRestoreOneEnergyPoint);
                 CurrentEnergy++;
-                Debug.Log($"CurrentEnergy: {CurrentEnergy}");
             }
 
             _coroutineWasStarted = false;

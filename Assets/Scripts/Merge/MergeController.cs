@@ -2,14 +2,14 @@
 using System.Linq;
 using JetBrains.Annotations;
 using Merge.Selling;
+using SaveSystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Merge
 {
     public class MergeController : MonoBehaviour
     {
-        [FormerlySerializedAs("_spawnCells")] [SerializeField] private MergeCell[] mergeCells;
+        [SerializeField] private MergeCell[] mergeCells;
 
         [SerializeField] private SellButton sellButton;
 
@@ -29,7 +29,7 @@ namespace Merge
             if (MergingItem == null)
                 return;
 
-            var worldPosition = (Vector2) Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+            var worldPosition = (Vector2)Camera.main!.ScreenToWorldPoint(Input.mousePosition);
             MergingItem.transform.position = worldPosition;
         }
 
@@ -73,6 +73,11 @@ namespace Merge
         private void Awake()
         {
             Instance = this;
+        }
+
+        public void SaveMField()
+        {
+            //SaveManager.Instance.Save();
         }
     }
 }
