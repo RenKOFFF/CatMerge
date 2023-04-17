@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e5acff4f3134a8d85692b99be9dfac2, type: 3}
-  m_Name: Energy4
+  m_Name: Energy_1
   m_EditorClassIdentifier: 
-  sprite: {fileID: 165941600, guid: 67d44ac6e466d6647bb653911f02087a, type: 3}
-  previousMergeItem: {fileID: 11400000, guid: 3017e162d1abb3545bd7d31bedc94eb7, type: 2}
-  nextMergeItem: {fileID: 0}
+  sprite: {fileID: -1635465084, guid: 67d44ac6e466d6647bb653911f02087a, type: 3}
+  nextMergeItem: {fileID: 11400000, guid: 86be6abbd8babe04ca58f4d526cd12be, type: 2}
   SpawnChance:
     serializedVersion: 2
     m_Curve:
@@ -39,4 +38,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _energy: 15
+  _energy: 1

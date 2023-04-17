@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bad2ecfc52bb409eb3a6af1a6c2efe19, type: 3}
-  m_Name: Coin4
+  m_Name: Coin_3
   m_EditorClassIdentifier: 
-  sprite: {fileID: -1971986775, guid: 8b0f805b8d03e394e8fceb654b6a7462, type: 3}
-  previousMergeItem: {fileID: 11400000, guid: c19eaeb976711e344b6cbc1acf5e0d38, type: 2}
-  nextMergeItem: {fileID: 0}
+  sprite: {fileID: -696050059, guid: 8b0f805b8d03e394e8fceb654b6a7462, type: 3}
+  previousMergeItem: {fileID: 11400000, guid: a70bdabb4f2cb5f4081850a9556563fa, type: 2}
+  nextMergeItem: {fileID: 11400000, guid: 6f971f9dfc90c9b4f9bbb4fbca416af2, type: 2}
   SpawnChance:
     serializedVersion: 2
     m_Curve:
@@ -39,4 +39,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _coins: 15
+  _coins: 7

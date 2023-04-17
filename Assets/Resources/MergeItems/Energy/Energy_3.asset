@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e5acff4f3134a8d85692b99be9dfac2, type: 3}
-  m_Name: Energy3
+  m_Name: Energy_3
   m_EditorClassIdentifier: 
   sprite: {fileID: 12505041, guid: 67d44ac6e466d6647bb653911f02087a, type: 3}
   previousMergeItem: {fileID: 11400000, guid: 86be6abbd8babe04ca58f4d526cd12be, type: 2}

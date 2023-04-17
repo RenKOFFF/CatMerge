@@ -9,18 +9,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd314e7d37064c15889684d10850b527, type: 3}
-  m_Name: Cat7
+  m_Script: {fileID: 11500000, guid: 6e5acff4f3134a8d85692b99be9dfac2, type: 3}
+  m_Name: Energy_2
   m_EditorClassIdentifier: 
-  sprite: {fileID: -1660350570, guid: 8a6dd17e699becd4fafb245641b96f30, type: 3}
-  previousMergeItem: {fileID: 11400000, guid: c36eae351c97595409e96135aa5c8772, type: 2}
-  nextMergeItem: {fileID: 0}
+  sprite: {fileID: 962460335, guid: 67d44ac6e466d6647bb653911f02087a, type: 3}
+  previousMergeItem: {fileID: 11400000, guid: 3cbd96c5f18757b40bf7c2118d3ccbaf, type: 2}
+  nextMergeItem: {fileID: 11400000, guid: 3017e162d1abb3545bd7d31bedc94eb7, type: 2}
   SpawnChance:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
       time: 1
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 34
@@ -30,3 +39,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _energy: 3

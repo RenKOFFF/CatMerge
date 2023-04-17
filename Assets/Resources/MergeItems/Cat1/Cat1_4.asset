@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd314e7d37064c15889684d10850b527, type: 3}
-  m_Name: Cat5
+  m_Name: Cat1_4
   m_EditorClassIdentifier: 
-  sprite: {fileID: -767017164, guid: 8a6dd17e699becd4fafb245641b96f30, type: 3}
-  previousMergeItem: {fileID: 11400000, guid: 7e475989ef49c924cbe7a99359878bd8, type: 2}
-  nextMergeItem: {fileID: 11400000, guid: c36eae351c97595409e96135aa5c8772, type: 2}
+  sprite: {fileID: -527463840, guid: 8a6dd17e699becd4fafb245641b96f30, type: 3}
+  previousMergeItem: {fileID: 11400000, guid: 441b0bff7b232ab498b9995cfd61c2ac, type: 2}
+  nextMergeItem: {fileID: 11400000, guid: abab33f2c7a35014aadf7c772bf9a60a, type: 2}
   SpawnChance:
     serializedVersion: 2
     m_Curve:
