@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using GameData;
+using Merge.Coins;
 using Merge.Generator;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -145,6 +146,17 @@ namespace Merge
                 if (_clickCount >= 2)
                 {
                     doubleClickableData.GiveEnergy();
+                    ClearItemCell();
+                }
+
+                return;
+            }
+            
+            if (MergeItemData is CoinsMergeItemData coinsMergeItemData)
+            {
+                if (_clickCount >= 2)
+                {
+                    coinsMergeItemData.GiveCoins();
                     ClearItemCell();
                 }
 
