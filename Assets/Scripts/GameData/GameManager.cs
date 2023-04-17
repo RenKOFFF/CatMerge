@@ -9,6 +9,7 @@ namespace GameData
     {
         public static GameManager Instance { get; private set; }
         public static EnergyController EnergyController;
+        public bool IsGeneratorSpawned => GeneratorController.Instance.IsGeneratorSpawned;
 
         public int Money { get; private set; }
         public int Energy => EnergyController.CurrentEnergy;
@@ -16,20 +17,19 @@ namespace GameData
         public void AddMoney(int amount)
         {
             Money += amount;
-            
-            SaveManager.Instance.Save(new GameplayData(Instance));
+            SaveGameplayData();
         }
-
+        
         public void AddEnergy(int amount)
         {
             EnergyController.Instance.AddEnergy(amount);
-            SaveManager.Instance.Save(new GameplayData(Instance));
+            SaveGameplayData();
         }
 
         public void SpendEnergy()
         {
             EnergyController.Instance.SpendEnergy();
-            SaveManager.Instance.Save(new GameplayData(Instance));
+            SaveGameplayData();
         }
 
         private void Awake()
@@ -44,6 +44,11 @@ namespace GameData
 
             Money = data.Money;
             EnergyController.SetEnergy(data.CurrentEnergy);
+        }
+        
+        private void SaveGameplayData()
+        {
+            SaveManager.Instance.Save(new GameplayData(Instance));
         }
     }
 }

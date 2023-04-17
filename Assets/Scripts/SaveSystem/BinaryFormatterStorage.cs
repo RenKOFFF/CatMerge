@@ -22,7 +22,7 @@ namespace SaveSystem
         public void Save<T>(T data)
         {
             var fileName = $"{typeof(T)}.save";
-            
+
             using (FileStream file = File.Create(_directory + fileName))
             {
                 _formatter.Serialize(file, data);
@@ -33,26 +33,18 @@ namespace SaveSystem
         {
             var fileName = $"{typeof(T)}.save";
 
-            try
-            {
-                using (FileStream file = File.Open(_directory + fileName, FileMode.Open))
-                {
-                    if (!File.Exists(_directory + fileName))
-                    {
-                        Save(defaultValue);
-                        return defaultValue;
-                    }
-
-                    var loadedData = _formatter.Deserialize(file);
-                    T saveData = (T)loadedData;
-
-                    return saveData;
-                }
-            }
-            catch (Exception e)
+            if (!File.Exists(_directory + fileName))
             {
                 Save(defaultValue);
                 return defaultValue;
+            }
+            
+            using (FileStream file = File.Open(_directory + fileName, FileMode.Open))
+            {
+                var loadedData = _formatter.Deserialize(file);
+                T saveData = (T)loadedData;
+
+                return saveData;
             }
         }
     }

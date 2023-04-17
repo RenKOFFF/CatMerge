@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using GameData;
 using JetBrains.Annotations;
 using Merge.Selling;
+using Newtonsoft.Json;
 using SaveSystem;
 using UnityEngine;
 
@@ -39,11 +42,14 @@ namespace Merge
                 return;
 
             droppedOnItem.TrySwapData(MergingItem);
+
+            SaveMField();
         }
 
         public void OnClick(MergeItem clickedItem)
         {
             ActivateSellButton(clickedItem);
+            SaveMField();
         }
 
         public MergeItem FindMergeItemWithData(MergeItemData mergeItemData)
@@ -75,9 +81,37 @@ namespace Merge
             Instance = this;
         }
 
+        private void Start()
+        {
+            LoadMergeFieldData();
+            GeneratorController.Instance.SpawnGenerator();
+        }
+
+        private void LoadMergeFieldData()
+        {
+            var loadedData = SaveManager.Instance.Load(new LevelSaveData(Instance, false));
+
+            var dict = JsonConvert.DeserializeObject<Dictionary<int, string>>(loadedData
+                .CellsDictionaryJSonFormat);
+
+            GeneratorController.Instance.SetIsGeneratorSpawned(loadedData.IsGeneratorSpawned);
+            
+            for (int i = 0; i < mergeCells.Length; i++)
+            {
+                if (dict.TryGetValue(i, out var dataName))
+                {
+                    string directory = dataName.Split("_")[0];
+
+                    var mergeItemData = Resources.Load<MergeItemData>($"MergeItems/{directory}/{dataName}");
+                    MergeCells[i].MergeItem.TrySetData(mergeItemData, false);
+                }
+                else MergeCells[i].MergeItem.TrySetData(null, true);
+            }
+        }
+
         public void SaveMField()
         {
-            //SaveManager.Instance.Save();
+            SaveManager.Instance.Save(new LevelSaveData(Instance, GameManager.Instance.IsGeneratorSpawned));
         }
     }
 }
