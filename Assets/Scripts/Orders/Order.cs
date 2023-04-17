@@ -12,12 +12,16 @@ namespace Orders
         [SerializeField] private GameObject claimRewardButton;
         [SerializeField] private TMP_Text rewardText;
 
+        private int Reward { get; set; }
+        private OrderData OrderData { get; set; }
+
         private readonly List<OrderPart> _orderParts = new();
-        private int _reward;
 
         public void Initialize(OrderData orderData)
         {
-            foreach (var orderPartData in orderData.Parts)
+            OrderData = orderData;
+
+            foreach (var orderPartData in OrderData.Parts)
             {
                 var orderPart = Instantiate(orderPartPrefab, orderPartsParent, false);
                 orderPart.Initialize(orderPartData);
@@ -25,9 +29,9 @@ namespace Orders
             }
 
             foreach (var orderPartData in _orderParts)
-                _reward += orderPartData.GetRewardAmount();
+                Reward += orderPartData.GetRewardAmount();
 
-            rewardText.text = $"+{_reward}";
+            rewardText.text = $"+{Reward}";
         }
 
         public void ClaimReward()
@@ -35,7 +39,10 @@ namespace Orders
             foreach (var orderPartData in _orderParts)
                 orderPartData.Complete();
 
-            GameManager.Instance.AddMoney(_reward);
+            if (OrderData.RewardItem != null)
+                RewardsStack.Instance.AppendReward(OrderData.RewardItem);
+
+            GameManager.Instance.AddMoney(Reward);
 
             Destroy(gameObject);
         }

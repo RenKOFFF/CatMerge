@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Extensions;
+using GameData;
 using Merge;
-using Merge.Generator;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,7 +16,8 @@ namespace Orders
         [SerializeField] private double timeToGenerateOrderInSeconds;
         [SerializeField] private int maxActiveOrdersCount;
 
-        private List<MergeItemData> AllMergeItems { get; set; } = new();
+        private const double OrderIncludesRewardProbability = 0.5;
+
         private List<GameObject> ActiveOrders { get; set; } = new();
         private DateTime NextOrderGenerationTime { get; set; }
 
@@ -29,9 +30,20 @@ namespace Orders
             if (ActiveOrders.Count >= maxActiveOrdersCount)
                 return;
 
-            var availableMergeItems = AllMergeItems.ToList();
+            var availableMergeItems = GameDataHelper.AllMergeItems.ToList();
             var partsAmount = Random.Range(1, 3 + 1);
-            var orderData = new OrderData();
+
+            var isRewardItemIncluded = Random.Range(0f, 1) < OrderIncludesRewardProbability;
+            MergeItemData rewardItem = null;
+
+            if (isRewardItemIncluded)
+            {
+                var availableRewardItems = GameDataHelper.AllItems.ToList();
+                var randomIndex = Random.Range(0, availableRewardItems.Count);
+                rewardItem = availableRewardItems[randomIndex];
+            }
+
+            var orderData = new OrderData(rewardItem);
 
             for (var i = 0; i < partsAmount; i++)
             {
@@ -59,15 +71,6 @@ namespace Orders
         private void SetNewOrderGenerationTime()
         {
             NextOrderGenerationTime = DateTime.UtcNow + TimeSpan.FromSeconds(timeToGenerateOrderInSeconds);
-        }
-
-        private void Awake()
-        {
-            AllMergeItems = Resources.LoadAll<MergeItemData>("MergeItems")
-                .Where(i => i
-                    is not GeneratorMergeItemData
-                    and not EnergyMergeItemData)
-                .ToList();
         }
 
         private void Start()
