@@ -144,7 +144,7 @@ namespace Merge
             {
                 if (_clickCount >= 2)
                 {
-                    doubleClickableData.GetEnergy();
+                    doubleClickableData.GiveEnergy();
                     ClearItemCell();
                 }
 

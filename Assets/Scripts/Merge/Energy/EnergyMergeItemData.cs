@@ -8,7 +8,7 @@ namespace Merge
     {
         [Min(1), SerializeField] private int _energy = 1;
 
-        public void GetEnergy()
+        public void GiveEnergy()
         {
             EnergyController.Instance.AddEnergy(_energy);
         }
