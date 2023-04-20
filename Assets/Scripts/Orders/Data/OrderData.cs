@@ -19,9 +19,13 @@ namespace Orders
         public List<OrderPartData> Parts { get; } = new();
         [CanBeNull] public MergeItemData RewardItem { get; }
 
-        public OrderData([CanBeNull] MergeItemData rewardItem = null)
+        public bool ContainsRewardMoney { get; }
+        public bool ContainsRewardItem => RewardItem != null;
+
+        public OrderData([CanBeNull] MergeItemData rewardItem = null, bool containsRewardMoney = true)
         {
             RewardItem = rewardItem;
+            ContainsRewardMoney = containsRewardMoney;
         }
 
         public void AddPart(OrderPartData orderPartData)

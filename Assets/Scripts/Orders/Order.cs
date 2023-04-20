@@ -2,6 +2,7 @@
 using GameData;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Orders
 {
@@ -11,6 +12,7 @@ namespace Orders
         [SerializeField] private Transform orderPartsParent;
         [SerializeField] private GameObject claimRewardButton;
         [SerializeField] private TMP_Text rewardText;
+        [SerializeField] private Image rewardItemImage;
 
         private int Reward { get; set; }
         private OrderData OrderData { get; set; }
@@ -31,7 +33,13 @@ namespace Orders
             foreach (var orderPartData in _orderParts)
                 Reward += orderPartData.GetRewardAmount();
 
-            rewardText.text = $"+{Reward}";
+            rewardText.text = OrderData.ContainsRewardMoney ? $" + {Reward}" : "";
+            rewardText.gameObject.SetActive(OrderData.ContainsRewardMoney);
+
+            if (OrderData.ContainsRewardItem)
+                rewardItemImage.sprite = orderData.RewardItem.sprite;
+
+            rewardItemImage.gameObject.SetActive(OrderData.ContainsRewardItem);
         }
 
         public void ClaimReward()
@@ -39,10 +47,11 @@ namespace Orders
             foreach (var orderPartData in _orderParts)
                 orderPartData.Complete();
 
-            if (OrderData.RewardItem != null)
+            if (OrderData.ContainsRewardItem)
                 RewardsStack.Instance.AppendReward(OrderData.RewardItem);
 
-            GameManager.Instance.AddMoney(Reward);
+            if (OrderData.ContainsRewardMoney)
+                GameManager.Instance.AddMoney(Reward);
 
             Destroy(gameObject);
         }

@@ -16,7 +16,8 @@ namespace Orders
         [SerializeField] private double timeToGenerateOrderInSeconds;
         [SerializeField] private int maxActiveOrdersCount;
 
-        private const double OrderIncludesRewardProbability = 0.5;
+        private const double OrderIncludesRewardItemProbability = 0.5;
+        private const double OrderIncludesRewardMoneyProbability = 0.5;
 
         private List<GameObject> ActiveOrders { get; set; } = new();
         private DateTime NextOrderGenerationTime { get; set; }
@@ -33,7 +34,8 @@ namespace Orders
             var availableMergeItems = GameDataHelper.AllMergeItems.ToList();
             var partsAmount = Random.Range(1, 3 + 1);
 
-            var isRewardItemIncluded = Random.Range(0f, 1) < OrderIncludesRewardProbability;
+            var isRewardItemIncluded = Random.Range(0f, 1) < OrderIncludesRewardItemProbability;
+            var containsRewardMoney = Random.Range(0f, 1) < OrderIncludesRewardMoneyProbability;
             MergeItemData rewardItem = null;
 
             if (isRewardItemIncluded)
@@ -43,7 +45,7 @@ namespace Orders
                 rewardItem = availableRewardItems[randomIndex];
             }
 
-            var orderData = new OrderData(rewardItem);
+            var orderData = new OrderData(rewardItem, containsRewardMoney);
 
             for (var i = 0; i < partsAmount; i++)
             {
