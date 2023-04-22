@@ -4,12 +4,14 @@ using JetBrains.Annotations;
 using Merge.Selling;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Utils;
 
 namespace Merge
 {
     public class MergeController : MonoBehaviour
     {
-        [FormerlySerializedAs("_spawnCells")] [SerializeField] private MergeCell[] mergeCells;
+        [FormerlySerializedAs("_spawnCells")] [SerializeField]
+        private MergeCell[] mergeCells;
 
         [SerializeField] private SellButton sellButton;
 
@@ -18,6 +20,31 @@ namespace Merge
         public MergeCell[] MergeCells => mergeCells;
 
         public static MergeController Instance { get; private set; }
+
+        public MergeItem FindMergeItemWithData(MergeItemData mergeItemData)
+            => MergeCells
+                .Select(c => c.MergeItem)
+                .FirstOrDefault(i => i.MergeItemData == mergeItemData);
+
+        public List<MergeItem> FindMergeItemsWithData(MergeItemData mergeItemData)
+            => MergeCells
+                .Select(c => c.MergeItem)
+                .Where(i => i.MergeItemData == mergeItemData)
+                .ToList();
+
+        public static int GetEmptyCellIndex()
+        {
+            var shookSpawnCellsArray = ShakeArray<MergeCell>.Shake(Instance.MergeCells);
+
+            for (var i = 0; i < shookSpawnCellsArray.Length; i++)
+            {
+                if (Instance.MergeCells[i].GetComponentInChildren<MergeItem>().IsEmpty)
+                    return i;
+            }
+
+            Debug.Log("Empty cells not found");
+            return -1;
+        }
 
         public void OnBeginDrag(MergeItem clickedItem)
         {
@@ -45,17 +72,6 @@ namespace Merge
         {
             ActivateSellButton(clickedItem);
         }
-
-        public MergeItem FindMergeItemWithData(MergeItemData mergeItemData)
-            => MergeCells
-                .Select(c => c.MergeItem)
-                .FirstOrDefault(i => i.MergeItemData == mergeItemData);
-
-        public List<MergeItem> FindMergeItemsWithData(MergeItemData mergeItemData)
-            => MergeCells
-                .Select(c => c.MergeItem)
-                .Where(i => i.MergeItemData == mergeItemData)
-                .ToList();
 
         private void SetMergingItem(MergeItem clickedItem)
         {

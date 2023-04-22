@@ -17,7 +17,7 @@ namespace Merge.Generator
         {
             if (EnergyController.Instance.CurrentEnergy > 0)
             {
-                var cellIndex = GeneratorController.Instance.GetEmptyCellIndex();
+                var cellIndex = MergeController.GetEmptyCellIndex();
 
                 if (cellIndex == -1)
                 {
