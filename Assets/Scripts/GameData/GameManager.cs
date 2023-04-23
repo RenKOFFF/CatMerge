@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using Merge;
 using Merge.Energy;
+using Newtonsoft.Json;
 using SaveSystem;
 using UnityEngine;
 
@@ -13,13 +16,16 @@ namespace GameData
 
         public int Money { get; private set; }
         public int Energy => EnergyController.CurrentEnergy;
+        public Dictionary<int, bool> OpenedLevels;
+        
+        public int CurrentLevel { get; private set; }
 
         public void AddMoney(int amount)
         {
             Money += amount;
             SaveGameplayData();
         }
-        
+
         public void AddEnergy(int amount)
         {
             EnergyController.Instance.AddEnergy(amount);
@@ -44,11 +50,25 @@ namespace GameData
 
             Money = data.Money;
             EnergyController.SetEnergy(data.CurrentEnergy);
+            OpenedLevels = JsonConvert.DeserializeObject<Dictionary<int, bool>>(data.OpenedLevelsDictionaryJSonFormat);
+            CurrentLevel = data.CurrentLevel;
         }
-        
+
         private void SaveGameplayData()
         {
             SaveManager.Instance.Save(new GameplayData(Instance));
+        }
+
+        public void ChangeLevel(int lvlIndex)
+        {
+            CurrentLevel = lvlIndex;
+            SaveGameplayData();
+        }
+        
+        private void OnApplicationQuit()
+        {
+            SaveGameplayData();
+            MergeController.Instance.SaveMField();
         }
     }
 }

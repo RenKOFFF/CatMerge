@@ -12,11 +12,18 @@ namespace SaveSystem
     {
         public int CurrentEnergy;
         public int Money;
+        public string OpenedLevelsDictionaryJSonFormat;
+        public int CurrentLevel;
 
         public GameplayData(GameManager gameManager)
         {
             CurrentEnergy = gameManager.Energy;
             Money = gameManager.Money;
+
+            var openedLevelsDictionary = gameManager.OpenedLevels;
+            OpenedLevelsDictionaryJSonFormat = JsonConvert.SerializeObject(openedLevelsDictionary);
+
+            CurrentLevel = gameManager.CurrentLevel;
         }
 
         /// <summary>
@@ -26,23 +33,27 @@ namespace SaveSystem
         {
             CurrentEnergy = GameManager.EnergyController.MaxStartEnergy;
             Money = 0;
+
+            var startDict = new Dictionary<int, bool>();
+            startDict.Add(0, true);
+            OpenedLevelsDictionaryJSonFormat = JsonConvert.SerializeObject(startDict);
+
+            CurrentLevel = 0;
         }
     }
 
     [Serializable]
     public class LevelSaveData
     {
-        public int LevelNumber;
         public bool IsGeneratorSpawned;
         public string CellsDictionaryJSonFormat;
 
         public LevelSaveData(MergeController mergeController, bool isGeneratorSpawned)
         {
-            LevelNumber = 1;
             IsGeneratorSpawned = isGeneratorSpawned;
-            
+
             Dictionary<int, string> CellsDictionary = new();
-            
+
             for (int i = 0; i < mergeController.MergeCells.Length; i++)
             {
                 if (!mergeController.MergeCells[i].MergeItem.IsEmpty)
@@ -53,6 +64,19 @@ namespace SaveSystem
                 {
                     CellsDictionary.Add(i, "empty");
                 }
+            }
+
+            CellsDictionaryJSonFormat = JsonConvert.SerializeObject(CellsDictionary);
+        }
+
+        public LevelSaveData(int MergeCellsLength)
+        {
+            IsGeneratorSpawned = false;
+            Dictionary<int, string> CellsDictionary = new();
+
+            for (int i = 0; i < MergeCellsLength; i++)
+            {
+                CellsDictionary.Add(i, "empty");
             }
 
             CellsDictionaryJSonFormat = JsonConvert.SerializeObject(CellsDictionary);

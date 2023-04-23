@@ -138,6 +138,8 @@ namespace Merge
             if (MergeItemData is GeneratorMergeItemData clickableData)
             {
                 clickableData.Spawn();
+
+                MergeController.Instance.SaveMField();
                 return;
             }
 
@@ -149,6 +151,7 @@ namespace Merge
                     ClearItemCell();
                 }
 
+                MergeController.Instance.SaveMField();
                 return;
             }
             
@@ -160,6 +163,7 @@ namespace Merge
                     ClearItemCell();
                 }
 
+                MergeController.Instance.SaveMField();
                 return;
             }
 

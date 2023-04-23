@@ -83,19 +83,25 @@ namespace Merge
 
         private void Start()
         {
+            //LoadLevel();
+        }
+
+        public void LoadLevel()
+        {
             LoadMergeFieldData();
             GeneratorController.Instance.SpawnGenerator();
         }
 
         private void LoadMergeFieldData()
         {
-            var loadedData = SaveManager.Instance.LoadOrDefault(new LevelSaveData(Instance, false));
+            var loadedData = SaveManager.Instance.LoadOrDefault(new LevelSaveData(Instance.MergeCells.Length),
+                GameManager.Instance.CurrentLevel.ToString());
 
             var dict = JsonConvert.DeserializeObject<Dictionary<int, string>>(loadedData
                 .CellsDictionaryJSonFormat);
 
             GeneratorController.Instance.SetIsGeneratorSpawned(loadedData.IsGeneratorSpawned);
-            
+
             for (int i = 0; i < mergeCells.Length; i++)
             {
                 if (dict.TryGetValue(i, out var dataName))
@@ -103,7 +109,7 @@ namespace Merge
                     string directory = dataName.Split("_")[0];
 
                     var mergeItemData = Resources.Load<MergeItemData>($"MergeItems/{directory}/{dataName}");
-                    MergeCells[i].MergeItem.TrySetData(mergeItemData, false);
+                    MergeCells[i].MergeItem.TrySetData(mergeItemData, true);
                 }
                 else MergeCells[i].MergeItem.TrySetData(null, true);
             }
@@ -111,7 +117,8 @@ namespace Merge
 
         public void SaveMField()
         {
-            SaveManager.Instance.Save(new LevelSaveData(Instance, GameManager.Instance.IsGeneratorSpawned));
+            SaveManager.Instance.Save(new LevelSaveData(Instance, GameManager.Instance.IsGeneratorSpawned),
+                GameManager.Instance.CurrentLevel.ToString());
         }
     }
 }

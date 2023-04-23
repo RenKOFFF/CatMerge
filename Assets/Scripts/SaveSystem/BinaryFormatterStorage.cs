@@ -19,9 +19,9 @@ namespace SaveSystem
             }
         }
 
-        public void Save<T>(T data)
+        public void Save<T>(T data, string key = "")
         {
-            var fileName = $"{typeof(T)}.save";
+            var fileName = GetFileName<T>(key);
 
             using (FileStream file = File.Create(_directory + fileName))
             {
@@ -29,16 +29,16 @@ namespace SaveSystem
             }
         }
 
-        public T Load<T>(T defaultValue = default)
+        public T LoadOrDefault<T>(T defaultValue = default, string key = "")
         {
-            var fileName = $"{typeof(T)}.save";
+            var fileName = GetFileName<T>(key);
 
             if (!File.Exists(_directory + fileName))
             {
-                Save(defaultValue);
+                Save(defaultValue, key);
                 return defaultValue;
             }
-            
+
             using (FileStream file = File.Open(_directory + fileName, FileMode.Open))
             {
                 var loadedData = _formatter.Deserialize(file);
@@ -46,6 +46,12 @@ namespace SaveSystem
 
                 return saveData;
             }
+        }
+
+        private string GetFileName<T>(string key = "")
+        {
+            var fileName = $"{typeof(T)}{key}.save";
+            return fileName;
         }
     }
 }
