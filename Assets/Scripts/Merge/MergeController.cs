@@ -89,7 +89,7 @@ namespace Merge
 
         private void LoadMergeFieldData()
         {
-            var loadedData = SaveManager.Instance.Load(new LevelSaveData(Instance, false));
+            var loadedData = SaveManager.Instance.LoadOrDefault(new LevelSaveData(Instance, false));
 
             var dict = JsonConvert.DeserializeObject<Dictionary<int, string>>(loadedData
                 .CellsDictionaryJSonFormat);

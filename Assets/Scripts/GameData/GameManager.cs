@@ -40,7 +40,7 @@ namespace GameData
 
         private void Start()
         {
-            var data = SaveManager.Instance.Load(new GameplayData());
+            var data = SaveManager.Instance.LoadOrDefault(new GameplayData());
 
             Money = data.Money;
             EnergyController.SetEnergy(data.CurrentEnergy);
