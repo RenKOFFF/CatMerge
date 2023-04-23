@@ -47,12 +47,23 @@ public class GeneratorController : MonoBehaviour
 
     public int GetEmptyCellIndex()
     {
-        var shakedSpawnCellsArray = ShakeArray<MergeCell>.Shake(MergeController.Instance.MergeCells);
+        var mergeCellsLength = MergeController.Instance.MergeCells.Length;
+        var spawnCellsIndexesArray = new int[mergeCellsLength];
 
-        for (int i = 0; i < shakedSpawnCellsArray.Length; i++)
+        for (int i = 0; i < mergeCellsLength; i++)
         {
-            var isEmpty = MergeController.Instance.MergeCells[i].GetComponentInChildren<MergeItem>().IsEmpty;
-            if (isEmpty) return i;
+            spawnCellsIndexesArray[i] = i;
+        }
+        
+        var shakedSpawnCellsIndexesArray =  ShakeArray<int>.Shake(spawnCellsIndexesArray);
+        var shakedIndex = 0;
+        
+        for (int i = 0; i < shakedSpawnCellsIndexesArray.Length; i++)
+        {
+            shakedIndex = shakedSpawnCellsIndexesArray[i];
+            
+            var isEmpty = MergeController.Instance.MergeCells[shakedIndex].GetComponentInChildren<MergeItem>().IsEmpty;
+            if (isEmpty) return shakedIndex;
         }
 
         Debug.Log("Not empty cells");
