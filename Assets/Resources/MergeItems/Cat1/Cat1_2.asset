@@ -10,49 +10,49 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd314e7d37064c15889684d10850b527, type: 3}
-  m_Name: Cat3
+  m_Name: Cat1_2
   m_EditorClassIdentifier: 
-  sprite: {fileID: -821608058, guid: 8a6dd17e699becd4fafb245641b96f30, type: 3}
-  previousMergeItem: {fileID: 11400000, guid: 241cc1550555ef44fb7a7ee770430ea7, type: 2}
-  nextMergeItem: {fileID: 11400000, guid: 7e475989ef49c924cbe7a99359878bd8, type: 2}
+  sprite: {fileID: 2001267634, guid: 8a6dd17e699becd4fafb245641b96f30, type: 3}
+  previousMergeItem: {fileID: 11400000, guid: b9bc292adf5836e46ab50b0ce2433735, type: 2}
+  nextMergeItem: {fileID: 11400000, guid: 441b0bff7b232ab498b9995cfd61c2ac, type: 2}
   SpawnChance:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.15
+      outSlope: 0.15
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 2
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      value: 0.15
+      inSlope: Infinity
+      outSlope: Infinity
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.6875
+      outWeight: 0
     - serializedVersion: 3
       time: 3
-      value: 0.1
+      value: 0.25
+      inSlope: 0.075
+      outSlope: 0.075
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 4
+      value: 0.3
       inSlope: Infinity
       outSlope: Infinity
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 4
-      value: 0.15
-      inSlope: 0.050000004
-      outSlope: 0.050000004
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2

@@ -10,19 +10,17 @@ public class GeneratorController : MonoBehaviour
 
     public int GeneratorCellIndex { get; private set; }
     public static GeneratorController Instance { get; private set; }
+    public bool IsGeneratorSpawned { get; private set; }
 
     private void Awake()
     {
         Instance = this;
     }
 
-    private void Start()
+    public void SpawnGenerator()
     {
-        SpawnGenerator();
-    }
-
-    private void SpawnGenerator()
-    {
+        if (IsGeneratorSpawned) return;
+        
         for (int i = 0; i < _generatorsData.Length; i++)
         {
             var generatorCellIndex = MergeController.GetEmptyCellIndex();
@@ -37,5 +35,12 @@ public class GeneratorController : MonoBehaviour
             if (mergeItem.TrySetData(_generatorsData[i], false))
                 GeneratorCellIndex = generatorCellIndex;
         }
+
+        IsGeneratorSpawned = true;
+    }
+
+    public void SetIsGeneratorSpawned(bool value)
+    {
+        IsGeneratorSpawned = value;
     }
 }

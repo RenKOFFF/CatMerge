@@ -9,18 +9,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd314e7d37064c15889684d10850b527, type: 3}
-  m_Name: Cat7
+  m_Script: {fileID: 11500000, guid: bad2ecfc52bb409eb3a6af1a6c2efe19, type: 3}
+  m_Name: Coin_1
   m_EditorClassIdentifier: 
-  sprite: {fileID: -1660350570, guid: 8a6dd17e699becd4fafb245641b96f30, type: 3}
-  previousMergeItem: {fileID: 11400000, guid: c36eae351c97595409e96135aa5c8772, type: 2}
-  nextMergeItem: {fileID: 0}
+  sprite: {fileID: -297049562, guid: 8b0f805b8d03e394e8fceb654b6a7462, type: 3}
+  previousMergeItem: {fileID: 0}
+  nextMergeItem: {fileID: 11400000, guid: a70bdabb4f2cb5f4081850a9556563fa, type: 2}
   SpawnChance:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
       time: 1
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 34
@@ -30,3 +39,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _coins: 1

@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de80889951e47b1a8328ceaab247016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnCells:
+  mergeCells:
   - {fileID: 242053076453079616}
   - {fileID: 875818869629308361}
   - {fileID: 1345558054300229072}
