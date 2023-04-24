@@ -10,9 +10,7 @@ namespace Merge
 {
     public class MergeController : MonoBehaviour
     {
-        [FormerlySerializedAs("_spawnCells")] [SerializeField]
-        private MergeCell[] mergeCells;
-
+        [FormerlySerializedAs("_spawnCells")] [SerializeField] private MergeCell[] mergeCells;
         [SerializeField] private SellButton sellButton;
 
         [CanBeNull] private MergeItem MergingItem { get; set; }

@@ -25,15 +25,14 @@ namespace Orders
         public void ClaimReward()
         {
             var reward = Rewards.Peek();
-
             var emptyCellIndex = MergeController.GetEmptyCellIndex();
 
             if (emptyCellIndex == -1)
                 return;
 
-            var emptyCellItem = MergeController.Instance.MergeCells[emptyCellIndex].GetComponentInChildren<MergeItem>();
-
-            emptyCellItem.TrySetData(reward, false);
+            MergeController.Instance.MergeCells[emptyCellIndex]
+                .GetComponentInChildren<MergeItem>()
+                .TrySetData(reward, false);
 
             Rewards.Pop();
             UpdateSprite();

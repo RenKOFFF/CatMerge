@@ -1,4 +1,5 @@
 ﻿using Merge;
+using Orders.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,9 +19,6 @@ namespace Orders
             _orderPartData = orderPartData;
             orderPartImage.sprite = _orderPartData.NeededItem.sprite;
         }
-
-        public int GetRewardAmount()
-            => Random.Range(1, 4 + 1) * _orderPartData.NeededItem.ComplexityLevel;
 
         public void Complete()
         {

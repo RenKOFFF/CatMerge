@@ -23,7 +23,7 @@ public class GeneratorController : MonoBehaviour
 
     private void SpawnGenerator()
     {
-        for (var i = 0; i < _generatorsData.Length; i++)
+        for (int i = 0; i < _generatorsData.Length; i++)
         {
             var generatorCellIndex = MergeController.GetEmptyCellIndex();
 

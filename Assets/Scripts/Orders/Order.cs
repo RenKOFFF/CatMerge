@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using GameData;
+using Orders.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +15,6 @@ namespace Orders
         [SerializeField] private TMP_Text rewardText;
         [SerializeField] private Image rewardItemImage;
 
-        private int Reward { get; set; }
         private OrderData OrderData { get; set; }
 
         private readonly List<OrderPart> _orderParts = new();
@@ -23,17 +23,14 @@ namespace Orders
         {
             OrderData = orderData;
 
-            foreach (var orderPartData in OrderData.Parts)
+            foreach (var partData in OrderData.Parts)
             {
                 var orderPart = Instantiate(orderPartPrefab, orderPartsParent, false);
-                orderPart.Initialize(orderPartData);
+                orderPart.Initialize(partData);
                 _orderParts.Add(orderPart);
             }
 
-            foreach (var orderPartData in _orderParts)
-                Reward += orderPartData.GetRewardAmount();
-
-            rewardText.text = OrderData.ContainsRewardMoney ? $" + {Reward}" : "";
+            rewardText.text = OrderData.ContainsRewardMoney ? $" + {OrderData.RewardMoney}" : "";
             rewardText.gameObject.SetActive(OrderData.ContainsRewardMoney);
 
             if (OrderData.ContainsRewardItem)
@@ -51,7 +48,7 @@ namespace Orders
                 RewardsStack.Instance.AppendReward(OrderData.RewardItem);
 
             if (OrderData.ContainsRewardMoney)
-                GameManager.Instance.AddMoney(Reward);
+                GameManager.Instance.AddMoney(OrderData.RewardMoney);
 
             Destroy(gameObject);
         }
