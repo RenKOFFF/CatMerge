@@ -36,15 +36,26 @@ namespace Merge
 
         public static int GetEmptyCellIndex()
         {
-            var shookSpawnCellsArray = ShakeArray<MergeCell>.Shake(Instance.MergeCells);
+            var mergeCellsLength = Instance.MergeCells.Length;
+            var spawnCellsIndexesArray = new int[mergeCellsLength];
 
-            for (var i = 0; i < shookSpawnCellsArray.Length; i++)
+            for (int i = 0; i < mergeCellsLength; i++)
             {
-                if (Instance.MergeCells[i].GetComponentInChildren<MergeItem>().IsEmpty)
-                    return i;
+                spawnCellsIndexesArray[i] = i;
+            }
+        
+            var shakedSpawnCellsIndexesArray =  ShakeArray<int>.Shake(spawnCellsIndexesArray);
+            var shakedIndex = 0;
+        
+            for (int i = 0; i < shakedSpawnCellsIndexesArray.Length; i++)
+            {
+                shakedIndex = shakedSpawnCellsIndexesArray[i];
+            
+                var isEmpty = MergeController.Instance.MergeCells[shakedIndex].GetComponentInChildren<MergeItem>().IsEmpty;
+                if (isEmpty) return shakedIndex;
             }
 
-            Debug.Log("Empty cells not found");
+            Debug.Log("Not empty cells");
             return -1;
         }
 
