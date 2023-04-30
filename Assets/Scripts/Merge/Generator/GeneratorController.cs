@@ -1,5 +1,7 @@
 using System;
+using GameData;
 using Merge;
+using SaveSystem;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -36,11 +38,12 @@ public class GeneratorController : MonoBehaviour
                 GeneratorCellIndex = generatorCellIndex;
         }
 
-        IsGeneratorSpawned = true;
+        SetIsGeneratorSpawned(true);
     }
 
     public void SetIsGeneratorSpawned(bool value)
     {
         IsGeneratorSpawned = value;
+        SaveManager.Instance.Save(new LevelSaveData(MergeController.Instance, value), GameManager.Instance.CurrentLevel.ToString());
     }
 }
