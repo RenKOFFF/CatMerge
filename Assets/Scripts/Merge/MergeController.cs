@@ -43,15 +43,16 @@ namespace Merge
             {
                 spawnCellsIndexesArray[i] = i;
             }
-        
-            var shakedSpawnCellsIndexesArray =  ShakeArray<int>.Shake(spawnCellsIndexesArray);
+
+            var shakedSpawnCellsIndexesArray = ShakeArray<int>.Shake(spawnCellsIndexesArray);
             var shakedIndex = 0;
-        
+
             for (int i = 0; i < shakedSpawnCellsIndexesArray.Length; i++)
             {
                 shakedIndex = shakedSpawnCellsIndexesArray[i];
-            
-                var isEmpty = MergeController.Instance.MergeCells[shakedIndex].GetComponentInChildren<MergeItem>().IsEmpty;
+
+                var isEmpty = MergeController.Instance.MergeCells[shakedIndex].GetComponentInChildren<MergeItem>()
+                    .IsEmpty;
                 if (isEmpty) return shakedIndex;
             }
 
@@ -76,10 +77,12 @@ namespace Merge
         public void OnDrop(MergeItem droppedOnItem)
         {
             if (MergingItem == null || MergingItem.TryMergeIn(droppedOnItem))
+            {
+                SaveMField();
                 return;
+            }
 
             droppedOnItem.TrySwapData(MergingItem);
-
             SaveMField();
         }
 
@@ -109,7 +112,8 @@ namespace Merge
 
         private void Start()
         {
-            //LoadLevel();
+            if (GameManager.Instance.CurrentLevel > 0)
+                LoadLevel();
         }
 
         public void LoadLevel()
