@@ -18,7 +18,18 @@ namespace GameData
         public int Energy => EnergyController.CurrentEnergy;
         public Dictionary<int, bool> OpenedLevels;
         
-        public int CurrentLevel { get; private set; }
+        public int CurrentLevel
+        {
+            get => _currentLevel;
+            private set
+            {
+                _currentLevel = value;
+                LevelChanged?.Invoke(_currentLevel);
+            }
+        }
+        public event Action<int> LevelChanged;
+        
+        private int _currentLevel;
 
         public void AddMoney(int amount)
         {
