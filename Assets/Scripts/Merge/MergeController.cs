@@ -129,9 +129,7 @@ namespace Merge
 
             var dict = JsonConvert.DeserializeObject<Dictionary<int, string>>(loadedData
                 .CellsDictionaryJSonFormat);
-
-            GeneratorController.Instance.SetIsGeneratorSpawned(loadedData.IsGeneratorSpawned);
-
+            
             for (int i = 0; i < mergeCells.Length; i++)
             {
                 if (dict.TryGetValue(i, out var dataName))
@@ -143,6 +141,8 @@ namespace Merge
                 }
                 else MergeCells[i].MergeItem.TrySetData(null, true);
             }
+            
+            GeneratorController.Instance.SetIsGeneratorSpawned(loadedData.IsGeneratorSpawned);
         }
 
         public void SaveMField()

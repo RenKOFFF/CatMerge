@@ -21,11 +21,7 @@ namespace GameData
         public int CurrentLevel
         {
             get => _currentLevel;
-            private set
-            {
-                _currentLevel = value;
-                LevelChanged?.Invoke(_currentLevel);
-            }
+            private set => _currentLevel = value;
         }
         public event Action<int> LevelChanged;
         
@@ -72,8 +68,12 @@ namespace GameData
 
         public void ChangeLevel(int lvlIndex)
         {
+            if (CurrentLevel == lvlIndex) return;
+            
             CurrentLevel = lvlIndex;
             SaveGameplayData();
+            
+            LevelChanged?.Invoke(_currentLevel);
         }
         
         private void OnApplicationQuit()
