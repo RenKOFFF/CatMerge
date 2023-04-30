@@ -1,7 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using UnityEngine;
 
 namespace SaveSystem
 {
@@ -19,6 +17,12 @@ namespace SaveSystem
             }
         }
 
+        /// <summary>
+        /// Save... damn, why a u asked this 
+        /// </summary>
+        /// <param name="data">save data: (new ...SaveData(dataParam from this SaveData)</param>
+        /// <param name="key">needed if u need save more 1 data</param>
+        /// <typeparam name="T"></typeparam>
         public void Save<T>(T data, string key = "")
         {
             var fileName = GetFileName<T>(key);
