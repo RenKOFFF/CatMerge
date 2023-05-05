@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using GameData;
+using JetBrains.Annotations;
 using Orders.Data;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Orders
@@ -16,12 +18,14 @@ namespace Orders
         [SerializeField] private Image rewardItemImage;
 
         private OrderData OrderData { get; set; }
+        [CanBeNull] private UnityAction OnCompleted { get; set; }
 
         private readonly List<OrderPart> _orderParts = new();
 
-        public void Initialize(OrderData orderData)
+        public void Initialize(OrderData orderData, [CanBeNull] UnityAction onCompleted = null)
         {
             OrderData = orderData;
+            OnCompleted = onCompleted;
 
             foreach (var partData in OrderData.Parts)
             {
@@ -44,12 +48,7 @@ namespace Orders
             foreach (var orderPartData in _orderParts)
                 orderPartData.Complete();
 
-            if (OrderData.ContainsRewardItem)
-                RewardsStack.Instance.AppendReward(OrderData.RewardItem);
-
-            if (OrderData.ContainsRewardMoney)
-                GameManager.Instance.AddMoney(OrderData.RewardMoney);
-
+            OnCompleted?.Invoke();
             Destroy(gameObject);
         }
 

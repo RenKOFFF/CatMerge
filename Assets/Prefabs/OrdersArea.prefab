@@ -165,6 +165,7 @@ MonoBehaviour:
   ordersParent: {fileID: 4275090085983670804}
   timeToGenerateOrderInSeconds: 3
   maxActiveOrdersCount: 5
+  completedOrdersCountText: {fileID: 7983668742127651316}
 --- !u!1 &4275090086001332789
 GameObject:
   m_ObjectHideFlags: 0
