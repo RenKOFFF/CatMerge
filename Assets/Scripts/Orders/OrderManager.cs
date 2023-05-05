@@ -13,11 +13,13 @@ namespace Orders
 {
     public class OrderManager : MonoBehaviour
     {
+        [SerializeField] private double timeToGenerateOrderInSeconds = 3;
+        [SerializeField] private int maxActiveOrdersCount = 5;
+        [SerializeField] private int ordersNeededToCompleteLevelCount = 20;
         [SerializeField] private Order orderPrefab;
         [SerializeField] private Transform ordersParent;
-        [SerializeField] private double timeToGenerateOrderInSeconds;
-        [SerializeField] private int maxActiveOrdersCount;
         [SerializeField] private TMP_Text completedOrdersCountText;
+        [SerializeField] private GameObject levelCompletedPanelPrefab;
 
         private const double OrderIncludesRewardItemProbability = 0.5;
         private const double OrderIncludesRewardMoneyProbability = 0.5;
@@ -78,6 +80,12 @@ namespace Orders
                     GameManager.Instance.AddMoney(orderData.RewardMoney);
 
                 CompletedOrdersCount++;
+
+                if (CompletedOrdersCount == ordersNeededToCompleteLevelCount)
+                {
+                    var canvas = GameObject.FindGameObjectWithTag("Canvas");
+                    var levelCompletedPanel = Instantiate(levelCompletedPanelPrefab, canvas.transform, false);
+                }
             }
 
             var order = Instantiate(orderPrefab, ordersParent, false);

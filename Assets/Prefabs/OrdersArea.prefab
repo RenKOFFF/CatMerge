@@ -161,11 +161,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab14bcba1d84b20a230e00ae3185561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orderPrefab: {fileID: 2345349851450697169, guid: 08c23fca7c5d89c4c9e4a8032dce4b2a, type: 3}
-  ordersParent: {fileID: 4275090085983670804}
   timeToGenerateOrderInSeconds: 3
   maxActiveOrdersCount: 5
+  ordersNeededToCompleteLevelCount: 20
+  orderPrefab: {fileID: 2345349851450697169, guid: 08c23fca7c5d89c4c9e4a8032dce4b2a, type: 3}
+  ordersParent: {fileID: 4275090085983670804}
   completedOrdersCountText: {fileID: 7983668742127651316}
+  levelCompletedPanelPrefab: {fileID: 6246119546167026065, guid: d3e6b5aaaf6fef549ab14f6890835160, type: 3}
 --- !u!1 &4275090086001332789
 GameObject:
   m_ObjectHideFlags: 0
