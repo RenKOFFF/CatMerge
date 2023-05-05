@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 140175344}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1430,7 +1430,7 @@ GameObject:
   - component: {fileID: 834723543}
   m_Layer: 5
   m_Name: MenuCanvas
-  m_TagString: Untagged
+  m_TagString: MenuCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2912,10 +2912,6 @@ PrefabInstance:
     - target: {fileID: 4275090085983670804, guid: 82657f15adc707841851cb05dc89f212, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4275090085983670804, guid: 82657f15adc707841851cb05dc89f212, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.00003615493
       objectReference: {fileID: 0}
     - target: {fileID: 4275090086000181900, guid: 82657f15adc707841851cb05dc89f212, type: 3}
       propertyPath: m_Name
