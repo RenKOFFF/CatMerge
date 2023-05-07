@@ -132,10 +132,10 @@ TextureImporter:
       name: Devchuly_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1070
-        width: 534.3333
-        height: 535
+        x: 88
+        y: 1137
+        width: 352
+        height: 400
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,10 +153,10 @@ TextureImporter:
       name: Devchuly_1
       rect:
         serializedVersion: 2
-        x: 534
-        y: 1070
-        width: 534.3333
-        height: 535
+        x: 626
+        y: 1132
+        width: 402
+        height: 426
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,10 +174,10 @@ TextureImporter:
       name: Devchuly_2
       rect:
         serializedVersion: 2
-        x: 1068
-        y: 1070
-        width: 534.3333
-        height: 535
+        x: 1150
+        y: 1112
+        width: 396
+        height: 443
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,10 +195,10 @@ TextureImporter:
       name: Devchuly_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 535
-        width: 534.3333
-        height: 535
+        x: 90
+        y: 564
+        width: 345
+        height: 439
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,10 +216,10 @@ TextureImporter:
       name: Devchuly_4
       rect:
         serializedVersion: 2
-        x: 534
-        y: 535
-        width: 534.3333
-        height: 535
+        x: 586
+        y: 593
+        width: 389
+        height: 436
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,10 +237,10 @@ TextureImporter:
       name: Devchuly_5
       rect:
         serializedVersion: 2
-        x: 1068
-        y: 535
-        width: 534.3333
-        height: 535
+        x: 1142
+        y: 592
+        width: 364
+        height: 410
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,10 +258,10 @@ TextureImporter:
       name: Devchuly_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 534.3333
-        height: 535
+        x: 76
+        y: 36
+        width: 376
+        height: 428
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,10 +279,10 @@ TextureImporter:
       name: Devchuly_7
       rect:
         serializedVersion: 2
-        x: 534
-        y: 0
-        width: 534.3333
-        height: 535
+        x: 606
+        y: 87
+        width: 387
+        height: 339
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -300,10 +300,10 @@ TextureImporter:
       name: Devchuly_8
       rect:
         serializedVersion: 2
-        x: 1068
-        y: 0
-        width: 534.3333
-        height: 535
+        x: 1131
+        y: 60
+        width: 357
+        height: 403
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

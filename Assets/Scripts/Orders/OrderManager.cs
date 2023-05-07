@@ -216,7 +216,7 @@ namespace Orders
             if (GameManager.Instance.CurrentLevel == 0)
                 return;
 
-            completedOrdersCountText.text = $"Выполнено заказов: {CompletedOrdersCount}";
+            completedOrdersCountText.text = $"{CompletedOrdersCount}";
 
             if (!NextOrderGenerationTime.IsPassed())
                 return;
