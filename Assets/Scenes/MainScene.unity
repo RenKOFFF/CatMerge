@@ -924,7 +924,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2076,9 +2076,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8e47a44720c18dc42b8bb8c1f04177eb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 24f8bc6d129f5f844a4b6697daa2e74c, type: 3}
   m_Type: 0
-  m_PreserveAspect: 1
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -2476,7 +2476,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 424.7, y: -175.5}
+  m_AnchoredPosition: {x: 146.70001, y: -175.5}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1204248611
@@ -2622,7 +2622,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 146.70001, y: -175.5}
+  m_AnchoredPosition: {x: 424.7, y: -175.5}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1242662326
@@ -2925,6 +2925,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 140175347}
     m_Modifications:
+    - target: {fileID: 3660682141594401079, guid: a71d86944645f77469197fd811cee7da, type: 3}
+      propertyPath: m_text
+      value: "\u041F\u0440\u043E\u0434\u0430\u0442\u044C \u043A\u043E\u0442\u0430"
+      objectReference: {fileID: 0}
     - target: {fileID: 7084717492431136180, guid: a71d86944645f77469197fd811cee7da, type: 3}
       propertyPath: m_Name
       value: MergeField
@@ -3368,6 +3372,10 @@ PrefabInstance:
       propertyPath: completedOrdersCountText
       value: 
       objectReference: {fileID: 1437142784}
+    - target: {fileID: 4275090086000181889, guid: 82657f15adc707841851cb05dc89f212, type: 3}
+      propertyPath: ordersNeededToCompleteLevelCount
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4275090086000181900, guid: 82657f15adc707841851cb05dc89f212, type: 3}
       propertyPath: m_Name
       value: OrdersArea

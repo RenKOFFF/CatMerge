@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab14bcba1d84b20a230e00ae3185561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToGenerateOrderInSeconds: 60
+  timeToGenerateOrderInSeconds: 5
   maxActiveOrdersCount: 4
   ordersNeededToCompleteLevelCount: 10
   orderPrefab: {fileID: 2345349851450697169, guid: 08c23fca7c5d89c4c9e4a8032dce4b2a, type: 3}

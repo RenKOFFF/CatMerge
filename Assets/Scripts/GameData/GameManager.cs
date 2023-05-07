@@ -18,14 +18,15 @@ namespace GameData
         public int Money { get; private set; }
         public int Energy => EnergyController.CurrentEnergy;
         public Dictionary<int, bool> OpenedLevels;
-        
+
         public int CurrentLevel
         {
             get => _currentLevel;
             private set => _currentLevel = value;
         }
+
         public event Action<int> LevelChanged;
-        
+
         private int _currentLevel;
 
         public void AddMoney(int amount)
@@ -64,8 +65,12 @@ namespace GameData
 
         public void OpenNextLevelAndCloseCurrent()
         {
-            OpenedLevels.TryAdd(CurrentLevel, false);
+            if (OpenedLevels.ContainsKey(CurrentLevel))
+                OpenedLevels[CurrentLevel] = false;
+            
             OpenedLevels.TryAdd(CurrentLevel + 1, true);
+            if (CurrentLevel == 3) OpenedLevels.TryAdd(CurrentLevel + 2, true);
+
             SaveGameplayData();
         }
 
@@ -77,13 +82,13 @@ namespace GameData
         public void ChangeLevel(int lvlIndex)
         {
             if (CurrentLevel == lvlIndex) return;
-            
+
             CurrentLevel = lvlIndex;
             SaveGameplayData();
-            
+
             LevelChanged?.Invoke(_currentLevel);
         }
-        
+
         private void OnApplicationQuit()
         {
             SaveGameplayData();

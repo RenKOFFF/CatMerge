@@ -127,7 +127,6 @@ namespace Orders
 
                     levelCompletedPanel.Initialize(() =>
                     {
-                        canvas.SetActive(false);
                         menuCanvas.SetActive(true);
                         Destroy(levelCompletedPanel.gameObject);
                     });

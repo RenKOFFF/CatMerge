@@ -132,10 +132,10 @@ TextureImporter:
       name: cat_2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 320
-        width: 180
-        height: 160
+        x: 70
+        y: 1116
+        width: 386
+        height: 413
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,10 +153,10 @@ TextureImporter:
       name: cat_2_1
       rect:
         serializedVersion: 2
-        x: 180
-        y: 320
-        width: 180
-        height: 160
+        x: 632
+        y: 1128
+        width: 352
+        height: 396
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,10 +174,10 @@ TextureImporter:
       name: cat_2_2
       rect:
         serializedVersion: 2
-        x: 360
-        y: 320
-        width: 180
-        height: 160
+        x: 1220
+        y: 1093
+        width: 282
+        height: 431
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,10 +195,10 @@ TextureImporter:
       name: cat_2_3
       rect:
         serializedVersion: 2
-        x: 540
-        y: 320
-        width: 180
-        height: 160
+        x: 96
+        y: 589
+        width: 348
+        height: 449
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,10 +216,10 @@ TextureImporter:
       name: cat_2_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 160
-        width: 180
-        height: 160
+        x: 632
+        y: 576
+        width: 352
+        height: 427
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,10 +237,10 @@ TextureImporter:
       name: cat_2_5
       rect:
         serializedVersion: 2
-        x: 180
-        y: 160
-        width: 180
-        height: 160
+        x: 1165
+        y: 572
+        width: 288
+        height: 467
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,10 +258,10 @@ TextureImporter:
       name: cat_2_6
       rect:
         serializedVersion: 2
-        x: 360
-        y: 160
-        width: 180
-        height: 160
+        x: 78
+        y: 70
+        width: 401
+        height: 406
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,10 +279,10 @@ TextureImporter:
       name: cat_2_7
       rect:
         serializedVersion: 2
-        x: 540
-        y: 160
-        width: 180
-        height: 160
+        x: 600
+        y: 92
+        width: 410
+        height: 392
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,90 +292,6 @@ TextureImporter:
       bones: []
       spriteID: e7a422b729550bf44967d8f81e118bd4
       internalID: -628502063
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cat_2_8
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 180
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 85333483aa7d6ef4cae18d4c7dc97d80
-      internalID: -1566081895
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cat_2_9
-      rect:
-        serializedVersion: 2
-        x: 180
-        y: 0
-        width: 180
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d59062357a3533f45be2d238944e2f87
-      internalID: -260994338
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cat_2_10
-      rect:
-        serializedVersion: 2
-        x: 360
-        y: 0
-        width: 180
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bb872d1c1abd76645b4f62d23716a320
-      internalID: -1360706524
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: cat_2_11
-      rect:
-        serializedVersion: 2
-        x: 540
-        y: 0
-        width: 180
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 33a0b256e1bfac14993572546f186145
-      internalID: 1724674698
       vertices: []
       indices: 
       edges: []
@@ -391,8 +307,6 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      cat_2_8: -1566081895
-      cat_2_11: 1724674698
       cat_2_5: -73328174
       cat_2_2: -1422596427
       cat_2_4: 24195850
@@ -400,8 +314,6 @@ TextureImporter:
       cat_2_7: -628502063
       cat_2_3: 1990764972
       cat_2_6: -523600498
-      cat_2_10: -1360706524
-      cat_2_9: -260994338
       cat_2_0: 157855702
   spritePackingTag: 
   pSDRemoveMatte: 0
