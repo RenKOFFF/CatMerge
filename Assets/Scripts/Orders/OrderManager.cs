@@ -20,6 +20,7 @@ namespace Orders
         [SerializeField] private Transform ordersParent;
         [SerializeField] private TMP_Text completedOrdersCountText;
         [SerializeField] private LevelCompletedHandler levelCompletedPanelPrefab;
+        [SerializeField] private GameObject menuCanvas;
 
         private const double OrderIncludesRewardItemProbability = 0.5;
         private const double OrderIncludesRewardMoneyProbability = 0.5;
@@ -84,7 +85,14 @@ namespace Orders
                 if (CompletedOrdersCount == ordersNeededToCompleteLevelCount)
                 {
                     var canvas = GameObject.FindGameObjectWithTag(GameConstants.Tags.Canvas);
-                    Instantiate(levelCompletedPanelPrefab, canvas.transform, false);
+                    var levelCompletedPanel = Instantiate(levelCompletedPanelPrefab, canvas.transform, false);
+
+                    levelCompletedPanel.Initialize(() =>
+                    {
+                        canvas.SetActive(false);
+                        menuCanvas.SetActive(true);
+                        Destroy(levelCompletedPanel.gameObject);
+                    });
                 }
             }
 

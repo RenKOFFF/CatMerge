@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace GameData
 {
     public class LevelCompletedHandler : MonoBehaviour
     {
+        private UnityAction OnOpenMenu { get; set; }
+
+        public void Initialize(UnityAction onOpenMenu)
+        {
+            OnOpenMenu = onOpenMenu;
+        }
+
         public void OpenMenu()
         {
-            var canvas =  GameObject.FindGameObjectWithTag(GameConstants.Tags.Canvas);
-            var menuCanvas =  GameObject.FindGameObjectWithTag(GameConstants.Tags.MenuCanvas);
-
-            canvas.SetActive(false);
-            menuCanvas.SetActive(true);
-            Destroy(gameObject);
+            OnOpenMenu();
         }
     }
 }
