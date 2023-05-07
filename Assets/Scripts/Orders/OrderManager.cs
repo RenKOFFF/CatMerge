@@ -22,7 +22,9 @@ namespace Orders
         [SerializeField] private Order orderPrefab;
         [SerializeField] private Transform ordersParent;
         [SerializeField] private TMP_Text completedOrdersCountText;
-        [SerializeField] private GameObject levelCompletedPanelPrefab;
+
+        [SerializeField] private LevelCompletedHandler levelCompletedPanelPrefab;
+        [SerializeField] private GameObject menuCanvas;
 
         private const double OrderIncludesRewardItemProbability = 0.5;
         private const double OrderIncludesRewardMoneyProbability = 0.5;
@@ -69,7 +71,7 @@ namespace Orders
 
             if (isRewardItemIncluded)
             {
-                var availableRewardItems = GameDataHelper.AllItems.ToList();
+                var availableRewardItems = GameDataHelper.AllRewardItems.ToList();
                 var randomIndex = Random.Range(0, availableRewardItems.Count);
                 rewardItem = availableRewardItems[randomIndex];
             }
@@ -119,9 +121,16 @@ namespace Orders
 
                 if (CompletedOrdersCount == ordersNeededToCompleteLevelCount)
                 {
-                    var canvas = GameObject.FindGameObjectWithTag("Canvas");
-                    //var levelCompletedPanel = Instantiate(levelCompletedPanelPrefab, canvas.transform, false);
-                    
+
+                    var canvas = GameObject.FindGameObjectWithTag(GameConstants.Tags.Canvas);
+                    var levelCompletedPanel = Instantiate(levelCompletedPanelPrefab, canvas.transform, false);
+
+                    levelCompletedPanel.Initialize(() =>
+                    {
+                        canvas.SetActive(false);
+                        menuCanvas.SetActive(true);
+                        Destroy(levelCompletedPanel.gameObject);
+                    });
                     LevelComplited?.Invoke();
                 }
             }
