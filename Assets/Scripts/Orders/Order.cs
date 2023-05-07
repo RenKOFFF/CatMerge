@@ -17,7 +17,7 @@ namespace Orders
         [SerializeField] private TMP_Text rewardText;
         [SerializeField] private Image rewardItemImage;
 
-        private OrderData OrderData { get; set; }
+        public OrderData OrderData { get; private set; }
         [CanBeNull] private UnityAction OnCompleted { get; set; }
 
         private readonly List<OrderPart> _orderParts = new();
