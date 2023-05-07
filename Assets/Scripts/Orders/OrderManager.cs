@@ -5,6 +5,7 @@ using Extensions;
 using GameData;
 using Merge;
 using Orders.Data;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,16 +13,20 @@ namespace Orders
 {
     public class OrderManager : MonoBehaviour
     {
+        [SerializeField] private double timeToGenerateOrderInSeconds = 3;
+        [SerializeField] private int maxActiveOrdersCount = 5;
+        [SerializeField] private int ordersNeededToCompleteLevelCount = 20;
         [SerializeField] private Order orderPrefab;
         [SerializeField] private Transform ordersParent;
-        [SerializeField] private double timeToGenerateOrderInSeconds;
-        [SerializeField] private int maxActiveOrdersCount;
+        [SerializeField] private TMP_Text completedOrdersCountText;
+        [SerializeField] private GameObject levelCompletedPanelPrefab;
 
         private const double OrderIncludesRewardItemProbability = 0.5;
         private const double OrderIncludesRewardMoneyProbability = 0.5;
 
         private List<GameObject> ActiveOrders { get; set; } = new();
         private DateTime NextOrderGenerationTime { get; set; }
+        private int CompletedOrdersCount { get; set; }
 
         private void GenerateOrder()
         {
@@ -66,8 +71,25 @@ namespace Orders
 
         private void SpawnOrder(OrderData orderData)
         {
+            void OnOrderCompleted()
+            {
+                if (orderData.ContainsRewardItem)
+                    RewardsStack.Instance.AppendReward(orderData.RewardItem);
+
+                if (orderData.ContainsRewardMoney)
+                    GameManager.Instance.AddMoney(orderData.RewardMoney);
+
+                CompletedOrdersCount++;
+
+                if (CompletedOrdersCount == ordersNeededToCompleteLevelCount)
+                {
+                    var canvas = GameObject.FindGameObjectWithTag("Canvas");
+                    var levelCompletedPanel = Instantiate(levelCompletedPanelPrefab, canvas.transform, false);
+                }
+            }
+
             var order = Instantiate(orderPrefab, ordersParent, false);
-            order.Initialize(orderData);
+            order.Initialize(orderData, OnOrderCompleted);
             ActiveOrders.Add(order.gameObject);
         }
 
@@ -83,6 +105,8 @@ namespace Orders
 
         private void Update()
         {
+            completedOrdersCountText.text = $"Выполнено заказов: {CompletedOrdersCount}";
+
             if (!NextOrderGenerationTime.IsPassed())
                 return;
 
