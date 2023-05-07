@@ -33,6 +33,7 @@ namespace Merge.Energy
         private void Awake()
         {
             Instance = this;
+            StartCoroutine(RestoreEnergy());
         }
 
         private void Start()
