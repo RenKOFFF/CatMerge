@@ -47,7 +47,7 @@ namespace Orders
 
             if (isRewardItemIncluded)
             {
-                var availableRewardItems = GameDataHelper.AllItems.ToList();
+                var availableRewardItems = GameDataHelper.AllRewardItems.ToList();
                 var randomIndex = Random.Range(0, availableRewardItems.Count);
                 rewardItem = availableRewardItems[randomIndex];
             }
