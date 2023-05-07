@@ -24,14 +24,14 @@ namespace Orders
         private const double OrderIncludesRewardItemProbability = 0.5;
         private const double OrderIncludesRewardMoneyProbability = 0.5;
 
-        private List<GameObject> ActiveOrders { get; set; } = new();
+        private List<Order> ActiveOrders { get; set; } = new();
         private DateTime NextOrderGenerationTime { get; set; }
         private int CompletedOrdersCount { get; set; }
 
         private void GenerateOrder()
         {
             ActiveOrders = ActiveOrders
-                .Where(o => o != null)
+                .Where(o => o != null && o.gameObject != null)
                 .ToList();
 
             if (ActiveOrders.Count >= maxActiveOrdersCount)
@@ -90,7 +90,7 @@ namespace Orders
 
             var order = Instantiate(orderPrefab, ordersParent, false);
             order.Initialize(orderData, OnOrderCompleted);
-            ActiveOrders.Add(order.gameObject);
+            ActiveOrders.Add(order);
         }
 
         private void SetNewOrderGenerationTime()
