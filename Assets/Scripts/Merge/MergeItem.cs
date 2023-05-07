@@ -106,7 +106,7 @@ namespace Merge
         public void OnBeginDrag(PointerEventData eventData)
         {
             CanvasGroup.blocksRaycasts = false;
-            var slotTransform = transform.parent;
+            var slotTransform = transform.parent.parent;
             slotTransform.SetAsLastSibling();
 
             MergeController.Instance.OnBeginDrag(this);
