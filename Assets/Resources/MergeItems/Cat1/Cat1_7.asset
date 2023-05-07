@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd314e7d37064c15889684d10850b527, type: 3}
   m_Name: Cat1_7
   m_EditorClassIdentifier: 
-  sprite: {fileID: -1660350570, guid: 8a6dd17e699becd4fafb245641b96f30, type: 3}
+  sprite: {fileID: 1256495218, guid: cc9413ed08ff0b54a91039ea0b8dec71, type: 3}
   previousMergeItem: {fileID: 11400000, guid: c36eae351c97595409e96135aa5c8772, type: 2}
   nextMergeItem: {fileID: 0}
   SpawnChance:
