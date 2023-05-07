@@ -4,7 +4,10 @@ using System.Linq;
 using Extensions;
 using GameData;
 using Merge;
+using Newtonsoft.Json;
 using Orders.Data;
+using SaveSystem;
+using SaveSystem.SaveData;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -24,9 +27,26 @@ namespace Orders
         private const double OrderIncludesRewardItemProbability = 0.5;
         private const double OrderIncludesRewardMoneyProbability = 0.5;
 
-        private List<Order> ActiveOrders { get; set; } = new();
+        public List<Order> ActiveOrders { get; private set; } = new();
         private DateTime NextOrderGenerationTime { get; set; }
-        private int CompletedOrdersCount { get; set; }
+        public int CompletedOrdersCount { get; private set; }
+
+        public static OrderManager Instance;
+
+        private void OnEnable()
+        {
+            GameManager.Instance.LevelChanged += OnLevelChanged;
+        }
+
+        private void OnDisable()
+        {
+            GameManager.Instance.LevelChanged -= OnLevelChanged;
+        }
+
+        private void OnLevelChanged(int _)
+        {
+            LoadOrdersOnCurrentLevel();
+        }
 
         private void GenerateOrder()
         {
@@ -51,7 +71,7 @@ namespace Orders
                 rewardItem = availableRewardItems[randomIndex];
             }
 
-            var orderData = new OrderData(rewardItem, containsRewardMoney);
+            List<MergeItemData> itemsForPartsData = new();
 
             for (var i = 0; i < partsAmount; i++)
             {
@@ -60,13 +80,26 @@ namespace Orders
 
                 var randomIndex = Random.Range(0, availableMergeItems.Count);
                 var randomItem = availableMergeItems[randomIndex];
+                itemsForPartsData.Add(randomItem);
                 availableMergeItems.RemoveAt(randomIndex);
+            }
 
-                var orderPartData = new OrderPartData(randomItem);
+            var orderData = CreateSpecificOrderData(rewardItem, containsRewardMoney, itemsForPartsData);
+            SpawnOrder(orderData);
+        }
+
+        private OrderData CreateSpecificOrderData(MergeItemData rewardItem, bool containsRewardMoney,
+            List<MergeItemData> itemsForPartsData)
+        {
+            var orderData = new OrderData(rewardItem, containsRewardMoney);
+
+            foreach (var itemData in itemsForPartsData)
+            {
+                var orderPartData = new OrderPartData(itemData);
                 orderData.AddPart(orderPartData);
             }
 
-            SpawnOrder(orderData);
+            return orderData;
         }
 
         private void SpawnOrder(OrderData orderData)
@@ -91,6 +124,10 @@ namespace Orders
             var order = Instantiate(orderPrefab, ordersParent, false);
             order.Initialize(orderData, OnOrderCompleted);
             ActiveOrders.Add(order);
+
+            SaveManager.Instance.Save(
+                new OrdersSaveData(Instance),
+                GameManager.Instance.CurrentLevel.ToString());
         }
 
         private void SetNewOrderGenerationTime()
@@ -98,13 +135,73 @@ namespace Orders
             NextOrderGenerationTime = DateTime.UtcNow + TimeSpan.FromSeconds(timeToGenerateOrderInSeconds);
         }
 
+        private void Awake()
+        {
+            Instance = this;
+        }
+
         private void Start()
         {
             SetNewOrderGenerationTime();
+            LoadOrdersOnCurrentLevel();
+        }
+
+        private void LoadOrdersOnCurrentLevel()
+        {
+            var ordersSaveData = SaveManager.Instance.LoadOrDefault(
+                new OrdersSaveData(),
+                GameManager.Instance.CurrentLevel.ToString());
+            
+            var rewardDict = JsonConvert.DeserializeObject<Dictionary<int, string>>(ordersSaveData.rewardDictJSonFormat);
+            var hasMoneyDict = JsonConvert.DeserializeObject<Dictionary<int, bool>>(ordersSaveData.hasMoneyDictJSonFormat);
+            var partsDict = JsonConvert.DeserializeObject<Dictionary<int, Dictionary<int, string>>>(ordersSaveData.partsDictJSonFormat);
+            
+            CompletedOrdersCount = ordersSaveData.CompletedOrdersCount;
+
+            foreach (var currentActiveOrder in ActiveOrders)
+            {
+                if (currentActiveOrder)
+                    Destroy(currentActiveOrder.gameObject);
+            }
+
+            ActiveOrders.Clear();
+
+            for (int i = 0; i < rewardDict.Keys.Count; i++)
+            {
+                MergeItemData rewardItem = FindMergeItemDataOnResourcesByDict(rewardDict, i);
+
+                List<MergeItemData> partsList = new();
+                foreach (var partName in partsDict[i].Values)
+                {
+                    MergeItemData partMergeItemData = FindMergeItemDataOnResourcesByName(partName);
+                    partsList.Add(partMergeItemData);
+                }
+                
+                var loadedOrderData = CreateSpecificOrderData(rewardItem, hasMoneyDict[i], partsList);
+                SpawnOrder(loadedOrderData);
+            }
+            
+            MergeItemData FindMergeItemDataOnResourcesByDict(Dictionary<int, string> dictionary, int i)
+            {
+                if (dictionary.TryGetValue(i, out var dataName))
+                    return FindMergeItemDataOnResourcesByName(dataName);
+
+                return null;
+            }
+            
+            MergeItemData FindMergeItemDataOnResourcesByName(string dataName)
+            {
+                string directory = dataName.Split("_")[0];
+                var mergeItemData = Resources.Load<MergeItemData>($"MergeItems/{directory}/{dataName}");    
+                return mergeItemData;
+            }
         }
 
         private void Update()
         {
+            if (GameManager.Instance.CurrentLevel == 0)
+                return;
+
             completedOrdersCountText.text = $"Выполнено заказов: {CompletedOrdersCount}";
 
             if (!NextOrderGenerationTime.IsPassed())

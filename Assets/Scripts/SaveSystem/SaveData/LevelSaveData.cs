@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Merge;
 using Merge.Energy;
 using Newtonsoft.Json;
+using SaveSystem.SaveData;
 
 namespace SaveSystem
 {
@@ -16,34 +17,34 @@ namespace SaveSystem
         {
             IsGeneratorSpawned = isGeneratorSpawned;
 
-            Dictionary<int, string> CellsDictionary = new();
+            Dictionary<int, string> cellsDictionary = new();
 
             for (int i = 0; i < mergeController.MergeCells.Length; i++)
             {
                 if (!mergeController.MergeCells[i].MergeItem.IsEmpty)
                 {
-                    CellsDictionary.Add(i, mergeController.MergeCells[i].MergeItem.MergeItemData.name);
+                    cellsDictionary.Add(i, mergeController.MergeCells[i].MergeItem.MergeItemData.name);
                 }
                 else
                 {
-                    CellsDictionary.Add(i, "empty");
+                    cellsDictionary.Add(i, "empty");
                 }
             }
-
-            CellsDictionaryJSonFormat = JsonConvert.SerializeObject(CellsDictionary);
+            
+            CellsDictionaryJSonFormat = JsonConvert.SerializeObject(cellsDictionary);
         }
 
-        public LevelSaveData(int MergeCellsLength)
+        public LevelSaveData(int mergeCellsLength)
         {
             IsGeneratorSpawned = false;
-            Dictionary<int, string> CellsDictionary = new();
+            Dictionary<int, string> cellsDictionary = new();
 
-            for (int i = 0; i < MergeCellsLength; i++)
+            for (int i = 0; i < mergeCellsLength; i++)
             {
-                CellsDictionary.Add(i, "empty");
+                cellsDictionary.Add(i, "empty");
             }
-
-            CellsDictionaryJSonFormat = JsonConvert.SerializeObject(CellsDictionary);
+            
+            CellsDictionaryJSonFormat = JsonConvert.SerializeObject(cellsDictionary);
         }
     }
 }
