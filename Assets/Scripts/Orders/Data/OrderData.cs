@@ -8,13 +8,13 @@ namespace Orders.Data
 {
     public class OrderPartData
     {
-        public MergeItemData NeededItem { get; }
-        public int RewardMoney { get; }
+        public MergeItemData NeededItem { get; set; }
+        public int RewardMoney { get; set; }
 
-        public OrderPartData(MergeItemData neededItem)
+        public OrderPartData(MergeItemData neededItem, int? rewardMoney = null)
         {
             NeededItem = neededItem;
-            RewardMoney = GetRandomRewardMoney();
+            RewardMoney = rewardMoney ?? GetRandomRewardMoney();
         }
 
         private int GetRandomRewardMoney()
@@ -23,13 +23,13 @@ namespace Orders.Data
 
     public class OrderData
     {
-        public List<OrderPartData> Parts { get; } = new();
+        public List<OrderPartData> Parts { get; set; } = new();
 
-        [CanBeNull] public MergeItemData RewardItem { get; }
+        [CanBeNull] public MergeItemData RewardItem { get; set; }
         public bool ContainsRewardItem => RewardItem != null;
 
         public int RewardMoney => Parts.Select(p => p.RewardMoney).Sum();
-        public bool ContainsRewardMoney { get; }
+        public bool ContainsRewardMoney { get; set; }
 
         public OrderData([CanBeNull] MergeItemData rewardItem = null, bool containsRewardMoney = true)
         {
