@@ -32,15 +32,18 @@ namespace Orders
         public int CompletedOrdersCount { get; private set; }
 
         public static OrderManager Instance;
+        public event Action LevelComplited;
 
         private void OnEnable()
         {
             GameManager.Instance.LevelChanged += OnLevelChanged;
+            LevelComplited += GameManager.Instance.OpenNextLevelAndCloseCurrent;
         }
 
         private void OnDisable()
         {
             GameManager.Instance.LevelChanged -= OnLevelChanged;
+            LevelComplited -= GameManager.Instance.OpenNextLevelAndCloseCurrent;
         }
 
         private void OnLevelChanged(int _)
@@ -117,7 +120,9 @@ namespace Orders
                 if (CompletedOrdersCount == ordersNeededToCompleteLevelCount)
                 {
                     var canvas = GameObject.FindGameObjectWithTag("Canvas");
-                    var levelCompletedPanel = Instantiate(levelCompletedPanelPrefab, canvas.transform, false);
+                    //var levelCompletedPanel = Instantiate(levelCompletedPanelPrefab, canvas.transform, false);
+                    
+                    LevelComplited?.Invoke();
                 }
             }
 

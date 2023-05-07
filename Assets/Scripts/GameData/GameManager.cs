@@ -62,6 +62,13 @@ namespace GameData
             CurrentLevel = data.CurrentLevel;
         }
 
+        public void OpenNextLevelAndCloseCurrent()
+        {
+            OpenedLevels.TryAdd(CurrentLevel, false);
+            OpenedLevels.TryAdd(CurrentLevel + 1, true);
+            SaveGameplayData();
+        }
+
         private void SaveGameplayData()
         {
             SaveManager.Instance.Save(new GameplayData(Instance));
