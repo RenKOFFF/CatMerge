@@ -17,6 +17,7 @@ namespace GameData
 
         public int Money { get; private set; }
         public int Energy => EnergyController.CurrentEnergy;
+        public DateTime LastEnergyChangingTime => EnergyController.LastEnergyChangingTime;
         public Dictionary<int, bool> OpenedLevels;
 
         public int CurrentLevel
@@ -57,8 +58,15 @@ namespace GameData
         {
             var data = SaveManager.Instance.LoadOrDefault(new GameplayData());
 
+            var lastEnergyChangingTime = data.LastEnergyChangingTime;
+            var timePassedFromLastEnergyUpdate = DateTime.UtcNow - lastEnergyChangingTime;
+            var offlineEnergyGainRaw = timePassedFromLastEnergyUpdate.TotalSeconds
+                                       / EnergyController.TimeToRestoreOneEnergyInSeconds;
+            var offlineEnergyGain = (int) Math.Floor(offlineEnergyGainRaw);
+
             Money = data.Money;
-            EnergyController.SetEnergy(data.CurrentEnergy);
+            EnergyController.LastEnergyChangingTime = lastEnergyChangingTime;
+            EnergyController.SetEnergy(data.CurrentEnergy + offlineEnergyGain);
             OpenedLevels = JsonConvert.DeserializeObject<Dictionary<int, bool>>(data.OpenedLevelsDictionaryJSonFormat);
             CurrentLevel = data.CurrentLevel;
         }
@@ -67,7 +75,7 @@ namespace GameData
         {
             if (OpenedLevels.ContainsKey(CurrentLevel))
                 OpenedLevels[CurrentLevel] = false;
-            
+
             OpenedLevels.TryAdd(CurrentLevel + 1, true);
             if (CurrentLevel == 3) OpenedLevels.TryAdd(CurrentLevel + 2, true);
 

@@ -14,6 +14,8 @@ namespace Merge.Energy
         private int _currentEnergy;
 
         public int MaxStartEnergy => _maxStartEnergy;
+        public float TimeToRestoreOneEnergyInSeconds => _timeBtwRestoreOneEnergyPoint;
+
         public int CurrentEnergy
         {
             get => _currentEnergy;
@@ -23,9 +25,12 @@ namespace Merge.Energy
                     _currentEnergy = _maxStartEnergy;
                 else _currentEnergy = value;
 
+                LastEnergyChangingTime = DateTime.UtcNow;
                 OnEnergyChangedEvent?.Invoke(CurrentEnergy);
             }
         }
+
+        public DateTime LastEnergyChangingTime { get; set; } = DateTime.UtcNow;
 
         public static EnergyController Instance { get; private set; }
         public event Action<float> OnEnergyChangedEvent;
@@ -60,7 +65,6 @@ namespace Merge.Energy
             return false;
         }
 
-
         public void AddEnergy(int count)
         {
             CurrentEnergy += count;
@@ -78,6 +82,7 @@ namespace Merge.Energy
             while (CurrentEnergy < _maxStartEnergy)
             {
                 yield return new WaitForSeconds(_timeBtwRestoreOneEnergyPoint);
+
                 CurrentEnergy++;
             }
 
