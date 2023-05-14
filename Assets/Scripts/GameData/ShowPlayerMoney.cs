@@ -1,20 +1,26 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
+using UI;
 using UnityEngine;
 
 namespace GameData
 {
-    public class ShowPlayerMoney : MonoBehaviour
+    public class ShowPlayerMoney : CurrencyFillElement
     {
-        private TMP_Text _tmpText;
-
-        private void Awake()
+        private void Start()
         {
-            _tmpText = GetComponent<TMP_Text>() ?? GetComponentInChildren<TMP_Text>();
+            GameManager.Instance.MoneyChanged += OnMoneyChanged;
+            Initialize(0, GameManager.Instance.Money);
         }
 
-        private void Update()
+        private void OnDestroy()
         {
-            _tmpText.text = GameManager.Instance.Money.ToString();
+            GameManager.Instance.MoneyChanged -= OnMoneyChanged;
+        }
+
+        private void OnMoneyChanged(int money)
+        {
+            ChangeValue(money);
         }
     }
 }

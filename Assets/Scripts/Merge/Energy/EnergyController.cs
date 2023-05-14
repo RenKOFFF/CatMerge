@@ -77,8 +77,8 @@ namespace Merge.Energy
 
             while (CurrentEnergy < _maxStartEnergy)
             {
-                yield return new WaitForSeconds(_timeBtwRestoreOneEnergyPoint);
                 CurrentEnergy++;
+                yield return new WaitForSeconds(_timeBtwRestoreOneEnergyPoint);
             }
 
             _coroutineWasStarted = false;

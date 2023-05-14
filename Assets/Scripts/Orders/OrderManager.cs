@@ -21,31 +21,41 @@ namespace Orders
         [SerializeField] private int ordersNeededToCompleteLevelCount = 20;
         [SerializeField] private Order orderPrefab;
         [SerializeField] private Transform ordersParent;
-        [SerializeField] private TMP_Text completedOrdersCountText;
 
         [SerializeField] private LevelCompletedHandler levelCompletedPanelPrefab;
         [SerializeField] private GameObject menuCanvas;
+        private int _completedOrdersCount;
 
         private const double OrderIncludesRewardItemProbability = 0.5;
         private const double OrderIncludesRewardMoneyProbability = 0.5;
 
         public List<Order> ActiveOrders { get; private set; } = new();
         private DateTime NextOrderGenerationTime { get; set; }
-        public int CompletedOrdersCount { get; private set; }
+
+        public int CompletedOrdersCount
+        {
+            get => _completedOrdersCount;
+            private set
+            {
+                _completedOrdersCount = value;
+                ComoletedOrdersChanged?.Invoke(_completedOrdersCount);
+            }
+        }
 
         public static OrderManager Instance;
-        public event Action LevelComplited;
+        public event Action LevelCompleted;
+        public event Action<int> ComoletedOrdersChanged;
 
         private void OnEnable()
         {
             GameManager.Instance.LevelChanged += OnLevelChanged;
-            LevelComplited += GameManager.Instance.OpenNextLevelAndCloseCurrent;
+            LevelCompleted += GameManager.Instance.OpenNextLevelAndCloseCurrent;
         }
 
         private void OnDisable()
         {
             GameManager.Instance.LevelChanged -= OnLevelChanged;
-            LevelComplited -= GameManager.Instance.OpenNextLevelAndCloseCurrent;
+            LevelCompleted -= GameManager.Instance.OpenNextLevelAndCloseCurrent;
         }
 
         private void OnLevelChanged(int _)
@@ -130,7 +140,7 @@ namespace Orders
                         menuCanvas.SetActive(true);
                         Destroy(levelCompletedPanel.gameObject);
                     });
-                    LevelComplited?.Invoke();
+                    LevelCompleted?.Invoke();
                 }
             }
 
@@ -214,8 +224,6 @@ namespace Orders
         {
             if (GameManager.Instance.CurrentLevel == 0)
                 return;
-
-            completedOrdersCountText.text = $"{CompletedOrdersCount}";
 
             if (!NextOrderGenerationTime.IsPassed())
                 return;

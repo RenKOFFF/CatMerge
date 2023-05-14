@@ -11,11 +11,22 @@ namespace GameData
     [DefaultExecutionOrder(-1)]
     public class GameManager : MonoBehaviour
     {
+        private int _money;
+
         public static GameManager Instance { get; private set; }
         public static EnergyController EnergyController;
         public bool IsGeneratorSpawned => GeneratorController.Instance.IsGeneratorSpawned;
 
-        public int Money { get; private set; }
+        public int Money
+        {
+            get => _money;
+            private set
+            {
+                _money = value;
+                MoneyChanged?.Invoke(_money);
+            }
+        }
+
         public int Energy => EnergyController.CurrentEnergy;
         public Dictionary<int, bool> OpenedLevels;
 
@@ -26,6 +37,7 @@ namespace GameData
         }
 
         public event Action<int> LevelChanged;
+        public event Action<int> MoneyChanged;
 
         private int _currentLevel;
 

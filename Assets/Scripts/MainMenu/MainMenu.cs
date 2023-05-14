@@ -16,7 +16,7 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.LevelChanged += OnLevelChanged;
-        OrderManager.Instance.LevelComplited += UpdateButtonInteractivity;
+        OrderManager.Instance.LevelCompleted += UpdateButtonInteractivity;
         
         UpdateButtonInteractivity();
     }
@@ -24,7 +24,7 @@ public class MainMenu : MonoBehaviour
     private void OnDestroy()
     {
         GameManager.Instance.LevelChanged -= OnLevelChanged;
-        OrderManager.Instance.LevelComplited -= UpdateButtonInteractivity;
+        OrderManager.Instance.LevelCompleted -= UpdateButtonInteractivity;
     }
     
     private void UpdateButtonInteractivity()

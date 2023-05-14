@@ -1,27 +1,26 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Merge;
 using Merge.Energy;
 using TMPro;
 using UnityEngine;
 
-public class EnergyUiField : MonoBehaviour
+namespace UI.Energy
 {
-    [SerializeField] private TextMeshProUGUI _text;
-
-    private void Start()
+    public class EnergyUiField : CurrencyFillElement
     {
-        EnergyController.Instance.OnEnergyChangedEvent += OnEnergyChanged;
-    }
+        private void Start()
+        {
+            var energyController = EnergyController.Instance;
+            energyController.OnEnergyChangedEvent += OnEnergyChanged;
+            Initialize(energyController.MaxStartEnergy, energyController.CurrentEnergy);
+        }
 
-    private void OnDestroy()
-    {
-        EnergyController.Instance.OnEnergyChangedEvent -= OnEnergyChanged;
-    }
+        private void OnDestroy()
+        {
+            EnergyController.Instance.OnEnergyChangedEvent -= OnEnergyChanged;
+        }
 
-    private void OnEnergyChanged(float currentEnergy)
-    {
-        _text.text = currentEnergy.ToString();
+        private void OnEnergyChanged(float currentEnergy)
+        {
+            ChangeValue(currentEnergy);
+        }
     }
 }
