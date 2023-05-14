@@ -129,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Devchuly_0
+      name: cat_1_0
       rect:
         serializedVersion: 2
-        x: 88
-        y: 1137
-        width: 352
-        height: 400
+        x: 0
+        y: 258
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,20 +143,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0899959e725d899439065c3eb1315439
-      internalID: -610092461
+      spriteID: fd1ac3c083c277c4ea58d6f5d8a24b6f
+      internalID: -334425920
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Devchuly_1
+      name: cat_1_1
       rect:
         serializedVersion: 2
-        x: 626
-        y: 1132
-        width: 402
-        height: 426
+        x: 128
+        y: 258
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,20 +164,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74738db491b5be94fa4c8fa7d14400cd
-      internalID: 549697964
+      spriteID: f4f2284d838d54a41abc2cbcaa71d03b
+      internalID: 1500819820
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Devchuly_2
+      name: cat_1_2
       rect:
         serializedVersion: 2
-        x: 1150
-        y: 1112
-        width: 396
-        height: 443
+        x: 256
+        y: 258
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,20 +185,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f4c6f4b83dcf534195e494f0c79d0e8
-      internalID: 1237018698
+      spriteID: dca218179f0845c40b1bfd4ac8dfeef1
+      internalID: 1160371052
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Devchuly_3
+      name: cat_1_3
       rect:
         serializedVersion: 2
-        x: 90
-        y: 564
-        width: 345
-        height: 439
+        x: 0
+        y: 130
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,20 +206,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf6489056bf7e1e4c81b4bbaa5f935b8
-      internalID: 525463679
+      spriteID: 563a6e8b33f58b94abb375ba80259ce7
+      internalID: -1866743400
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Devchuly_4
+      name: cat_1_4
       rect:
         serializedVersion: 2
-        x: 586
-        y: 593
-        width: 389
-        height: 436
+        x: 128
+        y: 130
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -227,20 +227,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 767e919a488c78b4db07db405158f341
-      internalID: 750981539
+      spriteID: 899f3ee18472a764eb065d0fbac688e6
+      internalID: -241581155
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Devchuly_5
+      name: cat_1_5
       rect:
         serializedVersion: 2
-        x: 1142
-        y: 592
-        width: 364
-        height: 410
+        x: 256
+        y: 130
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -248,20 +248,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b24d88b47c57ec4fb9a3e28ab41f54b
-      internalID: -1934168989
+      spriteID: 5f8306a95a2e74a499ab822a85982c96
+      internalID: 1727520481
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Devchuly_6
+      name: cat_1_6
       rect:
         serializedVersion: 2
-        x: 76
-        y: 36
-        width: 376
-        height: 428
+        x: 0
+        y: 2
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -269,20 +269,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 800dd313cf9d808418a5fbfb813f8ea5
-      internalID: -923508519
+      spriteID: 6a59c95b12cb3c646a4fe8f63709294e
+      internalID: -1663361774
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Devchuly_7
+      name: cat_1_7
       rect:
         serializedVersion: 2
-        x: 606
-        y: 87
-        width: 387
-        height: 339
+        x: 128
+        y: 2
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -290,20 +290,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52f46e2f412e520449e1c287694e1ae9
-      internalID: 1936253111
+      spriteID: ef0d5f3d391274f45a8e5758003f1cb3
+      internalID: -937420092
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Devchuly_8
+      name: cat_1_8
       rect:
         serializedVersion: 2
-        x: 1131
-        y: 60
-        width: 357
-        height: 403
+        x: 256
+        y: 2
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -311,8 +311,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c166daf1381429840b48d73350bedc82
-      internalID: 1256495218
+      spriteID: 1683facd2f64c3345a34fb06e9be1416
+      internalID: -1610774752
       vertices: []
       indices: 
       edges: []
@@ -328,15 +328,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Devchuly_1: 549697964
-      Devchuly_7: 1936253111
-      Devchuly_8: 1256495218
-      Devchuly_5: -1934168989
-      Devchuly_2: 1237018698
-      Devchuly_0: -610092461
-      Devchuly_6: -923508519
-      Devchuly_4: 750981539
-      Devchuly_3: 525463679
+      cat_1_8: -1610774752
+      cat_1_3: -1866743400
+      cat_1_5: 1727520481
+      cat_1_7: -937420092
+      cat_1_2: 1160371052
+      cat_1_6: -1663361774
+      cat_1_4: -241581155
+      cat_1_1: 1500819820
+      cat_1_0: -334425920
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
