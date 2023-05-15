@@ -78,7 +78,7 @@ namespace Merge
 
         public void OnDrop(MergeItem droppedOnItem)
         {
-            if (MergingItem == null || MergingItem.TryMergeIn(droppedOnItem, SpawnRandomItem))
+            if (MergingItem == null || MergingItem.TryMergeIn(droppedOnItem, SpawnRandomItemWithChance))
             {
                 SaveMField();
                 return;
@@ -102,18 +102,23 @@ namespace Merge
             MergingItem = clickedItem;
         }
 
-        private void SpawnRandomItem(int itemLevel)
+        private void SpawnRandomItemWithChance(int itemLevel)
         {
+            var itemSpawnChance = .1f * itemLevel;
+
             var spawnCellIndex = GetEmptyCellIndex();
 
             var spawnItemIndex = Random.Range(0, GameDataHelper.AllRewardItems.Count);
             var spawnItem = GameDataHelper.AllRewardItems[spawnItemIndex];
-            
-            if (spawnCellIndex == -1)
-                RewardsStack.Instance.AppendReward(spawnItem);
-            
-            mergeCells[spawnCellIndex].MergeItem.TrySetData(spawnItem, false);
 
+            var spawnChance = Random.Range(0f, 1f);
+            if (spawnChance <= itemSpawnChance)
+            {
+                if (spawnCellIndex == -1)
+                    RewardsStack.Instance.AppendReward(spawnItem);
+
+                mergeCells[spawnCellIndex].MergeItem.TrySetData(spawnItem, false);
+            }
         }
 
         private void ActivateSellButton(MergeItem sellingItem)
@@ -145,7 +150,7 @@ namespace Merge
 
             var dict = JsonConvert.DeserializeObject<Dictionary<int, string>>(loadedData
                 .CellsDictionaryJSonFormat);
-            
+
             for (int i = 0; i < mergeCells.Length; i++)
             {
                 if (dict.TryGetValue(i, out var dataName))
@@ -157,7 +162,7 @@ namespace Merge
                 }
                 else MergeCells[i].MergeItem.TrySetData(null, true);
             }
-            
+
             GeneratorController.Instance.SetIsGeneratorSpawned(loadedData.IsGeneratorSpawned);
         }
 
