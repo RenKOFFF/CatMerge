@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using GameData;
 using JetBrains.Annotations;
-using Merge.Selling;
+using Merge.Item_info;
 using Newtonsoft.Json;
-using Orders;
 using SaveSystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Utils;
 using Random = UnityEngine.Random;
 
@@ -17,7 +14,7 @@ namespace Merge
     public class MergeController : MonoBehaviour
     {
         [SerializeField] private MergeCell[] mergeCells;
-        [SerializeField] private SellButton sellButton;
+        [SerializeField] private ItemInfo itemInfoPanel;
 
         [CanBeNull] private MergeItem MergingItem { get; set; }
 
@@ -85,12 +82,13 @@ namespace Merge
             }
 
             droppedOnItem.TrySwapData(MergingItem);
+            OpenItemInfo(droppedOnItem);
             SaveMField();
         }
 
         public void OnClick(MergeItem clickedItem)
         {
-            ActivateSellButton(clickedItem);
+            OpenItemInfo(clickedItem);
             SaveMField();
         }
 
@@ -100,6 +98,7 @@ namespace Merge
                 return;
 
             MergingItem = clickedItem;
+            OpenItemInfo(MergingItem);
         }
 
         private void SpawnRandomItemWithChance(int itemLevel)
@@ -121,9 +120,12 @@ namespace Merge
             }
         }
 
-        private void ActivateSellButton(MergeItem sellingItem)
+        private void OpenItemInfo(MergeItem selectedItem)
         {
-            sellButton.Initialize(sellingItem);
+            itemInfoPanel.Initialize(selectedItem);
+        }
+        {
+            itemInfoPanel.Initialize(selectedItem);
         }
 
         private void Awake()

@@ -1,11 +1,7 @@
-using System;
 using GameData;
 using Merge;
-using Orders;
 using SaveSystem;
-using Unity.VisualScripting;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class GeneratorController : MonoBehaviour
 {

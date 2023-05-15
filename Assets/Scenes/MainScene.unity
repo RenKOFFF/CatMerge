@@ -609,10 +609,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 140175347}
     m_Modifications:
-    - target: {fileID: 3660682141594401079, guid: a71d86944645f77469197fd811cee7da, type: 3}
-      propertyPath: m_text
-      value: "\u041F\u0440\u043E\u0434\u0430\u0442\u044C \u043A\u043E\u0442\u0430"
-      objectReference: {fileID: 0}
     - target: {fileID: 7084717492431136180, guid: a71d86944645f77469197fd811cee7da, type: 3}
       propertyPath: m_Name
       value: MergeField

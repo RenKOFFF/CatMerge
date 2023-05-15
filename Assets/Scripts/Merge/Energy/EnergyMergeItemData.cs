@@ -1,5 +1,4 @@
 ﻿using GameData;
-using Merge.Energy;
 using UnityEngine;
 
 namespace Merge
