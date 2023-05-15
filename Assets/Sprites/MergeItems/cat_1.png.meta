@@ -132,10 +132,10 @@ TextureImporter:
       name: cat_1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 258
-        width: 128
-        height: 128
+        x: 10
+        y: 261
+        width: 106
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,10 +153,10 @@ TextureImporter:
       name: cat_1_1
       rect:
         serializedVersion: 2
-        x: 128
-        y: 258
-        width: 128
-        height: 128
+        x: 138
+        y: 262
+        width: 120
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,10 +174,10 @@ TextureImporter:
       name: cat_1_2
       rect:
         serializedVersion: 2
-        x: 256
-        y: 258
-        width: 128
-        height: 128
+        x: 264
+        y: 260
+        width: 113
+        height: 124
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,10 +195,10 @@ TextureImporter:
       name: cat_1_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 130
-        width: 128
-        height: 128
+        x: 12
+        y: 132
+        width: 98
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,10 +216,10 @@ TextureImporter:
       name: cat_1_4
       rect:
         serializedVersion: 2
-        x: 128
-        y: 130
-        width: 128
-        height: 128
+        x: 135
+        y: 133
+        width: 111
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,10 +237,10 @@ TextureImporter:
       name: cat_1_5
       rect:
         serializedVersion: 2
-        x: 256
-        y: 130
-        width: 128
-        height: 128
+        x: 265
+        y: 134
+        width: 98
+        height: 110
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,10 +258,10 @@ TextureImporter:
       name: cat_1_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2
-        width: 128
-        height: 128
+        x: 8
+        y: 9
+        width: 106
+        height: 113
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,10 +279,10 @@ TextureImporter:
       name: cat_1_7
       rect:
         serializedVersion: 2
-        x: 128
-        y: 2
-        width: 128
-        height: 128
+        x: 138
+        y: 18
+        width: 108
+        height: 94
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -300,10 +300,10 @@ TextureImporter:
       name: cat_1_8
       rect:
         serializedVersion: 2
-        x: 256
-        y: 2
-        width: 128
-        height: 128
+        x: 266
+        y: 1
+        width: 101
+        height: 125
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

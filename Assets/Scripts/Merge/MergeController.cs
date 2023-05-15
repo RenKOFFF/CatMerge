@@ -10,6 +10,7 @@ using SaveSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
+using Random = UnityEngine.Random;
 
 namespace Merge
 {
@@ -77,7 +78,7 @@ namespace Merge
 
         public void OnDrop(MergeItem droppedOnItem)
         {
-            if (MergingItem == null || MergingItem.TryMergeIn(droppedOnItem))
+            if (MergingItem == null || MergingItem.TryMergeIn(droppedOnItem, SpawnRandomItem))
             {
                 SaveMField();
                 return;
@@ -99,6 +100,20 @@ namespace Merge
                 return;
 
             MergingItem = clickedItem;
+        }
+
+        private void SpawnRandomItem(int itemLevel)
+        {
+            var spawnCellIndex = GetEmptyCellIndex();
+
+            var spawnItemIndex = Random.Range(0, GameDataHelper.AllRewardItems.Count);
+            var spawnItem = GameDataHelper.AllRewardItems[spawnItemIndex];
+            
+            if (spawnCellIndex == -1)
+                RewardsStack.Instance.AppendReward(spawnItem);
+            
+            mergeCells[spawnCellIndex].MergeItem.TrySetData(spawnItem, false);
+
         }
 
         private void ActivateSellButton(MergeItem sellingItem)

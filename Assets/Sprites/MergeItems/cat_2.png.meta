@@ -133,9 +133,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 259
-        width: 128
-        height: 128
+        y: 258
+        width: 118
+        height: 125
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,10 +153,10 @@ TextureImporter:
       name: cat_2_1
       rect:
         serializedVersion: 2
-        x: 128
-        y: 259
-        width: 128
-        height: 128
+        x: 140
+        y: 258
+        width: 109
+        height: 123
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,10 +174,10 @@ TextureImporter:
       name: cat_2_2
       rect:
         serializedVersion: 2
-        x: 256
-        y: 259
-        width: 128
-        height: 128
+        x: 283
+        y: 258
+        width: 79
+        height: 124
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,10 +195,10 @@ TextureImporter:
       name: cat_2_3
       rect:
         serializedVersion: 2
-        x: 0
+        x: 20
         y: 131
-        width: 128
-        height: 128
+        width: 78
+        height: 124
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -216,10 +216,10 @@ TextureImporter:
       name: cat_2_4
       rect:
         serializedVersion: 2
-        x: 128
-        y: 131
-        width: 128
-        height: 128
+        x: 138
+        y: 134
+        width: 107
+        height: 120
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,10 +237,10 @@ TextureImporter:
       name: cat_2_5
       rect:
         serializedVersion: 2
-        x: 256
-        y: 131
-        width: 128
-        height: 128
+        x: 270
+        y: 133
+        width: 99
+        height: 122
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,9 +259,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 3
-        width: 128
-        height: 128
+        y: 9
+        width: 126
+        height: 111
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
