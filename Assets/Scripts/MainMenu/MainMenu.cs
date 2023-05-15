@@ -13,10 +13,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Button[] _levelButtons;
     [SerializeField] private Button _backButton;
 
+    private Dictionary<int, bool> _openedLevels;
+
     private void Start()
     {
         GameManager.Instance.LevelChanged += OnLevelChanged;
-        OrderManager.Instance.LevelComplited += UpdateButtonInteractivity;
+        OrderManager.Instance.LevelCompleted += UpdateButtonInteractivity;
         
         UpdateButtonInteractivity();
     }
@@ -24,22 +26,25 @@ public class MainMenu : MonoBehaviour
     private void OnDestroy()
     {
         GameManager.Instance.LevelChanged -= OnLevelChanged;
-        OrderManager.Instance.LevelComplited -= UpdateButtonInteractivity;
+        OrderManager.Instance.LevelCompleted -= UpdateButtonInteractivity;
     }
     
     private void UpdateButtonInteractivity()
     {
         var data = SaveManager.Instance.LoadOrDefault(new GameplayData());
-        var dict = JsonConvert.DeserializeObject<Dictionary<int, bool>>(data.OpenedLevelsDictionaryJSonFormat);
+        var openedLevels = JsonConvert.DeserializeObject<Dictionary<int, bool>>(data.OpenedLevelsDictionaryJSonFormat);
+        _openedLevels = openedLevels;
         
         for (int i = 0; i < _levelButtons.Length; i++)
         {
-            _levelButtons[i].interactable = dict.TryGetValue(i + 1, out var isOpened) && isOpened;
+            _levelButtons[i].interactable = openedLevels.TryGetValue(i + 1, out var isOpened) && isOpened;
         }
+
+        OnLevelChanged(GameManager.Instance.CurrentLevel);
     }
 
-    private void OnLevelChanged(int lvl)
+    private void OnLevelChanged(int backLevelIndex)
     {
-        _backButton.gameObject.SetActive(lvl > 0);
+        _backButton.gameObject.SetActive(backLevelIndex > 0 && _openedLevels.TryGetValue(backLevelIndex, out var isOpened) && isOpened);
     }
 }

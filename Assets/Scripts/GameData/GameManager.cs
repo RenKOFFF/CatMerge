@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Merge;
 using Merge.Energy;
 using Newtonsoft.Json;
@@ -11,11 +12,22 @@ namespace GameData
     [DefaultExecutionOrder(-1)]
     public class GameManager : MonoBehaviour
     {
+        private int _money;
+
         public static GameManager Instance { get; private set; }
         public static EnergyController EnergyController;
         public bool IsGeneratorSpawned => GeneratorController.Instance.IsGeneratorSpawned;
 
-        public int Money { get; private set; }
+        public int Money
+        {
+            get => _money;
+            private set
+            {
+                _money = value;
+                MoneyChanged?.Invoke(_money);
+            }
+        }
+
         public int Energy => EnergyController.CurrentEnergy;
         public DateTime LastEnergyChangingTime => EnergyController.LastEnergyChangingTime;
         public Dictionary<int, bool> OpenedLevels;
@@ -27,6 +39,7 @@ namespace GameData
         }
 
         public event Action<int> LevelChanged;
+        public event Action<int> MoneyChanged;
 
         private int _currentLevel;
 
@@ -76,10 +89,38 @@ namespace GameData
             if (OpenedLevels.ContainsKey(CurrentLevel))
                 OpenedLevels[CurrentLevel] = false;
 
-            OpenedLevels.TryAdd(CurrentLevel + 1, true);
-            if (CurrentLevel == 3) OpenedLevels.TryAdd(CurrentLevel + 2, true);
+            OpenAllPossibleLevels();
 
             SaveGameplayData();
+        }
+
+        private void OpenAllPossibleLevels()
+        {
+            var levelDatas = GameDataHelper.AllLevelData;
+
+            var currentLevelData = levelDatas.Where(i => i.CurrentLevelIndex == CurrentLevel).ToList();
+            if (currentLevelData.Count > 1)
+            {
+                Debug.Log("Level data more 1; Fix this");
+                return;
+            }
+
+            var nextLevelIndexes = new List<int>();
+            if (currentLevelData.Count == 0 || currentLevelData[0].NextLevelIndexes.Count == 0)
+            {
+                //TODO:this is debug code
+                if (currentLevelData.Count != 0 && currentLevelData[0].NextLevelIndexes.Count == 0)
+                    Debug.Log("There is level data, but next level list is empty");
+                
+                nextLevelIndexes.Add(CurrentLevel + 1);
+            }
+            else nextLevelIndexes = currentLevelData[0].NextLevelIndexes;
+
+
+            foreach (var nextLevelIndex in nextLevelIndexes)
+            {
+                OpenedLevels.TryAdd(nextLevelIndex, true);
+            }
         }
 
         private void SaveGameplayData()

@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using GameData;
 using Merge.Coins;
 using Merge.Generator;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -33,7 +35,7 @@ namespace Merge
             }
         }
 
-        public bool TryMergeIn(MergeItem itemToMergeIn)
+        public bool TryMergeIn(MergeItem itemToMergeIn, Action<int> callback = null)
         {
             if (IsEmpty
                 || gameObject == itemToMergeIn.gameObject
@@ -47,7 +49,8 @@ namespace Merge
             itemToMergeIn.RefreshSprite();
 
             ClearItemCell();
-
+            
+            callback?.Invoke(itemToMergeIn.MergeItemData.ComplexityLevel);
             return true;
         }
 
