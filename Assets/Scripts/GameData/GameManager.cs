@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Merge;
 using Merge.Energy;
 using Newtonsoft.Json;
@@ -79,11 +80,39 @@ namespace GameData
         {
             if (OpenedLevels.ContainsKey(CurrentLevel))
                 OpenedLevels[CurrentLevel] = false;
-            
-            OpenedLevels.TryAdd(CurrentLevel + 1, true);
-            if (CurrentLevel == 3) OpenedLevels.TryAdd(CurrentLevel + 2, true);
+
+            OpenAllPossibleLevels();
 
             SaveGameplayData();
+        }
+
+        private void OpenAllPossibleLevels()
+        {
+            var levelDatas = GameDataHelper.AllLevelData;
+
+            var currentLevelData = levelDatas.Where(i => i.CurrentLevelIndex == CurrentLevel).ToList();
+            if (currentLevelData.Count > 1)
+            {
+                Debug.Log("Level data more 1; Fix this");
+                return;
+            }
+
+            var nextLevelIndexes = new List<int>();
+            if (currentLevelData.Count == 0 || currentLevelData[0].NextLevelIndexes.Count == 0)
+            {
+                //TODO:this is debug code
+                if (currentLevelData.Count != 0 && currentLevelData[0].NextLevelIndexes.Count == 0)
+                    Debug.Log("There is level data, but next level list is empty");
+                
+                nextLevelIndexes.Add(CurrentLevel + 1);
+            }
+            else nextLevelIndexes = currentLevelData[0].NextLevelIndexes;
+
+
+            foreach (var nextLevelIndex in nextLevelIndexes)
+            {
+                OpenedLevels.TryAdd(nextLevelIndex, true);
+            }
         }
 
         private void SaveGameplayData()

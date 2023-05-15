@@ -12,6 +12,7 @@ namespace GameData
         public static List<MergeItemData> AllItems { get; }
         public static List<MergeItemData> AllMergeItems { get; }
         public static List<MergeItemData> AllRewardItems { get; }
+        public static List<LevelData> AllLevelData { get; }
 
         static GameDataHelper()
         {
@@ -28,6 +29,10 @@ namespace GameData
                     is CoinsMergeItemData
                     or EnergyMergeItemData
                 )
+                .ToList();
+            
+            AllLevelData = Resources
+                .LoadAll<LevelData>("LevelDatas")
                 .ToList();
         }
     }
