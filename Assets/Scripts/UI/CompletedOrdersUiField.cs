@@ -8,7 +8,7 @@ namespace UI
         {
             var orderManager = OrderManager.Instance;
             orderManager.ComoletedOrdersChanged += OnCompletedOrdersChanged;
-            Initialize(0, orderManager.CompletedOrdersCount);
+            Initialize(orderManager.OrdersNeededToCompleteLevelCount, orderManager.CompletedOrdersCount);
         }
 
         private void OnDestroy()

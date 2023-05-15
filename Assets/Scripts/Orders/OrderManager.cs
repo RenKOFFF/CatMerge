@@ -41,6 +41,8 @@ namespace Orders
                 ComoletedOrdersChanged?.Invoke(_completedOrdersCount);
             }
         }
+        
+        public int OrdersNeededToCompleteLevelCount => ordersNeededToCompleteLevelCount;
 
         public static OrderManager Instance;
         public event Action LevelCompleted;
