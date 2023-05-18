@@ -9,13 +9,13 @@ namespace UI
         [SerializeField] protected TextMeshProUGUI _currencyText;
         [SerializeField] protected RectTransform _currencyFillRectTransform;
 
-        protected float _step;
-        protected float _maxValue;
-        protected float _currentValue;
-        
-        protected bool _isInitialized;
+        private float _step;
+        private float _maxValue;
+        private float _currentValue;
 
-        public void Initialize(float maxValue, float startValue = 0)
+        private bool _isInitialized;
+
+        protected void Initialize(float maxValue, float startValue = 0)
         {
             if (_isInitialized) return;
 
@@ -26,13 +26,13 @@ namespace UI
             _isInitialized = true;
         }
 
-        public void ChangeValue(float newValue)
+        protected void ChangeValue(float newValue)
         {
             _currentValue = newValue;
             _currencyText.text = _currentValue.ToString(CultureInfo.InvariantCulture);
             
             _currencyFillRectTransform.anchorMax = 
-                new Vector2(_maxValue == 0 ? 1 : Mathf.Clamp(_currentValue * _step, 0, 1),
+                new Vector2(_maxValue == 0 ? 0 : Mathf.Clamp(_currentValue * _step, 0, 1),
                 _currencyFillRectTransform.anchorMax.y);
         }
     }
