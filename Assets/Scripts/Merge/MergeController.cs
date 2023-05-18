@@ -120,9 +120,15 @@ namespace Merge
         {
             var spawnCellIndex = GetEmptyCellIndex();
             if (spawnCellIndex == -1)
+            {
+                Debug.Log("can't spawn");
                 return false;
+            }
 
-            return mergeCells[spawnCellIndex].MergeItem.TrySetData(spawnItem, false);
+            var result = mergeCells[spawnCellIndex].MergeItem.TrySetData(spawnItem, false);
+            if (result) SaveMField();
+
+            return result;
         }
 
         private void ActivateSellButton(MergeItem sellingItem)
