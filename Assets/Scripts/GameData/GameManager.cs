@@ -48,6 +48,15 @@ namespace GameData
             Money += amount;
             SaveGameplayData();
         }
+        
+        public bool SpendMoney(int amount)
+        {
+            if (Money < amount) return false;
+            
+            Money -= amount;
+            SaveGameplayData();
+            return true;
+        }
 
         public void AddEnergy(int amount)
         {
@@ -96,9 +105,9 @@ namespace GameData
 
         private void OpenAllPossibleLevels()
         {
-            var levelDatas = GameDataHelper.AllLevelData;
+            var levelData = GameDataHelper.AllLevelData;
 
-            var currentLevelData = levelDatas.Where(i => i.CurrentLevelIndex == CurrentLevel).ToList();
+            var currentLevelData = levelData.Where(i => i.CurrentLevelIndex == CurrentLevel).ToList();
             if (currentLevelData.Count > 1)
             {
                 Debug.Log("Level data more 1; Fix this");
