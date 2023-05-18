@@ -17,7 +17,7 @@ namespace Shop
 
         public bool ToBuy(ShopCell shopCell)
         {
-            if (GameManager.Instance.Money <= shopCell.ShopData.Cost)
+            if (GameManager.Instance.Money < shopCell.ShopData.Cost)
                 return false;
 
             var spawnIndex = Random.Range(0, shopCell.ShopData.Items.Length);
