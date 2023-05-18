@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5296fe97c24f73945ee13249239d74, type: 3}
+  m_Name: EnergyShopCellData
+  m_EditorClassIdentifier: 
+  _icon: {fileID: -1635465084, guid: 67d44ac6e466d6647bb653911f02087a, type: 3}
+  _cost: 2
+  _items:
+  - {fileID: 11400000, guid: 3cbd96c5f18757b40bf7c2118d3ccbaf, type: 2}
