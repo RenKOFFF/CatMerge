@@ -110,7 +110,7 @@ namespace GameData
             var currentLevelData = levelData.Where(i => i.CurrentLevelIndex == CurrentLevel).ToList();
             if (currentLevelData.Count > 1)
             {
-                Debug.Log("Level data more 1; Fix this");
+                Debug.LogError("Level data more 1; Fix this");
                 return;
             }
 

@@ -666,6 +666,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SafeArea
       objectReference: {fileID: 0}
+    - target: {fileID: 7337021519231724648, guid: aaed77ad93428664db8c7d36929b1b39, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -104.3999
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaed77ad93428664db8c7d36929b1b39, type: 3}
 --- !u!1 &925304396
@@ -877,6 +881,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960470104}
   m_CullTransparentMesh: 1
+--- !u!1 &1098475582 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4357903104051271921, guid: e26a9fb183ef184449841563ebb058f9, type: 3}
+  m_PrefabInstance: {fileID: 4357903103244134452}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1098475584 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4357903104051271923, guid: e26a9fb183ef184449841563ebb058f9, type: 3}
+  m_PrefabInstance: {fileID: 4357903103244134452}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098475582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1098475586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098475582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b76cbd23384e43cea8073bd4e8b7d4ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _background: {fileID: 1098475584}
+  _levelsData:
+  - {fileID: 11400000, guid: ed4058999fa11d141bee56a6cb1bf102, type: 2}
+  - {fileID: 11400000, guid: b2d28dd9e02846043b1144c986335272, type: 2}
+  - {fileID: 11400000, guid: cc53b69b6bfc3a24ca6f0f75f7f49987, type: 2}
+  - {fileID: 11400000, guid: 6f4d52c184600c749959f763d116b473, type: 2}
+  - {fileID: 11400000, guid: 327ea32521c81d3408ca5630765aa11f, type: 2}
 --- !u!1 &1139537398 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8752919424633915250, guid: 5e79f091f424d8b4da326efb5e208cfb, type: 3}
@@ -1727,6 +1766,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1694124557}
+    - target: {fileID: 4357903104051271923, guid: e26a9fb183ef184449841563ebb058f9, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4357903104051271923, guid: e26a9fb183ef184449841563ebb058f9, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4357903104051271923, guid: e26a9fb183ef184449841563ebb058f9, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4357903104070432482, guid: e26a9fb183ef184449841563ebb058f9, type: 3}
       propertyPath: m_Name
       value: MenuCanvas
