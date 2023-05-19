@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using DG.Tweening;
 using GameData;
 using Merge.Coins;
 using Merge.Generator;
@@ -48,8 +49,13 @@ namespace Merge
             itemToMergeIn.MergeItemData = MergeItemData.nextMergeItem;
             itemToMergeIn.RefreshSprite();
 
+            DOTween.Sequence()
+                .Append(itemToMergeIn.transform.DOScale(Vector3.zero, .3f))
+                .Append(itemToMergeIn.transform.DOScale(Vector3.one, .3f))
+                .SetEase(Ease.OutBounce);
+
             ClearItemCell();
-            
+
             callback?.Invoke(itemToMergeIn.MergeItemData.ComplexityLevel);
             return true;
         }
@@ -81,6 +87,17 @@ namespace Merge
             {
                 MergeItemData = data;
                 RefreshSprite();
+
+                if (data != null)
+                {
+                    var sequence = DOTween.Sequence()
+                        .Append(transform.DOScale(new Vector3(.9f, .9f), .2f))
+                        .Append(transform.DOScale(new Vector3(1.2f, 1.2f), .2f))
+                        .Append(transform.DOScale(new Vector3(1, 1), .3f))
+                        .SetEase(Ease.OutBounce);
+
+                    //sequence.Append(transform.DOShakeScale(1, .3f));
+                }
 
                 return true;
             }
@@ -128,7 +145,7 @@ namespace Merge
         private void ResetItem()
         {
             CanvasGroup.blocksRaycasts = true;
-            transform.localPosition = Vector3.zero;
+            transform.DOLocalMove(Vector3.zero, .3f);
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -140,6 +157,12 @@ namespace Merge
 
             if (MergeItemData is GeneratorMergeItemData clickableData)
             {
+                DOTween.Sequence()
+                    .Append(transform.DOScale(new Vector3(.9f, .9f), .2f))
+                    .Append(transform.DOScale(new Vector3(1.2f, 1.2f), .2f))
+                    .Append(transform.DOScale(new Vector3(1, 1), .3f))
+                    .SetEase(Ease.OutBounce);
+                
                 clickableData.Spawn();
 
                 MergeController.Instance.SaveMField();
@@ -151,19 +174,25 @@ namespace Merge
                 if (_clickCount >= 2)
                 {
                     doubleClickableData.GiveEnergy();
-                    ClearItemCell();
+                    DOTween.Sequence()
+                        .Append(transform.DOScale(Vector3.one * 1.2f, .1f))
+                        .Append(transform.DOScale(Vector3.zero, .1f))
+                        .OnComplete(ClearItemCell);
                 }
 
                 MergeController.Instance.SaveMField();
                 return;
             }
-            
+
             if (MergeItemData is CoinsMergeItemData coinsMergeItemData)
             {
                 if (_clickCount >= 2)
                 {
                     coinsMergeItemData.GiveCoins();
-                    ClearItemCell();
+                    DOTween.Sequence()
+                        .Append(transform.DOScale(Vector3.one * 1.2f, .1f))
+                        .Append(transform.DOScale(Vector3.zero, .1f))
+                        .OnComplete(ClearItemCell);
                 }
 
                 MergeController.Instance.SaveMField();
