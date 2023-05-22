@@ -4,6 +4,7 @@ using GameData;
 using JetBrains.Annotations;
 using Merge.Item_info;
 using Newtonsoft.Json;
+using Orders;
 using SaveSystem;
 using UnityEngine;
 using Utils;
@@ -77,6 +78,7 @@ namespace Merge
         {
             if (MergingItem == null || MergingItem.TryMergeIn(droppedOnItem, SpawnRandomItemWithChance))
             {
+                OpenItemInfo(droppedOnItem);
                 SaveMField();
                 return;
             }
@@ -121,9 +123,6 @@ namespace Merge
         }
 
         private void OpenItemInfo(MergeItem selectedItem)
-        {
-            itemInfoPanel.Initialize(selectedItem);
-        }
         {
             itemInfoPanel.Initialize(selectedItem);
         }
