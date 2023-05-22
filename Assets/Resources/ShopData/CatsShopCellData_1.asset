@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f5296fe97c24f73945ee13249239d74, type: 3}
+  m_Name: CatsShopCellData_1
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 21300000, guid: 446d5856fea980f4985a224756d22bf2, type: 3}
+  _cost: 4
+  _items:
+  - {fileID: 11400000, guid: b9bc292adf5836e46ab50b0ce2433735, type: 2}
+  - {fileID: 11400000, guid: 241cc1550555ef44fb7a7ee770430ea7, type: 2}
+  - {fileID: 11400000, guid: 441b0bff7b232ab498b9995cfd61c2ac, type: 2}
+  - {fileID: 11400000, guid: 7e475989ef49c924cbe7a99359878bd8, type: 2}
+  - {fileID: 11400000, guid: abab33f2c7a35014aadf7c772bf9a60a, type: 2}
+  - {fileID: 11400000, guid: c36eae351c97595409e96135aa5c8772, type: 2}
+  - {fileID: 11400000, guid: 0fabcd9fc49e94c4a93f0602856521db, type: 2}
