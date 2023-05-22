@@ -1,6 +1,7 @@
 ﻿using System;
 using GameData;
 using Merge;
+using Orders;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -21,11 +22,10 @@ namespace Shop
                 return false;
 
             var spawnIndex = Random.Range(0, shopCell.ShopData.Items.Length);
-            
-            var isSpawned = MergeController.Instance.SpawnItem(shopCell.ShopData.Items[spawnIndex]);
-            if (isSpawned)
-                GameManager.Instance.SpendMoney(shopCell.ShopData.Cost);
-            
+
+            RewardsStack.Instance.AppendReward(shopCell.ShopData.Items[spawnIndex]);
+            GameManager.Instance.SpendMoney(shopCell.ShopData.Cost);
+
             return true;
         }
     }

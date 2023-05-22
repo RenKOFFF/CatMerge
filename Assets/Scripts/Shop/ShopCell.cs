@@ -18,13 +18,13 @@ namespace Shop
         private void OnEnable()
         {
             if (_button)
-                _button.onClick.AddListener(() => ShopController.Instance.ToBuy(this));
+                _button.onClick.AddListener(OnClickShopButton);
         }
 
         private void OnDisable()
         {
             if (_button)
-                _button.onClick.RemoveListener(() => ShopController.Instance.ToBuy(this));
+                _button.onClick.RemoveListener(OnClickShopButton);
         }
 
         private void Start()
@@ -36,6 +36,11 @@ namespace Shop
         {
             _icon.sprite = _shopCellData.Icon;
             _costText.text = _shopCellData.Cost.ToString();
+        }
+
+        private void OnClickShopButton()
+        {
+            ShopController.Instance.ToBuy(this);
         }
     }
 
