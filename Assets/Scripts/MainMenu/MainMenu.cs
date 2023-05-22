@@ -37,7 +37,7 @@ namespace MainMenu
         
             for (int i = 0; i < _levelButtons.Length; i++)
             {
-                _levelButtons[i].interactable = openedLevels.TryGetValue(i + 1, out var isOpened) && isOpened;
+                _levelButtons[i].gameObject.SetActive(openedLevels.TryGetValue(i + 1, out var isOpened) && isOpened);
             }
 
             OnLevelChanged(GameManager.Instance.CurrentLevel);

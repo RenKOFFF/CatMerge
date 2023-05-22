@@ -1,5 +1,4 @@
-﻿using System;
-using GameData;
+﻿using GameData;
 using Merge;
 using Orders;
 using UnityEngine;
@@ -7,14 +6,17 @@ using Random = UnityEngine.Random;
 
 namespace Shop
 {
+    [DefaultExecutionOrder(-1)]
     public class ShopController : MonoBehaviour
     {
         public static ShopController Instance;
 
-        private void Start()
+        private void Awake()
         {
             if (!Instance) Instance = this;
         }
+
+        public void SetActiveShop(bool value) => gameObject.SetActive(value);
 
         public bool ToBuy(ShopCell shopCell)
         {

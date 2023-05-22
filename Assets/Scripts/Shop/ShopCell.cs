@@ -12,19 +12,25 @@ namespace Shop
         [SerializeField] private Image _icon;
         [SerializeField] private TextMeshProUGUI _costText;
         [SerializeField] private Button _button;
-        
+
         public ShopCellData ShopData => _shopCellData;
 
         private void OnEnable()
         {
             if (_button)
+            {
                 _button.onClick.AddListener(OnClickShopButton);
+                GameManager.Instance.MoneyChanged += OnMoneyCountChanged;
+            }
         }
 
         private void OnDisable()
         {
             if (_button)
+            {
                 _button.onClick.RemoveListener(OnClickShopButton);
+                GameManager.Instance.MoneyChanged -= OnMoneyCountChanged;
+            }
         }
 
         private void Start()
@@ -36,6 +42,11 @@ namespace Shop
         {
             _icon.sprite = _shopCellData.Icon;
             _costText.text = _shopCellData.Cost.ToString();
+        }
+
+        private void OnMoneyCountChanged(int currentMoney)
+        {
+            _button.interactable = currentMoney >= ShopData.Cost;
         }
 
         private void OnClickShopButton()

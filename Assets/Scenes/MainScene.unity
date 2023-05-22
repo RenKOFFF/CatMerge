@@ -206,9 +206,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1248151278}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+      - m_Target: {fileID: 1248151280}
+        m_TargetAssemblyTypeName: Shop.ShopController, Assembly-CSharp
+        m_MethodName: SetActiveShop
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -948,16 +948,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1248151278 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2321301093951049489, guid: a23b02ee3ad98c84389fe14e7ace80df, type: 3}
-  m_PrefabInstance: {fileID: 2321301093046864383}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1248151279 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2321301093951049488, guid: a23b02ee3ad98c84389fe14e7ace80df, type: 3}
   m_PrefabInstance: {fileID: 2321301093046864383}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1248151280 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2321301093951049487, guid: a23b02ee3ad98c84389fe14e7ace80df, type: 3}
+  m_PrefabInstance: {fileID: 2321301093046864383}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e67c9020255645668c2c687f40b82756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1254882924 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4275090086000181903, guid: 82657f15adc707841851cb05dc89f212, type: 3}
@@ -1665,6 +1671,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 140175347}
     m_Modifications:
+    - target: {fileID: 2321301093105183941, guid: a23b02ee3ad98c84389fe14e7ace80df, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1248151280}
+    - target: {fileID: 2321301093105183941, guid: a23b02ee3ad98c84389fe14e7ace80df, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActiveShop
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321301093105183941, guid: a23b02ee3ad98c84389fe14e7ace80df, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Shop.ShopController, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2321301093951049488, guid: a23b02ee3ad98c84389fe14e7ace80df, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1756,7 +1774,7 @@ PrefabInstance:
     - target: {fileID: 8469896245445109021, guid: a23b02ee3ad98c84389fe14e7ace80df, type: 3}
       propertyPath: _shopCellData
       value: 
-      objectReference: {fileID: 11400000, guid: e61cb03e89ce25641959770ebfc19460, type: 2}
+      objectReference: {fileID: 11400000, guid: e4361523c1043f64f9519015c07fb329, type: 2}
     - target: {fileID: 8469896246914601342, guid: a23b02ee3ad98c84389fe14e7ace80df, type: 3}
       propertyPath: _shopCellData
       value: 
