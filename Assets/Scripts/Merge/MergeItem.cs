@@ -142,6 +142,7 @@ namespace Merge
             {
                 clickableData.Spawn();
 
+                MergeController.Instance.OpenItemInfo(this);
                 MergeController.Instance.SaveMField();
                 return;
             }
@@ -154,6 +155,7 @@ namespace Merge
                     ClearItemCell();
                 }
 
+                MergeController.Instance.OpenItemInfo(this);
                 MergeController.Instance.SaveMField();
                 return;
             }
@@ -166,6 +168,7 @@ namespace Merge
                     ClearItemCell();
                 }
 
+                MergeController.Instance.OpenItemInfo(this);
                 MergeController.Instance.SaveMField();
                 return;
             }

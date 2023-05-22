@@ -94,6 +94,11 @@ namespace Merge
             SaveMField();
         }
 
+        public void OpenItemInfo(MergeItem selectedItem)
+        {
+            itemInfoPanel.Initialize(selectedItem);
+        }
+
         private void SetMergingItem(MergeItem clickedItem)
         {
             if (clickedItem.IsEmpty)
@@ -120,11 +125,6 @@ namespace Merge
 
                 mergeCells[spawnCellIndex].MergeItem.TrySetData(spawnItem, false);
             }
-        }
-
-        private void OpenItemInfo(MergeItem selectedItem)
-        {
-            itemInfoPanel.Initialize(selectedItem);
         }
 
         private void Awake()

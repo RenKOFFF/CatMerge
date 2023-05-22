@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,17 +10,23 @@ namespace Merge.Item_info
         [SerializeField] private Image itemImage;
         [SerializeField] private TMP_Text itemTitleText;
         [SerializeField] private TMP_Text itemLevelText;
+        [SerializeField] private ItemTreePanel itemTreePanel;
 
         private MergeItem _selectedItem;
 
         public void Initialize(MergeItem selectedItem)
         {
+            if (selectedItem.IsEmpty)
+                return;
+
             _selectedItem = selectedItem;
 
             sellButton.Initialize(_selectedItem);
             itemImage.sprite = _selectedItem.MergeItemData.sprite;
             itemTitleText.text = $"{_selectedItem.MergeItemData.name}";
             itemLevelText.text = $"Уровень: {_selectedItem.MergeItemData.ComplexityLevel}";
+
+            itemTreePanel.Initialize(_selectedItem);
 
             gameObject.SetActive(true);
         }
