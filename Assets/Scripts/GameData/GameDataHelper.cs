@@ -32,7 +32,7 @@ namespace GameData
                 .ToList();
             
             AllLevelData = Resources
-                .LoadAll<LevelData>("LevelDatas")
+                .LoadAll<LevelData>("LevelData")
                 .ToList();
         }
     }

@@ -16,26 +16,15 @@ namespace Merge.Generator
 
         public void Spawn()
         {
-            if (EnergyController.Instance.CurrentEnergy > 0)
-            {
-                var cellIndex = MergeController.GetEmptyCellIndex();
+            if (EnergyController.Instance.CurrentEnergy <= 0) return;
 
-                if (cellIndex == -1)
-                {
-                    Debug.Log("can't spawn");
-                    return;
-                }
-                
-                var itemOnSpecificCell =
-                    MergeController.Instance.MergeCells[cellIndex].GetComponentInChildren<MergeItem>();
+            var line = GetRandomLine();
+            var itemIndex = GetRandomItemIndexByGeneratorAge(line);
 
-                var line = GetRandomLine();
-                var itemIndex = GetRandomItemIndexByGeneratorAge(line);
-                
-                itemOnSpecificCell.TrySetData(_lines.GenerateLine[line].ItemData[itemIndex], false);
-                
-                GameManager.Instance.SpendEnergy();
-            }
+            var spawnItem = _lines.GenerateLine[line].ItemData[itemIndex];
+            MergeController.Instance.SpawnItem(spawnItem);
+
+            GameManager.Instance.SpendEnergy();
         }
 
         private int GetRandomLine()

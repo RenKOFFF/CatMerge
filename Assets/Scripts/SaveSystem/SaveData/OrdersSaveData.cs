@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using Orders;
 
@@ -8,7 +9,7 @@ namespace SaveSystem.SaveData
     [Serializable]
     public class OrdersSaveData
     {
-        public string rewardDictJSonFormat, hasMoneyDictJSonFormat, partsDictJSonFormat;
+        public string rewardDictJSonFormat, hasMoneyDictJSonFormat, partsDictJSonFormat, rewardsStackJSonFormat;
         public int CompletedOrdersCount;
 
         public OrdersSaveData(OrderManager orderManager)
@@ -18,8 +19,16 @@ namespace SaveSystem.SaveData
             Dictionary<int, string> rewardDict = new();
             Dictionary<int, bool> hasMoneyDict = new();
             Dictionary<int, Dictionary<int, string>> partsDict = new();
-
+            
             CompletedOrdersCount = orderManager.CompletedOrdersCount;
+            
+            var rewardsStackArray = RewardsStack.Instance.Rewards.ToArray();
+            var rewardsStackDict = new Dictionary<int, string>();
+            
+            for (int i = 0; i < rewardsStackArray.Length; i++)
+            {
+                rewardsStackDict.Add(i, rewardsStackArray[i].name);
+            }
             
             for (int i = 0; i < orderManagerActiveOrders.Count; i++)
             {
@@ -40,6 +49,7 @@ namespace SaveSystem.SaveData
             rewardDictJSonFormat = JsonConvert.SerializeObject(rewardDict);
             hasMoneyDictJSonFormat = JsonConvert.SerializeObject(hasMoneyDict);
             partsDictJSonFormat = JsonConvert.SerializeObject(partsDict);
+            rewardsStackJSonFormat = JsonConvert.SerializeObject(rewardsStackDict);
         }
 
         public OrdersSaveData()
@@ -47,10 +57,12 @@ namespace SaveSystem.SaveData
             Dictionary<int, string> rewardDict = new();
             Dictionary<int, bool> hasMoneyDict = new();
             Dictionary<int, Dictionary<int, string>> partsDict = new();
-            
+            Dictionary<int, string> rewardsStack = new();
+
             rewardDictJSonFormat = JsonConvert.SerializeObject(rewardDict);
             hasMoneyDictJSonFormat = JsonConvert.SerializeObject(hasMoneyDict);
             partsDictJSonFormat = JsonConvert.SerializeObject(partsDict);
+            rewardsStackJSonFormat = JsonConvert.SerializeObject(rewardsStack);
         }
     }
 }

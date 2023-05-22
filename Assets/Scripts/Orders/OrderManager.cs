@@ -41,7 +41,7 @@ namespace Orders
                 ComoletedOrdersChanged?.Invoke(_completedOrdersCount);
             }
         }
-        
+
         public int OrdersNeededToCompleteLevelCount => ordersNeededToCompleteLevelCount;
 
         public static OrderManager Instance;
@@ -102,7 +102,7 @@ namespace Orders
             }
 
             var orderData = CreateSpecificOrderData(rewardItem, containsRewardMoney, itemsForPartsData);
-            SpawnOrder(orderData);
+            SpawnOrder(orderData, false);
         }
 
         private OrderData CreateSpecificOrderData(MergeItemData rewardItem, bool containsRewardMoney,
@@ -119,7 +119,7 @@ namespace Orders
             return orderData;
         }
 
-        private void SpawnOrder(OrderData orderData)
+        private void SpawnOrder(OrderData orderData, bool isLoadSpawn)
         {
             void OnOrderCompleted()
             {
@@ -133,7 +133,6 @@ namespace Orders
 
                 if (CompletedOrdersCount == ordersNeededToCompleteLevelCount)
                 {
-
                     var canvas = GameObject.FindGameObjectWithTag(GameConstants.Tags.Canvas);
                     var levelCompletedPanel = Instantiate(levelCompletedPanelPrefab, canvas.transform, false);
 
@@ -150,9 +149,10 @@ namespace Orders
             order.Initialize(orderData, OnOrderCompleted);
             ActiveOrders.Add(order);
 
-            SaveManager.Instance.Save(
-                new OrdersSaveData(Instance),
-                GameManager.Instance.CurrentLevel.ToString());
+            if (!isLoadSpawn)
+                SaveManager.Instance.Save(
+                    new OrdersSaveData(Instance),
+                    GameManager.Instance.CurrentLevel.ToString());
         }
 
         private void SetNewOrderGenerationTime()
@@ -176,11 +176,15 @@ namespace Orders
             var ordersSaveData = SaveManager.Instance.LoadOrDefault(
                 new OrdersSaveData(),
                 GameManager.Instance.CurrentLevel.ToString());
-            
-            var rewardDict = JsonConvert.DeserializeObject<Dictionary<int, string>>(ordersSaveData.rewardDictJSonFormat);
-            var hasMoneyDict = JsonConvert.DeserializeObject<Dictionary<int, bool>>(ordersSaveData.hasMoneyDictJSonFormat);
-            var partsDict = JsonConvert.DeserializeObject<Dictionary<int, Dictionary<int, string>>>(ordersSaveData.partsDictJSonFormat);
-            
+
+            var rewardDict =
+                JsonConvert.DeserializeObject<Dictionary<int, string>>(ordersSaveData.rewardDictJSonFormat);
+            var hasMoneyDict =
+                JsonConvert.DeserializeObject<Dictionary<int, bool>>(ordersSaveData.hasMoneyDictJSonFormat);
+            var partsDict =
+                JsonConvert.DeserializeObject<Dictionary<int, Dictionary<int, string>>>(ordersSaveData
+                    .partsDictJSonFormat);
+
             CompletedOrdersCount = ordersSaveData.CompletedOrdersCount;
 
             foreach (var currentActiveOrder in ActiveOrders)
@@ -201,11 +205,11 @@ namespace Orders
                     MergeItemData partMergeItemData = FindMergeItemDataOnResourcesByName(partName);
                     partsList.Add(partMergeItemData);
                 }
-                
+
                 var loadedOrderData = CreateSpecificOrderData(rewardItem, hasMoneyDict[i], partsList);
-                SpawnOrder(loadedOrderData);
+                SpawnOrder(loadedOrderData, true);
             }
-            
+
             MergeItemData FindMergeItemDataOnResourcesByDict(Dictionary<int, string> dictionary, int i)
             {
                 if (dictionary.TryGetValue(i, out var dataName))
@@ -213,11 +217,11 @@ namespace Orders
 
                 return null;
             }
-            
+
             MergeItemData FindMergeItemDataOnResourcesByName(string dataName)
             {
                 string directory = dataName.Split("_")[0];
-                var mergeItemData = Resources.Load<MergeItemData>($"MergeItems/{directory}/{dataName}");    
+                var mergeItemData = Resources.Load<MergeItemData>($"MergeItems/{directory}/{dataName}");
                 return mergeItemData;
             }
         }

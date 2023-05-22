@@ -1,5 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using GameData;
 using Merge;
+using Newtonsoft.Json;
+using SaveSystem;
+using SaveSystem.SaveData;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,13 +18,17 @@ namespace Orders
 
         public static RewardsStack Instance { get; private set; }
 
-        private Stack<MergeItemData> Rewards { get; } = new();
+        public Stack<MergeItemData> Rewards { get; private set; } = new();
 
         public void AppendReward(MergeItemData reward)
         {
             Rewards.Push(reward);
             UpdateSprite();
             gameObject.SetActive(true);
+            
+            SaveManager.Instance.Save(
+                new OrdersSaveData(OrderManager.Instance),
+                GameManager.Instance.CurrentLevel.ToString());
         }
 
         public void ClaimReward()
@@ -36,7 +45,13 @@ namespace Orders
 
             Rewards.Pop();
             UpdateSprite();
+            
+            SaveManager.Instance.Save(
+                new OrdersSaveData(OrderManager.Instance),
+                GameManager.Instance.CurrentLevel.ToString());
         }
+
+        private void ClearStack() => Rewards.Clear();
 
         private void UpdateSprite()
         {
@@ -49,11 +64,48 @@ namespace Orders
             Instance = this;
         }
 
+        private void Start()
+        {
+            LoadOrDefaultData();
+        }
+
+        private void LoadOrDefaultData()
+        {
+            ClearStack();
+            var ordersSaveData = SaveManager.Instance.LoadOrDefault(
+                new OrdersSaveData(),
+                GameManager.Instance.CurrentLevel.ToString());
+
+            var rewardStackDict =
+                JsonConvert.DeserializeObject<Dictionary<int, string>>(ordersSaveData.rewardsStackJSonFormat);
+            ;
+            for (int i = rewardStackDict.Values.Count - 1; i >= 0; i--)
+            {
+                var item = GameDataHelper.AllRewardItems.Find(item => item.name == rewardStackDict[i]);
+                AppendReward(item);
+            }
+        }
+
         private void Update()
         {
             var rewardsCount = Rewards.Count;
             gameObject.SetActive(rewardsCount > 0);
             rewardsCountText.text = rewardsCount.ToString();
+        }
+
+        private void OnEnable()
+        {
+            GameManager.Instance.LevelChanged += OnLevelChanged;
+        }
+
+        private void OnDisable()
+        {
+            GameManager.Instance.LevelChanged -= OnLevelChanged;
+        }
+
+        private void OnLevelChanged(int _)
+        {
+            LoadOrDefaultData();
         }
     }
 }

@@ -8,8 +8,10 @@ namespace GameData
     {
         [SerializeField] private int _currentLvlIndex;
         [SerializeField] private List<int> _nextLvlIndexes;
+        [SerializeField] private Sprite _bgWhenThisLevelCompleted;
         
         public int CurrentLevelIndex => _currentLvlIndex;
         public List<int> NextLevelIndexes => _nextLvlIndexes;
+        public Sprite BgWhenThisLevelCompleted => _bgWhenThisLevelCompleted;
     }
 }

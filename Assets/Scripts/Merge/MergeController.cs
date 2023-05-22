@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GameData;
 using JetBrains.Annotations;
@@ -112,19 +113,29 @@ namespace Merge
         {
             var itemSpawnChance = .1f * itemLevel;
 
-            var spawnCellIndex = GetEmptyCellIndex();
-
             var spawnItemIndex = Random.Range(0, GameDataHelper.AllRewardItems.Count);
             var spawnItem = GameDataHelper.AllRewardItems[spawnItemIndex];
 
             var spawnChance = Random.Range(0f, 1f);
             if (spawnChance <= itemSpawnChance)
             {
-                if (spawnCellIndex == -1)
-                    RewardsStack.Instance.AppendReward(spawnItem);
-
-                mergeCells[spawnCellIndex].MergeItem.TrySetData(spawnItem, false);
+                SpawnItem(spawnItem);
             }
+        }
+
+        public bool SpawnItem(MergeItemData spawnItem)
+        {
+            var spawnCellIndex = GetEmptyCellIndex();
+            if (spawnCellIndex == -1)
+            {
+                Debug.Log("can't spawn");
+                return false;
+            }
+
+            var result = mergeCells[spawnCellIndex].MergeItem.TrySetData(spawnItem, false);
+            if (result) SaveMField();
+
+            return result;
         }
 
         private void Awake()
