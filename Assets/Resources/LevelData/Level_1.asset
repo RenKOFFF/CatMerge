@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentLvlIndex: 1
   _nextLvlIndexes: 
-  _bgWhenThisLevelCompleted: {fileID: -334425920, guid: cc9413ed08ff0b54a91039ea0b8dec71, type: 3}
+  _bgWhenThisLevelCompleted: {fileID: 21300000, guid: 146d9807d5cbb384388658e906f3c1fa, type: 3}
