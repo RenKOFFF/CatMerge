@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c77c5c8b8754aefbc7f71f5cf8a2fbc, type: 3}
   m_Name: Generator_0
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: c8a69ecdf54ac8e4b873466605de27ff, type: 3}
+  sprite: {fileID: -1564771136, guid: 0e1d672ae8a7cc545a4407010c7e5de8, type: 3}
   previousMergeItem: {fileID: 0}
-  nextMergeItem: {fileID: 11400000, guid: 5915dd76d52162645a544fa6f33f9b29, type: 2}
+  nextMergeItem: {fileID: 11400000, guid: 662d28a09bab9804bb90e97722deda2f, type: 2}
   SpawnChance:
     serializedVersion: 2
     m_Curve: []
@@ -24,11 +24,5 @@ MonoBehaviour:
   _age: 1
   _lines:
     GenerateLine:
-    - ItemData:
-      - {fileID: 11400000, guid: b9bc292adf5836e46ab50b0ce2433735, type: 2}
-      - {fileID: 11400000, guid: 241cc1550555ef44fb7a7ee770430ea7, type: 2}
-      - {fileID: 11400000, guid: 441b0bff7b232ab498b9995cfd61c2ac, type: 2}
-    - ItemData:
-      - {fileID: 11400000, guid: 9e86ad282d18e0c42806929679495fce, type: 2}
-      - {fileID: 11400000, guid: f594ee4f765371346bdda49d4a2e24ca, type: 2}
-      - {fileID: 11400000, guid: bff12f2fae4d2384ca9b43af637b6446, type: 2}
+    - ItemData: []
+    - ItemData: []

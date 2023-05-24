@@ -281,9 +281,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _generatorsData:
-  - {fileID: 11400000, guid: 662d28a09bab9804bb90e97722deda2f, type: 2}
-  - {fileID: 11400000, guid: 662d28a09bab9804bb90e97722deda2f, type: 2}
-  - {fileID: 11400000, guid: 5915dd76d52162645a544fa6f33f9b29, type: 2}
+  - {fileID: 11400000, guid: 98a4a555845d224458084acd3c39e38e, type: 2}
+  - {fileID: 11400000, guid: 98a4a555845d224458084acd3c39e38e, type: 2}
 --- !u!114 &4860024317761926740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1138,6 +1137,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7084717492431136181}
     m_Modifications:
+    - target: {fileID: 7058631936572117003, guid: bba448e82194bf3489d3e2afa9ca2f65, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -29.099998
+      objectReference: {fileID: 0}
     - target: {fileID: 8630254682585733720, guid: bba448e82194bf3489d3e2afa9ca2f65, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

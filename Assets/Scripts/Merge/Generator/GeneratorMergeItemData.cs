@@ -19,7 +19,18 @@ namespace Merge.Generator
             if (EnergyController.Instance.CurrentEnergy <= 0) return;
 
             var line = GetRandomLine();
+            if (line == -1)
+            {
+                Debug.Log("Line is empty");
+                return;
+            }
+            
             var itemIndex = GetRandomItemIndexByGeneratorAge(line);
+            if (itemIndex == -1)
+            {
+                Debug.Log("itemIndex is empty");
+                return;
+            }
 
             var spawnItem = _lines.GenerateLine[line].ItemData[itemIndex];
             MergeController.Instance.SpawnItem(spawnItem);
@@ -29,6 +40,8 @@ namespace Merge.Generator
 
         private int GetRandomLine()
         {
+            if (_lines.GenerateLine.Length == 0) return -1;
+            
             return Random.Range(0, _lines.GenerateLine.Length);
         }
 
@@ -40,6 +53,9 @@ namespace Merge.Generator
             {
                 chances.Add(_lines.GenerateLine[line].ItemData[i].SpawnChance.Evaluate(_age));
             }
+
+            if (chances.Count == 0)
+                return -1;
 
             var value = Random.Range(0, chances.Sum());
 
