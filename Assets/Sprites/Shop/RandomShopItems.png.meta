@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a964d2fb5f956bd4d968f5cfdbbaa06c
+guid: bb12ec558f5ad5c4dbeffd5876216023
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -129,43 +129,43 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OrderButton_0
+      name: RandomShopItems_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 190
-        height: 192
+        x: 20
+        y: 10
+        width: 86
+        height: 84
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 32, y: 34, z: 30, w: 33}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85104baee2375434a9f77a168baa483d
-      internalID: 5448012
+      spriteID: e500114ad0c968d4ca3c9f46fc21a306
+      internalID: 1046195016
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OrderButton_1
+      name: RandomShopItems_1
       rect:
         serializedVersion: 2
-        x: 204
-        y: 32
-        width: 129
-        height: 128
+        x: 139
+        y: 4
+        width: 105
+        height: 120
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 21, y: 22, z: 21, w: 19}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d108d4a321545f342bc52e8c53a3120c
-      internalID: 1440478604
+      spriteID: 0c68386fd94623d43ae957d4e6345708
+      internalID: 1199763644
       vertices: []
       indices: 
       edges: []
@@ -181,8 +181,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      OrderButton_1: 1440478604
-      OrderButton_0: 5448012
+      RandomShopItems_1: -1594850949
+      RandomShopItems_0: 891104080
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
