@@ -9,6 +9,7 @@ namespace Merge.Item_info
         public void Initialize(MergeItem sellingItem)
         {
             _sellingItem = sellingItem;
+            gameObject.SetActive(_sellingItem.MergeItemData.GetType() == typeof(MergeItemData));
         }
 
         public void Sell()

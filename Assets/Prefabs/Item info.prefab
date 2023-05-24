@@ -1011,42 +1011,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8630254682585733720}
     m_Modifications:
-    - target: {fileID: 1139418215575545268, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409006436748380906, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1454713105748521916, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1576164567102196411, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2048149062215213283, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2687728450044384920, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3078127074486488281, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4988540928901677998, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5037237164025748717, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5275299208405319092, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
       propertyPath: m_Name
       value: ItemTreePanel
@@ -1065,7 +1029,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6371519084754636346, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6371519084754636346, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1073,7 +1037,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6371519084754636346, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6371519084754636346, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
       propertyPath: m_AnchorMin.y
@@ -1081,11 +1045,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6371519084754636346, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 1040
       objectReference: {fileID: 0}
     - target: {fileID: 6371519084754636346, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 500
+      value: 921.6
       objectReference: {fileID: 0}
     - target: {fileID: 6371519084754636346, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1121,7 +1085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6371519084754636346, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 696.2817
+      value: 678.6
       objectReference: {fileID: 0}
     - target: {fileID: 6371519084754636346, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1134,18 +1098,6 @@ PrefabInstance:
     - target: {fileID: 6371519084754636346, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6458801719044910727, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7042209951300007015, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7607050115894905732, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}
-      propertyPath: m_PreserveAspect
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0010a6a2dc421c0418db0f843ab3d235, type: 3}

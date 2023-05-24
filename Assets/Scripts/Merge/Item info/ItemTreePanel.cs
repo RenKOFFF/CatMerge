@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Extensions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,34 +7,52 @@ namespace Merge.Item_info
 {
     public class ItemTreePanel : MonoBehaviour
     {
-        [SerializeField] private List<Image> itemsImages;
+        [SerializeField] private TMP_Text itemGroupName;
+        [SerializeField] private Transform itemTreeNodesParent;
+        [SerializeField] private ItemTreeNode itemTreeNodePrefab;
+        [SerializeField] private Transform itemPointersParent;
+        [SerializeField] private Image itemPointerPrefab;
+
+        private const int ItemsInRow = 4;
 
         public void Initialize(MergeItem selectedItem)
         {
-            foreach (var image in itemsImages)
-                image.sprite = null;
+            itemTreeNodesParent.DestroyChildren();
+            itemPointersParent.DestroyChildren();
 
             var currentDisplayItem = selectedItem.MergeItemData;
 
             while (currentDisplayItem.previousMergeItem != null)
                 currentDisplayItem = currentDisplayItem.previousMergeItem;
 
-            var index = 0;
+            var itemImagesCount = 0;
+            itemGroupName.text = currentDisplayItem.name;
 
-            while (currentDisplayItem.nextMergeItem != null)
+            do
             {
-                itemsImages[index++].sprite = currentDisplayItem.sprite;
+                SpawnNode(currentDisplayItem);
                 currentDisplayItem = currentDisplayItem.nextMergeItem;
-            }
+                itemImagesCount++;
+            } while (currentDisplayItem != null);
 
-            itemsImages[index].sprite = currentDisplayItem.sprite;
+            var rowsCount = Mathf.CeilToInt((float) itemImagesCount / ItemsInRow);
+            var pointersCount = itemImagesCount - rowsCount;
+
+            for (var i = 0; i < pointersCount; i++)
+                Instantiate(itemPointerPrefab, itemPointersParent, false);
 
             Close();
         }
 
+        private void SpawnNode(MergeItemData currentDisplayItem)
+        {
+            var node = Instantiate(itemTreeNodePrefab, itemTreeNodesParent, false);
+            node.Initialize(currentDisplayItem);
+        }
+
         private void Awake()
         {
-            gameObject.SetActive(false);
+            Close();
         }
 
         public void Close()
