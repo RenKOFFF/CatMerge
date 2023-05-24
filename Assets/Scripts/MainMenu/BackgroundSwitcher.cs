@@ -16,8 +16,12 @@ namespace MainMenu
         private void Start()
         {
             OrderManager.Instance.LevelCompleted += OnLevelCompleted;
+            if (GameManager.Instance.CurrentLevel > 1)
+            {
+                SwitchBackgroundByLevelIndex(GameManager.Instance.CurrentLevel);
+            }
         }
-        
+
         private void OnDestroy()
         {
             OrderManager.Instance.LevelCompleted -= OnLevelCompleted;
