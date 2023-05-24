@@ -20,8 +20,10 @@ namespace Shop
             if (_button)
             {
                 _button.onClick.AddListener(OnClickShopButton);
-                GameManager.Instance.MoneyChanged += OnMoneyCountChanged;
             }
+
+            GameManager.Instance.MoneyChanged += OnMoneyCountChanged; 
+            OnMoneyCountChanged(GameManager.Instance.Money);
         }
 
         private void OnDisable()
@@ -29,8 +31,9 @@ namespace Shop
             if (_button)
             {
                 _button.onClick.RemoveListener(OnClickShopButton);
-                GameManager.Instance.MoneyChanged -= OnMoneyCountChanged;
             }
+
+            GameManager.Instance.MoneyChanged -= OnMoneyCountChanged; 
         }
 
         private void Start()
@@ -45,6 +48,11 @@ namespace Shop
         }
 
         private void OnMoneyCountChanged(int currentMoney)
+        {
+            SetInteractableByCurrentMoney(currentMoney);
+        }
+
+        private void SetInteractableByCurrentMoney(int currentMoney)
         {
             _button.interactable = currentMoney >= ShopData.Cost;
         }

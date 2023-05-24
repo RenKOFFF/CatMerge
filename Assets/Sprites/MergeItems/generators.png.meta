@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a964d2fb5f956bd4d968f5cfdbbaa06c
+guid: 0e1d672ae8a7cc545a4407010c7e5de8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -129,43 +129,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OrderButton_0
+      name: generators_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 190
-        height: 192
+        x: 4
+        y: 6
+        width: 122
+        height: 117
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 32, y: 34, z: 30, w: 33}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85104baee2375434a9f77a168baa483d
-      internalID: 5448012
+      spriteID: 936c7ebff6798be43afede8bde6076dc
+      internalID: -1564771136
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OrderButton_1
+      name: generators_1
       rect:
         serializedVersion: 2
-        x: 204
-        y: 32
-        width: 129
-        height: 128
+        x: 132
+        y: 13
+        width: 120
+        height: 104
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 21, y: 22, z: 21, w: 19}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d108d4a321545f342bc52e8c53a3120c
-      internalID: 1440478604
+      spriteID: 56ddbdabb2638c640977c6b51d4bdfaa
+      internalID: -1560039237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generators_2
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 8
+        width: 107
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ddeb485303958146ba751defa5519f2
+      internalID: -1931270333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: generators_3
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 9
+        width: 109
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8e7ebeb0086199479bf7504048c9e35
+      internalID: -656303356
       vertices: []
       indices: 
       edges: []
@@ -181,8 +223,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      OrderButton_1: 1440478604
-      OrderButton_0: 5448012
+      generators_0: -1564771136
+      generators_2: -1931270333
+      generators_3: -656303356
+      generators_1: -1560039237
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

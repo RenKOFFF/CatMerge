@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a964d2fb5f956bd4d968f5cfdbbaa06c
+guid: cec2baeb5bd1d2940b13d29a9e230393
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -129,43 +129,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OrderButton_0
+      name: currency_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 190
-        height: 192
+        x: 15
+        y: 12
+        width: 105
+        height: 102
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 32, y: 34, z: 30, w: 33}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85104baee2375434a9f77a168baa483d
-      internalID: 5448012
+      spriteID: a7c681b0f7c1256499e048922031d8e8
+      internalID: -832224974
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OrderButton_1
+      name: currency_1
       rect:
         serializedVersion: 2
-        x: 204
-        y: 32
-        width: 129
-        height: 128
+        x: 138
+        y: 7
+        width: 114
+        height: 110
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 21, y: 22, z: 21, w: 19}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d108d4a321545f342bc52e8c53a3120c
-      internalID: 1440478604
+      spriteID: d343a5a72cd4573438bb3a03188c4afa
+      internalID: 1004071021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: currency_2
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 6
+        width: 117
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0023f9d9c65e65498783de12909a23b
+      internalID: -1586756665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: currency_3
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 2
+        width: 125
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aab175bc37ddc414985c42223714869a
+      internalID: -1084001545
       vertices: []
       indices: 
       edges: []
@@ -181,8 +223,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      OrderButton_1: 1440478604
-      OrderButton_0: 5448012
+      currency_2: -1586756665
+      currency_1: 1004071021
+      currency_3: -1084001545
+      currency_0: -832224974
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

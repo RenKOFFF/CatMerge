@@ -1,4 +1,5 @@
-﻿using GameData;
+﻿using System;
+using GameData;
 using Merge;
 using Orders;
 using UnityEngine;
@@ -14,6 +15,11 @@ namespace Shop
         private void Awake()
         {
             if (!Instance) Instance = this;
+        }
+
+        private void Start()
+        {
+            SetActiveShop(false);
         }
 
         public void SetActiveShop(bool value) => gameObject.SetActive(value);
