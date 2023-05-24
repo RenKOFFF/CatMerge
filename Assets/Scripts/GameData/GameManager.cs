@@ -31,6 +31,7 @@ namespace GameData
         public int Energy => EnergyController.CurrentEnergy;
         public DateTime LastEnergyChangingTime => EnergyController.LastEnergyChangingTime;
         public Dictionary<int, bool> OpenedLevels;
+        public Dictionary<int, bool> CompletedLevels;
 
         public int CurrentLevel
         {
@@ -90,6 +91,7 @@ namespace GameData
             EnergyController.LastEnergyChangingTime = lastEnergyChangingTime;
             EnergyController.SetEnergy(data.CurrentEnergy + offlineEnergyGain);
             OpenedLevels = JsonConvert.DeserializeObject<Dictionary<int, bool>>(data.OpenedLevelsDictionaryJSonFormat);
+            CompletedLevels = JsonConvert.DeserializeObject<Dictionary<int, bool>>(data.CompletedLevelsDictionaryJSonFormat);
             CurrentLevel = data.CurrentLevel;
         }
 
@@ -97,6 +99,8 @@ namespace GameData
         {
             if (OpenedLevels.ContainsKey(CurrentLevel))
                 OpenedLevels[CurrentLevel] = false;
+            
+            CompletedLevels.Add(CurrentLevel, true);
 
             OpenAllPossibleLevels();
 

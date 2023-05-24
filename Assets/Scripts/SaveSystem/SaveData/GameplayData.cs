@@ -12,6 +12,7 @@ namespace SaveSystem
         public DateTime LastEnergyChangingTime { get; set; }
         public int Money { get; set; }
         public string OpenedLevelsDictionaryJSonFormat { get; set; }
+        public string CompletedLevelsDictionaryJSonFormat { get; set; }
         public int CurrentLevel { get; set; }
 
         public GameplayData(GameManager gameManager)
@@ -21,7 +22,9 @@ namespace SaveSystem
             Money = gameManager.Money;
 
             var openedLevelsDictionary = gameManager.OpenedLevels;
+            var completedLevelsDictionary = gameManager.CompletedLevels;
             OpenedLevelsDictionaryJSonFormat = JsonConvert.SerializeObject(openedLevelsDictionary);
+            CompletedLevelsDictionaryJSonFormat = JsonConvert.SerializeObject(completedLevelsDictionary);
 
             CurrentLevel = gameManager.CurrentLevel;
         }
@@ -36,9 +39,11 @@ namespace SaveSystem
             Money = 0;
 
             var startDict = new Dictionary<int, bool>();
+            CompletedLevelsDictionaryJSonFormat = JsonConvert.SerializeObject(startDict);
+            
             startDict.Add(1, true);
             OpenedLevelsDictionaryJSonFormat = JsonConvert.SerializeObject(startDict);
-
+            
             CurrentLevel = 0;
         }
     }
