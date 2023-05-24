@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5acff4f3134a8d85692b99be9dfac2, type: 3}
   m_Name: Energy_3
   m_EditorClassIdentifier: 
+  itemName: "\u042D\u043D\u0435\u0440\u0433\u0438\u044F 3"
   sprite: {fileID: 12505041, guid: 67d44ac6e466d6647bb653911f02087a, type: 3}
   previousMergeItem: {fileID: 11400000, guid: 86be6abbd8babe04ca58f4d526cd12be, type: 2}
   nextMergeItem: {fileID: 11400000, guid: 002e8d8fcd0728e408879d9c478499ab, type: 2}
+  itemsGroupName: 
   SpawnChance:
     serializedVersion: 2
     m_Curve:

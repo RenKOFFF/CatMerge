@@ -26,7 +26,11 @@ namespace Merge.Item_info
                 currentDisplayItem = currentDisplayItem.previousMergeItem;
 
             var itemImagesCount = 0;
-            itemGroupName.text = currentDisplayItem.name;
+            var itemsGroupName = currentDisplayItem.itemsGroupName;
+
+            itemGroupName.text = !string.IsNullOrEmpty(itemsGroupName)
+                ? itemsGroupName
+                : "Загадочные предметы";
 
             do
             {

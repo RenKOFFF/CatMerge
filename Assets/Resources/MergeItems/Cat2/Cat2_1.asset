@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd314e7d37064c15889684d10850b527, type: 3}
   m_Name: Cat2_1
   m_EditorClassIdentifier: 
+  itemName: "\u041A\u043E\u0442 \u0438 \u043C\u044F\u0447"
   sprite: {fileID: 157855702, guid: 44941cf6862589f48aee951d8ddb0df0, type: 3}
+  previousMergeItem: {fileID: 0}
   nextMergeItem: {fileID: 11400000, guid: f594ee4f765371346bdda49d4a2e24ca, type: 2}
+  itemsGroupName: "\u0414\u043E\u043C\u0430\u0448\u043D\u0438\u0435 \u043A\u043E\u0442\u044B"
   SpawnChance:
     serializedVersion: 2
     m_Curve:

@@ -23,8 +23,12 @@ namespace Merge.Item_info
 
             sellButton.Initialize(_selectedItem);
             itemImage.sprite = _selectedItem.MergeItemData.sprite;
-            itemTitleText.text = $"{_selectedItem.MergeItemData.name}";
             itemLevelText.text = $"Уровень: {_selectedItem.MergeItemData.ComplexityLevel}";
+
+            var itemName = _selectedItem.MergeItemData.itemName;
+            itemTitleText.text = !string.IsNullOrEmpty(itemName)
+                ? itemName
+                : "Загадочный предмет";
 
             itemTreePanel.Initialize(_selectedItem);
 

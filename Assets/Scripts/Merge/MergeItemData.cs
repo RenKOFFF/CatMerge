@@ -27,11 +27,24 @@ namespace Merge
             }
         }
 
+        [CanBeNull]
+        public string itemName;
+
         public Sprite sprite;
 
-        [CanBeNull] public MergeItemData previousMergeItem;
-        [CanBeNull] public MergeItemData nextMergeItem;
+        [CanBeNull]
+        public MergeItemData previousMergeItem;
 
-        [FormerlySerializedAs("SpawnProbability")] public AnimationCurve SpawnChance;
+        [CanBeNull]
+        public MergeItemData nextMergeItem;
+
+        /// <summary>
+        /// Название группы предметов. Указывать только у первого предмета цепочки.
+        /// </summary>
+        [CanBeNull]
+        public string itemsGroupName;
+
+        [FormerlySerializedAs("SpawnProbability")]
+        public AnimationCurve SpawnChance;
     }
 }

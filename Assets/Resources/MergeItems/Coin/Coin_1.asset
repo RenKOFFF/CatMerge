@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bad2ecfc52bb409eb3a6af1a6c2efe19, type: 3}
   m_Name: Coin_1
   m_EditorClassIdentifier: 
+  itemName: "\u041C\u043E\u043D\u0435\u0442\u0430 1"
   sprite: {fileID: -297049562, guid: 8b0f805b8d03e394e8fceb654b6a7462, type: 3}
   previousMergeItem: {fileID: 0}
   nextMergeItem: {fileID: 11400000, guid: a70bdabb4f2cb5f4081850a9556563fa, type: 2}
+  itemsGroupName: "\u041C\u043E\u043D\u0435\u0442\u044B"
   SpawnChance:
     serializedVersion: 2
     m_Curve:
