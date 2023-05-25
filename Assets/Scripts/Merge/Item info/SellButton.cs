@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 namespace Merge.Item_info
 {
@@ -10,7 +9,7 @@ namespace Merge.Item_info
         public void Initialize(MergeItem sellingItem)
         {
             _sellingItem = sellingItem;
-            GetComponent<Button>().interactable = _sellingItem.MergeItemData.GetType() == typeof(MergeItemData);
+            gameObject.SetActive(_sellingItem.MergeItemData.GetType() == typeof(MergeItemData));
         }
 
         public void Sell()

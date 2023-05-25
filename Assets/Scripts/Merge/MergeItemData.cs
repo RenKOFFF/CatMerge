@@ -8,24 +8,12 @@ namespace Merge
     public class MergeItemData : ScriptableObject
     {
         public bool IsFinalItem => nextMergeItem == null;
+
         public int SellPrice => ComplexityLevel;
 
-        public int ComplexityLevel
-        {
-            get
-            {
-                var complexityLevel = 0;
-                var currentItem = this;
+        public int ComplexityLevel => GetComplexityLevel();
 
-                while (currentItem != null)
-                {
-                    complexityLevel++;
-                    currentItem = currentItem.previousMergeItem;
-                }
-
-                return complexityLevel;
-            }
-        }
+        public int MaxLevel => GetMaxLevel();
 
         [CanBeNull]
         public string itemName;
@@ -46,5 +34,33 @@ namespace Merge
 
         [FormerlySerializedAs("SpawnProbability")]
         public AnimationCurve SpawnChance;
+
+        private int GetComplexityLevel()
+        {
+            var complexityLevel = 0;
+            var currentItem = this;
+
+            while (currentItem != null)
+            {
+                complexityLevel++;
+                currentItem = currentItem.previousMergeItem;
+            }
+
+            return complexityLevel;
+        }
+
+        private int GetMaxLevel()
+        {
+            var maxLevel = ComplexityLevel;
+            var currentItem = this;
+
+            while (currentItem.nextMergeItem != null)
+            {
+                maxLevel++;
+                currentItem = currentItem.nextMergeItem;
+            }
+
+            return maxLevel;
+        }
     }
 }

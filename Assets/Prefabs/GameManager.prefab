@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxStartEnergy: 100
-  _timeBtwRestoreOneEnergyPoint: 30
+  _timeBtwRestoreOneEnergyPoint: 2
 --- !u!114 &6878691482917918883
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ namespace Merge.Energy
     public class EnergyController : MonoBehaviour
     {
         [SerializeField] private int _maxStartEnergy = 100;
-        [SerializeField] private float _timeBtwRestoreOneEnergyPoint = 30f;
+        [SerializeField] private float _timeBtwRestoreOneEnergyPoint = 2f;
 
         private bool _coroutineWasStarted;
         private int _currentEnergy;

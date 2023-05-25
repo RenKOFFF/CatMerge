@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Extensions;
 using GameData;
+using JetBrains.Annotations;
 using Merge;
+using Mono.Cecil.Cil;
 using Newtonsoft.Json;
 using Orders.Data;
 using SaveSystem;
@@ -21,13 +23,10 @@ namespace Orders
         [SerializeField] private int ordersNeededToCompleteLevelCount = 20;
         [SerializeField] private Order orderPrefab;
         [SerializeField] private Transform ordersParent;
-
         [SerializeField] private LevelCompletedHandler levelCompletedPanelPrefab;
         [SerializeField] private GameObject menuCanvas;
-        private int _completedOrdersCount;
 
-        private const double OrderIncludesRewardItemProbability = 0.5;
-        private const double OrderIncludesRewardMoneyProbability = 0.5;
+        private int _completedOrdersCount;
 
         public List<Order> ActiveOrders { get; private set; } = new();
         private DateTime NextOrderGenerationTime { get; set; }
@@ -74,11 +73,34 @@ namespace Orders
             if (ActiveOrders.Count >= maxActiveOrdersCount)
                 return;
 
-            var availableMergeItems = GameDataHelper.AllMergeItems.ToList();
-            var partsAmount = Random.Range(1, 3 + 1);
+            var partsCount = GetOrderPartsCount();
+            var itemsForPartsData = new List<MergeItemData>();
 
-            var isRewardItemIncluded = Random.Range(0f, 1) < OrderIncludesRewardItemProbability;
-            var containsRewardMoney = Random.Range(0f, 1) < OrderIncludesRewardMoneyProbability;
+            var availableMergeItems = GameDataHelper.AllMergeItems
+                .Where(i =>
+                {
+                    var maxItemLevel = Math.Min(i.MaxLevel - partsCount + 2, 7);
+                    var minItemLevel = Math.Max(1, maxItemLevel - 2);
+                    var complexityLevel = i.ComplexityLevel;
+
+                    return complexityLevel >= minItemLevel && complexityLevel <= maxItemLevel;
+                })
+                .ToList();
+
+            for (var i = 0; i < partsCount; i++)
+            {
+                if (availableMergeItems.Count == 0)
+                    break;
+
+                var randomIndex = Random.Range(0, availableMergeItems.Count);
+                var randomItem = availableMergeItems[randomIndex];
+
+                itemsForPartsData.Add(randomItem);
+                availableMergeItems.RemoveAt(randomIndex);
+            }
+
+            var orderIncludesRewardItemProbability = itemsForPartsData.Average(i => i.ComplexityLevel) * partsCount * 0.08;
+            var isRewardItemIncluded = Random.Range(0f, 1) < orderIncludesRewardItemProbability;
             MergeItemData rewardItem = null;
 
             if (isRewardItemIncluded)
@@ -88,24 +110,36 @@ namespace Orders
                 rewardItem = availableRewardItems[randomIndex];
             }
 
-            List<MergeItemData> itemsForPartsData = new();
-
-            for (var i = 0; i < partsAmount; i++)
-            {
-                if (availableMergeItems.Count == 0)
-                    break;
-
-                var randomIndex = Random.Range(0, availableMergeItems.Count);
-                var randomItem = availableMergeItems[randomIndex];
-                itemsForPartsData.Add(randomItem);
-                availableMergeItems.RemoveAt(randomIndex);
-            }
-
-            var orderData = CreateSpecificOrderData(rewardItem, containsRewardMoney, itemsForPartsData);
+            var orderData = CreateSpecificOrderData(rewardItem, true, itemsForPartsData);
             SpawnOrder(orderData, false);
         }
 
-        private OrderData CreateSpecificOrderData(MergeItemData rewardItem, bool containsRewardMoney,
+        private static int GetOrderPartsCount()
+        {
+            var chanceInPercent = Random.Range(0, 100);
+            var currentLevel = GameManager.Instance.CurrentLevel;
+
+            return currentLevel switch
+            {
+                1 => 1,
+                2 or 3 => chanceInPercent switch
+                {
+                    < 5 => 3,
+                    < 30 => 2,
+                    _ => 1
+                },
+                _ => chanceInPercent switch
+                {
+                    < 30 => 3,
+                    < 60 => 2,
+                    _ => 1
+                }
+            };
+        }
+
+        private static OrderData CreateSpecificOrderData(
+            MergeItemData rewardItem,
+            bool containsRewardMoney,
             List<MergeItemData> itemsForPartsData)
         {
             var orderData = new OrderData(rewardItem, containsRewardMoney);
