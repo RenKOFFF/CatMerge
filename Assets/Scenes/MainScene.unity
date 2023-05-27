@@ -1334,10 +1334,6 @@ PrefabInstance:
       propertyPath: menuCanvas
       value: 
       objectReference: {fileID: 834723547}
-    - target: {fileID: 4275090086000181889, guid: 82657f15adc707841851cb05dc89f212, type: 3}
-      propertyPath: ordersNeededToCompleteLevelCount
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4275090086000181900, guid: 82657f15adc707841851cb05dc89f212, type: 3}
       propertyPath: m_Name
       value: OrdersArea
@@ -1424,10 +1420,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4275090086000181903, guid: 82657f15adc707841851cb05dc89f212, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4275090086001332788, guid: 82657f15adc707841851cb05dc89f212, type: 3}
-      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2354,6 +2346,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1694124557}
+    - target: {fileID: 4357903104570283598, guid: e26a9fb183ef184449841563ebb058f9, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4357903105110589211, guid: e26a9fb183ef184449841563ebb058f9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

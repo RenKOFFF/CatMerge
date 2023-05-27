@@ -40,29 +40,34 @@ namespace MainMenu
         [ContextMenu("PlayAnim")]
         private void PlayTransitionAnimation()
         {
-            var levelButtons = MainMenu.Instance.LevelButtons;
-            var backButton = MainMenu.Instance.BackButton;
+            var mainMenuButtons = MainMenu.Instance.LevelButtons.ToList();
+            mainMenuButtons.Add(MainMenu.Instance.BackButton);
+            var activeButtons = mainMenuButtons.Where(b => b.gameObject.activeInHierarchy).ToList();
 
-            SwitchButtonsIntaractable(false);
-            
             Color transparentColor = Color.white;
             transparentColor.a = 0;
             _background.color = transparentColor;
-            
-            _background.DOColor(Color.white, _transitionDuration)
+
+            SwitchButtonsIntaractable(false);
+
+            _background
+                .DOColor(Color.white, _transitionDuration)
                 .SetEase(_ease)
                 .OnComplete(() => SwitchButtonsIntaractable(true));
 
-            void SwitchButtonsIntaractable(bool value)
+            void SwitchButtonsIntaractable(bool isOn)
             {
-                foreach (var levelButton in levelButtons)
+                foreach (var button in activeButtons)
                 {
-                    if (levelButton)
-                        levelButton.interactable = value;
+                    button.interactable = isOn;
+                    if (isOn)
+                    {
+                        button.targetGraphic
+                            .DOColor(Color.white, _transitionDuration)
+                            .SetEase(_ease);
+                    }
+                    else button.targetGraphic.color = transparentColor;
                 }
-
-                if (backButton)
-                    backButton.interactable = value;
             }
         }
 
@@ -105,7 +110,6 @@ namespace MainMenu
                     completedParallelLevels--;
                     if (completedParallelLevels <= 0)
                     {
-                        //_backgroundOld.sprite = _background.sprite;
                         _background.sprite = currentLevelData.BgWhenThisLevelCompletedLast;
                     }
                 }
