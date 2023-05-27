@@ -44,11 +44,12 @@ namespace MainMenu
             var backButton = MainMenu.Instance.BackButton;
 
             SwitchButtonsIntaractable(false);
-
-            _backgroundOld.color = Color.white;
-            Color transparentColor = _backgroundOld.color;
+            
+            Color transparentColor = Color.white;
             transparentColor.a = 0;
-            _backgroundOld.DOColor(transparentColor, _transitionDuration)
+            _background.color = transparentColor;
+            
+            _background.DOColor(Color.white, _transitionDuration)
                 .SetEase(_ease)
                 .OnComplete(() => SwitchButtonsIntaractable(true));
 
@@ -104,7 +105,7 @@ namespace MainMenu
                     completedParallelLevels--;
                     if (completedParallelLevels <= 0)
                     {
-                        _backgroundOld.sprite = _background.sprite;
+                        //_backgroundOld.sprite = _background.sprite;
                         _background.sprite = currentLevelData.BgWhenThisLevelCompletedLast;
                     }
                 }
