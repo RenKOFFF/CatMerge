@@ -23,7 +23,7 @@ namespace Orders
         [SerializeField] private Transform ordersParent;
 
         [SerializeField] private LevelCompletedHandler levelCompletedPanelPrefab;
-        [SerializeField] private GameObject menuCanvas;
+        [SerializeField] private MainMenu.MainMenu menuCanvas;
         private int _completedOrdersCount;
 
         private const double OrderIncludesRewardItemProbability = 0.5;
@@ -138,7 +138,7 @@ namespace Orders
 
                     levelCompletedPanel.Initialize(() =>
                     {
-                        menuCanvas.SetActive(true);
+                        menuCanvas.ShowMenu();
                         Destroy(levelCompletedPanel.gameObject);
                     });
                     LevelCompleted?.Invoke();
