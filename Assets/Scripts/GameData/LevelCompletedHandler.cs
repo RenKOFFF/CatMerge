@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace GameData
 {
     public class LevelCompletedHandler : MonoBehaviour
     {
-        private UnityAction OnOpenMenu { get; set; }
+        private UnityAction OnOpenMenu;
 
         public void Initialize(UnityAction onOpenMenu)
         {
