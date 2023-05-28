@@ -25,8 +25,7 @@ namespace Orders
         [SerializeField] private Transform ordersParent;
         [SerializeField] private LevelCompletedHandler levelCompletedPanelPrefab;
         [SerializeField] private MainMenu.MainMenu menuCanvas;
-        private int _completedOrdersCount;
-
+        
         private int _completedOrdersCount;
 
         public List<Order> ActiveOrders { get; private set; } = new();
