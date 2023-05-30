@@ -79,7 +79,8 @@ namespace Orders
             var availableMergeItems = GameDataHelper.AllMergeItems
                 .Where(i =>
                 {
-                    var maxItemLevel = Math.Min(i.MaxLevel - partsCount + 2, 7);
+                    var unlockedComplexityLevel = MergeController.Instance.GetUnlockedComplexityLevel(i);
+                    var maxItemLevel = Math.Min(unlockedComplexityLevel - partsCount + 2, 7);
                     var minItemLevel = Math.Max(1, maxItemLevel - 2);
                     var complexityLevel = i.ComplexityLevel;
 
