@@ -4,6 +4,7 @@ using DG.Tweening;
 using GameData;
 using Merge.Coins;
 using Merge.Generator;
+using Merge.Item_info;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -165,7 +166,7 @@ namespace Merge
                 
                 clickableData.Spawn();
 
-                MergeController.Instance.OpenItemInfo(this);
+                ItemInfo.Instance.Initialize(this);
                 MergeController.Instance.SaveMField();
                 return;
             }
@@ -181,7 +182,7 @@ namespace Merge
                         .OnComplete(ClearItemCell);
                 }
 
-                MergeController.Instance.OpenItemInfo(this);
+                ItemInfo.Instance.Initialize(this);
                 MergeController.Instance.SaveMField();
                 return;
             }
@@ -197,7 +198,7 @@ namespace Merge
                         .OnComplete(ClearItemCell);
                 }
 
-                MergeController.Instance.OpenItemInfo(this);
+                ItemInfo.Instance.Initialize(this);
                 MergeController.Instance.SaveMField();
                 return;
             }

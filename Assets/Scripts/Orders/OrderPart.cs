@@ -1,4 +1,5 @@
 ﻿using Merge;
+using Merge.Item_info;
 using Orders.Data;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,11 @@ namespace Orders
         {
             _orderPartData = orderPartData;
             orderPartImage.sprite = _orderPartData.NeededItem.sprite;
+        }
+
+        public void OpenItemInfo()
+        {
+            ItemInfo.Instance.Initialize(_orderPartData.NeededItem);
         }
 
         public void Complete()

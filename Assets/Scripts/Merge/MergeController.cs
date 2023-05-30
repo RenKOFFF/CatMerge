@@ -71,7 +71,7 @@ namespace Merge
             if (MergingItem == null)
                 return;
 
-            var worldPosition = (Vector2)Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+            var worldPosition = (Vector2) Camera.main!.ScreenToWorldPoint(Input.mousePosition);
             MergingItem.transform.position = worldPosition;
         }
 
@@ -80,25 +80,20 @@ namespace Merge
             if (MergingItem == null || MergingItem.TryMergeIn(droppedOnItem, SpawnRandomItemWithChance))
             {
                 UpdateUnlockedComplexityLevel(droppedOnItem.MergeItemData);
-                OpenItemInfo(droppedOnItem);
+                ItemInfo.Instance.Initialize(droppedOnItem);
                 SaveMField();
                 return;
             }
 
             droppedOnItem.TrySwapData(MergingItem);
-            OpenItemInfo(droppedOnItem);
+            ItemInfo.Instance.Initialize(droppedOnItem);
             SaveMField();
         }
 
         public void OnClick(MergeItem clickedItem)
         {
-            OpenItemInfo(clickedItem);
+            ItemInfo.Instance.Initialize(clickedItem);
             SaveMField();
-        }
-
-        public void OpenItemInfo(MergeItem selectedItem)
-        {
-            itemInfoPanel.Initialize(selectedItem);
         }
 
         private void SetMergingItem(MergeItem clickedItem)
@@ -107,7 +102,7 @@ namespace Merge
                 return;
 
             MergingItem = clickedItem;
-            OpenItemInfo(MergingItem);
+            ItemInfo.Instance.Initialize(MergingItem);
         }
 
         private void SpawnRandomItemWithChance(int itemLevel)

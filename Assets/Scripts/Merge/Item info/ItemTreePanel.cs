@@ -15,12 +15,12 @@ namespace Merge.Item_info
 
         private const int ItemsInRow = 4;
 
-        public void Initialize(MergeItem selectedItem)
+        public void Initialize(MergeItemData selectedItem)
         {
             itemTreeNodesParent.DestroyChildren();
             itemPointersParent.DestroyChildren();
 
-            var currentDisplayItem = selectedItem.MergeItemData.FirstItem;
+            var currentDisplayItem = selectedItem.FirstItem;
 
             var itemImagesCount = 0;
             var itemsGroupName = currentDisplayItem.GroupName;

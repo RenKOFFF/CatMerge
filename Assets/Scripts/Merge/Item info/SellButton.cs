@@ -16,5 +16,10 @@ namespace Merge.Item_info
         {
             _sellingItem.Sell();
         }
+
+        public void Close()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
