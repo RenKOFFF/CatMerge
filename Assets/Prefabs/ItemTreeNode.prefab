@@ -54,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 3893514340635723526}
   itemName: {fileID: 3435182996366352842}
+  lockedItemImage: {fileID: -1594994390, guid: 110235c760262a8458e143e9969ff095, type: 3}
 --- !u!1 &6164008800311382637
 GameObject:
   m_ObjectHideFlags: 0
