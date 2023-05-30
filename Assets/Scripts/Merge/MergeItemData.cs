@@ -11,9 +11,54 @@ namespace Merge
 
         public int SellPrice => ComplexityLevel;
 
-        public int ComplexityLevel => GetComplexityLevel();
+        public int ComplexityLevel
+        {
+            get
+            {
+                var complexityLevel = 0;
+                var currentItem = this;
 
-        public int MaxLevel => GetMaxLevel();
+                while (currentItem != null)
+                {
+                    complexityLevel++;
+                    currentItem = currentItem.previousMergeItem;
+                }
+
+                return complexityLevel;
+            }
+        }
+
+        public int MaxLevel
+        {
+            get
+            {
+                var maxLevel = ComplexityLevel;
+                var currentItem = this;
+
+                while (currentItem.nextMergeItem != null)
+                {
+                    maxLevel++;
+                    currentItem = currentItem.nextMergeItem;
+                }
+
+                return maxLevel;
+            }
+        }
+
+        public MergeItemData FirstItem
+        {
+            get
+            {
+                var currentItem = this;
+
+                while (currentItem.previousMergeItem != null)
+                    currentItem = currentItem.previousMergeItem;
+
+                return currentItem;
+            }
+        }
+
+        public string GroupName => FirstItem.itemsGroupName;
 
         [CanBeNull]
         public string itemName;
@@ -34,33 +79,5 @@ namespace Merge
 
         [FormerlySerializedAs("SpawnProbability")]
         public AnimationCurve SpawnChance;
-
-        private int GetComplexityLevel()
-        {
-            var complexityLevel = 0;
-            var currentItem = this;
-
-            while (currentItem != null)
-            {
-                complexityLevel++;
-                currentItem = currentItem.previousMergeItem;
-            }
-
-            return complexityLevel;
-        }
-
-        private int GetMaxLevel()
-        {
-            var maxLevel = ComplexityLevel;
-            var currentItem = this;
-
-            while (currentItem.nextMergeItem != null)
-            {
-                maxLevel++;
-                currentItem = currentItem.nextMergeItem;
-            }
-
-            return maxLevel;
-        }
     }
 }

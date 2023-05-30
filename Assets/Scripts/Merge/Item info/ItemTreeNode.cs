@@ -8,11 +8,15 @@ namespace Merge.Item_info
     {
         [SerializeField] private Image itemImage;
         [SerializeField] private TMP_Text itemName;
+        [SerializeField] private Sprite lockedItemImage;
 
         public void Initialize(MergeItemData mergeItemData)
         {
-            itemImage.sprite = mergeItemData.sprite;
-            itemName.text = mergeItemData.ComplexityLevel.ToString();
+            var complexityLevel = mergeItemData.ComplexityLevel;
+            var isItemUnlocked = MergeController.Instance.GetUnlockedComplexityLevel(mergeItemData) >= complexityLevel;
+
+            itemImage.sprite = isItemUnlocked ? mergeItemData.sprite : lockedItemImage;
+            itemName.text = complexityLevel.ToString();
         }
     }
 }

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using GameData;
 using JetBrains.Annotations;
 using Merge.Item_info;
 using Newtonsoft.Json;
-using Orders;
 using SaveSystem;
 using UnityEngine;
 using Utils;
@@ -17,6 +15,8 @@ namespace Merge
     {
         [SerializeField] private MergeCell[] mergeCells;
         [SerializeField] private ItemInfo itemInfoPanel;
+
+        public Dictionary<string, int> MergeItemGroupNameToUnlockedComplexityLevel { get; set; } = new();
 
         [CanBeNull] private MergeItem MergingItem { get; set; }
 
@@ -79,6 +79,7 @@ namespace Merge
         {
             if (MergingItem == null || MergingItem.TryMergeIn(droppedOnItem, SpawnRandomItemWithChance))
             {
+                UpdateUnlockedComplexityLevel(droppedOnItem.MergeItemData);
                 OpenItemInfo(droppedOnItem);
                 SaveMField();
                 return;
@@ -132,10 +133,15 @@ namespace Merge
                 return false;
             }
 
-            var result = mergeCells[spawnCellIndex].MergeItem.TrySetData(spawnItem, false);
-            if (result) SaveMField();
+            var isItemSpawned = mergeCells[spawnCellIndex].MergeItem.TrySetData(spawnItem, false);
 
-            return result;
+            if (isItemSpawned)
+            {
+                SaveMField();
+                UpdateUnlockedComplexityLevel(mergeCells[spawnCellIndex].MergeItem.MergeItemData);
+            }
+
+            return isItemSpawned;
         }
 
         private void Awake()
@@ -152,6 +158,7 @@ namespace Merge
         public void LoadLevel()
         {
             LoadMergeFieldData();
+            LoadUnlockedComplexityLevels();
             GeneratorController.Instance.SpawnGenerator();
         }
 
@@ -182,6 +189,36 @@ namespace Merge
         {
             SaveManager.Instance.Save(new LevelSaveData(Instance, GameManager.Instance.IsGeneratorSpawned),
                 GameManager.Instance.CurrentLevel.ToString());
+        }
+
+        public int GetUnlockedComplexityLevel(MergeItemData mergeItemData)
+            => MergeItemGroupNameToUnlockedComplexityLevel.GetValueOrDefault(mergeItemData.GroupName);
+
+        public void UpdateUnlockedComplexityLevel(MergeItemData mergeItemData)
+        {
+            var groupName = mergeItemData.GroupName;
+            var complexityLevel = mergeItemData.ComplexityLevel;
+
+            if (!MergeItemGroupNameToUnlockedComplexityLevel.ContainsKey(groupName)
+                || MergeItemGroupNameToUnlockedComplexityLevel[groupName] < complexityLevel)
+            {
+                MergeItemGroupNameToUnlockedComplexityLevel[groupName] = complexityLevel;
+                SaveUnlockedComplexityLevels();
+            }
+        }
+
+        private void SaveUnlockedComplexityLevels()
+        {
+            SaveManager.Instance.Save(
+                MergeItemGroupNameToUnlockedComplexityLevel,
+                SaveFileNames.UnlockedMergeItemComplexityLevels);
+        }
+
+        private void LoadUnlockedComplexityLevels()
+        {
+            MergeItemGroupNameToUnlockedComplexityLevel = SaveManager.Instance.LoadOrDefault(
+                MergeItemGroupNameToUnlockedComplexityLevel,
+                SaveFileNames.UnlockedMergeItemComplexityLevels);
         }
     }
 }

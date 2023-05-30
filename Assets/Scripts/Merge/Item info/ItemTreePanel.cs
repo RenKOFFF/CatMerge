@@ -20,13 +20,10 @@ namespace Merge.Item_info
             itemTreeNodesParent.DestroyChildren();
             itemPointersParent.DestroyChildren();
 
-            var currentDisplayItem = selectedItem.MergeItemData;
-
-            while (currentDisplayItem.previousMergeItem != null)
-                currentDisplayItem = currentDisplayItem.previousMergeItem;
+            var currentDisplayItem = selectedItem.MergeItemData.FirstItem;
 
             var itemImagesCount = 0;
-            var itemsGroupName = currentDisplayItem.itemsGroupName;
+            var itemsGroupName = currentDisplayItem.GroupName;
 
             itemGroupName.text = !string.IsNullOrEmpty(itemsGroupName)
                 ? itemsGroupName

@@ -32,7 +32,10 @@ public class GeneratorController : MonoBehaviour
 
             var mergeItem = MergeController.Instance.MergeCells[generatorCellIndex].GetComponentInChildren<MergeItem>();
             if (mergeItem.TrySetData(_generatorsData[i], false))
+            {
                 GeneratorCellIndex = generatorCellIndex;
+                MergeController.Instance.UpdateUnlockedComplexityLevel(mergeItem.MergeItemData);
+            }
         }
 
         SetIsGeneratorSpawned(true);
