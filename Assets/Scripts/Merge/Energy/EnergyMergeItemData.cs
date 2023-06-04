@@ -10,9 +10,9 @@ namespace Merge
         [Min(1), SerializeField] private int _energy = 1;
         public int Value => _energy;
 
-        public void GiveEnergy()
+        public void GiveEnergy(int value)
         {
-            GameManager.Instance.AddEnergy(_energy);
+            GameManager.Instance.AddEnergy(value);
         }
     }
 }

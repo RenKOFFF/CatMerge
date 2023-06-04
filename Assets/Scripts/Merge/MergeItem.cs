@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using GameData;
 using Merge.Coins;
@@ -10,6 +11,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Merge
 {
@@ -176,14 +178,11 @@ namespace Merge
             {
                 if (_clickCount >= 2)
                 {
-                    var particle = SpawnParticle(doubleClickableData);
-                    
-                    var energyUI = FindObjectOfType<EnergyUiField>();
-                    particle.transform
-                        .DOJump(energyUI.transform.position, -2, 1, particle.main.startLifetime.constantMax)
-                        .SetEase(Ease.InOutQuint)
-                        .OnKill(() => doubleClickableData.GiveEnergy());
-                    
+                    var particles = SpawnParticle(doubleClickableData);
+                    var target = FindObjectOfType<EnergyUiField>();
+
+                    FlyToTargetAnimation(particles, target.gameObject, doubleClickableData.GiveEnergy);
+
                     DOTween.Sequence()
                         .Append(transform.DOScale(Vector3.one * 1.2f, .1f))
                         .Append(transform.DOScale(Vector3.zero, .1f))
@@ -199,13 +198,10 @@ namespace Merge
             {
                 if (_clickCount >= 2)
                 {
-                    var particle = SpawnParticle(coinsMergeItemData);
+                    var particles = SpawnParticle(coinsMergeItemData);
+                    var target = FindObjectOfType<ShowPlayerMoney>();
 
-                    var moneyUI = FindObjectOfType<ShowPlayerMoney>();
-                    particle.transform
-                        .DOJump(moneyUI.transform.position, -2, 1, particle.main.startLifetime.constantMax)
-                        .SetEase(Ease.InOutQuint)
-                        .OnKill(() => coinsMergeItemData.GiveCoins());
+                    FlyToTargetAnimation(particles, target.gameObject, coinsMergeItemData.GiveCoins);
 
                     DOTween.Sequence()
                         .Append(transform.DOScale(Vector3.one * 1.2f, .1f))
@@ -221,21 +217,54 @@ namespace Merge
             MergeController.Instance.OnClick(this);
         }
 
-        private ParticleSystem SpawnParticle(ICurrencyValueOwner mergeItemData)
+        private void FlyToTargetAnimation(List<ParticleSystem> particles, GameObject target, Action<int> callback)
         {
-            var particles = Instantiate(MergeItemData.ParticleByUse, transform.parent, false);
-            var particlesMain = particles.main;
-            particlesMain.maxParticles = mergeItemData.Value;
-
-            var particlesTextureSheetAnimation = particles.textureSheetAnimation;
-            particlesTextureSheetAnimation.mode = ParticleSystemAnimationMode.Sprites;
-
-            for (int i = 0; i < particlesTextureSheetAnimation.spriteCount; i++)
+            var seq = DOTween.Sequence();
+            var duration = 0f;
+            
+            for (int i = 0; i < particles.Count; i++)
             {
-                particlesTextureSheetAnimation.RemoveSprite(i);
+                if (i == 0) duration = particles[i].main.startLifetime.constant;
+
+                var timePosition = i * particles[i].main.startLifetime.constantMax / particles.Count;
+
+                var mainStartLifetime = particles[i].main;
+                mainStartLifetime.startLifetime = particles[i].main.startLifetime.constant + timePosition;
+                particles[i].Play();
+
+                seq.Insert(timePosition, 
+                    particles[i].transform
+                    .DOJump(target.transform.position, Random.Range(-2f, -0.1f), 1,
+                        duration)
+                    .SetEase(Ease.InOutQuint)
+                    .OnComplete(() => callback?.Invoke(1)));
             }
 
-            particlesTextureSheetAnimation.AddSprite(MergeItemData.ParticleSprite);
+            seq.Play();
+        }
+
+        private List<ParticleSystem> SpawnParticle(ICurrencyValueOwner mergeItemData)
+        {
+            List<ParticleSystem> particles = new();
+            for (int i = 0; i < mergeItemData.Value; i++)
+            {
+                var particle = Instantiate(MergeItemData.ParticleByUse, transform.parent, false);
+                var particlesMain = particle.main;
+                particlesMain.maxParticles = 1;
+
+                var particlesTextureSheetAnimation = particle.textureSheetAnimation;
+                particlesTextureSheetAnimation.mode = ParticleSystemAnimationMode.Sprites;
+
+                for (int j = 0; j < particlesTextureSheetAnimation.spriteCount; j++)
+                {
+                    particlesTextureSheetAnimation.RemoveSprite(j);
+                }
+
+                particlesTextureSheetAnimation.AddSprite(MergeItemData.ParticleSprite);
+
+                particles.Add(particle);
+            }
+
 
             return particles;
         }

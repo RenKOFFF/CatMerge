@@ -10,9 +10,9 @@ namespace Merge.Coins
         public int Value => _coins;
         
 
-        public void GiveCoins()
+        public void GiveCoins(int value)
         {
-            GameManager.Instance.AddMoney(_coins);
+            GameManager.Instance.AddMoney(value);
         }
     }
 }
