@@ -41,4 +41,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _particleByUse: {fileID: 59856802269504765, guid: bb9229eb64da51749811e84d6d1cbb79, type: 3}
+  _particleSprite: {fileID: -832224974, guid: cec2baeb5bd1d2940b13d29a9e230393, type: 3}
   _coins: 3

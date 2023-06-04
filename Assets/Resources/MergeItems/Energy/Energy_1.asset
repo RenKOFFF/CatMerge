@@ -41,4 +41,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _particleByUse: {fileID: 59856802269504765, guid: bb9229eb64da51749811e84d6d1cbb79, type: 3}
+  _particleSprite: {fileID: 1881694459, guid: 3cff70406bd16a34fa8ed9b60b6097c2, type: 3}
   _energy: 1

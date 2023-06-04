@@ -5,6 +5,7 @@ using GameData;
 using Merge.Coins;
 using Merge.Generator;
 using Merge.Item_info;
+using UI.Energy;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -163,7 +164,7 @@ namespace Merge
                     .Append(transform.DOScale(new Vector3(1.2f, 1.2f), .2f))
                     .Append(transform.DOScale(new Vector3(1, 1), .3f))
                     .SetEase(Ease.OutBounce);
-                
+
                 clickableData.Spawn();
 
                 ItemInfo.Instance.Initialize(this);
@@ -175,7 +176,14 @@ namespace Merge
             {
                 if (_clickCount >= 2)
                 {
-                    doubleClickableData.GiveEnergy();
+                    var particle = SpawnParticle(doubleClickableData);
+                    
+                    var energyUI = FindObjectOfType<EnergyUiField>();
+                    particle.transform
+                        .DOJump(energyUI.transform.position, -2, 1, particle.main.startLifetime.constantMax)
+                        .SetEase(Ease.InOutQuint)
+                        .OnKill(() => doubleClickableData.GiveEnergy());
+                    
                     DOTween.Sequence()
                         .Append(transform.DOScale(Vector3.one * 1.2f, .1f))
                         .Append(transform.DOScale(Vector3.zero, .1f))
@@ -191,7 +199,14 @@ namespace Merge
             {
                 if (_clickCount >= 2)
                 {
-                    coinsMergeItemData.GiveCoins();
+                    var particle = SpawnParticle(coinsMergeItemData);
+
+                    var moneyUI = FindObjectOfType<ShowPlayerMoney>();
+                    particle.transform
+                        .DOJump(moneyUI.transform.position, -2, 1, particle.main.startLifetime.constantMax)
+                        .SetEase(Ease.InOutQuint)
+                        .OnKill(() => coinsMergeItemData.GiveCoins());
+
                     DOTween.Sequence()
                         .Append(transform.DOScale(Vector3.one * 1.2f, .1f))
                         .Append(transform.DOScale(Vector3.zero, .1f))
@@ -204,6 +219,25 @@ namespace Merge
             }
 
             MergeController.Instance.OnClick(this);
+        }
+
+        private ParticleSystem SpawnParticle(ICurrencyValueOwner mergeItemData)
+        {
+            var particles = Instantiate(MergeItemData.ParticleByUse, transform.parent, false);
+            var particlesMain = particles.main;
+            particlesMain.maxParticles = mergeItemData.Value;
+
+            var particlesTextureSheetAnimation = particles.textureSheetAnimation;
+            particlesTextureSheetAnimation.mode = ParticleSystemAnimationMode.Sprites;
+
+            for (int i = 0; i < particlesTextureSheetAnimation.spriteCount; i++)
+            {
+                particlesTextureSheetAnimation.RemoveSprite(i);
+            }
+
+            particlesTextureSheetAnimation.AddSprite(MergeItemData.ParticleSprite);
+
+            return particles;
         }
 
         public void Sell()

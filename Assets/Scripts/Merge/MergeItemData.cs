@@ -79,5 +79,13 @@ namespace Merge
 
         [FormerlySerializedAs("SpawnProbability")]
         public AnimationCurve SpawnChance;
+        
+        public ParticleSystem ParticleByUse => _particleByUse;
+
+        [SerializeField] private ParticleSystem _particleByUse;
+        
+        public Sprite ParticleSprite => _particleSprite;
+
+        [SerializeField] private Sprite _particleSprite;
     }
 }
