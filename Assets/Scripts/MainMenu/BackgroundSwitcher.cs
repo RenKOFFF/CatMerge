@@ -23,7 +23,7 @@ namespace MainMenu
         private void Start()
         {
             OrderManager.Instance.LevelCompleted += OnLevelCompleted;
-            if (GameManager.Instance.CurrentLevel > 1)
+            if (GameManager.Instance.CurrentLevel > 0)
             {
                 SwitchBackgroundByLevelIndex(GameManager.Instance.CurrentLevel);
             }
@@ -63,7 +63,7 @@ namespace MainMenu
                     if (isOn)
                     {
                         button.targetGraphic
-                            .DOColor(Color.white, _transitionDuration)
+                            .DOColor(Color.white, _transitionDuration/3f)
                             .SetEase(_ease);
                     }
                     else button.targetGraphic.color = transparentColor;
