@@ -24,7 +24,7 @@ namespace Merge.Generator
                 Debug.Log("Line is empty");
                 return;
             }
-            
+
             var itemIndex = GetRandomItemIndexByGeneratorAge(line);
             if (itemIndex == -1)
             {
@@ -33,15 +33,16 @@ namespace Merge.Generator
             }
 
             var spawnItem = _lines.GenerateLine[line].ItemData[itemIndex];
-            MergeController.Instance.SpawnItem(spawnItem);
-
-            GameManager.Instance.SpendEnergy();
+            if (MergeController.Instance.SpawnItem(spawnItem))
+            {
+                GameManager.Instance.SpendEnergy();
+            }
         }
 
         private int GetRandomLine()
         {
             if (_lines.GenerateLine.Length == 0) return -1;
-            
+
             return Random.Range(0, _lines.GenerateLine.Length);
         }
 
