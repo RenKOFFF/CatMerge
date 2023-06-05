@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace UI
     {
         [SerializeField] protected TextMeshProUGUI _currencyText;
         [SerializeField] protected RectTransform _currencyFillRectTransform;
+        [SerializeField] protected bool _showMaxValue;
 
         private float _step;
         private float _maxValue;
@@ -15,21 +17,27 @@ namespace UI
 
         private bool _isInitialized;
 
-        protected void Initialize(float maxValue, float startValue = 0)
+        protected void Initialize(float maxValue, float startValue = 0, bool showMaxValue = false)
         {
             if (_isInitialized) return;
 
             _maxValue = maxValue;
             _step = 1 / maxValue;
+            ChangeMaxValueVisibility(showMaxValue);
             
             ChangeValue(startValue);
             _isInitialized = true;
         }
 
+        protected void ChangeMaxValueVisibility(bool showMaxValue)
+        {
+            _showMaxValue = showMaxValue;
+        }
+
         protected void ChangeValue(float newValue)
         {
             _currentValue = newValue;
-            _currencyText.text = _currentValue.ToString(CultureInfo.InvariantCulture);
+            _currencyText.text = _currentValue.ToString(CultureInfo.InvariantCulture) + (_showMaxValue ? $"/{_maxValue}" : "");
             
             _currencyFillRectTransform.anchorMax = 
                 new Vector2(_maxValue == 0 ? 0 : Mathf.Clamp(_currentValue * _step, 0, 1),

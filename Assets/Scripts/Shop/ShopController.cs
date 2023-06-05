@@ -22,7 +22,10 @@ namespace Shop
             SetActiveShop(false);
         }
 
-        public void SetActiveShop(bool value) => gameObject.SetActive(value);
+        public void SetActiveShop(bool value)
+        {
+            gameObject.SetActive(value);
+        }
 
         public bool ToBuy(ShopCell shopCell)
         {

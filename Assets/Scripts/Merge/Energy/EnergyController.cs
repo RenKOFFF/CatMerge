@@ -8,8 +8,10 @@ namespace Merge.Energy
     {
         [SerializeField] private int _maxStartEnergy = 100;
         [SerializeField] private float _timeBtwRestoreOneEnergyPoint = 2f;
+        [SerializeField] private int _maxSuperEnergyCount = 999;
 
-        private bool _coroutineWasStarted;
+        private bool _restoreCoroutineWasStarted;
+        private bool _toNormalEnergyValueCoroutineWasStarted;
         private int _currentEnergy;
 
         public int MaxStartEnergy => _maxStartEnergy;
@@ -20,9 +22,12 @@ namespace Merge.Energy
             get => _currentEnergy;
             private set
             {
-                if (value > _maxStartEnergy)
-                    _currentEnergy = _maxStartEnergy;
-                else _currentEnergy = value;
+                _currentEnergy = value > _maxSuperEnergyCount ? _maxSuperEnergyCount : value;
+
+                if (_currentEnergy > _maxStartEnergy)
+                {
+                    StartCoroutine(BackToNormalEnergy());
+                }
 
                 LastEnergyChangingTime = DateTime.UtcNow;
                 OnEnergyChangedEvent?.Invoke(CurrentEnergy);
@@ -38,11 +43,7 @@ namespace Merge.Energy
         {
             Instance = this;
             StartCoroutine(RestoreEnergy());
-        }
-
-        private void Start()
-        {
-            //CurrentEnergy = _maxStartEnergy;
+            StartCoroutine(BackToNormalEnergy());
         }
 
         public void SetEnergy(int energy)
@@ -71,20 +72,39 @@ namespace Merge.Energy
 
         private IEnumerator RestoreEnergy()
         {
-            if (_coroutineWasStarted)
+            if (_restoreCoroutineWasStarted)
             {
                 yield break;
             }
 
-            _coroutineWasStarted = true;
+            _restoreCoroutineWasStarted = true;
 
             while (CurrentEnergy < _maxStartEnergy)
             {
                 CurrentEnergy++;
-                yield return new WaitForSeconds(_timeBtwRestoreOneEnergyPoint);
+                yield return new WaitForSeconds(TimeToRestoreOneEnergyInSeconds);
             }
 
-            _coroutineWasStarted = false;
+            _restoreCoroutineWasStarted = false;
+        }
+
+        private IEnumerator BackToNormalEnergy()
+        {
+            if (_toNormalEnergyValueCoroutineWasStarted)
+            {
+                yield break;
+            }
+
+
+            _toNormalEnergyValueCoroutineWasStarted = true;
+
+            while (CurrentEnergy > _maxStartEnergy)
+            {
+                CurrentEnergy--;
+                yield return new WaitForSeconds(TimeToRestoreOneEnergyInSeconds / 2f);
+            }
+
+            _toNormalEnergyValueCoroutineWasStarted = false;
         }
     }
 }
