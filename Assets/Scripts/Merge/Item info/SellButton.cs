@@ -9,6 +9,13 @@ namespace Merge.Item_info
         public void Initialize(MergeItem sellingItem)
         {
             _sellingItem = sellingItem;
+
+            if (_sellingItem.IsEmpty)
+            {
+                Close();
+                return;
+            }
+
             gameObject.SetActive(_sellingItem.MergeItemData.GetType() == typeof(MergeItemData));
         }
 
