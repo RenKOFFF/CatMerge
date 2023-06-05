@@ -218,18 +218,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1139537398}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &113516827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -801,16 +789,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960470104}
   m_CullTransparentMesh: 1
---- !u!1 &1139537398 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8752919424633915250, guid: 5e79f091f424d8b4da326efb5e208cfb, type: 3}
-  m_PrefabInstance: {fileID: 8752919423595065988}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1139537399 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8752919424633915251, guid: 5e79f091f424d8b4da326efb5e208cfb, type: 3}
   m_PrefabInstance: {fileID: 8752919423595065988}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1139537400 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6921799495172086799, guid: 5e79f091f424d8b4da326efb5e208cfb, type: 3}
+  m_PrefabInstance: {fileID: 8752919423595065988}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16ecc0ea5375ffa4a8cca1a2dfd85b9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1248151279 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2321301093951049488, guid: a23b02ee3ad98c84389fe14e7ace80df, type: 3}
@@ -2454,18 +2448,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1139537398}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
       - m_Target: {fileID: 1248151280}
         m_TargetAssemblyTypeName: Shop.ShopController, Assembly-CSharp
         m_MethodName: SetActiveShop
@@ -2477,6 +2459,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1139537400}
+        m_TargetAssemblyTypeName: Settings.SettingsController, Assembly-CSharp
+        m_MethodName: SetActiveSettings
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1001 &4357903103244134452
 PrefabInstance:
@@ -3232,43 +3226,39 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8576752381829703799, guid: 5e79f091f424d8b4da326efb5e208cfb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8576752381829703799, guid: 5e79f091f424d8b4da326efb5e208cfb, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8576752381829703799, guid: 5e79f091f424d8b4da326efb5e208cfb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 220.55
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8576752381829703799, guid: 5e79f091f424d8b4da326efb5e208cfb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -192.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8752919424244863682, guid: 5e79f091f424d8b4da326efb5e208cfb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8752919424244863682, guid: 5e79f091f424d8b4da326efb5e208cfb, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8752919424244863682, guid: 5e79f091f424d8b4da326efb5e208cfb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 601.65
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8752919424244863682, guid: 5e79f091f424d8b4da326efb5e208cfb, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -192.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8752919424633915250, guid: 5e79f091f424d8b4da326efb5e208cfb, type: 3}
       propertyPath: m_Name
       value: SettingsField
-      objectReference: {fileID: 0}
-    - target: {fileID: 8752919424633915250, guid: 5e79f091f424d8b4da326efb5e208cfb, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8752919424633915251, guid: 5e79f091f424d8b4da326efb5e208cfb, type: 3}
       propertyPath: m_Pivot.x
