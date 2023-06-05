@@ -29,6 +29,9 @@ namespace Merge.Energy
                     StartCoroutine(BackToNormalEnergy());
                 }
 
+                if (_currentEnergy == _maxStartEnergy)
+                    OnEnergyIsFull?.Invoke();
+
                 LastEnergyChangingTime = DateTime.UtcNow;
                 OnEnergyChangedEvent?.Invoke(CurrentEnergy);
             }
@@ -38,6 +41,7 @@ namespace Merge.Energy
 
         public static EnergyController Instance { get; private set; }
         public event Action<float> OnEnergyChangedEvent;
+        public event Action OnEnergyIsFull;
 
         private void Awake()
         {
