@@ -34,8 +34,8 @@ namespace Orders
                 _orderParts.Add(orderPart);
             }
 
-            rewardText.text = OrderData.ContainsRewardMoney ? $" + {OrderData.RewardMoney}" : "";
-            rewardText.gameObject.SetActive(OrderData.ContainsRewardMoney);
+            rewardText.text = $" +{OrderData.RewardMoney}";
+            rewardText.autoSizeTextContainer = true;
 
             if (OrderData.ContainsRewardItem)
                 rewardItemImage.sprite = orderData.RewardItem.sprite;
