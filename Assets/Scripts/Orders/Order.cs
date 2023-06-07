@@ -21,9 +21,13 @@ namespace Orders
         [CanBeNull] private UnityAction OnCompleted { get; set; }
 
         private readonly List<OrderPart> _orderParts = new();
+        private Image _background;
+
+        public static Color CompletedOrderColor = new(0.7f, 1, 0.7f);
 
         public void Initialize(OrderData orderData, [CanBeNull] UnityAction onCompleted = null)
         {
+            _background = GetComponent<Image>();
             OrderData = orderData;
             OnCompleted = onCompleted;
 
@@ -60,6 +64,7 @@ namespace Orders
                 areAllNeededItemsOnFieldNow &= orderPartData.IsItemOnField;
 
             claimRewardButton.SetActive(areAllNeededItemsOnFieldNow);
+            _background.color = areAllNeededItemsOnFieldNow ? CompletedOrderColor : new Color(1, 1, 1);
         }
     }
 }
