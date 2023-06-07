@@ -78,10 +78,17 @@ namespace Orders
 
             var rewardStackDict =
                 JsonConvert.DeserializeObject<Dictionary<int, string>>(ordersSaveData.rewardsStackJSonFormat);
-            ;
-            for (int i = rewardStackDict.Values.Count - 1; i >= 0; i--)
+
+            for (var i = rewardStackDict.Values.Count - 1; i >= 0; i--)
             {
-                var item = GameDataHelper.AllRewardItems.Find(item => item.name == rewardStackDict[i]);
+                var item = GameDataHelper.AllItems.Find(item => item.name == rewardStackDict[i]);
+
+                if (item == null)
+                {
+                    Debug.LogError($"Не удалось загрузить награду стека [{rewardStackDict[i]}].");
+                    continue;
+                }
+
                 AppendReward(item);
             }
         }
