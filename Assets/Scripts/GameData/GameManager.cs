@@ -89,7 +89,12 @@ namespace GameData
 
             Money = data.Money;
             EnergyController.LastEnergyChangingTime = lastEnergyChangingTime;
-            EnergyController.SetEnergy(data.CurrentEnergy + offlineEnergyGain);
+            
+            EnergyController.SetEnergy(Math.Clamp(
+                data.CurrentEnergy + offlineEnergyGain, 
+                0, 
+                EnergyController.MaxStartEnergy));
+            
             OpenedLevels = JsonConvert.DeserializeObject<Dictionary<int, bool>>(data.OpenedLevelsDictionaryJSonFormat);
             CompletedLevels = JsonConvert.DeserializeObject<Dictionary<int, bool>>(data.CompletedLevelsDictionaryJSonFormat);
             CurrentLevel = data.CurrentLevel;
