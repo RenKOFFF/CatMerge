@@ -19,6 +19,8 @@ namespace Orders
 
         public OrderData OrderData { get; private set; }
 
+        public bool IsDeleted { get; private set; }
+
         public float CompletedProgress { get; private set; }
 
         [CanBeNull] private UnityAction OnCompleted { get; set; }
@@ -55,6 +57,7 @@ namespace Orders
             foreach (var orderPartData in _orderParts)
                 orderPartData.Complete();
 
+            IsDeleted = true;
             OnCompleted?.Invoke();
             Destroy(gameObject);
         }

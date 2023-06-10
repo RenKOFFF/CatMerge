@@ -23,12 +23,10 @@ namespace Orders.Data
         public bool ContainsRewardItem => RewardItem != null;
 
         public int RewardMoney => Parts.Sum(i => i.NeededItem.ComplexityLevel) * 10;
-        public bool ContainsRewardMoney { get; set; }
 
-        public OrderData([CanBeNull] MergeItemData rewardItem = null, bool containsRewardMoney = true)
+        public OrderData([CanBeNull] MergeItemData rewardItem = null)
         {
             RewardItem = rewardItem;
-            ContainsRewardMoney = containsRewardMoney;
         }
 
         public void AddPart(OrderPartData orderPartData)

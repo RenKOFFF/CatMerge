@@ -121,7 +121,7 @@ namespace Orders
                 rewardItem = availableRewardItems[randomIndex];
             }
 
-            var orderData = CreateSpecificOrderData(rewardItem, true, itemsForPartsData);
+            var orderData = CreateSpecificOrderData(rewardItem, itemsForPartsData);
             SpawnOrder(orderData, false);
         }
 
@@ -150,10 +150,9 @@ namespace Orders
 
         private static OrderData CreateSpecificOrderData(
             MergeItemData rewardItem,
-            bool containsRewardMoney,
             List<MergeItemData> itemsForPartsData)
         {
-            var orderData = new OrderData(rewardItem, containsRewardMoney);
+            var orderData = new OrderData(rewardItem);
 
             foreach (var itemData in itemsForPartsData)
             {
@@ -168,13 +167,15 @@ namespace Orders
         {
             void OnOrderCompleted()
             {
+                UpdateActiveOrders();
+
                 if (orderData.ContainsRewardItem)
                     RewardsStack.Instance.AppendReward(orderData.RewardItem);
 
-                if (orderData.ContainsRewardMoney)
-                    GameManager.Instance.AddMoney(orderData.RewardMoney);
+                GameManager.Instance.AddMoney(orderData.RewardMoney);
 
                 CompletedOrdersCount++;
+                SaveOrders();
 
                 if (CompletedOrdersCount == GetOrdersNeededToCompleteLevelCount())
                 {
@@ -199,9 +200,14 @@ namespace Orders
             ActiveOrders.Add(order);
 
             if (!isLoadSpawn)
-                SaveManager.Instance.Save(
-                    new OrdersSaveData(Instance),
-                    GameManager.Instance.CurrentLevel.ToString());
+                SaveOrders();
+        }
+
+        private static void SaveOrders()
+        {
+            SaveManager.Instance.Save(
+                new OrdersSaveData(Instance),
+                GameManager.Instance.CurrentLevel.ToString());
         }
 
         private void SetNewOrderGenerationTime()
@@ -226,13 +232,11 @@ namespace Orders
                 new OrdersSaveData(),
                 GameManager.Instance.CurrentLevel.ToString());
 
-            var rewardDict =
-                JsonConvert.DeserializeObject<Dictionary<int, string>>(ordersSaveData.rewardDictJSonFormat);
-            var hasMoneyDict =
-                JsonConvert.DeserializeObject<Dictionary<int, bool>>(ordersSaveData.hasMoneyDictJSonFormat);
-            var partsDict =
-                JsonConvert.DeserializeObject<Dictionary<int, Dictionary<int, string>>>(ordersSaveData
-                    .partsDictJSonFormat);
+            var rewardDict = JsonConvert.DeserializeObject<Dictionary<int, string>>(
+                ordersSaveData.rewardDictJSonFormat);
+
+            var partsDict = JsonConvert.DeserializeObject<Dictionary<int, Dictionary<int, string>>>(
+                ordersSaveData.partsDictJSonFormat);
 
             CompletedOrdersCount = ordersSaveData.CompletedOrdersCount;
 
@@ -255,7 +259,7 @@ namespace Orders
                     partsList.Add(partMergeItemData);
                 }
 
-                var loadedOrderData = CreateSpecificOrderData(rewardItem, hasMoneyDict[i], partsList);
+                var loadedOrderData = CreateSpecificOrderData(rewardItem, partsList);
                 SpawnOrder(loadedOrderData, true);
             }
 
@@ -278,7 +282,7 @@ namespace Orders
         private void UpdateActiveOrders()
         {
             ActiveOrders = ActiveOrders
-                .Where(o => o != null && o.gameObject != null)
+                .Where(o => o != null && o.gameObject != null && !o.IsDeleted)
                 .OrderByDescending(o => o.CompletedProgress)
                 .ToList();
 
