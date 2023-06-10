@@ -4,6 +4,7 @@ using GameData;
 using Merge;
 using Orders;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Shop
@@ -12,6 +13,13 @@ namespace Shop
     public class ShopController : MonoBehaviour
     {
         [SerializeField] private GameObject[] _shopButtons;
+        
+        [SerializeField] private GameObject _panel;
+        [SerializeField] private Image _bg;
+        
+        [SerializeField] private Color _openedColor;
+        [SerializeField] private Color _closedColor;
+        
         private bool _animationInProcess;
         public static ShopController Instance;
 
@@ -26,7 +34,9 @@ namespace Shop
 
         private void Start()
         {
-            transform.localScale = Vector3.zero;
+            _panel.transform.localScale = Vector3.zero;
+            _bg.color = _closedColor;
+            _bg.gameObject.SetActive(false);
         }
 
         public void SetActiveShop(bool isOpening)
@@ -37,7 +47,7 @@ namespace Shop
             var seq = DOTween.Sequence();
 
             float durationPanel = isOpening ? 0.8f : 0.4f;
-            seq.Append(transform
+            seq.Append(_panel.transform
                 .DOScale(isOpening ? Vector3.one : Vector3.zero, isOpening ? 0.8f : 0.4f)
                 .SetEase(isOpening ? Ease.OutBack : Ease.InBack));
 
@@ -51,8 +61,14 @@ namespace Shop
                         .SetEase(isOpening ? Ease.OutBack : Ease.InBack));
             }
 
+            _bg.gameObject.SetActive(true);
+            seq.Insert(0, _bg.DOColor(isOpening ? _openedColor : _closedColor, durationPanel));
 
-            seq.Play().OnComplete(() => _animationInProcess = false);
+            seq.Play().OnComplete(() =>
+            {
+                _animationInProcess = false;
+                if (!isOpening) _bg.gameObject.SetActive(false);
+            });
         }
 
         public bool ToBuy(ShopCell shopCell)

@@ -621,6 +621,10 @@ MonoBehaviour:
   - {fileID: 3666478631283609879}
   - {fileID: 7685167867661910874}
   - {fileID: 7685167868561192761}
+  _panel: {fileID: 2321301094031277275}
+  _bg: {fileID: 2321301094162358874}
+  _openedColor: {r: 0, g: 0, b: 0, a: 0.39215687}
+  _closedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &2321301094031277275
 GameObject:
   m_ObjectHideFlags: 0

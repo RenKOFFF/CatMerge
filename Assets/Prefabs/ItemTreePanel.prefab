@@ -568,7 +568,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -93, y: 37.838127}
+  m_AnchoredPosition: {x: -93, y: 37.838135}
   m_SizeDelta: {x: 119.5, y: 119.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6212365451926035183
@@ -653,9 +653,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5275299208405319092}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+      - m_Target: {fileID: 2100921763}
+        m_TargetAssemblyTypeName: Merge.Item_info.ItemTreePanelAnimationController,
+          Assembly-CSharp
+        m_MethodName: SetActiveTree
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -678,6 +679,7 @@ GameObject:
   - component: {fileID: 8194940952723824584}
   - component: {fileID: 8390144923877924112}
   - component: {fileID: 6250923803684814713}
+  - component: {fileID: 2100921763}
   m_Layer: 5
   m_Name: ItemTreePanel
   m_TagString: Untagged
@@ -780,6 +782,22 @@ MonoBehaviour:
   children:
   - {fileID: 6255487079887896119}
   offset: 0
+--- !u!114 &2100921763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5275299208405319092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c567d93e0f30d049a542b5065768e16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bg: {fileID: 0}
+  _tree: {fileID: 8194940952723824584}
+  _openedColor: {r: 0, g: 0, b: 0, a: 0.39215687}
+  _closedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &8228513659949520771
 GameObject:
   m_ObjectHideFlags: 0

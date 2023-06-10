@@ -845,7 +845,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8752919423042861276}
   - {fileID: 8752919423956991244}
@@ -1041,3 +1041,7 @@ MonoBehaviour:
   _buttons:
   - {fileID: 7671370431847194702}
   - {fileID: 8752919424244863681}
+  _panel: {fileID: 8752919423975313788}
+  _bg: {fileID: 8752919423695694542}
+  _openedColor: {r: 0, g: 0, b: 0, a: 0.39215687}
+  _closedColor: {r: 0, g: 0, b: 0, a: 0}
