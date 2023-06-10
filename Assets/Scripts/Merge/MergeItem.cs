@@ -234,9 +234,9 @@ namespace Merge
 
                 seq.Insert(timePosition, 
                     particles[i].transform
-                    .DOJump(target.transform.position, Random.Range(-2f, -0.1f), 1,
+                    .DOJump(target.transform.position, Random.Range(-2f, -1f), 1,
                         duration)
-                    .SetEase(Ease.InOutQuint)
+                    .SetEase(Ease.InOutCirc)
                     .OnComplete(() => callback?.Invoke(1)));
             }
 
