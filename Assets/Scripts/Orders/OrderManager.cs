@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Extensions;
 using GameData;
-using JetBrains.Annotations;
 using Merge;
-using Mono.Cecil.Cil;
 using Newtonsoft.Json;
 using Orders.Data;
 using SaveSystem;
 using SaveSystem.SaveData;
-using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -25,7 +22,7 @@ namespace Orders
         [SerializeField] private Transform ordersParent;
         [SerializeField] private LevelCompletedHandler levelCompletedPanelPrefab;
         [SerializeField] private MainMenu.MainMenu menuCanvas;
-        
+
         private int _completedOrdersCount;
 
         public List<Order> ActiveOrders { get; private set; } = new();
@@ -66,10 +63,6 @@ namespace Orders
 
         private void GenerateOrder()
         {
-            ActiveOrders = ActiveOrders
-                .Where(o => o != null && o.gameObject != null)
-                .ToList();
-
             if (ActiveOrders.Count >= maxActiveOrdersCount)
                 return;
 
@@ -261,10 +254,23 @@ namespace Orders
             }
         }
 
+        private void UpdateActiveOrders()
+        {
+            ActiveOrders = ActiveOrders
+                .Where(o => o != null && o.gameObject != null)
+                .OrderByDescending(o => o.CompletedProgress)
+                .ToList();
+
+            foreach (var order in ActiveOrders)
+                order.transform.SetAsLastSibling();
+        }
+
         private void Update()
         {
             if (GameManager.Instance.CurrentLevel == 0)
                 return;
+
+            UpdateActiveOrders();
 
             if (!NextOrderGenerationTime.IsPassed())
                 return;

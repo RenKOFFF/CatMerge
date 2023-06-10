@@ -18,6 +18,9 @@ namespace Orders
         [SerializeField] private Image rewardItemImage;
 
         public OrderData OrderData { get; private set; }
+
+        public float CompletedProgress { get; private set; }
+
         [CanBeNull] private UnityAction OnCompleted { get; set; }
 
         private readonly List<OrderPart> _orderParts = new();
@@ -59,9 +62,17 @@ namespace Orders
         private void Update()
         {
             var areAllNeededItemsOnFieldNow = true;
+            var completedPartsCount = 0f;
 
             foreach (var orderPartData in _orderParts)
+            {
                 areAllNeededItemsOnFieldNow &= orderPartData.IsItemOnField;
+
+                if (orderPartData.IsItemOnField)
+                    completedPartsCount++;
+            }
+
+            CompletedProgress = completedPartsCount / _orderParts.Count;
 
             claimRewardButton.SetActive(areAllNeededItemsOnFieldNow);
             _background.color = areAllNeededItemsOnFieldNow ? CompletedOrderColor : new Color(1, 1, 1);
