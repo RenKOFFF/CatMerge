@@ -17,7 +17,6 @@ namespace Orders
     {
         [SerializeField] private double timeToGenerateOrderInSeconds = 3;
         [SerializeField] private int maxActiveOrdersCount = 5;
-        [SerializeField] private int ordersNeededToCompleteLevelCount = 20;
         [SerializeField] private Order orderPrefab;
         [SerializeField] private Transform ordersParent;
         [SerializeField] private LevelCompletedHandler levelCompletedPanelPrefab;
@@ -34,15 +33,33 @@ namespace Orders
             private set
             {
                 _completedOrdersCount = value;
-                ComoletedOrdersChanged?.Invoke(_completedOrdersCount);
+                CompletedOrdersChanged?.Invoke(_completedOrdersCount);
             }
         }
 
-        public int OrdersNeededToCompleteLevelCount => ordersNeededToCompleteLevelCount;
-
         public static OrderManager Instance;
         public event Action LevelCompleted;
-        public event Action<int> ComoletedOrdersChanged;
+        public event Action<int> CompletedOrdersChanged;
+
+        public static int GetOrdersNeededToCompleteLevelCount()
+            => GameManager.Instance.CurrentLevel switch
+            {
+                1 => 5,
+                2 => 7,
+                3 => 10,
+                4 or 5 => 12,
+                _ => 10
+            };
+
+        public static int GetCompletedLevelReward()
+            => GameManager.Instance.CurrentLevel switch
+            {
+                1 => 10,
+                2 => 14,
+                3 => 20,
+                4 or 5 => 24,
+                _ => 20
+            };
 
         private void OnEnable()
         {
@@ -159,9 +176,13 @@ namespace Orders
 
                 CompletedOrdersCount++;
 
-                if (CompletedOrdersCount == ordersNeededToCompleteLevelCount)
+                if (CompletedOrdersCount == GetOrdersNeededToCompleteLevelCount())
                 {
                     var canvas = GameObject.FindGameObjectWithTag(GameConstants.Tags.Canvas);
+
+                    var reward = GetCompletedLevelReward();
+                    GameManager.Instance.AddMoney(reward);
+
                     var levelCompletedPanel = Instantiate(levelCompletedPanelPrefab, canvas.transform, false);
 
                     levelCompletedPanel.Initialize(() =>

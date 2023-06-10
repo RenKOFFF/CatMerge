@@ -19,19 +19,23 @@ namespace UI
         {
             if (_isInitialized) return;
 
-            _maxValue = maxValue;
-            _step = 1 / maxValue;
-            
+            UpdateMaxValue(maxValue);
             ChangeValue(startValue);
             _isInitialized = true;
+        }
+
+        protected void UpdateMaxValue(float maxValue)
+        {
+            _maxValue = maxValue;
+            _step = 1 / maxValue;
         }
 
         protected void ChangeValue(float newValue)
         {
             _currentValue = newValue;
             _currencyText.text = _currentValue.ToString(CultureInfo.InvariantCulture);
-            
-            _currencyFillRectTransform.anchorMax = 
+
+            _currencyFillRectTransform.anchorMax =
                 new Vector2(_maxValue == 0 ? 0 : Mathf.Clamp(_currentValue * _step, 0, 1),
                 _currencyFillRectTransform.anchorMax.y);
         }

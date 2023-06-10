@@ -1,4 +1,5 @@
-﻿using Orders;
+﻿using GameData;
+using Orders;
 
 namespace UI
 {
@@ -7,18 +8,26 @@ namespace UI
         private void Start()
         {
             var orderManager = OrderManager.Instance;
-            orderManager.ComoletedOrdersChanged += OnCompletedOrdersChanged;
-            Initialize(orderManager.OrdersNeededToCompleteLevelCount, orderManager.CompletedOrdersCount);
+            orderManager.CompletedOrdersChanged += OnCompletedOrdersChanged;
+            GameManager.Instance.LevelChanged += OnLevelChanged;
+
+            Initialize(OrderManager.GetOrdersNeededToCompleteLevelCount(), orderManager.CompletedOrdersCount);
         }
 
         private void OnDestroy()
         {
-            OrderManager.Instance.ComoletedOrdersChanged -= OnCompletedOrdersChanged;
+            OrderManager.Instance.CompletedOrdersChanged -= OnCompletedOrdersChanged;
+            GameManager.Instance.LevelChanged -= OnLevelChanged;
         }
 
         private void OnCompletedOrdersChanged(int currentValue)
         {
             ChangeValue(currentValue);
+        }
+
+        private void OnLevelChanged(int currentValue)
+        {
+            UpdateMaxValue(OrderManager.GetOrdersNeededToCompleteLevelCount());
         }
     }
 }
