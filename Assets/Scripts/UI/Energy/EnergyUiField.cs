@@ -10,7 +10,7 @@ namespace UI.Energy
         {
             var energyController = EnergyController.Instance;
             energyController.OnEnergyChangedEvent += OnEnergyChanged;
-            Initialize(energyController.MaxStartEnergy, energyController.CurrentEnergy, true);
+            Initialize(energyController.MaxStartEnergy, energyController.CurrentEnergy);
         }
 
         private void OnDestroy()
@@ -20,7 +20,7 @@ namespace UI.Energy
 
         private void OnEnergyChanged(float currentEnergy)
         {
-            if (EnergyController.Instance.CurrentEnergy > EnergyController.Instance.MaxStartEnergy)
+            if (currentEnergy > EnergyController.Instance.MaxStartEnergy)
                 ChangeMaxValueVisibility(true);
             else ChangeMaxValueVisibility(false);
 
