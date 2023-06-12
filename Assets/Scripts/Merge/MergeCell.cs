@@ -6,6 +6,7 @@ public class MergeCell : MonoBehaviour, IDropHandler
 {
     [SerializeField] private MergeItem mergeItem;
     [SerializeField] private GameObject isUsedForOrderFlag;
+    [SerializeField] private GameObject _isGeneratorMark;
 
     public MergeItem MergeItem => mergeItem;
 
@@ -17,5 +18,6 @@ public class MergeCell : MonoBehaviour, IDropHandler
     private void Update()
     {
         isUsedForOrderFlag.SetActive(MergeItem.IsUsedForOrder && !MergeItem.IsMoving);
+        _isGeneratorMark.SetActive(MergeItem.IsGenerator && !MergeItem.IsMoving);
     }
 }

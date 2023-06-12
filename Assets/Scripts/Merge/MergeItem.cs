@@ -26,6 +26,7 @@ namespace Merge
         private CanvasGroup CanvasGroup { get; set; }
 
         public bool IsUsedForOrder { get; private set; }
+        public bool IsGenerator { get; private set; }
 
         public bool IsEmpty => MergeItemData == null;
         public bool IsMoving => transform.localPosition != Vector3.zero;
@@ -35,6 +36,8 @@ namespace Merge
             get => _mergeItemData;
             private set
             {
+                IsGenerator = value is GeneratorMergeItemData;
+             
                 SetUsedForOrder(false);
                 _mergeItemData = value;
             }
@@ -221,7 +224,7 @@ namespace Merge
         {
             var seq = DOTween.Sequence();
             var duration = 0f;
-            
+
             for (int i = 0; i < particles.Count; i++)
             {
                 if (i == 0) duration = particles[i].main.startLifetime.constant;
@@ -232,12 +235,12 @@ namespace Merge
                 mainStartLifetime.startLifetime = particles[i].main.startLifetime.constant + timePosition;
                 particles[i].Play();
 
-                seq.Insert(timePosition, 
+                seq.Insert(timePosition,
                     particles[i].transform
-                    .DOJump(target.transform.position, Random.Range(-2f, -1f), 1,
-                        duration)
-                    .SetEase(Ease.InOutCirc)
-                    .OnComplete(() => callback?.Invoke(1)));
+                        .DOJump(target.transform.position, Random.Range(-2f, -1f), 1,
+                            duration)
+                        .SetEase(Ease.InOutCirc)
+                        .OnComplete(() => callback?.Invoke(1)));
             }
 
             seq.Play();

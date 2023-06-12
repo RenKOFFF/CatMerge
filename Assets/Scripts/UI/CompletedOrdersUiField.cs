@@ -11,7 +11,7 @@ namespace UI
             orderManager.CompletedOrdersChanged += OnCompletedOrdersChanged;
             GameManager.Instance.LevelChanged += OnLevelChanged;
 
-            Initialize(OrderManager.GetOrdersNeededToCompleteLevelCount(), orderManager.CompletedOrdersCount);
+            Initialize(OrderManager.GetOrdersNeededToCompleteLevelCount(GameManager.Instance.CurrentLevel), orderManager.CompletedOrdersCount);
         }
 
         private void OnDestroy()
@@ -27,7 +27,7 @@ namespace UI
 
         private void OnLevelChanged(int currentValue)
         {
-            UpdateMaxValue(OrderManager.GetOrdersNeededToCompleteLevelCount());
+            UpdateMaxValue(OrderManager.GetOrdersNeededToCompleteLevelCount(GameManager.Instance.CurrentLevel));
         }
     }
 }
