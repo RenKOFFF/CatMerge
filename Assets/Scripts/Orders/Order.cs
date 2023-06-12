@@ -18,12 +18,21 @@ namespace Orders
         [SerializeField] private Image rewardItemImage;
 
         public OrderData OrderData { get; private set; }
+
+        public bool IsDeleted { get; private set; }
+
+        public float CompletedProgress { get; private set; }
+
         [CanBeNull] private UnityAction OnCompleted { get; set; }
 
         private readonly List<OrderPart> _orderParts = new();
+        private Image _background;
+
+        public static Color CompletedOrderColor = new(0.7f, 1, 0.7f);
 
         public void Initialize(OrderData orderData, [CanBeNull] UnityAction onCompleted = null)
         {
+            _background = GetComponent<Image>();
             OrderData = orderData;
             OnCompleted = onCompleted;
 
@@ -34,8 +43,8 @@ namespace Orders
                 _orderParts.Add(orderPart);
             }
 
-            rewardText.text = OrderData.ContainsRewardMoney ? $" + {OrderData.RewardMoney}" : "";
-            rewardText.gameObject.SetActive(OrderData.ContainsRewardMoney);
+            rewardText.text = $" +{OrderData.RewardMoney}";
+            rewardText.autoSizeTextContainer = true;
 
             if (OrderData.ContainsRewardItem)
                 rewardItemImage.sprite = orderData.RewardItem.sprite;
@@ -48,6 +57,7 @@ namespace Orders
             foreach (var orderPartData in _orderParts)
                 orderPartData.Complete();
 
+            IsDeleted = true;
             OnCompleted?.Invoke();
             Destroy(gameObject);
         }
@@ -55,11 +65,20 @@ namespace Orders
         private void Update()
         {
             var areAllNeededItemsOnFieldNow = true;
+            var completedPartsCount = 0f;
 
             foreach (var orderPartData in _orderParts)
+            {
                 areAllNeededItemsOnFieldNow &= orderPartData.IsItemOnField;
 
+                if (orderPartData.IsItemOnField)
+                    completedPartsCount++;
+            }
+
+            CompletedProgress = completedPartsCount / _orderParts.Count;
+
             claimRewardButton.SetActive(areAllNeededItemsOnFieldNow);
+            _background.color = areAllNeededItemsOnFieldNow ? CompletedOrderColor : new Color(1, 1, 1);
         }
     }
 }

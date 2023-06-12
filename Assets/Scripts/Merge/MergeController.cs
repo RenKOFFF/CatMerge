@@ -77,17 +77,22 @@ namespace Merge
 
         public void OnDrop(MergeItem droppedOnItem)
         {
-            if (MergingItem == null || MergingItem.TryMergeIn(droppedOnItem, SpawnRandomItemWithChance))
+            if (MergingItem == null || !MergingItem.IsMoving)
+                return;
+
+            if (MergingItem.TryMergeIn(droppedOnItem, SpawnRandomItemWithChance))
             {
                 UpdateUnlockedComplexityLevel(droppedOnItem.MergeItemData);
                 ItemInfo.Instance.Initialize(droppedOnItem);
                 SaveMField();
+                ResetMergingItem();
                 return;
             }
 
             droppedOnItem.TrySwapData(MergingItem);
             ItemInfo.Instance.Initialize(droppedOnItem);
             SaveMField();
+            ResetMergingItem();
         }
 
         public void OnClick(MergeItem clickedItem)
@@ -103,6 +108,11 @@ namespace Merge
 
             MergingItem = clickedItem;
             ItemInfo.Instance.Initialize(MergingItem);
+        }
+
+        private void ResetMergingItem()
+        {
+            MergingItem = null;
         }
 
         private void SpawnRandomItemWithChance(int itemLevel)

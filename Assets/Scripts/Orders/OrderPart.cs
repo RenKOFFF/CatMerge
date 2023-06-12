@@ -14,11 +14,13 @@ namespace Orders
         public bool IsItemOnField { get; private set; }
 
         private OrderPartData _orderPartData;
+        private Image _background;
 
         public void Initialize(OrderPartData orderPartData)
         {
             _orderPartData = orderPartData;
             orderPartImage.sprite = _orderPartData.NeededItem.sprite;
+            _background = GetComponent<Image>();
         }
 
         public void OpenItemInfo()
@@ -47,6 +49,7 @@ namespace Orders
 
             IsItemOnField = foundMergeItem != null;
             isItemOnFieldFlag.SetActive(IsItemOnField);
+            _background.color = IsItemOnField ? Order.CompletedOrderColor : new Color(1, 1, 1);
 
             if (IsItemOnField)
                 UseForOrderAllNeededItemsOnField();

@@ -32,6 +32,7 @@ namespace Merge.Item_info
         public void Initialize(MergeItem selectedItem)
         {
             Initialize(selectedItem.MergeItemData);
+
             _selectedItem = selectedItem;
             sellButton.Initialize(_selectedItem);
         }

@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Extensions;
 using GameData;
-using JetBrains.Annotations;
 using Merge;
-using Mono.Cecil.Cil;
 using Newtonsoft.Json;
 using Orders.Data;
 using SaveSystem;
 using SaveSystem.SaveData;
-using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -20,12 +17,11 @@ namespace Orders
     {
         [SerializeField] private double timeToGenerateOrderInSeconds = 3;
         [SerializeField] private int maxActiveOrdersCount = 5;
-        [SerializeField] private int ordersNeededToCompleteLevelCount = 20;
         [SerializeField] private Order orderPrefab;
         [SerializeField] private Transform ordersParent;
         [SerializeField] private LevelCompletedHandler levelCompletedPanelPrefab;
         [SerializeField] private MainMenu.MainMenu menuCanvas;
-        
+
         private int _completedOrdersCount;
 
         public List<Order> ActiveOrders { get; private set; } = new();
@@ -37,15 +33,33 @@ namespace Orders
             private set
             {
                 _completedOrdersCount = value;
-                ComoletedOrdersChanged?.Invoke(_completedOrdersCount);
+                CompletedOrdersChanged?.Invoke(_completedOrdersCount);
             }
         }
 
-        public int OrdersNeededToCompleteLevelCount => ordersNeededToCompleteLevelCount;
-
         public static OrderManager Instance;
         public event Action LevelCompleted;
-        public event Action<int> ComoletedOrdersChanged;
+        public event Action<int> CompletedOrdersChanged;
+
+        public static int GetOrdersNeededToCompleteLevelCount()
+            => GameManager.Instance.CurrentLevel switch
+            {
+                1 => 5,
+                2 => 7,
+                3 => 10,
+                4 or 5 => 12,
+                _ => 10
+            };
+
+        public static int GetCompletedLevelReward()
+            => GameManager.Instance.CurrentLevel switch
+            {
+                1 => 10,
+                2 => 14,
+                3 => 20,
+                4 or 5 => 24,
+                _ => 20
+            };
 
         private void OnEnable()
         {
@@ -66,10 +80,6 @@ namespace Orders
 
         private void GenerateOrder()
         {
-            ActiveOrders = ActiveOrders
-                .Where(o => o != null && o.gameObject != null)
-                .ToList();
-
             if (ActiveOrders.Count >= maxActiveOrdersCount)
                 return;
 
@@ -111,7 +121,7 @@ namespace Orders
                 rewardItem = availableRewardItems[randomIndex];
             }
 
-            var orderData = CreateSpecificOrderData(rewardItem, true, itemsForPartsData);
+            var orderData = CreateSpecificOrderData(rewardItem, itemsForPartsData);
             SpawnOrder(orderData, false);
         }
 
@@ -140,10 +150,9 @@ namespace Orders
 
         private static OrderData CreateSpecificOrderData(
             MergeItemData rewardItem,
-            bool containsRewardMoney,
             List<MergeItemData> itemsForPartsData)
         {
-            var orderData = new OrderData(rewardItem, containsRewardMoney);
+            var orderData = new OrderData(rewardItem);
 
             foreach (var itemData in itemsForPartsData)
             {
@@ -158,17 +167,23 @@ namespace Orders
         {
             void OnOrderCompleted()
             {
+                UpdateActiveOrders();
+
                 if (orderData.ContainsRewardItem)
                     RewardsStack.Instance.AppendReward(orderData.RewardItem);
 
-                if (orderData.ContainsRewardMoney)
-                    GameManager.Instance.AddMoney(orderData.RewardMoney);
+                GameManager.Instance.AddMoney(orderData.RewardMoney);
 
                 CompletedOrdersCount++;
+                SaveOrders();
 
-                if (CompletedOrdersCount == ordersNeededToCompleteLevelCount)
+                if (CompletedOrdersCount == GetOrdersNeededToCompleteLevelCount())
                 {
                     var canvas = GameObject.FindGameObjectWithTag(GameConstants.Tags.Canvas);
+
+                    var reward = GetCompletedLevelReward();
+                    GameManager.Instance.AddMoney(reward);
+
                     var levelCompletedPanel = Instantiate(levelCompletedPanelPrefab, canvas.transform, false);
 
                     levelCompletedPanel.Initialize(() =>
@@ -185,9 +200,14 @@ namespace Orders
             ActiveOrders.Add(order);
 
             if (!isLoadSpawn)
-                SaveManager.Instance.Save(
-                    new OrdersSaveData(Instance),
-                    GameManager.Instance.CurrentLevel.ToString());
+                SaveOrders();
+        }
+
+        private static void SaveOrders()
+        {
+            SaveManager.Instance.Save(
+                new OrdersSaveData(Instance),
+                GameManager.Instance.CurrentLevel.ToString());
         }
 
         private void SetNewOrderGenerationTime()
@@ -212,13 +232,11 @@ namespace Orders
                 new OrdersSaveData(),
                 GameManager.Instance.CurrentLevel.ToString());
 
-            var rewardDict =
-                JsonConvert.DeserializeObject<Dictionary<int, string>>(ordersSaveData.rewardDictJSonFormat);
-            var hasMoneyDict =
-                JsonConvert.DeserializeObject<Dictionary<int, bool>>(ordersSaveData.hasMoneyDictJSonFormat);
-            var partsDict =
-                JsonConvert.DeserializeObject<Dictionary<int, Dictionary<int, string>>>(ordersSaveData
-                    .partsDictJSonFormat);
+            var rewardDict = JsonConvert.DeserializeObject<Dictionary<int, string>>(
+                ordersSaveData.rewardDictJSonFormat);
+
+            var partsDict = JsonConvert.DeserializeObject<Dictionary<int, Dictionary<int, string>>>(
+                ordersSaveData.partsDictJSonFormat);
 
             CompletedOrdersCount = ordersSaveData.CompletedOrdersCount;
 
@@ -241,7 +259,7 @@ namespace Orders
                     partsList.Add(partMergeItemData);
                 }
 
-                var loadedOrderData = CreateSpecificOrderData(rewardItem, hasMoneyDict[i], partsList);
+                var loadedOrderData = CreateSpecificOrderData(rewardItem, partsList);
                 SpawnOrder(loadedOrderData, true);
             }
 
@@ -261,10 +279,23 @@ namespace Orders
             }
         }
 
+        private void UpdateActiveOrders()
+        {
+            ActiveOrders = ActiveOrders
+                .Where(o => o != null && o.gameObject != null && !o.IsDeleted)
+                .OrderByDescending(o => o.CompletedProgress)
+                .ToList();
+
+            foreach (var order in ActiveOrders)
+                order.transform.SetAsLastSibling();
+        }
+
         private void Update()
         {
             if (GameManager.Instance.CurrentLevel == 0)
                 return;
+
+            UpdateActiveOrders();
 
             if (!NextOrderGenerationTime.IsPassed())
                 return;

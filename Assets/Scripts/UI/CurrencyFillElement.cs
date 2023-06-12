@@ -1,4 +1,3 @@
-using System;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
@@ -25,6 +24,7 @@ namespace UI
             _step = 1 / maxValue;
             ChangeMaxValueVisibility(showMaxValue);
             
+            UpdateMaxValue(maxValue);
             ChangeValue(startValue);
             _isInitialized = true;
         }
@@ -32,6 +32,12 @@ namespace UI
         protected void ChangeMaxValueVisibility(bool showMaxValue)
         {
             _showMaxValue = showMaxValue;
+        }
+
+        protected void UpdateMaxValue(float maxValue)
+        {
+            _maxValue = maxValue;
+            _step = 1 / maxValue;
         }
 
         protected void ChangeValue(float newValue)
