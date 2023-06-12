@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using GameData;
+using Newtonsoft.Json;
 using Orders;
+using SaveSystem;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,16 +18,28 @@ namespace MainMenu
         [SerializeField] private Image _backgroundOld;
         [SerializeField] private float _transitionDuration = 1f;
         [SerializeField] private Ease _ease = Ease.Linear;
-        [SerializeField] private LevelData[] _levelsData;
-
+        
+        private List<LevelData> _levelsData;
         private bool _isLevelCompleted;
 
         private void Start()
         {
+            _levelsData = GameDataHelper.AllLevelData;
             OrderManager.Instance.LevelCompleted += OnLevelCompleted;
             if (GameManager.Instance.CurrentLevel > 0)
             {
-                SwitchBackgroundByLevelIndex(GameManager.Instance.CurrentLevel);
+                var data = SaveManager.Instance.LoadOrDefault(new GameplayData());
+                var openedLevels =
+                    JsonConvert.DeserializeObject<Dictionary<int, bool>>(data.OpenedLevelsDictionaryJSonFormat);
+                var completedLevels =
+                    JsonConvert.DeserializeObject<Dictionary<int, bool>>(data.CompletedLevelsDictionaryJSonFormat);
+                
+                completedLevels.TryGetValue(GameManager.Instance.CurrentLevel, out var isCompleted);
+                
+                if (openedLevels.TryGetValue(GameManager.Instance.CurrentLevel, out var isOpened) && !isOpened
+                    && isCompleted)
+                    SwitchBackgroundByLevelIndex(GameManager.Instance.CurrentLevel);
+                else SwitchBackgroundByLevelIndex(GameManager.Instance.CurrentLevel - 1);
             }
         }
 
@@ -34,6 +48,7 @@ namespace MainMenu
             if (_isLevelCompleted)
             {
                 PlayTransitionAnimation();
+                SwitchBackgroundByLevelIndex(GameManager.Instance.CurrentLevel);
             }
         }
 
@@ -41,7 +56,6 @@ namespace MainMenu
         private void PlayTransitionAnimation()
         {
             var mainMenuButtons = MainMenu.Instance.LevelButtons.ToList();
-            mainMenuButtons.Add(MainMenu.Instance.BackButton);
             var activeButtons = mainMenuButtons.Where(b => b.gameObject.activeInHierarchy).ToList();
 
             Color transparentColor = Color.white;
@@ -57,16 +71,26 @@ namespace MainMenu
 
             void SwitchButtonsIntaractable(bool isOn)
             {
+                MainMenu.Instance.BackButton.interactable = isOn;
+                if (isOn)
+                {
+                    MainMenu.Instance.BackButton.targetGraphic
+                        .DOColor(Color.white, _transitionDuration / 3f)
+                        .SetEase(_ease);
+                }
+                else MainMenu.Instance.BackButton.targetGraphic.color = transparentColor;
+
+
                 foreach (var button in activeButtons)
                 {
-                    button.interactable = isOn;
+                    button.Button.interactable = isOn;
                     if (isOn)
                     {
-                        button.targetGraphic
-                            .DOColor(Color.white, _transitionDuration/3f)
+                        button.Button.targetGraphic
+                            .DOColor(Color.white, _transitionDuration / 3f)
                             .SetEase(_ease);
                     }
-                    else button.targetGraphic.color = transparentColor;
+                    else button.Button.targetGraphic.color = transparentColor;
                 }
             }
         }
@@ -79,7 +103,6 @@ namespace MainMenu
         private void OnLevelCompleted()
         {
             _isLevelCompleted = true;
-            SwitchBackgroundByLevelIndex(GameManager.Instance.CurrentLevel);
         }
 
         private void SwitchBackgroundByLevelIndex(int currentLevel)

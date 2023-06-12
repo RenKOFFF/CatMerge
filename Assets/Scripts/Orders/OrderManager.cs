@@ -41,8 +41,8 @@ namespace Orders
         public event Action LevelCompleted;
         public event Action<int> CompletedOrdersChanged;
 
-        public static int GetOrdersNeededToCompleteLevelCount()
-            => GameManager.Instance.CurrentLevel switch
+        public static int GetOrdersNeededToCompleteLevelCount(int level)
+            => level switch
             {
                 1 => 5,
                 2 => 7,
@@ -64,13 +64,13 @@ namespace Orders
         private void OnEnable()
         {
             GameManager.Instance.LevelChanged += OnLevelChanged;
-            LevelCompleted += GameManager.Instance.OpenNextLevelAndCloseCurrent;
+            LevelCompleted += GameManager.Instance.OnLevelCompleted;
         }
 
         private void OnDisable()
         {
             GameManager.Instance.LevelChanged -= OnLevelChanged;
-            LevelCompleted -= GameManager.Instance.OpenNextLevelAndCloseCurrent;
+            LevelCompleted -= GameManager.Instance.OnLevelCompleted;
         }
 
         private void OnLevelChanged(int _)
@@ -177,7 +177,7 @@ namespace Orders
                 CompletedOrdersCount++;
                 SaveOrders();
 
-                if (CompletedOrdersCount == GetOrdersNeededToCompleteLevelCount())
+                if (CompletedOrdersCount == GetOrdersNeededToCompleteLevelCount(GameManager.Instance.CurrentLevel))
                 {
                     var canvas = GameObject.FindGameObjectWithTag(GameConstants.Tags.Canvas);
 
@@ -226,6 +226,15 @@ namespace Orders
             LoadOrdersOnCurrentLevel();
         }
 
+        public int GetOrderProgressInLevel(int levelIndex)
+        {
+            var ordersSaveData = SaveManager.Instance.LoadOrDefault(
+                new OrdersSaveData(),
+                levelIndex.ToString());
+            
+            return ordersSaveData.CompletedOrdersCount;
+        }
+        
         private void LoadOrdersOnCurrentLevel()
         {
             var ordersSaveData = SaveManager.Instance.LoadOrDefault(

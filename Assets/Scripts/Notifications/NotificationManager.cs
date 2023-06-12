@@ -10,12 +10,12 @@ namespace Notifications
         void Start()
         {
             CreateNotificationChanel();
-            EnergyController.Instance.OnEnergyIsFull += SendNotification;
+            //EnergyController.Instance.OnEnergyIsFull += SendNotification;
         }
 
         private void OnDestroy()
         {
-            EnergyController.Instance.OnEnergyIsFull -= SendNotification;
+            //EnergyController.Instance.OnEnergyIsFull -= SendNotification;
         }
 
         private void CreateNotificationChanel()

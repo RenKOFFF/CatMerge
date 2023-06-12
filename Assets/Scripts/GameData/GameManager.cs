@@ -100,13 +100,17 @@ namespace GameData
             CurrentLevel = data.CurrentLevel;
         }
 
+        public void OnLevelCompleted()
+        {
+            CompletedLevels.Add(CurrentLevel, true);
+            SaveGameplayData();
+        }
+
         public void OpenNextLevelAndCloseCurrent()
         {
             if (OpenedLevels.ContainsKey(CurrentLevel))
                 OpenedLevels[CurrentLevel] = false;
             
-            CompletedLevels.Add(CurrentLevel, true);
-
             OpenAllPossibleLevels();
 
             SaveGameplayData();
