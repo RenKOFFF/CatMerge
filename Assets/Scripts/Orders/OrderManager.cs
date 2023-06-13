@@ -207,7 +207,7 @@ namespace Orders
         {
             SaveManager.Instance.Save(
                 new OrdersSaveData(Instance),
-                GameManager.Instance.CurrentLevel.ToString());
+                $"Sh-{GameManager.Instance.CurrentShelter}-Lvl-{GameManager.Instance.CurrentLevel}");
         }
 
         private void SetNewOrderGenerationTime()
@@ -225,12 +225,12 @@ namespace Orders
             SetNewOrderGenerationTime();
             LoadOrdersOnCurrentLevel();
         }
-
-        public int GetOrderProgressInLevel(int levelIndex)
+        
+        public int GetOrderProgressInLevel(int shelterIndex, int levelIndex)
         {
             var ordersSaveData = SaveManager.Instance.LoadOrDefault(
                 new OrdersSaveData(),
-                levelIndex.ToString());
+                $"Sh-{shelterIndex}-Lvl-{levelIndex}");
             
             return ordersSaveData.CompletedOrdersCount;
         }
@@ -239,7 +239,7 @@ namespace Orders
         {
             var ordersSaveData = SaveManager.Instance.LoadOrDefault(
                 new OrdersSaveData(),
-                GameManager.Instance.CurrentLevel.ToString());
+                $"Sh-{GameManager.Instance.CurrentShelter}-Lvl-{GameManager.Instance.CurrentLevel}");
 
             var rewardDict = JsonConvert.DeserializeObject<Dictionary<int, string>>(
                 ordersSaveData.rewardDictJSonFormat);

@@ -5,6 +5,7 @@ using Merge;
 using Merge.Energy;
 using Newtonsoft.Json;
 using SaveSystem;
+using SaveSystem.SaveData;
 using UnityEngine;
 
 namespace GameData
@@ -86,25 +87,26 @@ namespace GameData
 
         private void Start()
         {
-            var data = SaveManager.Instance.LoadOrDefault(new GameplayData());
+            var shelterData = SaveManager.Instance.LoadOrDefault(new ShelterData(), $"Sh-{Instance.CurrentShelter}-Lvl-{Instance.CurrentLevel}");
+            var gameplayData = SaveManager.Instance.LoadOrDefault(new GameplayData());
 
-            var lastEnergyChangingTime = data.LastEnergyChangingTime;
+            var lastEnergyChangingTime = gameplayData.LastEnergyChangingTime;
             var timePassedFromLastEnergyUpdate = DateTime.UtcNow - lastEnergyChangingTime;
             var offlineEnergyGainRaw = timePassedFromLastEnergyUpdate.TotalSeconds
                                        / EnergyController.TimeToRestoreOneEnergyInSeconds;
             var offlineEnergyGain = (int) Math.Floor(offlineEnergyGainRaw);
 
-            Money = data.Money;
+            Money = gameplayData.Money;
             EnergyController.LastEnergyChangingTime = lastEnergyChangingTime;
             
             EnergyController.SetEnergy(Math.Clamp(
-                data.CurrentEnergy + offlineEnergyGain, 
+                gameplayData.CurrentEnergy + offlineEnergyGain, 
                 0, 
                 EnergyController.MaxStartEnergy));
             
-            OpenedLevels = JsonConvert.DeserializeObject<Dictionary<int, bool>>(data.OpenedLevelsDictionaryJSonFormat);
-            CompletedLevels = JsonConvert.DeserializeObject<Dictionary<int, bool>>(data.CompletedLevelsDictionaryJSonFormat);
-            CurrentLevel = data.CurrentLevel;
+            OpenedLevels = JsonConvert.DeserializeObject<Dictionary<int, bool>>(shelterData.OpenedLevelsDictionaryJSonFormat);
+            CompletedLevels = JsonConvert.DeserializeObject<Dictionary<int, bool>>(shelterData.CompletedLevelsDictionaryJSonFormat);
+            CurrentLevel = shelterData.CurrentLevel;
         }
 
         public void OnLevelCompleted()
@@ -153,6 +155,7 @@ namespace GameData
 
         private void SaveGameplayData()
         {
+            SaveManager.Instance.Save(new ShelterData(Instance), $"Sh-{Instance.CurrentShelter}-Lvl-{Instance.CurrentLevel}");
             SaveManager.Instance.Save(new GameplayData(Instance));
         }
 

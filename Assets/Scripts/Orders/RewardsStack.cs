@@ -28,7 +28,7 @@ namespace Orders
             
             SaveManager.Instance.Save(
                 new OrdersSaveData(OrderManager.Instance),
-                GameManager.Instance.CurrentLevel.ToString());
+                $"Sh-{GameManager.Instance.CurrentShelter}-Lvl-{GameManager.Instance.CurrentLevel}");
         }
 
         public void ClaimReward()
@@ -48,7 +48,7 @@ namespace Orders
             
             SaveManager.Instance.Save(
                 new OrdersSaveData(OrderManager.Instance),
-                GameManager.Instance.CurrentLevel.ToString());
+                $"Sh-{GameManager.Instance.CurrentShelter}-Lvl-{GameManager.Instance.CurrentLevel}");
         }
 
         private void ClearStack() => Rewards.Clear();
@@ -74,7 +74,7 @@ namespace Orders
             ClearStack();
             var ordersSaveData = SaveManager.Instance.LoadOrDefault(
                 new OrdersSaveData(),
-                GameManager.Instance.CurrentLevel.ToString());
+                $"Sh-{GameManager.Instance.CurrentShelter}-Lvl-{GameManager.Instance.CurrentLevel}");
 
             var rewardStackDict =
                 JsonConvert.DeserializeObject<Dictionary<int, string>>(ordersSaveData.rewardsStackJSonFormat);

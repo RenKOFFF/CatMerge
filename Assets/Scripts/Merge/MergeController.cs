@@ -170,7 +170,7 @@ namespace Merge
         private void LoadMergeFieldData()
         {
             var loadedData = SaveManager.Instance.LoadOrDefault(new LevelSaveData(Instance.MergeCells.Length),
-                GameManager.Instance.CurrentLevel.ToString());
+                $"Sh-{GameManager.Instance.CurrentShelter}-Lvl-{GameManager.Instance.CurrentLevel}");
 
             var dict = JsonConvert.DeserializeObject<Dictionary<int, string>>(loadedData
                 .CellsDictionaryJSonFormat);
@@ -193,7 +193,7 @@ namespace Merge
         public void SaveMField()
         {
             SaveManager.Instance.Save(new LevelSaveData(Instance, GameManager.Instance.IsGeneratorSpawned),
-                GameManager.Instance.CurrentLevel.ToString());
+                $"Sh-{GameManager.Instance.CurrentShelter}-Lvl-{GameManager.Instance.CurrentLevel}");
         }
 
         public int GetUnlockedComplexityLevel(MergeItemData mergeItemData)

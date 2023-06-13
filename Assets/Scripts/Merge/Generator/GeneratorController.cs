@@ -46,6 +46,7 @@ public class GeneratorController : MonoBehaviour
         if (IsGeneratorSpawned == value) return;
         
         IsGeneratorSpawned = value;
-        SaveManager.Instance.Save(new LevelSaveData(MergeController.Instance, value), GameManager.Instance.CurrentLevel.ToString());
+        SaveManager.Instance.Save(new LevelSaveData(MergeController.Instance, value), 
+            $"Sh-{GameManager.Instance.CurrentShelter}-Lvl-{GameManager.Instance.CurrentLevel}");
     }
 }

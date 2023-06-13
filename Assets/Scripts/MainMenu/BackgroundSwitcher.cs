@@ -28,7 +28,7 @@ namespace MainMenu
             OrderManager.Instance.LevelCompleted += OnLevelCompleted;
             if (GameManager.Instance.CurrentLevel > 0)
             {
-                var data = SaveManager.Instance.LoadOrDefault(new GameplayData());
+                var data = SaveManager.Instance.LoadOrDefault(new ShelterData(), $"Sh-{GameManager.Instance.CurrentShelter}-Lvl-{GameManager.Instance.CurrentLevel}");
                 var openedLevels =
                     JsonConvert.DeserializeObject<Dictionary<int, bool>>(data.OpenedLevelsDictionaryJSonFormat);
                 var completedLevels =

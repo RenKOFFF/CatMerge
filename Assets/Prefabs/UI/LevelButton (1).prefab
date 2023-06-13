@@ -580,6 +580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelIndex: 1
+  _shelterIndex: 1
   _levelSwitcher: {fileID: 0}
   _mainMenuCanvas: {fileID: 0}
   _backToLevelButton: {fileID: 0}

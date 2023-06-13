@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3be46934b89e4755bfb985b70c3dbcef, type: 3}
-  m_Name: Level_0
+  m_Name: Level_2
   m_EditorClassIdentifier: 
-  _currentLvlIndex: 0
+  _currentLvlIndex: 2
+  _currentShelterIndex: 1
   _nextLvlIndexes: 
   _parallelLvlData: []
-  _bgWhenThisLevelCompleted: {fileID: 21300000, guid: 080969ff45734e242b1be41d97b295f7, type: 3}
+  _bgWhenThisLevelCompleted: {fileID: 21300000, guid: 146d9807d5cbb384388658e906f3c1fa, type: 3}
   _bgWhenThisLevelCompletedLast: {fileID: 0}
