@@ -38,11 +38,18 @@ namespace GameData
             get => _currentLevel;
             private set => _currentLevel = value;
         }
+        
+        public int CurrentShelter
+        {
+            get => _currentShelter;
+            private set => _currentShelter = value;
+        }
 
         public event Action<int> LevelChanged;
         public event Action<int> MoneyChanged;
 
         private int _currentLevel;
+        private int _currentShelter;
 
         public void AddMoney(int amount)
         {

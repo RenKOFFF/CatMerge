@@ -132,10 +132,10 @@ TextureImporter:
       name: BackButton_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 198
-        height: 197
+        x: 2
+        y: 8
+        width: 192
+        height: 196
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,10 +153,10 @@ TextureImporter:
       name: BackButton_1
       rect:
         serializedVersion: 2
-        x: 210
-        y: 0
-        width: 199
-        height: 197
+        x: 214
+        y: 8
+        width: 194
+        height: 196
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,6 +166,48 @@ TextureImporter:
       bones: []
       spriteID: 04182a306b0162b44aed644c712d3a9e
       internalID: -794055931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackButton_2
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 8
+        width: 194
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8e2b53f0da27e74790b8dc268dd8216
+      internalID: -850888673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BackButton_3
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 1
+        width: 194
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5be5b0af35e80a94dadc4c3f6641d305
+      internalID: 457768973
       vertices: []
       indices: 
       edges: []
@@ -181,7 +223,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      BackButton_3: 457768973
       BackButton_0: -2069640271
+      BackButton_2: -850888673
       BackButton_1: -794055931
   spritePackingTag: 
   pSDRemoveMatte: 0
