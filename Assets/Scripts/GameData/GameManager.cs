@@ -50,7 +50,7 @@ namespace GameData
         public event Action<int> MoneyChanged;
 
         private int _currentLevel;
-        private int _currentShelter;
+        private int _currentShelter = 1;
 
         public void AddMoney(int amount)
         {
@@ -87,8 +87,12 @@ namespace GameData
 
         private void Start()
         {
-            var shelterData = SaveManager.Instance.LoadOrDefault(new ShelterData(), $"Sh-{Instance.CurrentShelter}-Lvl-{Instance.CurrentLevel}");
             var gameplayData = SaveManager.Instance.LoadOrDefault(new GameplayData());
+            
+            CurrentLevel = gameplayData.CurrentLevel;
+            CurrentShelter = gameplayData.CurrentShelter;
+            
+            var shelterData = SaveManager.Instance.LoadOrDefault(new ShelterData(), $"Sh-{CurrentShelter}-Lvl-{CurrentLevel}");
 
             var lastEnergyChangingTime = gameplayData.LastEnergyChangingTime;
             var timePassedFromLastEnergyUpdate = DateTime.UtcNow - lastEnergyChangingTime;
@@ -106,7 +110,6 @@ namespace GameData
             
             OpenedLevels = JsonConvert.DeserializeObject<Dictionary<int, bool>>(shelterData.OpenedLevelsDictionaryJSonFormat);
             CompletedLevels = JsonConvert.DeserializeObject<Dictionary<int, bool>>(shelterData.CompletedLevelsDictionaryJSonFormat);
-            CurrentLevel = shelterData.CurrentLevel;
         }
 
         public void OnLevelCompleted()
