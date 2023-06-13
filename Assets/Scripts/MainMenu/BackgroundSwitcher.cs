@@ -18,7 +18,7 @@ namespace MainMenu
         [SerializeField] private Image _backgroundOld;
         [SerializeField] private float _transitionDuration = 1f;
         [SerializeField] private Ease _ease = Ease.Linear;
-        
+
         private List<LevelData> _levelsData;
         private bool _isLevelCompleted;
 
@@ -33,9 +33,9 @@ namespace MainMenu
                     JsonConvert.DeserializeObject<Dictionary<int, bool>>(data.OpenedLevelsDictionaryJSonFormat);
                 var completedLevels =
                     JsonConvert.DeserializeObject<Dictionary<int, bool>>(data.CompletedLevelsDictionaryJSonFormat);
-                
+
                 completedLevels.TryGetValue(GameManager.Instance.CurrentLevel, out var isCompleted);
-                
+
                 if (openedLevels.TryGetValue(GameManager.Instance.CurrentLevel, out var isOpened) && !isOpened
                     && isCompleted)
                     SwitchBackgroundByLevelIndex(GameManager.Instance.CurrentLevel);
@@ -45,11 +45,8 @@ namespace MainMenu
 
         public void OnOpenMenu()
         {
-            if (_isLevelCompleted)
-            {
-                PlayTransitionAnimation();
-                SwitchBackgroundByLevelIndex(GameManager.Instance.CurrentLevel);
-            }
+            SwitchBackgroundByLevelIndex(GameManager.Instance.CurrentLevel);
+            PlayTransitionAnimation();
         }
 
         [ContextMenu("PlayAnim")]

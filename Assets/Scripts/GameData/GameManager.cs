@@ -106,17 +106,14 @@ namespace GameData
             SaveGameplayData();
         }
 
-        public void OpenNextLevelAndCloseCurrent()
+        public void CloseCurrentLevel()
         {
             if (OpenedLevels.ContainsKey(CurrentLevel))
                 OpenedLevels[CurrentLevel] = false;
-            
-            OpenAllPossibleLevels();
-
             SaveGameplayData();
         }
 
-        private void OpenAllPossibleLevels()
+        public void OpenAllPossibleLevels()
         {
             var levelData = GameDataHelper.AllLevelData;
 
@@ -143,6 +140,8 @@ namespace GameData
             {
                 OpenedLevels.TryAdd(nextLevelIndex, true);
             }
+
+            SaveGameplayData();
         }
 
         private void SaveGameplayData()

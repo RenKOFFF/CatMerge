@@ -2527,6 +2527,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 819452820519153723, guid: e26a9fb183ef184449841563ebb058f9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -229.09998
+      objectReference: {fileID: 0}
     - target: {fileID: 3999361368027808871, guid: e26a9fb183ef184449841563ebb058f9, type: 3}
       propertyPath: _levelSwitcher
       value: 
@@ -2631,6 +2635,14 @@ PrefabInstance:
       propertyPath: _levelSwitcher
       value: 
       objectReference: {fileID: 1694124557}
+    - target: {fileID: 5810893093851155486, guid: e26a9fb183ef184449841563ebb058f9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 374
+      objectReference: {fileID: 0}
+    - target: {fileID: 5810893093851155486, guid: e26a9fb183ef184449841563ebb058f9, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -862
+      objectReference: {fileID: 0}
     - target: {fileID: 7483049903380972122, guid: e26a9fb183ef184449841563ebb058f9, type: 3}
       propertyPath: _levelButtons.Array.data[1]
       value: 

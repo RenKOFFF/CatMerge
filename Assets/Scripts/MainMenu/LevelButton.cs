@@ -66,8 +66,10 @@ namespace MainMenu
             _halo.SetActive(true);
             _image.sprite = _completedSprite;
          
+            _button.onClick.AddListener(GameManager.Instance.OpenAllPossibleLevels);
+            _button.onClick.AddListener(MainMenu.Instance.UpdateButtonInteractivity);
             _button.onClick.AddListener(callback);
-            _button.onClick.AddListener(GameManager.Instance.OpenNextLevelAndCloseCurrent);
+            _button.onClick.AddListener(GameManager.Instance.CloseCurrentLevel);
             _button.onClick.AddListener(MainMenu.Instance.UpdateButtonInteractivity);
         }
 
