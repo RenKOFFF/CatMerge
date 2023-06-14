@@ -39,7 +39,7 @@ namespace GameData
             get => _currentLevel;
             private set => _currentLevel = value;
         }
-        
+
         public int CurrentShelter
         {
             get => _currentShelter;
@@ -47,6 +47,7 @@ namespace GameData
         }
 
         public event Action<int> LevelChanged;
+        public event Action<int> ShelterChanged;
         public event Action<int> MoneyChanged;
 
         private int _currentLevel;
@@ -57,11 +58,11 @@ namespace GameData
             Money += amount;
             SaveGameplayData();
         }
-        
+
         public bool SpendMoney(int amount)
         {
             if (Money < amount) return false;
-            
+
             Money -= amount;
             SaveGameplayData();
             return true;
@@ -88,48 +89,57 @@ namespace GameData
         private void Start()
         {
             var gameplayData = SaveManager.Instance.LoadOrDefault(new GameplayData());
-            
+
             CurrentLevel = gameplayData.CurrentLevel;
             CurrentShelter = gameplayData.CurrentShelter;
-            
-            var shelterData = SaveManager.Instance.LoadOrDefault(new ShelterData(), $"Sh-{CurrentShelter}-Lvl-{CurrentLevel}");
 
             var lastEnergyChangingTime = gameplayData.LastEnergyChangingTime;
             var timePassedFromLastEnergyUpdate = DateTime.UtcNow - lastEnergyChangingTime;
             var offlineEnergyGainRaw = timePassedFromLastEnergyUpdate.TotalSeconds
                                        / EnergyController.TimeToRestoreOneEnergyInSeconds;
-            var offlineEnergyGain = (int) Math.Floor(offlineEnergyGainRaw);
+            var offlineEnergyGain = (int)Math.Floor(offlineEnergyGainRaw);
 
             Money = gameplayData.Money;
             EnergyController.LastEnergyChangingTime = lastEnergyChangingTime;
-            
+
             EnergyController.SetEnergy(Math.Clamp(
-                gameplayData.CurrentEnergy + offlineEnergyGain, 
-                0, 
+                gameplayData.CurrentEnergy + offlineEnergyGain,
+                0,
                 EnergyController.MaxStartEnergy));
-            
-            OpenedLevels = JsonConvert.DeserializeObject<Dictionary<int, bool>>(shelterData.OpenedLevelsDictionaryJSonFormat);
-            CompletedLevels = JsonConvert.DeserializeObject<Dictionary<int, bool>>(shelterData.CompletedLevelsDictionaryJSonFormat);
+
+            LoadShelterData();
+        }
+
+        private void LoadShelterData()
+        {
+            var shelterData = SaveManager.Instance.LoadOrDefault(new ShelterData(), $"Sh-{CurrentShelter}");
+
+            OpenedLevels =
+                JsonConvert.DeserializeObject<Dictionary<int, bool>>(shelterData.OpenedLevelsDictionaryJSonFormat);
+            CompletedLevels =
+                JsonConvert.DeserializeObject<Dictionary<int, bool>>(shelterData.CompletedLevelsDictionaryJSonFormat);
         }
 
         public void OnLevelCompleted()
         {
             CompletedLevels.Add(CurrentLevel, true);
-            SaveGameplayData();
+            SaveShelterData();
         }
 
         public void CloseCurrentLevel()
         {
             if (OpenedLevels.ContainsKey(CurrentLevel))
                 OpenedLevels[CurrentLevel] = false;
-            SaveGameplayData();
+            SaveShelterData();
         }
 
         public void OpenAllPossibleLevels()
         {
             var levelData = GameDataHelper.AllLevelData;
 
-            var currentLevelData = levelData.Where(i => i.CurrentLevelIndex == CurrentLevel).ToList();
+            var currentLevelData = levelData
+                .Where(i => i.CurrentLevelIndex == CurrentLevel &&
+                            i.CurrentShelterIndex == CurrentShelter).ToList();
             if (currentLevelData.Count > 1)
             {
                 Debug.LogError("Level data more 1; Fix this");
@@ -142,7 +152,7 @@ namespace GameData
                 //TODO:this is debug code
                 if (currentLevelData.Count != 0 && currentLevelData[0].NextLevelIndexes.Count == 0)
                     Debug.Log("There is level data, but next level list is empty");
-                
+
                 nextLevelIndexes.Add(CurrentLevel + 1);
             }
             else nextLevelIndexes = currentLevelData[0].NextLevelIndexes;
@@ -153,13 +163,18 @@ namespace GameData
                 OpenedLevels.TryAdd(nextLevelIndex, true);
             }
 
-            SaveGameplayData();
+            SaveShelterData();
         }
 
         private void SaveGameplayData()
         {
-            SaveManager.Instance.Save(new ShelterData(Instance), $"Sh-{Instance.CurrentShelter}-Lvl-{Instance.CurrentLevel}");
             SaveManager.Instance.Save(new GameplayData(Instance));
+        }
+
+        private void SaveShelterData()
+        {
+            SaveManager.Instance.Save(new ShelterData(Instance),
+                $"Sh-{Instance.CurrentShelter}");
         }
 
         public void ChangeLevel(int lvlIndex)
@@ -167,14 +182,28 @@ namespace GameData
             if (CurrentLevel == lvlIndex) return;
 
             CurrentLevel = lvlIndex;
-            SaveGameplayData();
+            SaveShelterData();
 
             LevelChanged?.Invoke(_currentLevel);
+        }
+
+        public bool ChangeShelter(int shelterIndex)
+        {
+            if (CurrentShelter == shelterIndex) return false;
+
+            CurrentShelter = shelterIndex;
+            
+            LoadShelterData();
+            //SaveShelterData();
+
+            ShelterChanged?.Invoke(CurrentShelter);
+            return true;
         }
 
         private void OnApplicationQuit()
         {
             SaveGameplayData();
+            SaveShelterData();
             MergeController.Instance.SaveMField();
         }
     }

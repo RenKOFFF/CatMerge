@@ -54,7 +54,7 @@ namespace SaveSystem
 
         private string GetFileName<T>(string key = "")
         {
-            var fileName = $"{typeof(T)}{key}.save";
+            var fileName = $"{typeof(T).Name}{key}.save";
             return fileName;
         }
     }

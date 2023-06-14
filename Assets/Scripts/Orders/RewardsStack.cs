@@ -71,6 +71,8 @@ namespace Orders
 
         private void LoadOrDefaultData()
         {
+            if (GameManager.Instance.CurrentLevel == 0) return;
+            
             ClearStack();
             var ordersSaveData = SaveManager.Instance.LoadOrDefault(
                 new OrdersSaveData(),

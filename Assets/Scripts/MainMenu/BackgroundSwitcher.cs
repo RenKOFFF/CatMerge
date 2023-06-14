@@ -20,15 +20,14 @@ namespace MainMenu
         [SerializeField] private Ease _ease = Ease.Linear;
 
         private List<LevelData> _levelsData;
-        private bool _isLevelCompleted;
 
         private void Start()
         {
             _levelsData = GameDataHelper.AllLevelData;
-            OrderManager.Instance.LevelCompleted += OnLevelCompleted;
             if (GameManager.Instance.CurrentLevel > 0)
             {
-                var data = SaveManager.Instance.LoadOrDefault(new ShelterData(), $"Sh-{GameManager.Instance.CurrentShelter}-Lvl-{GameManager.Instance.CurrentLevel}");
+                var data = SaveManager.Instance.LoadOrDefault(new ShelterData(),
+                    $"Sh-{GameManager.Instance.CurrentShelter}");
                 var openedLevels =
                     JsonConvert.DeserializeObject<Dictionary<int, bool>>(data.OpenedLevelsDictionaryJSonFormat);
                 var completedLevels =
@@ -53,7 +52,11 @@ namespace MainMenu
         private void PlayTransitionAnimation()
         {
             var mainMenuButtons = MainMenu.Instance.LevelButtons.ToList();
-            var activeButtons = mainMenuButtons.Where(b => b.gameObject.activeInHierarchy).ToList();
+            var activeButtons = mainMenuButtons
+                .Where(b => b.LevelButtons
+                    .Any(levelButton => levelButton.gameObject.activeInHierarchy))
+                .ToArray();
+
 
             Color transparentColor = Color.white;
             transparentColor.a = 0;
@@ -78,7 +81,8 @@ namespace MainMenu
                 else MainMenu.Instance.BackButton.targetGraphic.color = transparentColor;
 
 
-                foreach (var button in activeButtons)
+                var buttons = activeButtons.SelectMany(b => b.LevelButtons);
+                foreach (var button in buttons)
                 {
                     button.Button.interactable = isOn;
                     if (isOn)
@@ -90,16 +94,6 @@ namespace MainMenu
                     else button.Button.targetGraphic.color = transparentColor;
                 }
             }
-        }
-
-        private void OnDestroy()
-        {
-            OrderManager.Instance.LevelCompleted -= OnLevelCompleted;
-        }
-
-        private void OnLevelCompleted()
-        {
-            _isLevelCompleted = true;
         }
 
         private void SwitchBackgroundByLevelIndex(int currentLevel)

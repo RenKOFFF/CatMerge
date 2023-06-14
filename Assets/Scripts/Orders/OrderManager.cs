@@ -237,6 +237,8 @@ namespace Orders
         
         private void LoadOrdersOnCurrentLevel()
         {
+            if (GameManager.Instance.CurrentLevel == 0) return;
+
             var ordersSaveData = SaveManager.Instance.LoadOrDefault(
                 new OrdersSaveData(),
                 $"Sh-{GameManager.Instance.CurrentShelter}-Lvl-{GameManager.Instance.CurrentLevel}");

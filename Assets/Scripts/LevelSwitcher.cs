@@ -9,4 +9,10 @@ public class LevelSwitcher : MonoBehaviour
         GameManager.Instance.ChangeLevel(lvl);
         MergeController.Instance.LoadLevel();
     }
+
+    public void ChangeShelter(int shelterIndex)
+    {
+        if (GameManager.Instance.ChangeShelter(shelterIndex))
+            LoadLevel(0);
+    }
 }

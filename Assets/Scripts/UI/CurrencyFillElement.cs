@@ -46,7 +46,7 @@ namespace UI
             _currencyText.text = _currentValue.ToString(CultureInfo.InvariantCulture) + (_showMaxValue ? $"/{_maxValue}" : "");
             
             _currencyFillRectTransform.anchorMax = 
-                new Vector2(_maxValue == 0 ? 0 : Mathf.Clamp(_currentValue * _step, 0, 1),
+                new Vector2(_maxValue == 0 ? 0 : Mathf.Clamp(_currentValue * _step, 0.00001f, 1),
                 _currencyFillRectTransform.anchorMax.y);
         }
     }

@@ -169,6 +169,8 @@ namespace Merge
 
         private void LoadMergeFieldData()
         {
+            if (GameManager.Instance.CurrentLevel == 0) return;
+            
             var loadedData = SaveManager.Instance.LoadOrDefault(new LevelSaveData(Instance.MergeCells.Length),
                 $"Sh-{GameManager.Instance.CurrentShelter}-Lvl-{GameManager.Instance.CurrentLevel}");
 
