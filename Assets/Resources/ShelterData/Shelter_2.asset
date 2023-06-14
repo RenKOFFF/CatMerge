@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b1a560c3384255a85dbfa01dde0cfa, type: 3}
+  m_Name: Shelter_2
+  m_EditorClassIdentifier: 
+  _shelterName: "\u041A\u043E\u0448\u0430\u0447\u0438\u0439 \u0440\u0430\u0439"
+  _maxLevelsInTheShelter: 6
+  _currentShelterIndex: 2
+  _requiredCompletedLevelsCountToOpen: 3
+  _shelterSprite: {fileID: 21300000, guid: 8379ab67de8389f4d9f8dd3bce5bd8e5, type: 3}

@@ -406,6 +406,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2448803550443288754}
+  - component: {fileID: 1891283227305428953}
   m_Layer: 5
   m_Name: Shelter (1)
   m_TagString: Untagged
@@ -436,6 +437,27 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -276.5}
   m_SizeDelta: {x: 0, y: 553}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1891283227305428953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3397099300853435542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb209f096f9451ea7a85f47326440da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shelterIndex: 1
+  _shelterIndexText: {fileID: 9030162979890469591}
+  _titleText: {fileID: 4757013227426943428}
+  _button: {fileID: 2297227061652590198}
+  _lockImage: {fileID: 7563516649087467879}
+  _shelterImage: {fileID: 4827083605255121522}
+  _progressBar: {fileID: 3096457038422556234}
+  _levelSwitcher: {fileID: 0}
+  _sheltersCanvas: {fileID: 0}
 --- !u!1 &6013059721849324719
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,7 +524,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041A\u043E\u0442\u043E\u0434\u043E\u043C"
+  m_text: ???
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 586531a37207de7468b032a231d7f8d1, type: 2}
   m_sharedMaterial: {fileID: -971455175200992689, guid: 586531a37207de7468b032a231d7f8d1, type: 2}
@@ -703,9 +725,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 624141034931442710}
-  - component: {fileID: 8176052582814658482}
+  - component: {fileID: 3096457038422556234}
   m_Layer: 5
-  m_Name: CompleteLevelElement
+  m_Name: ProgressBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -733,7 +755,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -320, y: 92}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &8176052582814658482
+--- !u!114 &3096457038422556234
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -742,7 +764,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6676907360692193652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2027f523325fe1c42acfa20a4a58735b, type: 3}
+  m_Script: {fileID: 11500000, guid: e29a904908654f2a90966f36865c721a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _currencyText: {fileID: 2642673551281280132}
@@ -1049,7 +1071,7 @@ GameObject:
   - component: {fileID: 5526378957797029721}
   - component: {fileID: 2642673551281280132}
   m_Layer: 5
-  m_Name: ProcentiText
+  m_Name: ProgressText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

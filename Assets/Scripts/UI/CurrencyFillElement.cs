@@ -20,8 +20,6 @@ namespace UI
         {
             if (_isInitialized) return;
 
-            _maxValue = maxValue;
-            _step = 1 / maxValue;
             ChangeMaxValueVisibility(showMaxValue);
             
             UpdateMaxValue(maxValue);

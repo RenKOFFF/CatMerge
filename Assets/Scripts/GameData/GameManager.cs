@@ -80,6 +80,18 @@ namespace GameData
             SaveGameplayData();
         }
 
+        public int GetProgressInShelter(int shelterIndex)
+        {
+            var shelterData = SaveManager.Instance.LoadOrDefault(
+                new ShelterData(),
+                $"Sh-{shelterIndex}");
+            
+            var completedLevels =
+                JsonConvert.DeserializeObject<Dictionary<int, bool>>(shelterData.CompletedLevelsDictionaryJSonFormat);
+
+            return completedLevels.Count;
+        }
+        
         private void Awake()
         {
             Instance = this;

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentLvlIndex: 5
   _currentShelterIndex: 2
-  _nextLvlIndexes: 05000000
+  _nextLvlIndexes: 06000000
   _parallelLvlData:
   - {fileID: 11400000, guid: 6f4d52c184600c749959f763d116b473, type: 2}
   _bgWhenThisLevelCompleted: {fileID: 21300000, guid: d622b32d9fd347444b48fd37c3f5b257, type: 3}

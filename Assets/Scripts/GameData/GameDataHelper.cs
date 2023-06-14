@@ -3,6 +3,7 @@ using System.Linq;
 using Merge;
 using Merge.Coins;
 using Merge.Generator;
+using SaveSystem.SaveData;
 using UnityEngine;
 
 namespace GameData
@@ -13,7 +14,8 @@ namespace GameData
         public static List<MergeItemData> AllMergeItems { get; }
         public static List<MergeItemData> AllRewardItems { get; }
         public static List<LevelData> AllLevelData { get; }
-
+        public static List<ShelterConfig> AllShelterData { get;}
+        
         static GameDataHelper()
         {
             AllItems = Resources
@@ -33,6 +35,10 @@ namespace GameData
             
             AllLevelData = Resources
                 .LoadAll<LevelData>("LevelData")
+                .ToList();
+            
+            AllShelterData = Resources
+                .LoadAll<ShelterConfig>("ShelterData")
                 .ToList();
         }
     }

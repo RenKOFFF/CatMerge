@@ -7,11 +7,11 @@ using UnityEngine;
 
 namespace UI
 {
-    public class CompletedLevelUiField : CurrencyFillElement
+    public class MainMenuShelterProgressBar : CurrencyFillElement
     {
         [SerializeField] TextMeshProUGUI _shelterIndexText;
 
-        private int _maxLevelInZone = 5;
+        private int _maxLevelInShelter = 5;
         private int _completedLevels;
 
         private float _coeff;
@@ -21,14 +21,22 @@ namespace UI
             //TODO: это полное говнище, исправить, если проект будет не заброшен
             _completedLevels = GameManager.Instance.CompletedLevels.Values.Where(a => true).ToList().Count;
 
-            _coeff = 100f / _maxLevelInZone;
+            _maxLevelInShelter = GetMaxLevelsOnShelter();
+            _coeff = 100f / _maxLevelInShelter;
 
-            Initialize(_maxLevelInZone * _coeff, (_completedLevels) * _coeff);
+            Initialize(_maxLevelInShelter * _coeff, (_completedLevels) * _coeff);
             _currencyText.text += "%";
 
             OrderManager.Instance.LevelCompleted += ChangeValueWithPercentages;
             GameManager.Instance.ShelterChanged += OnShelterChanged;
             OnShelterChanged(GameManager.Instance.CurrentShelter);
+        }
+
+        private int GetMaxLevelsOnShelter()
+        {
+            return GameDataHelper.AllShelterData
+                .First(s => s.CurrentShelterIndex == GameManager.Instance.CurrentShelter)
+                .MaxLevelsInTheShelter;
         }
 
         private void OnDestroy()
@@ -45,6 +53,11 @@ namespace UI
 
         private void OnShelterChanged(int shelterIndex)
         {
+            _maxLevelInShelter = GetMaxLevelsOnShelter();
+            _coeff = 100f / _maxLevelInShelter;
+            
+            UpdateMaxValue(_maxLevelInShelter * _coeff);
+            
             if (_shelterIndexText)
                 _shelterIndexText.text = $"{shelterIndex}";
 
