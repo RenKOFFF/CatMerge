@@ -16,3 +16,4 @@ MonoBehaviour:
   _cost: 8
   _items:
   - {fileID: 11400000, guid: 98a4a555845d224458084acd3c39e38e, type: 2}
+  - {fileID: 11400000, guid: e575b4028cf98ac4a83bfe72278bc475, type: 2}

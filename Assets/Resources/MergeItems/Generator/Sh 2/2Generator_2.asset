@@ -17,6 +17,7 @@ MonoBehaviour:
   previousMergeItem: {fileID: 11400000, guid: c5264144d53ad754f8426e34845f019e, type: 2}
   nextMergeItem: {fileID: 11400000, guid: 587bfb93f9769224b937b6732783d7e5, type: 2}
   itemsGroupName: "\u041A\u0430\u0440\u0442\u043E\u043D\u043D\u044B\u0435 \u0434\u043E\u043C\u0438\u043A\u0438"
+  ShelterItemIndex: 2
   SpawnChance:
     serializedVersion: 2
     m_Curve: []
