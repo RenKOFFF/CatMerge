@@ -63,12 +63,14 @@ namespace Orders
 
         private void OnEnable()
         {
+            GameManager.Instance.ShelterChanged += OnLevelChanged;
             GameManager.Instance.LevelChanged += OnLevelChanged;
             LevelCompleted += GameManager.Instance.OnLevelCompleted;
         }
 
         private void OnDisable()
         {
+            GameManager.Instance.ShelterChanged -= OnLevelChanged;
             GameManager.Instance.LevelChanged -= OnLevelChanged;
             LevelCompleted -= GameManager.Instance.OnLevelCompleted;
         }
@@ -286,8 +288,7 @@ namespace Orders
 
             MergeItemData FindMergeItemDataOnResourcesByName(string dataName)
             {
-                string directory = dataName.Split("_")[0];
-                var mergeItemData = Resources.Load<MergeItemData>($"MergeItems/{directory}/{dataName}");
+                var mergeItemData = GameDataHelper.AllItems.Find(a => a.name == dataName);
                 return mergeItemData;
             }
         }
@@ -313,6 +314,8 @@ namespace Orders
             if (!NextOrderGenerationTime.IsPassed())
                 return;
 
+            if (menuCanvas.gameObject.activeInHierarchy) return;
+            
             GenerateOrder();
             SetNewOrderGenerationTime();
         }

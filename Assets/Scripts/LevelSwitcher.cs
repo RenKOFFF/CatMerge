@@ -7,6 +7,11 @@ public class LevelSwitcher : MonoBehaviour
     public void LoadLevel(int lvl)
     {
         GameManager.Instance.ChangeLevel(lvl);
+        LoadCurrentLevel();
+    }
+    
+    public void LoadCurrentLevel()
+    {
         MergeController.Instance.LoadLevel();
     }
 
