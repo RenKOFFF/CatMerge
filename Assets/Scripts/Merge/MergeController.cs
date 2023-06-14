@@ -2,6 +2,7 @@
 using System.Linq;
 using GameData;
 using JetBrains.Annotations;
+using Merge.Generator;
 using Merge.Item_info;
 using Newtonsoft.Json;
 using SaveSystem;
@@ -71,7 +72,7 @@ namespace Merge
             if (MergingItem == null)
                 return;
 
-            var worldPosition = (Vector2) Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+            var worldPosition = (Vector2)Camera.main!.ScreenToWorldPoint(Input.mousePosition);
             MergingItem.transform.position = worldPosition;
         }
 
@@ -170,7 +171,7 @@ namespace Merge
         private void LoadMergeFieldData()
         {
             if (GameManager.Instance.CurrentLevel == 0) return;
-            
+
             var loadedData = SaveManager.Instance.LoadOrDefault(new LevelSaveData(Instance.MergeCells.Length),
                 $"Sh-{GameManager.Instance.CurrentShelter}-Lvl-{GameManager.Instance.CurrentLevel}");
 
@@ -181,9 +182,7 @@ namespace Merge
             {
                 if (dict.TryGetValue(i, out var dataName))
                 {
-                    string directory = dataName.Split("_")[0];
-
-                    var mergeItemData = Resources.Load<MergeItemData>($"MergeItems/{directory}/{dataName}");
+                    var mergeItemData = GameDataHelper.AllItems.Find(a => a.name == dataName);
                     MergeCells[i].MergeItem.TrySetData(mergeItemData, true);
                 }
                 else MergeCells[i].MergeItem.TrySetData(null, true);
@@ -195,7 +194,7 @@ namespace Merge
         public void SaveMField()
         {
             if (GameManager.Instance.CurrentLevel == 0) return;
-            
+
             SaveManager.Instance.Save(new LevelSaveData(Instance, GameManager.Instance.IsGeneratorSpawned),
                 $"Sh-{GameManager.Instance.CurrentShelter}-Lvl-{GameManager.Instance.CurrentLevel}");
         }

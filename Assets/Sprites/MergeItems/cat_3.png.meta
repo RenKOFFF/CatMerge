@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0e1d672ae8a7cc545a4407010c7e5de8
+guid: eb332cd096264ba4ba0504217eee5bbf
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -129,97 +129,97 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: generators_0
+      name: cat_3_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 6
-        width: 122
-        height: 117
+        x: 3
+        y: 258
+        width: 123
+        height: 124
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 936c7ebff6798be43afede8bde6076dc
-      internalID: -1564771136
+      spriteID: 5ed6308fd5a276a4782ddf5d4afce57a
+      internalID: 160426347
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: generators_1
+      name: cat_3_1
       rect:
         serializedVersion: 2
-        x: 132
-        y: 13
-        width: 120
-        height: 104
+        x: 152
+        y: 259
+        width: 87
+        height: 125
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56ddbdabb2638c640977c6b51d4bdfaa
-      internalID: -1560039237
+      spriteID: 792b0fb4531f9304bb57f47d86a88f13
+      internalID: 2074786545
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: generators_2
+      name: cat_3_3
       rect:
         serializedVersion: 2
-        x: 267
-        y: 8
+        x: 260
+        y: 255
+        width: 121
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9595f126919a88b4eac2a239bc523076
+      internalID: -1945995247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cat_3_4
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 129
+        width: 110
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b9ece4258cf40243a50051c3b0013c5
+      internalID: -312035303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cat_3_5
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 130
         width: 107
-        height: 112
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5ddeb485303958146ba751defa5519f2
-      internalID: -1931270333
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: generators_3
-      rect:
-        serializedVersion: 2
-        x: 392
-        y: 9
-        width: 109
-        height: 113
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b8e7ebeb0086199479bf7504048c9e35
-      internalID: -656303356
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: generators_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 149
-        width: 132
-        height: 94
+        height: 124
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -227,20 +227,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d8545211fcd3eb40a2c9d4386661876
-      internalID: 444763042
+      spriteID: 2b69d05821ecac64499cce6fc50e610b
+      internalID: 1752466144
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: generators_5
+      name: cat_3_6
       rect:
         serializedVersion: 2
-        x: 132
-        y: 143
-        width: 120
-        height: 100
+        x: 259
+        y: 131
+        width: 121
+        height: 121
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -248,20 +248,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e74c0125cb3993044b30d3c25e992e3a
-      internalID: -1092355189
+      spriteID: 9fd3228408a04c54fbf61d9a19f46400
+      internalID: -159783081
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: generators_6
+      name: cat_3_7
       rect:
         serializedVersion: 2
-        x: 267
-        y: 135
-        width: 111
-        height: 119
+        x: 2
+        y: 3
+        width: 124
+        height: 123
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -269,29 +269,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b7d65e462669a1458a63f713e2736e9
-      internalID: 2027761561
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: generators_7
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 132
-        width: 119
-        height: 109
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8f3da87fc97f2ed43bb8536d63a28927
-      internalID: -1541631891
+      spriteID: 164b7c9d09905af4295f7b526eac6642
+      internalID: 45864489
       vertices: []
       indices: 
       edges: []
@@ -307,14 +286,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      generators_7: -1963722724
-      generators_0: -1564771136
-      generators_2: -1931270333
-      generators_6: -1402399775
-      generators_3: -656303356
-      generators_5: 395858768
-      generators_4: -1337921124
-      generators_1: -1560039237
+      cat_3_5: 1752466144
+      cat_3_7: 45864489
+      cat_3_0: 160426347
+      cat_3_2: -182147150
+      cat_3_6: -159783081
+      cat_3_3: -1945995247
+      cat_3_1: 2074786545
+      cat_3_4: -312035303
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

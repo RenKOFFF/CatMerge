@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Merge;
 using Merge.Energy;
+using Merge.Generator;
 using Newtonsoft.Json;
 using SaveSystem;
 using SaveSystem.SaveData;

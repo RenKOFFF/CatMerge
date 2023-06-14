@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c77c5c8b8754aefbc7f71f5cf8a2fbc, type: 3}
-  m_Name: Generator_3
+  m_Name: 2Generator_3
   m_EditorClassIdentifier: 
   itemName: "\u0414\u043E\u043C\u0438\u043A"
-  sprite: {fileID: -656303356, guid: 0e1d672ae8a7cc545a4407010c7e5de8, type: 3}
-  previousMergeItem: {fileID: 11400000, guid: 5915dd76d52162645a544fa6f33f9b29, type: 2}
+  sprite: {fileID: -1541631891, guid: 0e1d672ae8a7cc545a4407010c7e5de8, type: 3}
+  previousMergeItem: {fileID: 11400000, guid: d304e78237a7c054bb65a8b43469fcf7, type: 2}
   nextMergeItem: {fileID: 0}
   itemsGroupName: "\u041A\u0430\u0440\u0442\u043E\u043D\u043D\u044B\u0435 \u0434\u043E\u043C\u0438\u043A\u0438"
   SpawnChance:
@@ -23,14 +23,16 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _particleByUse: {fileID: 0}
+  _particleSprite: {fileID: 0}
   _age: 4
   _lines:
     GenerateLine:
     - ItemData:
-      - {fileID: 11400000, guid: b9bc292adf5836e46ab50b0ce2433735, type: 2}
-      - {fileID: 11400000, guid: 241cc1550555ef44fb7a7ee770430ea7, type: 2}
-      - {fileID: 11400000, guid: 441b0bff7b232ab498b9995cfd61c2ac, type: 2}
+      - {fileID: 11400000, guid: a7dc039b32e27874288fe2f7c963c05d, type: 2}
+      - {fileID: 11400000, guid: b587593794f35344cb233afdac63f64b, type: 2}
+      - {fileID: 11400000, guid: f5432a58fd1f340429b7a696180a5702, type: 2}
     - ItemData:
-      - {fileID: 11400000, guid: 9e86ad282d18e0c42806929679495fce, type: 2}
-      - {fileID: 11400000, guid: f594ee4f765371346bdda49d4a2e24ca, type: 2}
-      - {fileID: 11400000, guid: bff12f2fae4d2384ca9b43af637b6446, type: 2}
+      - {fileID: 11400000, guid: 4f28d100b14cd8549aba03f83b3fb0e9, type: 2}
+      - {fileID: 11400000, guid: 43c1b7164f551c94b9f4fcc64c11b08a, type: 2}
+      - {fileID: 11400000, guid: f5dd5b1cb7fba5c41a006442b81875ab, type: 2}

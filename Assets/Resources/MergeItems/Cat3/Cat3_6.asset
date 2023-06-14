@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd314e7d37064c15889684d10850b527, type: 3}
+  m_Name: Cat3_6
+  m_EditorClassIdentifier: 
+  itemName: "\u041A\u043E\u0442 \u0432 \u043A\u043E\u0440\u043E\u0431\u043A\u0435"
+  sprite: {fileID: -159783081, guid: eb332cd096264ba4ba0504217eee5bbf, type: 3}
+  previousMergeItem: {fileID: 11400000, guid: be2254edfda0f20449f37f9117e5e3d3, type: 2}
+  nextMergeItem: {fileID: 11400000, guid: 749e09a8986d1d445965046fa9b0ac78, type: 2}
+  itemsGroupName: 
+  SpawnChance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _particleByUse: {fileID: 0}
+  _particleSprite: {fileID: 0}

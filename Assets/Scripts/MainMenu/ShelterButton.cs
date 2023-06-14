@@ -40,7 +40,7 @@ namespace MainMenu
             {
                 _progressBar.gameObject.SetActive(false);
                 _shelterImage.sprite = null;
-                _shelterImage.color = Color.black;
+                _shelterImage.color = Color.grey;
             }
 
             _shelterIndexText.text = $"#{_shelterIndex}";
