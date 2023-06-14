@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using DG.Tweening;
 using GameData;
 using Merge;
@@ -13,13 +14,13 @@ namespace Shop
     public class ShopController : MonoBehaviour
     {
         [SerializeField] private GameObject[] _shopButtons;
-        
+
         [SerializeField] private GameObject _panel;
         [SerializeField] private Image _bg;
-        
+
         [SerializeField] private Color _openedColor;
         [SerializeField] private Color _closedColor;
-        
+
         private bool _animationInProcess;
         public static ShopController Instance;
 
@@ -76,9 +77,12 @@ namespace Shop
             if (GameManager.Instance.Money < shopCell.ShopData.Cost)
                 return false;
 
-            var spawnIndex = Random.Range(0, shopCell.ShopData.Items.Length);
+            var shopCellShopDataInCurrentShelter =
+                shopCell.ShopData.Items.Where(i => i.ShelterItemIndex == GameManager.Instance.CurrentShelter).ToArray();
 
-            RewardsStack.Instance.AppendReward(shopCell.ShopData.Items[spawnIndex]);
+            var spawnIndex = Random.Range(0, shopCellShopDataInCurrentShelter.Length);
+
+            RewardsStack.Instance.AppendReward(shopCellShopDataInCurrentShelter[spawnIndex]);
             GameManager.Instance.SpendMoney(shopCell.ShopData.Cost);
 
             return true;
