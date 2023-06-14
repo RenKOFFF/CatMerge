@@ -194,6 +194,8 @@ namespace Merge
 
         public void SaveMField()
         {
+            if (GameManager.Instance.CurrentLevel == 0) return;
+            
             SaveManager.Instance.Save(new LevelSaveData(Instance, GameManager.Instance.IsGeneratorSpawned),
                 $"Sh-{GameManager.Instance.CurrentShelter}-Lvl-{GameManager.Instance.CurrentLevel}");
         }

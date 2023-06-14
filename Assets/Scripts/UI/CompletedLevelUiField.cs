@@ -26,18 +26,18 @@ namespace UI
             Initialize(_maxLevelInZone * _coeff, (_completedLevels) * _coeff);
             _currencyText.text += "%";
 
-            OrderManager.Instance.LevelCompleted += OnCompletedOrdersChanged;
+            OrderManager.Instance.LevelCompleted += ChangeValueWithPercentages;
             GameManager.Instance.ShelterChanged += OnShelterChanged;
-            OnCompletedOrdersChanged();
+            OnShelterChanged(GameManager.Instance.CurrentShelter);
         }
 
         private void OnDestroy()
         {
-            OrderManager.Instance.LevelCompleted -= OnCompletedOrdersChanged;
+            OrderManager.Instance.LevelCompleted -= ChangeValueWithPercentages;
             GameManager.Instance.ShelterChanged -= OnShelterChanged;
         }
 
-        private void OnCompletedOrdersChanged()
+        private void ChangeValueWithPercentages()
         {
             ChangeValue(_coeff * GameManager.Instance.CompletedLevels.Values.Count);
             _currencyText.text += "%";
@@ -47,6 +47,8 @@ namespace UI
         {
             if (_shelterIndexText)
                 _shelterIndexText.text = $"{shelterIndex}";
+
+            ChangeValueWithPercentages();
         }
     }
 }

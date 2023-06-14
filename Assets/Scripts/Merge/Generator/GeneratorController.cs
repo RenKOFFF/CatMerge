@@ -43,7 +43,7 @@ public class GeneratorController : MonoBehaviour
 
     public void SetIsGeneratorSpawned(bool value)
     {
-        if (IsGeneratorSpawned == value) return;
+        if (IsGeneratorSpawned == value || GameManager.Instance.CurrentLevel == 0) return;
         
         IsGeneratorSpawned = value;
         SaveManager.Instance.Save(new LevelSaveData(MergeController.Instance, value), 
