@@ -94,7 +94,8 @@ namespace Orders
                     var minItemLevel = Math.Max(1, maxItemLevel - 2);
                     var complexityLevel = i.ComplexityLevel;
 
-                    return complexityLevel >= minItemLevel && complexityLevel <= maxItemLevel;
+                    return complexityLevel >= minItemLevel && complexityLevel <= maxItemLevel &&
+                           i.ShelterItemIndex == GameManager.Instance.CurrentShelter;
                 })
                 .ToList();
 
@@ -110,7 +111,8 @@ namespace Orders
                 availableMergeItems.RemoveAt(randomIndex);
             }
 
-            var orderIncludesRewardItemProbability = itemsForPartsData.Average(i => i.ComplexityLevel) * partsCount * 0.08;
+            var orderIncludesRewardItemProbability =
+                itemsForPartsData.Average(i => i.ComplexityLevel) * partsCount * 0.08;
             var isRewardItemIncluded = Random.Range(0f, 1) < orderIncludesRewardItemProbability;
             MergeItemData rewardItem = null;
 
@@ -225,16 +227,16 @@ namespace Orders
             SetNewOrderGenerationTime();
             LoadOrdersOnCurrentLevel();
         }
-        
+
         public int GetOrderProgressInLevel(int shelterIndex, int levelIndex)
         {
             var ordersSaveData = SaveManager.Instance.LoadOrDefault(
                 new OrdersSaveData(),
                 $"Sh-{shelterIndex}-Lvl-{levelIndex}");
-            
+
             return ordersSaveData.CompletedOrdersCount;
         }
-        
+
         private void LoadOrdersOnCurrentLevel()
         {
             if (GameManager.Instance.CurrentLevel == 0) return;

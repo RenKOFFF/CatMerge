@@ -86,13 +86,23 @@ namespace GameData
             var shelterData = SaveManager.Instance.LoadOrDefault(
                 new ShelterData(),
                 $"Sh-{shelterIndex}");
-            
+
             var completedLevels =
                 JsonConvert.DeserializeObject<Dictionary<int, bool>>(shelterData.CompletedLevelsDictionaryJSonFormat);
 
             return completedLevels.Count;
         }
-        
+
+
+        public int GetLastCurrentLevelOnShelter(int shelterIndex)
+        {
+            var shelterData = SaveManager.Instance.LoadOrDefault(
+                new ShelterData(),
+                $"Sh-{shelterIndex}");
+
+            return shelterData.LastLevel;
+        }
+
         private void Awake()
         {
             Instance = this;
@@ -195,6 +205,7 @@ namespace GameData
             if (CurrentLevel == lvlIndex) return;
 
             CurrentLevel = lvlIndex;
+            SaveGameplayData();
             SaveShelterData();
 
             LevelChanged?.Invoke(_currentLevel);
@@ -202,12 +213,10 @@ namespace GameData
 
         public bool ChangeShelter(int shelterIndex)
         {
-            if (CurrentShelter == shelterIndex) return false;
-
             CurrentShelter = shelterIndex;
-            
             LoadShelterData();
-            //SaveShelterData();
+            
+            ChangeLevel(GetLastCurrentLevelOnShelter(shelterIndex));
 
             ShelterChanged?.Invoke(CurrentShelter);
             return true;

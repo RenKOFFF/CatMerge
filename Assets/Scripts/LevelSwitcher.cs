@@ -12,7 +12,6 @@ public class LevelSwitcher : MonoBehaviour
 
     public void ChangeShelter(int shelterIndex)
     {
-        if (GameManager.Instance.ChangeShelter(shelterIndex))
-            LoadLevel(0);
+        GameManager.Instance.ChangeShelter(shelterIndex);
     }
 }

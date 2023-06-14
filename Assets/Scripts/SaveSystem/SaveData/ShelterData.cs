@@ -10,6 +10,7 @@ namespace SaveSystem
     {
         public string OpenedLevelsDictionaryJSonFormat { get; set; }
         public string CompletedLevelsDictionaryJSonFormat { get; set; }
+        public int LastLevel { get; set; }
 
         public ShelterData(GameManager gameManager)
         {
@@ -17,6 +18,7 @@ namespace SaveSystem
             var completedLevelsDictionary = gameManager.CompletedLevels;
             OpenedLevelsDictionaryJSonFormat = JsonConvert.SerializeObject(openedLevelsDictionary);
             CompletedLevelsDictionaryJSonFormat = JsonConvert.SerializeObject(completedLevelsDictionary);
+            LastLevel = gameManager.CurrentLevel;
         }
 
         /// <summary>

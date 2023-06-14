@@ -66,6 +66,8 @@ namespace MainMenu
 
         public void MakeHalo(UnityAction callback)
         {
+            _button.onClick.RemoveAllListeners();
+            
             _halo.SetActive(true);
             _image.sprite = _completedSprite;
 

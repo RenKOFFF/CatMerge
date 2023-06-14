@@ -4,9 +4,7 @@ using System.Linq;
 using DG.Tweening;
 using GameData;
 using Newtonsoft.Json;
-using Orders;
 using SaveSystem;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,10 +19,25 @@ namespace MainMenu
 
         private List<LevelData> _levelsData;
 
+        private void OnEnable()
+        {
+            GameManager.Instance.ShelterChanged += UpdateBg;
+        }
+
+        private void OnDisable()
+        {
+            GameManager.Instance.ShelterChanged -= UpdateBg;
+        }
+
         private void Start()
         {
             _levelsData = GameDataHelper.AllLevelData;
-            if (GameManager.Instance.CurrentLevel > 0)
+            UpdateBg(666);
+        }
+
+        private void UpdateBg(int _)
+        {
+            if (true) //GameManager.Instance.CurrentLevel > 0
             {
                 var data = SaveManager.Instance.LoadOrDefault(new ShelterData(),
                     $"Sh-{GameManager.Instance.CurrentShelter}");
@@ -98,8 +111,12 @@ namespace MainMenu
 
         private void SwitchBackgroundByLevelIndex(int currentLevel)
         {
+            if (currentLevel == -1) currentLevel = 0;
+            
             var currentLevelData =
-                _levelsData.FirstOrDefault(i => i.CurrentLevelIndex == currentLevel);
+                _levelsData.FirstOrDefault(i =>
+                    i.CurrentLevelIndex == currentLevel &&
+                    i.CurrentShelterIndex == GameManager.Instance.CurrentShelter);
 
             if (currentLevelData)
             {
