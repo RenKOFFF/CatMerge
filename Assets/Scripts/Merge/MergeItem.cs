@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using GameData;
@@ -31,13 +30,15 @@ namespace Merge
         public bool IsEmpty => MergeItemData == null;
         public bool IsMoving => transform.localPosition != Vector3.zero;
 
+        private static event Action<MergeItem> OnClick;
+
         public MergeItemData MergeItemData
         {
             get => _mergeItemData;
             private set
             {
                 IsGenerator = value is GeneratorMergeItemData;
-             
+
                 SetUsedForOrder(false);
                 _mergeItemData = value;
             }
@@ -86,6 +87,8 @@ namespace Merge
             SpriteRenderer = GetComponent<Image>();
             CanvasGroup = GetComponent<CanvasGroup>();
             RefreshSprite();
+
+            OnClick += ResetClickCountIfOtherItemIsClicked;
         }
 
         public bool TrySetData(MergeItemData data, bool forceSet)
@@ -159,8 +162,7 @@ namespace Merge
         {
             _clickCount++;
 
-            if (_clickCount > 0)
-                StartCoroutine(ClickCountReset());
+            OnClick?.Invoke(this);
 
             if (MergeItemData is GeneratorMergeItemData clickableData)
             {
@@ -181,6 +183,8 @@ namespace Merge
             {
                 if (_clickCount >= 2)
                 {
+                    ResetClickCount();
+
                     var particles = SpawnParticle(doubleClickableData);
                     var target = FindObjectOfType<EnergyUiField>();
 
@@ -201,6 +205,8 @@ namespace Merge
             {
                 if (_clickCount >= 2)
                 {
+                    ResetClickCount();
+
                     var particles = SpawnParticle(coinsMergeItemData);
                     var target = FindObjectOfType<ShowPlayerMoney>();
 
@@ -220,6 +226,19 @@ namespace Merge
             MergeController.Instance.OnClick(this);
         }
 
+        private void ResetClickCountIfOtherItemIsClicked(MergeItem clickedItem)
+        {
+            if (clickedItem == this)
+                return;
+
+            ResetClickCount();
+        }
+
+        private void ResetClickCount()
+        {
+            _clickCount = 0;
+        }
+
         private void FlyToTargetAnimation(List<ParticleSystem> particles, GameObject target, Action<int> callback)
         {
             var seq = DOTween.Sequence();
@@ -237,7 +256,9 @@ namespace Merge
 
                 seq.Insert(timePosition,
                     particles[i].transform
-                        .DOJump(target.transform.position, Random.Range(-2f, -1f), 1,
+                        .DOJump(target.transform.position,
+                            Random.Range(-2f, -1f),
+                            1,
                             duration)
                         .SetEase(Ease.InOutCirc)
                         .OnComplete(() => callback?.Invoke(1)));
@@ -268,7 +289,6 @@ namespace Merge
                 particles.Add(particle);
             }
 
-
             return particles;
         }
 
@@ -278,14 +298,9 @@ namespace Merge
             ClearItemCell();
         }
 
-        private IEnumerator ClickCountReset()
+        private void OnDestroy()
         {
-            while (_clickCount > 0)
-            {
-                yield return new WaitForSeconds(_timeBtwClick);
-
-                _clickCount = 0;
-            }
+            OnClick -= ResetClickCountIfOtherItemIsClicked;
         }
     }
 }
