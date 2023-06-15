@@ -841,7 +841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01ae72cfd334f98a574bb49e0972340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url: https://youtu.be/dQw4w9WgXcQ
+  url: https://www.oipa.org/international/dont-shop-adopt/
 --- !u!1 &8752919422695717084
 GameObject:
   m_ObjectHideFlags: 0
