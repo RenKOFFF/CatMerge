@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace UI
         [SerializeField] protected TextMeshProUGUI _currencyText;
         [SerializeField] protected RectTransform _currencyFillRectTransform;
         [SerializeField] protected bool _showMaxValue;
+        [SerializeField] private int _roundToDecimalCount = 2;
 
         private float _step;
         private float _maxValue;
@@ -43,7 +45,7 @@ namespace UI
         protected void ChangeValue(float newValue)
         {
             _currentValue = newValue;
-            _currencyText.text = _currentValue.ToString(CultureInfo.InvariantCulture) + (_showMaxValue ? $"/{_maxValue}" : "");
+            _currencyText.text = $"{Math.Round(_currentValue, _roundToDecimalCount)}" + (_showMaxValue ? $"/{_maxValue}" : "");
             
             _currencyFillRectTransform.anchorMax = 
                 new Vector2(_maxValue == 0 ? 0 : Mathf.Clamp(_currentValue * _step, 0.00001f, 1),
