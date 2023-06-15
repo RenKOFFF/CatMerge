@@ -76,7 +76,7 @@ namespace Merge
         /// </summary>
         [CanBeNull]
         public string itemsGroupName;
-        public int ShelterItemIndex = 1;
+        public int ShelterItemIndex;
 
         [FormerlySerializedAs("SpawnProbability")]
         public AnimationCurve SpawnChance;

@@ -23,6 +23,7 @@ namespace UI
         private void OnCompletedOrdersChanged(int currentValue)
         {
             ChangeValue(currentValue);
+            _currencyText.text += $"/{MaxValue}";
         }
 
         private void OnLevelChanged(int currentValue)

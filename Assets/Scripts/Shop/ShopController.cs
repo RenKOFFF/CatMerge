@@ -78,7 +78,17 @@ namespace Shop
                 return false;
 
             var shopCellShopDataInCurrentShelter =
-                shopCell.ShopData.Items.Where(i => i.ShelterItemIndex == GameManager.Instance.CurrentShelter).ToArray();
+                shopCell.ShopData.Items
+                    .Where(i =>
+                        i.ShelterItemIndex == GameManager.Instance.CurrentShelter ||
+                        i.ShelterItemIndex == 0)
+                    .ToArray();
+
+            if (shopCellShopDataInCurrentShelter.Length == 0)
+            {
+                Debug.LogError("Oh shit!!! nechego to buy!!!!");
+                return false;
+            }
 
             var spawnIndex = Random.Range(0, shopCellShopDataInCurrentShelter.Length);
 

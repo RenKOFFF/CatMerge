@@ -1,14 +1,20 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Merge.Item_info
 {
     public class SellButton : MonoBehaviour
     {
-        private MergeItem _sellingItem;
+        [SerializeField] private TextMeshProUGUI _sellingCostText;
+        [SerializeField] private Image _sellingCostIcon;
 
+        private MergeItem _sellingItem;
+        
         public void Initialize(MergeItem sellingItem)
         {
             _sellingItem = sellingItem;
+            _sellingCostText.text = $"+{sellingItem.MergeItemData.SellPrice}";
 
             if (_sellingItem.IsEmpty)
             {

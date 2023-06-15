@@ -16,6 +16,8 @@ namespace UI
 
         private bool _isInitialized;
 
+        protected float MaxValue => _maxValue;
+        
         protected void Initialize(float maxValue, float startValue = 0, bool showMaxValue = false)
         {
             if (_isInitialized) return;

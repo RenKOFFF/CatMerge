@@ -162,7 +162,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToGenerateOrderInSeconds: 5
   maxActiveOrdersCount: 4
-  ordersNeededToCompleteLevelCount: 10
   orderPrefab: {fileID: 2345349851450697169, guid: 08c23fca7c5d89c4c9e4a8032dce4b2a, type: 3}
   ordersParent: {fileID: 4275090085983670804}
   levelCompletedPanelPrefab: {fileID: 8725339332238190424, guid: d3e6b5aaaf6fef549ab14f6890835160, type: 3}

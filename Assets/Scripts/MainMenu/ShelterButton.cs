@@ -14,6 +14,9 @@ namespace MainMenu
         [SerializeField] private int _shelterIndex = 1;
         [SerializeField] private TextMeshProUGUI _shelterIndexText;
         [SerializeField] private TextMeshProUGUI _titleText;
+        [SerializeField] private Image _titleImage;
+        [SerializeField] private Color _openedColor;
+        [SerializeField] private Color _closedColor;
         [SerializeField] private Button _button;
 
         [SerializeField] private Image _lockImage;
@@ -31,6 +34,7 @@ namespace MainMenu
             {
                 _progressBar.SetShelter(_shelterIndex);
                 _shelterImage.sprite = shelterConfig.ShelterSprite;
+                _titleImage.color = _openedColor;
                 _titleText.text = shelterConfig.ShelterName;
                 _lockImage.gameObject.SetActive(false);
                 _button.onClick.AddListener(ChangeShelter);
@@ -39,8 +43,8 @@ namespace MainMenu
             else
             {
                 _progressBar.gameObject.SetActive(false);
-                _shelterImage.sprite = null;
-                _shelterImage.color = Color.grey;
+                //_shelterImage.sprite = null;
+                _titleImage.color = _closedColor;
             }
 
             _shelterIndexText.text = $"#{_shelterIndex}";

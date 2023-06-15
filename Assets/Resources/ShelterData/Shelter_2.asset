@@ -16,4 +16,4 @@ MonoBehaviour:
   _maxLevelsInTheShelter: 6
   _currentShelterIndex: 2
   _requiredCompletedLevelsCountToOpen: 3
-  _shelterSprite: {fileID: 21300000, guid: 8379ab67de8389f4d9f8dd3bce5bd8e5, type: 3}
+  _shelterSprite: {fileID: 21300000, guid: dda6908d9bb319d478b75eda8d568792, type: 3}
