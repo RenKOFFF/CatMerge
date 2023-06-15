@@ -22,7 +22,7 @@ namespace Orders.Data
         [CanBeNull] public MergeItemData RewardItem { get; set; }
         public bool ContainsRewardItem => RewardItem != null;
 
-        public int RewardMoney => Parts.Sum(i => i.NeededItem.ComplexityLevel) * 10;
+        public int RewardMoney => Parts.Sum(i => i.NeededItem.ComplexityLevel);
 
         public OrderData([CanBeNull] MergeItemData rewardItem = null)
         {

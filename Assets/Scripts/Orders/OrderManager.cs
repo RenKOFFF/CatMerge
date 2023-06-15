@@ -42,24 +42,82 @@ namespace Orders
         public event Action<int> CompletedOrdersChanged;
 
         public static int GetOrdersNeededToCompleteLevelCount(int level)
-            => level switch
-            {
-                1 => 5,
-                2 => 7,
-                3 => 10,
-                4 or 5 => 12,
-                _ => 10
-            };
+        {
+            const int defaultCount = 10;
+            var currentShelterIndex = GameManager.Instance.CurrentShelter;
 
-        public static int GetCompletedLevelReward()
-            => GameManager.Instance.CurrentLevel switch
+            return currentShelterIndex switch
             {
-                1 => 10,
-                2 => 14,
-                3 => 20,
-                4 or 5 => 24,
-                _ => 20
+                1 => level switch
+                {
+                    1 => 5,
+                    2 => 7,
+                    3 => 10,
+                    4 or 5 => 12,
+                    _ => defaultCount
+                },
+                2 => level switch
+                {
+                    1 => 6,
+                    2 or 3 => 8,
+                    4 or 5 => 11,
+                    6 => 12,
+                    _ => defaultCount
+                },
+                _ => defaultCount
             };
+        }
+
+        private static int GetCompletedLevelReward()
+        {
+            const int defaultCount = 20;
+            var currentShelterIndex = GameManager.Instance.CurrentShelter;
+            var currentLevel = GameManager.Instance.CurrentLevel;
+
+            return currentShelterIndex switch
+            {
+                1 => currentLevel switch
+                {
+                    1 => 10,
+                    2 => 14,
+                    3 => 20,
+                    4 or 5 => 24,
+                    _ => defaultCount
+                },
+                2 => currentLevel switch
+                {
+                    1 => 12,
+                    2 or 3 => 16,
+                    4 or 5 => 22,
+                    6 => 24,
+                    _ => defaultCount
+                },
+                _ => defaultCount
+            };
+        }
+
+        private static int GetOrderPartsCount()
+        {
+            var chanceInPercent = Random.Range(0, 100);
+            var currentLevel = GameManager.Instance.CurrentLevel;
+
+            return currentLevel switch
+            {
+                1 => 1,
+                2 or 3 => chanceInPercent switch
+                {
+                    < 5 => 3,
+                    < 30 => 2,
+                    _ => 1
+                },
+                _ => chanceInPercent switch
+                {
+                    < 30 => 3,
+                    < 60 => 2,
+                    _ => 1
+                }
+            };
+        }
 
         private void OnEnable()
         {
@@ -92,8 +150,8 @@ namespace Orders
                 .Where(i =>
                 {
                     var unlockedComplexityLevel = MergeController.Instance.GetUnlockedComplexityLevel(i);
-                    var maxItemLevel = Math.Min(unlockedComplexityLevel - partsCount + 2, 7);
-                    var minItemLevel = Math.Max(1, maxItemLevel - 2);
+                    var maxItemLevel = Math.Min(unlockedComplexityLevel - partsCount + 3, 7);
+                    var minItemLevel = Math.Max(1, maxItemLevel - 3);
                     var complexityLevel = i.ComplexityLevel;
 
                     return complexityLevel >= minItemLevel && complexityLevel <= maxItemLevel &&
@@ -127,29 +185,6 @@ namespace Orders
 
             var orderData = CreateSpecificOrderData(rewardItem, itemsForPartsData);
             SpawnOrder(orderData, false);
-        }
-
-        private static int GetOrderPartsCount()
-        {
-            var chanceInPercent = Random.Range(0, 100);
-            var currentLevel = GameManager.Instance.CurrentLevel;
-
-            return currentLevel switch
-            {
-                1 => 1,
-                2 or 3 => chanceInPercent switch
-                {
-                    < 5 => 3,
-                    < 30 => 2,
-                    _ => 1
-                },
-                _ => chanceInPercent switch
-                {
-                    < 30 => 3,
-                    < 60 => 2,
-                    _ => 1
-                }
-            };
         }
 
         private static OrderData CreateSpecificOrderData(
@@ -315,7 +350,7 @@ namespace Orders
                 return;
 
             if (menuCanvas.gameObject.activeInHierarchy) return;
-            
+
             GenerateOrder();
             SetNewOrderGenerationTime();
         }
