@@ -17,6 +17,7 @@ MonoBehaviour:
   previousMergeItem: {fileID: 11400000, guid: 2af2671bc5423634885223f3697944f2, type: 2}
   nextMergeItem: {fileID: 11400000, guid: ed5ed0accc294e44ab5117367caab7b7, type: 2}
   itemsGroupName: 
+  ShelterItemIndex: 1
   SpawnChance:
     serializedVersion: 2
     m_Curve:
@@ -32,3 +33,5 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _particleByUse: {fileID: 0}
+  _particleSprite: {fileID: 0}
