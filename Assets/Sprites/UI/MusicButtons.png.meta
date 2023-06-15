@@ -120,19 +120,19 @@ TextureImporter:
       name: MusicButtons_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 9
-        width: 196
-        height: 196
+        x: 0
+        y: 1470
+        width: 420
+        height: 420
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0db94de59290fa4e93e55b3c418f816
-      internalID: -40809050
+      spriteID: 661ea39b4931a104282ff35edbac5579
+      internalID: -1584833395
       vertices: []
       indices: 
       edges: []
@@ -141,19 +141,145 @@ TextureImporter:
       name: MusicButtons_1
       rect:
         serializedVersion: 2
-        x: 209
-        y: 9
-        width: 196
-        height: 196
+        x: 546
+        y: 1470
+        width: 420
+        height: 420
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6aa14ad727523564a8431f60ff808426
-      internalID: -1347267247
+      spriteID: b4680d3e3775eed43a177a7bf65a71e1
+      internalID: 1755514636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MusicButtons_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 980
+        width: 420
+        height: 420
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a217a8a166ff0a9489ec3bfdfeff7108
+      internalID: 1420507667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MusicButtons_3
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 980
+        width: 420
+        height: 420
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df103aeb533a7394e9bd490353e7933e
+      internalID: 1839594063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MusicButtons_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 490
+        width: 420
+        height: 420
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3c498f8e2cca5944b91cc9d124e14e4
+      internalID: -1739349806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MusicButtons_5
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 490
+        width: 420
+        height: 420
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7af73a76621a83144934ab8c63827ada
+      internalID: 1072620287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MusicButtons_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 420
+        height: 420
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d261c2c257946b5409c4ad2a41ab41aa
+      internalID: 998939256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MusicButtons_7
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 0
+        width: 420
+        height: 420
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9aefc17254daa9489da73fc7c0de8c2
+      internalID: -1344746271
       vertices: []
       indices: 
       edges: []
@@ -169,8 +295,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MusicButtons_1: -1347267247
-      MusicButtons_0: -40809050
+      MusicButtons_5: 1072620287
+      MusicButtons_1: 1755514636
+      MusicButtons_4: -1739349806
+      MusicButtons_6: 998939256
+      MusicButtons_7: -1344746271
+      MusicButtons_3: 1839594063
+      MusicButtons_2: 1420507667
+      MusicButtons_0: -1584833395
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

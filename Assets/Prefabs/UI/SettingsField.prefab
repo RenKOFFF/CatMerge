@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 8483885785758389831}
   - component: {fileID: 8037466752071977650}
   m_Layer: 5
-  m_Name: SettingsCell
+  m_Name: SoundsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -364,7 +364,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -414,7 +414,7 @@ GameObject:
   - component: {fileID: 1136791849311662750}
   - component: {fileID: 5163365496209316863}
   m_Layer: 5
-  m_Name: SettingsCell (1)
+  m_Name: MusicButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -497,7 +497,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -1430,9 +1430,13 @@ MonoBehaviour:
   _bg: {fileID: 8752919423695694542}
   _openedColor: {r: 0, g: 0, b: 0, a: 0.39215687}
   _closedColor: {r: 0, g: 0, b: 0, a: 0}
-  musicButton: {fileID: 1136791849311662750}
-  musicIsOnSprite: {fileID: -142720564, guid: 9212ff374ce65a74ca1420a18a5356b1, type: 3}
-  musicIsOffSprite: {fileID: -1347267247, guid: 8be2b53633c722c449c2931247b494c2, type: 3}
-  soundsButton: {fileID: 8483885785758389831}
-  soundsIsOnSprite: {fileID: 845147627, guid: 9212ff374ce65a74ca1420a18a5356b1, type: 3}
-  soundsIsOffSprite: {fileID: -40809050, guid: 8be2b53633c722c449c2931247b494c2, type: 3}
+  musicButton: {fileID: 5163365496209316863}
+  musicIsOnSprite: {fileID: 1072620287, guid: 8be2b53633c722c449c2931247b494c2, type: 3}
+  musicIsOnPressedSprite: {fileID: -1344746271, guid: 8be2b53633c722c449c2931247b494c2, type: 3}
+  musicIsOffSprite: {fileID: 1755514636, guid: 8be2b53633c722c449c2931247b494c2, type: 3}
+  musicIsOffPressedSprite: {fileID: 1839594063, guid: 8be2b53633c722c449c2931247b494c2, type: 3}
+  soundsButton: {fileID: 8037466752071977650}
+  soundsIsOnSprite: {fileID: -1739349806, guid: 8be2b53633c722c449c2931247b494c2, type: 3}
+  soundsIsOnPressedSprite: {fileID: 998939256, guid: 8be2b53633c722c449c2931247b494c2, type: 3}
+  soundsIsOffSprite: {fileID: -1584833395, guid: 8be2b53633c722c449c2931247b494c2, type: 3}
+  soundsIsOffPressedSprite: {fileID: 1420507667, guid: 8be2b53633c722c449c2931247b494c2, type: 3}

@@ -13,13 +13,17 @@ namespace Settings
         [SerializeField] private Color _openedColor;
         [SerializeField] private Color _closedColor;
 
-        [SerializeField] private Image musicButton;
+        [SerializeField] private Button musicButton;
         [SerializeField] private Sprite musicIsOnSprite;
+        [SerializeField] private Sprite musicIsOnPressedSprite;
         [SerializeField] private Sprite musicIsOffSprite;
+        [SerializeField] private Sprite musicIsOffPressedSprite;
 
-        [SerializeField] private Image soundsButton;
+        [SerializeField] private Button soundsButton;
         [SerializeField] private Sprite soundsIsOnSprite;
+        [SerializeField] private Sprite soundsIsOnPressedSprite;
         [SerializeField] private Sprite soundsIsOffSprite;
+        [SerializeField] private Sprite soundsIsOffPressedSprite;
 
         private bool _animationInProcess;
 
@@ -82,7 +86,11 @@ namespace Settings
 
         private void UpdateMusicSprite()
         {
-            musicButton.sprite = _isMusicOn ? musicIsOnSprite : musicIsOffSprite;
+            musicButton.GetComponent<Image>().sprite = _isMusicOn ? musicIsOnSprite : musicIsOffSprite;
+
+            var buttonSpriteState = musicButton.spriteState;
+            buttonSpriteState.pressedSprite = _isMusicOn ? musicIsOnPressedSprite : musicIsOffPressedSprite;
+            musicButton.spriteState = buttonSpriteState;
         }
 
         public void SwitchSounds()
@@ -93,7 +101,11 @@ namespace Settings
 
         private void UpdateSoundsSprite()
         {
-            soundsButton.sprite = _isSoundsOn ? soundsIsOnSprite : soundsIsOffSprite;
+            soundsButton.GetComponent<Image>().sprite = _isSoundsOn ? soundsIsOnSprite : soundsIsOffSprite;
+
+            var buttonSpriteState = soundsButton.spriteState;
+            buttonSpriteState.pressedSprite = _isSoundsOn ? soundsIsOnPressedSprite : soundsIsOffPressedSprite;
+            soundsButton.spriteState = buttonSpriteState;
         }
     }
 }
