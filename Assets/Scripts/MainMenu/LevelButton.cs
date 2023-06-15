@@ -2,11 +2,12 @@
 using GameData;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace MainMenu
 {
-    public class LevelButton : MonoBehaviour
+    public class LevelButton : MonoBehaviour//, IDeselectHandler
     {
         [SerializeField] private int _levelIndex;
         [SerializeField] private int _shelterIndex;
@@ -35,8 +36,15 @@ namespace MainMenu
             _backToLevelButton.onClick.AddListener(ReturnToNormal);
         }
 
+        // public void OnDeselect(BaseEventData eventData)
+        // {
+        //     Debug.Log("gavnp");
+        //     ReturnToNormal();
+        // }
+
         private void ShowProgress()
         {
+            //EventSystem.current.SetSelectedGameObject(gameObject);
             _button.onClick.RemoveListener(ShowProgress);
 
             _progressPanel.gameObject.SetActive(true);
@@ -68,9 +76,9 @@ namespace MainMenu
         {
             // if (_levelIndex != GameManager.Instance.CurrentLevel)
             //     GameManager.Instance.ChangeLevel(_levelIndex);
-            
+
             _button.onClick.RemoveAllListeners();
-            
+
             _halo.SetActive(true);
             _image.sprite = _completedSprite;
 
