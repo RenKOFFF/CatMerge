@@ -60,6 +60,8 @@ namespace Merge
 
         public string GroupName => FirstItem.itemsGroupName;
 
+        public string GroupDescription => FirstItem.itemsGroupDescription;
+
         [CanBeNull]
         public string itemName;
 
@@ -80,13 +82,19 @@ namespace Merge
 
         [FormerlySerializedAs("SpawnProbability")]
         public AnimationCurve SpawnChance;
-        
+
         public ParticleSystem ParticleByUse => _particleByUse;
 
         [SerializeField] private ParticleSystem _particleByUse;
-        
+
         public Sprite ParticleSprite => _particleSprite;
 
         [SerializeField] private Sprite _particleSprite;
+
+        /// <summary>
+        /// Описание группы предметов. Указывать только у первого предмета цепочки.
+        /// </summary>
+        [CanBeNull]
+        public string itemsGroupDescription;
     }
 }

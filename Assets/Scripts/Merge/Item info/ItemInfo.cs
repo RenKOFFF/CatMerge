@@ -7,25 +7,15 @@ namespace Merge.Item_info
 {
     public class ItemInfo : MonoBehaviour
     {
-        [SerializeField]
-        private SellButton sellButton;
-
-        [SerializeField]
-        private Image itemImage;
-
-        [SerializeField]
-        private TMP_Text itemTitleText;
-
-        [SerializeField]
-        private TMP_Text itemLevelText;
-
-        [SerializeField]
-        private ItemTreePanel itemTreePanel;
+        [SerializeField] private SellButton sellButton;
+        [SerializeField] private Image itemImage;
+        [SerializeField] private TMP_Text itemTitleText;
+        [SerializeField] private TMP_Text itemLevelText;
+        [SerializeField] private ItemTreePanel itemTreePanel;
 
         private MergeItemData _selectedItemData;
 
-        [CanBeNull]
-        private MergeItem _selectedItem;
+        [CanBeNull] private MergeItem _selectedItem;
 
         public static ItemInfo Instance { get; private set; }
 

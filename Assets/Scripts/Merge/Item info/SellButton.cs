@@ -8,9 +8,10 @@ namespace Merge.Item_info
     {
         [SerializeField] private TextMeshProUGUI _sellingCostText;
         [SerializeField] private Image _sellingCostIcon;
+        [SerializeField] private TMP_Text itemDescriptionText;
 
         private MergeItem _sellingItem;
-        
+
         public void Initialize(MergeItem sellingItem)
         {
             _sellingItem = sellingItem;
@@ -22,7 +23,12 @@ namespace Merge.Item_info
                 return;
             }
 
-            gameObject.SetActive(_sellingItem.MergeItemData.GetType() == typeof(MergeItemData));
+            var shouldBeButtonActive = _sellingItem.MergeItemData.GetType() == typeof(MergeItemData);
+            gameObject.SetActive(shouldBeButtonActive);
+
+            var description = sellingItem.MergeItemData.GroupDescription;
+            itemDescriptionText.text = description;
+            itemDescriptionText.gameObject.SetActive(!shouldBeButtonActive && !string.IsNullOrWhiteSpace(description));
         }
 
         public void Sell()
