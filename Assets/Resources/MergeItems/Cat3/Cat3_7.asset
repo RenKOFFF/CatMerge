@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd314e7d37064c15889684d10850b527, type: 3}
   m_Name: Cat3_7
   m_EditorClassIdentifier: 
-  itemName: "\u041A\u043E\u0442 \u043D\u0430 \u043A\u0440\u0435\u0441\u043B\u0435"
+  itemName: "\u041F\u0440\u043E\u0441\u0432\u0435\u0442\u043B\u0435\u043D\u043D\u044B\u0439
+    \u043A\u043E\u0442 "
   sprite: {fileID: 45864489, guid: eb332cd096264ba4ba0504217eee5bbf, type: 3}
   previousMergeItem: {fileID: 11400000, guid: 4def29af4e97a9741b7284c1abb42f44, type: 2}
   nextMergeItem: {fileID: 0}
@@ -35,3 +36,4 @@ MonoBehaviour:
     m_RotationOrder: 4
   _particleByUse: {fileID: 0}
   _particleSprite: {fileID: 0}
+  itemsGroupDescription: 

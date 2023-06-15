@@ -158,32 +158,63 @@ namespace GameData
 
         public void OpenAllPossibleLevels()
         {
-            var levelData = GameDataHelper.AllLevelData;
-
-            var currentLevelData = levelData
-                .Where(i => i.CurrentLevelIndex == GameManager.Instance.CurrentLevel &&
-                            i.CurrentShelterIndex == CurrentShelter).ToList();
-            if (currentLevelData.Count > 1)
+            if (CurrentShelter == 2)
             {
-                Debug.LogError("Level data more 1; Fix this");
-                return;
+                var levelData = GameDataHelper.AllLevelData;
+                var currentLevelsOnShelterData = levelData
+                    .Where(i => i.CurrentShelterIndex == CurrentShelter).ToList();
+
+
+                var progress = GetProgressInShelter(CurrentShelter);
+
+                if (progress == 0)
+                {
+                    OpenedLevels.TryAdd(1, true);
+                }
+                if (progress == 1)
+                {
+                    OpenedLevels.TryAdd(2, true);
+                    OpenedLevels.TryAdd(3, true);
+                }
+                if (progress == 3)
+                {
+                    OpenedLevels.TryAdd(4, true);
+                    OpenedLevels.TryAdd(5, true);
+                }
+                if (progress == 5)
+                {
+                    OpenedLevels.TryAdd(6, true);
+                }
             }
-
-            var nextLevelIndexes = new List<int>();
-            if (currentLevelData.Count == 0 || currentLevelData[0].NextLevelIndexes.Count == 0)
+            else
             {
-                //TODO:this is debug code
-                if (currentLevelData.Count != 0 && currentLevelData[0].NextLevelIndexes.Count == 0)
-                    Debug.Log("There is level data, but next level list is empty");
+                var levelData = GameDataHelper.AllLevelData;
 
-                nextLevelIndexes.Add(CurrentLevel + 1);
-            }
-            else nextLevelIndexes = currentLevelData[0].NextLevelIndexes;
+                var currentLevelData = levelData
+                    .Where(i => i.CurrentLevelIndex == GameManager.Instance.CurrentLevel &&
+                                i.CurrentShelterIndex == CurrentShelter).ToList();
+                if (currentLevelData.Count > 1)
+                {
+                    Debug.LogError("Level data more 1; Fix this");
+                    return;
+                }
+
+                var nextLevelIndexes = new List<int>();
+                if (currentLevelData.Count == 0 || currentLevelData[0].NextLevelIndexes.Count == 0)
+                {
+                    //TODO:this is debug code
+                    if (currentLevelData.Count != 0 && currentLevelData[0].NextLevelIndexes.Count == 0)
+                        Debug.Log("There is level data, but next level list is empty");
+
+                    nextLevelIndexes.Add(CurrentLevel + 1);
+                }
+                else nextLevelIndexes = currentLevelData[0].NextLevelIndexes;
 
 
-            foreach (var nextLevelIndex in nextLevelIndexes)
-            {
-                OpenedLevels.TryAdd(nextLevelIndex, true);
+                foreach (var nextLevelIndex in nextLevelIndexes)
+                {
+                    OpenedLevels.TryAdd(nextLevelIndex, true);
+                }
             }
 
             SaveShelterData();
@@ -215,7 +246,7 @@ namespace GameData
         {
             CurrentShelter = shelterIndex;
             LoadShelterData();
-            
+
             ChangeLevel(GetLastCurrentLevelOnShelter(shelterIndex));
 
             ShelterChanged?.Invoke(CurrentShelter);
