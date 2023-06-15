@@ -18,6 +18,6 @@ public class MergeCell : MonoBehaviour, IDropHandler
     private void Update()
     {
         isUsedForOrderFlag.SetActive(MergeItem.IsUsedForOrder && !MergeItem.IsMoving);
-        _isGeneratorMark.SetActive(MergeItem.IsGenerator && !MergeItem.IsMoving);
+        _isGeneratorMark.SetActive(MergeItem.IsGenerator && MergeItem.MergeItemData.ComplexityLevel > 1 && !MergeItem.IsMoving);
     }
 }
