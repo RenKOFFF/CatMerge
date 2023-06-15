@@ -258,10 +258,10 @@ TextureImporter:
       name: Popups_9
       rect:
         serializedVersion: 2
-        x: 852
-        y: 24
-        width: 200
-        height: 198
+        x: 856
+        y: 26
+        width: 196
+        height: 196
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,10 +279,10 @@ TextureImporter:
       name: Popups_10
       rect:
         serializedVersion: 2
-        x: 1056
-        y: 24
-        width: 200
-        height: 198
+        x: 1060
+        y: 26
+        width: 196
+        height: 196
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
