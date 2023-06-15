@@ -181,7 +181,7 @@ namespace Orders
                 CompletedOrdersCount++;
                 SaveOrders();
 
-                if (CompletedOrdersCount == GetOrdersNeededToCompleteLevelCount(GameManager.Instance.CurrentLevel))
+                if (CompletedOrdersCount >= GetOrdersNeededToCompleteLevelCount(GameManager.Instance.CurrentLevel))
                 {
                     var canvas = GameObject.FindGameObjectWithTag(GameConstants.Tags.Canvas);
 

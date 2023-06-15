@@ -14,6 +14,7 @@ namespace MainMenu
     {
         [SerializeField] private LevelButtonByShelter[] _levelButtons;
         [SerializeField] private Button _backButton;
+        [SerializeField] private Button _shelterButton;
         [SerializeField] private BackgroundSwitcher _backgroundSwitcher;
 
         private Dictionary<int, bool> _openedLevels;
@@ -21,6 +22,7 @@ namespace MainMenu
 
         public LevelButtonByShelter[] LevelButtons => _levelButtons;
         public Button BackButton => _backButton;
+        public Button ShelterButton => _shelterButton;
         public static MainMenu Instance;
 
         private void Awake()

@@ -15,6 +15,7 @@ MonoBehaviour:
   _currentLvlIndex: 4
   _currentShelterIndex: 2
   _nextLvlIndexes: 06000000
+  _previousLvlData: {fileID: 11400000, guid: 85ff0504f284dc64897f0ef1d2484584, type: 2}
   _parallelLvlData:
   - {fileID: 11400000, guid: 327ea32521c81d3408ca5630765aa11f, type: 2}
   _bgWhenThisLevelCompleted: {fileID: 21300000, guid: e2d6c475d0dd2f24db9f5eb4d7a30996, type: 3}

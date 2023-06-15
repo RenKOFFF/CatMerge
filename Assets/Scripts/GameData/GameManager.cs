@@ -161,7 +161,7 @@ namespace GameData
             var levelData = GameDataHelper.AllLevelData;
 
             var currentLevelData = levelData
-                .Where(i => i.CurrentLevelIndex == CurrentLevel &&
+                .Where(i => i.CurrentLevelIndex == GameManager.Instance.CurrentLevel &&
                             i.CurrentShelterIndex == CurrentShelter).ToList();
             if (currentLevelData.Count > 1)
             {

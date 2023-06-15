@@ -441,6 +441,7 @@ MonoBehaviour:
   _currencyText: {fileID: 5114825095305563679}
   _currencyFillRectTransform: {fileID: 6893360353461611297}
   _showMaxValue: 0
+  _roundToDecimalCount: 2
   _shelterIndexText: {fileID: 8452490367323229198}
 --- !u!1 &4357903103364514441
 GameObject:
@@ -693,6 +694,7 @@ MonoBehaviour:
     - {fileID: 4846034737003151153}
     - {fileID: 7352392228095954506}
   _backButton: {fileID: 4357903104827896961}
+  _shelterButton: {fileID: 405219098}
   _backgroundSwitcher: {fileID: 4188939892907940637}
 --- !u!114 &4188939892907940637
 MonoBehaviour:

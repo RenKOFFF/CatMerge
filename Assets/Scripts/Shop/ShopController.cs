@@ -80,17 +80,27 @@ namespace Shop
             var shopCellShopDataInCurrentShelter =
                 shopCell.ShopData.Items
                     .Where(i =>
-                        i.ShelterItemIndex == GameManager.Instance.CurrentShelter ||
-                        i.ShelterItemIndex == 0)
-                    .ToArray();
+                    {
+                        var unlockedComplexityLevel = MergeController.Instance.GetUnlockedComplexityLevel(i);
+                        var maxItemLevel = Math.Min(unlockedComplexityLevel, 7);
+                        var complexityLevel = i.ComplexityLevel;
 
-            if (shopCellShopDataInCurrentShelter.Length == 0)
-            {
-                Debug.LogError("Oh shit!!! nechego to buy!!!!");
-                return false;
-            }
+                        return complexityLevel <= maxItemLevel &&
+                               (i.ShelterItemIndex == GameManager.Instance.CurrentShelter ||
+                                i.ShelterItemIndex == 0);
+                    })
+                    .ToList();
 
-            var spawnIndex = Random.Range(0, shopCellShopDataInCurrentShelter.Length);
+            if (shopCellShopDataInCurrentShelter.Count == 0)
+                shopCellShopDataInCurrentShelter.Add(shopCell.ShopData.Items[0]);
+            
+            // if (shopCellShopDataInCurrentShelter.Length == 0)
+            // {
+            //     Debug.LogError("Oh shit!!! nechego to buy!!!!");
+            //     return false;
+            // }
+
+            var spawnIndex = Random.Range(0, shopCellShopDataInCurrentShelter.Count);
 
             RewardsStack.Instance.AppendReward(shopCellShopDataInCurrentShelter[spawnIndex]);
             GameManager.Instance.SpendMoney(shopCell.ShopData.Cost);

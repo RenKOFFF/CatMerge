@@ -9,6 +9,7 @@ namespace GameData
         [SerializeField] private int _currentLvlIndex;
         [SerializeField] private int _currentShelterIndex = 1;
         [SerializeField] private List<int> _nextLvlIndexes;
+        [SerializeField] private LevelData _previousLvlData;
         [SerializeField] private List<LevelData> _parallelLvlData;
         [SerializeField] private Sprite _bgWhenThisLevelCompleted;
         [SerializeField] private Sprite _bgWhenThisLevelCompletedLast;
@@ -16,6 +17,7 @@ namespace GameData
         public int CurrentLevelIndex => _currentLvlIndex;
         public int CurrentShelterIndex => _currentShelterIndex;
         public List<int> NextLevelIndexes => _nextLvlIndexes;
+        public LevelData PreviousLevelData => _previousLvlData;
         public List<LevelData> ParallelLvlData => _parallelLvlData;
         public Sprite BgWhenThisLevelCompleted => _bgWhenThisLevelCompleted;
         public Sprite BgWhenThisLevelCompletedLast => _bgWhenThisLevelCompletedLast;

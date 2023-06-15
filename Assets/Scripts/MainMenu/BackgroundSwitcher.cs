@@ -51,7 +51,7 @@ namespace MainMenu
                 if (openedLevels.TryGetValue(GameManager.Instance.CurrentLevel, out var isOpened) && !isOpened
                     && isCompleted)
                     SwitchBackgroundByLevelIndex(GameManager.Instance.CurrentLevel);
-                else SwitchBackgroundByLevelIndex(GameManager.Instance.CurrentLevel - 1);
+                else SwitchBackgroundByLevelIndex(GameManager.Instance.CurrentLevel - 1, true);
             }
         }
 
@@ -85,13 +85,22 @@ namespace MainMenu
             void SwitchButtonsIntaractable(bool isOn)
             {
                 MainMenu.Instance.BackButton.interactable = isOn;
+                MainMenu.Instance.ShelterButton.interactable = isOn;
                 if (isOn)
                 {
                     MainMenu.Instance.BackButton.targetGraphic
                         .DOColor(Color.white, _transitionDuration / 3f)
                         .SetEase(_ease);
+
+                    MainMenu.Instance.ShelterButton.targetGraphic
+                        .DOColor(Color.white, _transitionDuration / 3f)
+                        .SetEase(_ease);
                 }
-                else MainMenu.Instance.BackButton.targetGraphic.color = transparentColor;
+                else
+                {
+                    MainMenu.Instance.BackButton.targetGraphic.color = transparentColor;
+                    MainMenu.Instance.ShelterButton.targetGraphic.color = transparentColor;
+                }
 
 
                 var buttons = activeButtons.SelectMany(b => b.LevelButtons);
@@ -109,10 +118,10 @@ namespace MainMenu
             }
         }
 
-        private void SwitchBackgroundByLevelIndex(int currentLevel)
+        private void SwitchBackgroundByLevelIndex(int currentLevel, bool needForceLast = false)
         {
             if (currentLevel == -1) currentLevel = 0;
-            
+
             var currentLevelData =
                 _levelsData.FirstOrDefault(i =>
                     i.CurrentLevelIndex == currentLevel &&
@@ -121,7 +130,9 @@ namespace MainMenu
             if (currentLevelData)
             {
                 _backgroundOld.sprite = _background.sprite;
-                _background.sprite = currentLevelData.BgWhenThisLevelCompleted;
+                _background.sprite = needForceLast && currentLevelData.PreviousLevelData
+                    ? currentLevelData.PreviousLevelData.BgWhenThisLevelCompleted
+                    : currentLevelData.BgWhenThisLevelCompleted;
             }
             else
             {
@@ -129,17 +140,21 @@ namespace MainMenu
                 return;
             }
 
-            var completedParallelLevels = currentLevelData.ParallelLvlData.Count;
-            if (completedParallelLevels == 0) return;
+            var parallelLevels = currentLevelData.ParallelLvlData.Count;
+            if (parallelLevels == 0 || needForceLast) return;
 
             foreach (var parallelLvl in currentLevelData.ParallelLvlData)
             {
                 var isLevelCompleted =
-                    GameManager.Instance.CompletedLevels.Keys.Count(l => l == parallelLvl.CurrentLevelIndex);
-                if (isLevelCompleted > 0)
+                    GameManager.Instance.CompletedLevels.FirstOrDefault(l => l.Key == parallelLvl.CurrentLevelIndex).Value;
+                
+                var isLevelOpened =
+                    GameManager.Instance.OpenedLevels.FirstOrDefault(l => l.Key == parallelLvl.CurrentLevelIndex).Value;
+                
+                if (isLevelCompleted && !isLevelOpened)
                 {
-                    completedParallelLevels--;
-                    if (completedParallelLevels <= 0)
+                    parallelLevels--;
+                    if (parallelLevels <= 0)
                     {
                         _background.sprite = currentLevelData.BgWhenThisLevelCompletedLast;
                     }

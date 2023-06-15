@@ -1,33 +1,36 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace GameData
 {
     public class LevelCompletedHandler : MonoBehaviour
     {
         [SerializeField] private GameObject _cat;
+        [SerializeField] private GameObject _popup;
+        [SerializeField] private Image _shade;
+        [SerializeField] private Color _openedColor;
 
         private UnityAction OnOpenMenu;
         private TweenerCore<Quaternion, Vector3, QuaternionOptions> _tween;
 
         private void Start()
         {
-            transform.localScale = Vector3.zero;
-
             float durationPanel = 0.8f;
-            transform
-                .DOScale(Vector3.one, durationPanel)
-                .OnComplete(() => PlayCatAnimation());
+            _shade.DOColor(_openedColor, durationPanel);
+            _popup.transform.localScale = Vector3.zero;
+            _popup.transform
+                .DOScale(Vector3.one, durationPanel);
+            //.OnComplete(() => PlayCatAnimation());
+            PlayCatAnimation();
         }
 
         private void PlayCatAnimation()
         {
-            float durationCat = 2f;
+            float durationCat = 1f;
 
             _tween = _cat.transform
                 .DOLocalRotate(new Vector3(0, 0, 45), durationCat)

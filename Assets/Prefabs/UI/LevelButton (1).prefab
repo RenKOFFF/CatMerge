@@ -397,7 +397,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2002034970, guid: be767f03fbca8c648bcf5a217dcb3efb, type: 3}
+  m_Sprite: {fileID: 2108804014, guid: 1cf27c4fb6a7d3540aa7e86b487f1b96, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -584,8 +584,8 @@ MonoBehaviour:
   _levelSwitcher: {fileID: 0}
   _mainMenuCanvas: {fileID: 0}
   _backToLevelButton: {fileID: 0}
-  _normalSprite: {fileID: -2002034970, guid: be767f03fbca8c648bcf5a217dcb3efb, type: 3}
-  _selectedSprite: {fileID: 1834423191, guid: be767f03fbca8c648bcf5a217dcb3efb, type: 3}
+  _normalSprite: {fileID: 2108804014, guid: 1cf27c4fb6a7d3540aa7e86b487f1b96, type: 3}
+  _selectedSprite: {fileID: 1866826497, guid: 1cf27c4fb6a7d3540aa7e86b487f1b96, type: 3}
   _completedSprite: {fileID: -1601946001, guid: be767f03fbca8c648bcf5a217dcb3efb, type: 3}
   _image: {fileID: 478019261263298390}
   _button: {fileID: 478019261263298389}
