@@ -11,7 +11,7 @@ namespace UI
             orderManager.CompletedOrdersChanged += OnCompletedOrdersChanged;
             GameManager.Instance.LevelChanged += OnLevelChanged;
 
-            Initialize(OrderManager.GetOrdersNeededToCompleteLevelCount(GameManager.Instance.CurrentLevel), orderManager.CompletedOrdersCount);
+            Initialize(OrderManager.GetOrdersNeededToCompleteCurrentLevelCount(), orderManager.CompletedOrdersCount, true);
         }
 
         private void OnDestroy()
@@ -23,12 +23,11 @@ namespace UI
         private void OnCompletedOrdersChanged(int currentValue)
         {
             ChangeValue(currentValue);
-            _currencyText.text += $"/{MaxValue}";
         }
 
         private void OnLevelChanged(int currentValue)
         {
-            UpdateMaxValue(OrderManager.GetOrdersNeededToCompleteLevelCount(GameManager.Instance.CurrentLevel));
+            UpdateMaxValue(OrderManager.GetOrdersNeededToCompleteCurrentLevelCount());
         }
     }
 }

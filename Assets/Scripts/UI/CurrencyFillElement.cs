@@ -19,13 +19,13 @@ namespace UI
         private bool _isInitialized;
 
         protected float MaxValue => _maxValue;
-        
+
         protected void Initialize(float maxValue, float startValue = 0, bool showMaxValue = false)
         {
             if (_isInitialized) return;
 
             ChangeMaxValueVisibility(showMaxValue);
-            
+
             UpdateMaxValue(maxValue);
             ChangeValue(startValue);
             _isInitialized = true;
@@ -40,16 +40,22 @@ namespace UI
         {
             _maxValue = maxValue;
             _step = 1 / maxValue;
+            UpdateText();
         }
 
         protected void ChangeValue(float newValue)
         {
             _currentValue = newValue;
-            _currencyText.text = $"{Math.Round(_currentValue, _roundToDecimalCount)}" + (_showMaxValue ? $"/{_maxValue}" : "");
-            
-            _currencyFillRectTransform.anchorMax = 
+            UpdateText();
+
+            _currencyFillRectTransform.anchorMax =
                 new Vector2(_maxValue == 0 ? 0 : Mathf.Clamp(_currentValue * _step, 0.00001f, 1),
                 _currencyFillRectTransform.anchorMax.y);
+        }
+
+        protected void UpdateText()
+        {
+            _currencyText.text = $"{Math.Round(_currentValue, _roundToDecimalCount)}" + (_showMaxValue ? $"/{_maxValue}" : "");
         }
     }
 }

@@ -41,6 +41,9 @@ namespace Orders
         public event Action LevelCompleted;
         public event Action<int> CompletedOrdersChanged;
 
+        public static int GetOrdersNeededToCompleteCurrentLevelCount()
+            => GetOrdersNeededToCompleteLevelCount(GameManager.Instance.CurrentLevel);
+
         public static int GetOrdersNeededToCompleteLevelCount(int level)
         {
             const int defaultCount = 10;
@@ -140,8 +143,13 @@ namespace Orders
 
         private void GenerateOrder()
         {
-            if (ActiveOrders.Count >= maxActiveOrdersCount)
+            var activeOrdersCount = ActiveOrders.Count;
+
+            if (activeOrdersCount >= maxActiveOrdersCount
+                || CompletedOrdersCount + activeOrdersCount >= GetOrdersNeededToCompleteCurrentLevelCount())
+            {
                 return;
+            }
 
             var partsCount = GetOrderPartsCount();
             var itemsForPartsData = new List<MergeItemData>();
@@ -216,7 +224,7 @@ namespace Orders
                 CompletedOrdersCount++;
                 SaveOrders();
 
-                if (CompletedOrdersCount >= GetOrdersNeededToCompleteLevelCount(GameManager.Instance.CurrentLevel))
+                if (CompletedOrdersCount >= GetOrdersNeededToCompleteCurrentLevelCount())
                 {
                     var canvas = GameObject.FindGameObjectWithTag(GameConstants.Tags.Canvas);
 
