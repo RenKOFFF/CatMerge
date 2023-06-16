@@ -44,4 +44,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   _particleByUse: {fileID: 59856802269504765, guid: bb9229eb64da51749811e84d6d1cbb79, type: 3}
   _particleSprite: {fileID: 1881694459, guid: 3cff70406bd16a34fa8ed9b60b6097c2, type: 3}
+  itemsGroupDescription: "\u0422\u0430\u043F\u043D\u0443\u0442\u044C \u0434\u043B\u044F
+    \u0441\u0431\u043E\u0440\u0430 \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432"
   _energy: 7

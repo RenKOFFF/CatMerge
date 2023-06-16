@@ -17,6 +17,7 @@ MonoBehaviour:
   previousMergeItem: {fileID: 11400000, guid: c19eaeb976711e344b6cbc1acf5e0d38, type: 2}
   nextMergeItem: {fileID: 0}
   itemsGroupName: "\u041A\u0440\u0438\u0441\u0442\u0430\u043B\u043B\u044B"
+  ShelterItemIndex: 0
   SpawnChance:
     serializedVersion: 2
     m_Curve:
@@ -43,4 +44,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   _particleByUse: {fileID: 59856802269504765, guid: bb9229eb64da51749811e84d6d1cbb79, type: 3}
   _particleSprite: {fileID: -832224974, guid: cec2baeb5bd1d2940b13d29a9e230393, type: 3}
+  itemsGroupDescription: "\u0422\u0430\u043F\u043D\u0443\u0442\u044C \u0434\u043B\u044F
+    \u0441\u0431\u043E\u0440\u0430 \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432"
   _coins: 15
